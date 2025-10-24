@@ -20,9 +20,10 @@ interface Categoria {
 
 interface MegaMenuProps {
   categorias: Categoria[];
+  isBlogArticle?: boolean;
 }
 
-export default function MegaMenu({ categorias = [] }: MegaMenuProps) {
+export default function MegaMenu({ categorias = [], isBlogArticle = false }: MegaMenuProps) {
   const [activeCategory, setActiveCategory] = useState<Categoria | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -31,14 +32,30 @@ export default function MegaMenu({ categorias = [] }: MegaMenuProps) {
   const safeCategorias = Array.isArray(categorias) ? categorias : [];
 
   const handleMouseLeave = (e: React.MouseEvent) => {
-    if (menuRef.current && !menuRef.current.contains(e.relatedTarget as Node)) {
+    // If relatedTarget is null, it means the mouse left the browser window
+    if (!e.relatedTarget) {
+      setIsOpen(false);
+      setActiveCategory(null);
+      return;
+    }
+    
+    // Check if the related target is a Node and not within our menu
+    if (menuRef.current && e.relatedTarget instanceof Node && !menuRef.current.contains(e.relatedTarget)) {
       setIsOpen(false);
       setActiveCategory(null);
     }
   };
 
   const handleBlur = (e: React.FocusEvent<HTMLButtonElement>) => {
-    if (menuRef.current && !menuRef.current.contains(e.relatedTarget as Node)) {
+    // If relatedTarget is null, it means focus moved outside the browser
+    if (!e.relatedTarget) {
+      setIsOpen(false);
+      setActiveCategory(null);
+      return;
+    }
+    
+    // Check if the related target is a Node and not within our menu
+    if (menuRef.current && e.relatedTarget instanceof Node && !menuRef.current.contains(e.relatedTarget)) {
       setIsOpen(false);
       setActiveCategory(null);
     }
@@ -48,9 +65,11 @@ export default function MegaMenu({ categorias = [] }: MegaMenuProps) {
     <div className="relative" ref={menuRef} onMouseLeave={handleMouseLeave}>
       <div className="flex items-center h-full" onMouseEnter={() => setIsOpen(true)}>
         <button
-          className="font-medium text-white px-4 py-2 hover:text-blue-400 transition-colors"
+          type="button"
+          onMouseEnter={() => setIsOpen(true)}
           onFocus={() => setIsOpen(true)}
           onBlur={handleBlur}
+          className={`flex items-center ${isBlogArticle ? 'text-black hover:text-gray-700' : 'text-white hover:text-gray-200'} font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-transparent ${isBlogArticle ? 'focus:ring-black' : 'focus:ring-white'}`}
           tabIndex={0}
         >
           Servicios
@@ -84,6 +103,8 @@ export default function MegaMenu({ categorias = [] }: MegaMenuProps) {
             {/* Categorías */}
             <div className="col-span-1 px-6 py-4 border-r border-gray-200">
               <h3 className="text-lg font-semibold mb-4 text-gray-800">Categorías</h3>
+              <span className="sr-only">Abrir menú de servicios</span>
+              <span className={isBlogArticle ? 'text-black' : 'text-white'}>Servicios</span>
               <div className="space-y-2">
                 {safeCategorias.map((categoria) => (
                   <button

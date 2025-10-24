@@ -1,7 +1,39 @@
 'use client';
 import { useState, useRef, useEffect } from "react";
+import { useSession, signOut } from 'next-auth/react';
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { useRouter, useSearchParams } from 'next/navigation';
+import { Loader2 } from 'lucide-react';
+
+// Extend the NextAuth types to include the role field
+declare module 'next-auth' {
+  interface User {
+    id: string;
+    name?: string | null;
+    email: string;
+    image?: string | null;
+    role?: string;
+  }
+
+  interface Session {
+    user: User;
+  }
+}
+
+// Extend the JWT type to include the role
+declare module 'next-auth/jwt' {
+  interface JWT {
+    role?: string;
+  }
+}
+
+// Global window type for refresh function
+declare global {
+  interface Window {
+    refreshAdminPage?: () => void;
+  }
+}
 // import { getAllArticles } from "@/lib/utils";
 
 const tabs = [
@@ -168,11 +200,13 @@ function ImageSearch() {
 
 function ArticleEditor() {
   const categories = [
-    { id: "planificacion-estrategica-para-empresas", label: "Planificación estratégica para empresas" },
-    { id: "asesoria-de-negocios", label: "Asesoría de Negocios" },
-    { id: "seo-y-campanas-de-marketing", label: "SEO y Campañas de Marketing" },
-    { id: "diseno-web-para-empresas", label: "Diseño Web para Empresas" },
-    { id: "automatizacion-para-tu-empresa", label: "Automatización para tu Empresa" },
+    { id: "automatizacion", label: "Automatización" },
+    { id: "diseno-web", label: "Diseño Web" },
+    { id: "marketing-digital", label: "Marketing Digital" },
+    { id: "asesoria", label: "Asesoría" },
+    { id: "analisis-estrategico", label: "Análisis Estratégico" },
+    { id: "desarrollo-web", label: "Desarrollo Web" },
+    { id: "posicionamiento-marca", label: "Posicionamiento de Marca" }
   ];
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
@@ -249,20 +283,39 @@ function ArticleEditor() {
   };
 
   const buildYAML = () => {
-    return (
-      `---\n` +
-      `title: "${title}"\n` +
-      `date: "${date}"\n` +
-      `author: "César Reyes Jaramillo"\n` +
-      `tags: [${tags.split(",").map(t => `"${t.trim()}"`).filter(Boolean).join(", ")}]\n` +
-      `excerpt: "${excerpt}"\n` +
-      `image: "${image}"\n` +
-      `category: "${category}"\n` +
-      `metaDescription: "${metaDescription}"\n` +
-      `keyword: "${keyword}"\n` +
-      `slug: "${slug}"\n` +
-      `---`
-    );
+    // Función para escapar comillas dobles en strings
+    const escapeYamlString = (str: string) => {
+      if (!str) return '';
+      return str.replace(/"/g, '\\"');
+    };
+
+    const frontmatter = {
+      title: title || 'Sin título',
+      date: date || new Date().toISOString().split('T')[0],
+      author: 'César Reyes Jaramillo',
+      tags: tags.split(',').map(t => t.trim()).filter(Boolean).join(', '),
+      excerpt: escapeYamlString(excerpt),
+      image: image || '',
+      category: category,
+      metaDescription: escapeYamlString(metaDescription),
+      keyword: keyword || '',
+      slug: slug || ''
+    };
+
+    // Construir el YAML manualmente para mayor control
+    const yamlLines = [];
+    for (const [key, value] of Object.entries(frontmatter)) {
+      if (key === 'tags' && Array.isArray(value)) {
+        yamlLines.push(`${key}: [${value.map(v => `"${v}"`).join(', ')}]`);
+      } else if (typeof value === 'string' && value.includes(':')) {
+        // Si el valor contiene dos puntos, lo envolvemos en comillas
+        yamlLines.push(`${key}: "${value}"`);
+      } else {
+        yamlLines.push(`${key}: ${JSON.stringify(value)}`);
+      }
+    }
+
+    return `---\n${yamlLines.join('\n')}\n---`;
   };
 
   const handleCopy = () => {
@@ -470,6 +523,7 @@ function validateYAML(yaml: string) {
   if (!/tags:/.test(y)) errors.push("Falta el campo 'tags' en el encabezado YAML");
   return errors;
 }
+
 
 function ArticleManager() {
   const [articles, setArticles] = useState<any[]>([]);
@@ -711,121 +765,152 @@ function StatisticsPanel() {
   );
 }
 
-export default function AdminPanel() {
+export function AdminPanelContent() {
+  const { data: session, status } = useSession();
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [activeTab, setActiveTab] = useState("imagenes");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState("");
-  const [pass, setPass] = useState("");
-  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+  const [authChecked, setAuthChecked] = useState(false);
 
-  // Limpiar localStorage al cerrar sesión
+  // Add a global refresh function
   useEffect(() => {
-    if (!isLoggedIn) {
-      localStorage.removeItem("admin-article-draft");
-    }
-  }, [isLoggedIn]);
+    const refreshFn = () => window.location.reload();
+    window.refreshAdminPage = refreshFn;
 
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (user === "admin" && pass === "123") {
-      setIsLoggedIn(true);
-      setError("");
-    } else {
-      setError("Usuario o contraseña incorrectos");
-    }
-  };
+    return () => {
+      if (window.refreshAdminPage === refreshFn) {
+        window.refreshAdminPage = undefined;
+      }
+    };
+  }, []);
 
-  if (!isLoggedIn) {
-    return (
-      <div className="min-h-screen bg-[#2d2420] text-white flex flex-col items-center justify-center py-12">
-        <div className="w-full max-w-sm rounded-lg shadow-lg bg-[#3a2f29] p-8">
-          <h1 className="text-3xl font-bold mb-8 text-center font-serif">Acceso al Panel</h1>
-          <form onSubmit={handleLogin} className="flex flex-col gap-4">
-            <input
-              type="text"
-              placeholder="Usuario"
-              value={user}
-              onChange={e => setUser(e.target.value)}
-              className="px-4 py-2 rounded bg-[#111111] border border-[#111111] text-white focus:outline-none"
-              autoFocus
-            />
-            <input
-              type="password"
-              placeholder="Contraseña"
-              value={pass}
-              onChange={e => setPass(e.target.value)}
-              className="px-4 py-2 rounded bg-[#111111] border border-[#111111] text-white focus:outline-none"
-            />
-            {error && <div className="text-red-400 text-sm text-center">{error}</div>}
-            <button type="submit" className="bg-white text-[#111111] font-bold py-2 rounded-full mt-2 hover:bg-[#e5e5e5] transition-colors">Entrar</button>
-          </form>
-        </div>
+  // Handle authentication state
+  useEffect(() => {
+    const checkAuth = async () => {
+      if (status === 'unauthenticated') {
+        // If we're not already on the sign-in page, redirect to sign-in
+        if (!window.location.pathname.startsWith('/auth/signin')) {
+          await signOut({ redirect: false });
+          const callbackUrl = searchParams.get('callbackUrl') || '/admin';
+          router.push(`/auth/signin?callbackUrl=${encodeURIComponent(callbackUrl)}`);
+        }
+      } else if (status === 'authenticated') {
+        // If we have a session, ensure the user has the admin role
+        const user = session?.user as { role?: string } | undefined;
+        if (user?.role !== 'admin') {
+          console.error('Acceso denegado: Se requiere rol de administrador');
+          await signOut({ redirect: false });
+          router.push('/auth/signin?error=Acceso no autorizado');
+          return;
+        }
+        setIsLoading(false);
+        setAuthChecked(true);
+      }
+    };
+
+    checkAuth();
+  }, [status, session, router, searchParams]);
+
+  if (isLoading) return (
+    <div className="min-h-screen bg-[#2d2420] text-white flex items-center justify-center">
+      <div className="text-center">
+        <Loader2 className="h-12 w-12 animate-spin mx-auto mb-4" />
+        <p>Cargando panel de administración...</p>
       </div>
-    );
-  }
+    </div>
+  );
+  
+  if (!authChecked) return (
+    <div className="min-h-screen bg-[#2d2420] text-white flex items-center justify-center">
+      <div className="text-center">
+        <Loader2 className="h-12 w-12 animate-spin mx-auto mb-4" />
+        <p>Verificando credenciales...</p>
+      </div>
+    </div>
+  );
 
   return (
     <div className="min-h-screen bg-[#2d2420] text-white flex flex-col items-center py-12">
       <div className="w-full max-w-[1920px] rounded-lg shadow-lg bg-[#3a2f29] p-8">
-        <h1 className="text-3xl font-bold mb-8 text-center font-serif">Panel de Administración</h1>
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-3xl font-bold font-serif">Panel de Administración</h1>
+          <button 
+            onClick={() => signOut({ callbackUrl: '/' })}
+            className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-full text-sm font-medium transition-colors"
+          >
+            Cerrar sesión
+          </button>
+        </div>
+        
         <div className="flex justify-center mb-8 gap-4 flex-wrap">
           {tabs.map((tab) => (
             <button
               key={tab.id}
-              className={`px-4 py-2 rounded-full font-semibold transition-colors duration-200 ${activeTab === tab.id ? "bg-white text-[#111111]" : "bg-[#2d2420] text-white hover:bg-[#4a3b33]"}`}
+              className={`px-4 py-2 rounded-full font-semibold transition-colors duration-200 ${
+                activeTab === tab.id 
+                  ? "bg-white text-[#111111]" 
+                  : "bg-[#2d2420] text-white hover:bg-[#4a3b33]"
+              }`}
               onClick={() => setActiveTab(tab.id)}
             >
               {tab.label}
             </button>
           ))}
         </div>
+        
         <div className="bg-[#111111] rounded-lg p-6 min-h-[300px]">
           {activeTab === "imagenes" && (
             <div>
               <h2 className="text-2xl font-bold mb-4">Gestión de Imágenes</h2>
-              <p className="text-gray-300 mb-4">Aquí podrás subir imágenes, agregar metadatos y obtener la URL interna para usarlas en tus artículos.</p>
+              <p className="text-gray-300 mb-4">
+                Aquí podrás subir imágenes, agregar metadatos y obtener la URL interna para usarlas en tus artículos.
+              </p>
               <ImagenUploader />
             </div>
           )}
+          
           {activeTab === "videos" && (
             <div>
               <h2 className="text-2xl font-bold mb-4">Gestión de Videos</h2>
-              <p className="text-gray-300 mb-4">Aquí podrás subir videos o pegar enlaces de YouTube y obtener el código embed listo para tus artículos.</p>
-              {/*
-                [IMPORTANTE]
-                Próximamente: aquí irá el componente para formatear links de video (YouTube, Vimeo, etc.)
-                Si necesitas formatear un link de video, házmelo saber.
-                Esta sección solo muestra un placeholder por ahora.
-                
-                Cambios realizados antes de subir a git:
-                - Se eliminó código duplicado y fragmentos sueltos.
-                - Se dejó este placeholder y comentario para futura funcionalidad de formateo de links de video.
-                - El archivo está limpio, funcional y documentado.
-              */}
+              <p className="text-gray-300 mb-4">
+                Aquí podrás subir videos o pegar enlaces de YouTube y obtener el código embed listo para tus artículos.
+              </p>
               <div className="bg-[#222] p-4 rounded text-gray-300">
                 <p>Próximamente podrás subir videos o pegar enlaces de YouTube para obtener el código embed listo para tus artículos.</p>
-                <p className="mt-2 text-sm text-gray-400">(Funcionalidad en desarrollo. Si necesitas formatear un link de video, házmelo saber.)</p>
+                <p className="mt-2 text-sm text-gray-400">
+                  (Funcionalidad en desarrollo. Si necesitas formatear un link de video, házmelo saber.)
+                </p>
               </div>
             </div>
           )}
+          
           {activeTab === "articulos" && (
             <div>
               <h2 className="text-2xl font-bold mb-4">Crear Artículo</h2>
-              <p className="text-gray-300">Aquí podrás crear y previsualizar tus artículos en Markdown antes de publicarlos.</p>
+              <p className="text-gray-300">
+                Aquí podrás crear y previsualizar tus artículos en Markdown antes de publicarlos.
+              </p>
               <ArticleEditor />
             </div>
           )}
+          
           {activeTab === "gestion" && (
             <div>
               <h2 className="text-2xl font-bold mb-4">Editar o Eliminar Artículos</h2>
-              <p className="text-gray-300">Aquí podrás ver, editar o eliminar artículos ya publicados.</p>
+              <p className="text-gray-300">
+                Aquí podrás ver, editar o eliminar artículos ya publicados.
+              </p>
               <ArticleManager />
             </div>
           )}
+          
           {activeTab === "estadisticas" && (
             <div>
               <h2 className="text-2xl font-bold mb-4">Estadísticas del Sitio</h2>
-              <p className="text-gray-300 mb-4">Aquí podrás ver las estadísticas de visitas y el rendimiento del sitio.</p>
+              <p className="text-gray-300 mb-4">
+                Aquí podrás ver las estadísticas de visitas y el rendimiento del sitio.
+              </p>
               <StatisticsPanel />
             </div>
           )}

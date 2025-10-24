@@ -1,57 +1,57 @@
 {
-  "totalVisitas": 761,
-  "visitasHoy": 761,
+  "totalVisitas": 1174,
+  "visitasHoy": 1174,
   "articulosPublicados": 0,
   "suscriptoresNewsletter": 0,
   "ultimasVisitas": [
     {
-      "fecha": "2025-10-07",
+      "fecha": "2025-10-24",
+      "pagina": "/blog/desarrollo-web/restaurantes",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-10-24",
+      "pagina": "/blog",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-10-24",
       "pagina": "/",
       "visitas": 1
     },
     {
-      "fecha": "2025-10-07",
+      "fecha": "2025-10-24",
+      "pagina": "/blog/automatizacion/menu-por-whatsapp",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-10-24",
+      "pagina": "/blog",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-10-24",
+      "pagina": "/blog",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-10-24",
       "pagina": "/",
       "visitas": 1
     },
     {
-      "fecha": "2025-10-07",
-      "pagina": "/",
+      "fecha": "2025-10-24",
+      "pagina": "/blog",
       "visitas": 1
     },
     {
-      "fecha": "2025-10-07",
-      "pagina": "/",
+      "fecha": "2025-10-24",
+      "pagina": "/blog/automatizacion/menu-por-whatsapp",
       "visitas": 1
     },
     {
-      "fecha": "2025-10-07",
-      "pagina": "/",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-10-07",
-      "pagina": "/",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-10-07",
-      "pagina": "/",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-10-07",
-      "pagina": "/",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-10-07",
-      "pagina": "/",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-10-07",
-      "pagina": "/",
+      "fecha": "2025-10-24",
+      "pagina": "/blog",
       "visitas": 1
     }
   ],
@@ -87,7 +87,10 @@
     "2025-10-04": 20,
     "2025-10-05": 37,
     "2025-10-06": 3,
-    "2025-10-07": 19
+    "2025-10-07": 19,
+    "2025-10-22": 9,
+    "2025-10-23": 261,
+    "2025-10-24": 143
   },
   "aperturasEmail": {}
 }
