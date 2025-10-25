@@ -1,17 +1,47 @@
 {
-  "totalVisitas": 1303,
-  "visitasHoy": 1303,
+  "totalVisitas": 1315,
+  "visitasHoy": 1315,
   "articulosPublicados": 0,
   "suscriptoresNewsletter": 0,
   "ultimasVisitas": [
     {
       "fecha": "2025-10-25",
+      "pagina": "/auth/signin",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-10-25",
+      "pagina": "/auth/signin",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-10-25",
       "pagina": "/blog",
       "visitas": 1
     },
     {
       "fecha": "2025-10-25",
-      "pagina": "/blog/posicionamiento-marca/Actualizar%20Tu%20Menu%20en%201%20Minuto",
+      "pagina": "/",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-10-25",
+      "pagina": "/blog",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-10-25",
+      "pagina": "/blog/diseno-web/menu-1-minuto",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-10-25",
+      "pagina": "/blog",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-10-25",
+      "pagina": "/blog/marketing-digital/estrategias-marketing-digital-2023",
       "visitas": 1
     },
     {
@@ -22,36 +52,6 @@
     {
       "fecha": "2025-10-25",
       "pagina": "/blog/desarrollo-web/menu%20whatsapp",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-10-25",
-      "pagina": "/blog",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-10-25",
-      "pagina": "/blog/desarrollo-web/restaurantes",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-10-25",
-      "pagina": "/blog",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-10-25",
-      "pagina": "/blog/desarrollo-web/menu%20whatsapp",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-10-25",
-      "pagina": "/blog",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-10-25",
-      "pagina": "/blog/automatizacion/menu-por-whatsapp",
       "visitas": 1
     }
   ],
@@ -91,7 +91,7 @@
     "2025-10-22": 9,
     "2025-10-23": 261,
     "2025-10-24": 260,
-    "2025-10-25": 12
+    "2025-10-25": 24
   },
   "aperturasEmail": {}
 }
