@@ -1,219 +1,238 @@
+"use client"
+
+import { useState, useEffect } from "react"
 import Link from "next/link"
-import BlogCard from "@/components/blog-card"
 import Image from "next/image"
+import BlogCard from "@/components/blog-card"
+import { Search, X, Loader2 } from "lucide-react"
+import { FeaturedArticles } from "@/components/featured-articles"
 
-export const metadata = {
-  title: "Blog - César Reyes Jaramillo",
-  description:
-    "Artículos sobre automatización, diseño web, SEO, asesoría de negocios y planificación estratégica para ayudarte a impulsar tu empresa.",
-}
-
-// Datos de categorías
-const categories = [
-  {
-    id: "automatizacion-para-tu-empresa",
-    title: "Automatización para tu Empresa",
-    description:
-      "La categoría de Automatización reúne artículos y guías sobre cómo optimizar y automatizar procesos empresariales. Descubre cómo nuestras soluciones de automatización pueden transformar tu negocio.",
-    link: "/blog/automatizacion-para-tu-empresa",
-  },
-  {
-    id: "diseno-web-para-empresas",
-    title: "Diseño Web para Empresas",
-    description:
-      "La categoría de Diseño Web para tu Negocio recopila artículos y guías sobre cómo crear páginas web efectivas. Aprende sobre diseño web y desarrollo.",
-    link: "/blog/diseno-web-para-empresas",
-  },
-  {
-    id: "seo-y-campanas-de-marketing",
-    title: "SEO y Campañas de Marketing",
-    description:
-      "La categoría de SEO y Campañas recoge artículos y guías sobre cómo mejorar la visibilidad online de tu negocio. Aprende sobre SEO y marketing digital.",
-    link: "/blog/seo-y-campanas-de-marketing",
-  },
-  {
-    id: "asesoria-de-negocios",
-    title: "Asesoría de Negocios",
-    description:
-      "La categoría de Asesoría de Negocios tiene como objetivo acumular artículos y guías sobre cómo mejorar tu negocio con nuestras soluciones de asesoría. Descubre las mejores prácticas y tendencias.",
-    link: "/blog/asesoria-de-negocios",
-  },
-  {
-    id: "planificacion-estrategica-para-empresas",
-    title: "Planificación estratégica para empresas",
-    description:
-      "La categoría de Planificación Estratégica reúne artículos y guías que te ayudarán a diseñar y ejecutar estrategias efectivas para el crecimiento de tu negocio. Explora prácticas recomendadas y estudios de caso.",
-    link: "/blog/planificacion-estrategica-para-empresas",
-  },
-]
-
-// Datos de artículos del blog
-const blogPosts = [
-  {
-    title: "Cómo la automatización puede transformar tu negocio",
-    excerpt: "Descubre las ventajas competitivas que la automatización de procesos puede aportar a tu empresa.",
-    category: "Automatización",
-    categoryId: "automatizacion-para-tu-empresa",
-    date: "15 Abr 2023",
-    slug: "como-la-automatizacion-puede-transformar-tu-negocio",
-    image: "/placeholder.svg?height=300&width=500",
-  },
-  {
-    title: "Tendencias de diseño web para 2023",
-    excerpt: "Conoce las últimas tendencias en diseño web que deberías implementar en tu sitio este año.",
-    category: "Diseño Web",
-    categoryId: "diseno-web-para-empresas",
-    date: "28 Mar 2023",
-    slug: "tendencias-de-diseno-web-para-2023",
-    image: "/placeholder.svg?height=300&width=500",
-  },
-  {
-    title: "Estrategias de SEO efectivas para pequeñas empresas",
-    excerpt: "Aprende cómo implementar estrategias de SEO que funcionen para negocios con presupuestos limitados.",
-    category: "SEO",
-    categoryId: "seo-y-campanas-de-marketing",
-    date: "10 Mar 2023",
-    slug: "estrategias-de-seo-efectivas-para-pequenas-empresas",
-    image: "/placeholder.svg?height=300&width=500",
-  },
-  {
-    title: "Cómo desarrollar un plan de negocios efectivo",
-    excerpt: "Guía paso a paso para crear un plan de negocios que impulse el crecimiento de tu empresa.",
-    category: "Asesoría de Negocios",
-    categoryId: "asesoria-de-negocios",
-    date: "5 Mar 2023",
-    slug: "como-desarrollar-un-plan-de-negocios-efectivo",
-    image: "/placeholder.svg?height=300&width=500",
-  },
-  {
-    title: "Planificación estratégica: clave para el éxito empresarial",
-    excerpt:
-      "Descubre por qué la planificación estratégica es fundamental para el crecimiento sostenible de tu negocio.",
-    category: "Planificación Estratégica",
-    categoryId: "planificacion-estrategica-para-empresas",
-    date: "20 Feb 2023",
-    slug: "planificacion-estrategica-clave-para-el-exito-empresarial",
-    image: "/placeholder.svg?height=300&width=500",
-  },
-  {
-    title: "Herramientas de automatización para mejorar la productividad",
-    excerpt:
-      "Conoce las mejores herramientas de automatización que pueden ayudarte a optimizar tus procesos empresariales.",
-    category: "Automatización",
-    categoryId: "automatizacion-para-tu-empresa",
-    date: "15 Feb 2023",
-    slug: "herramientas-de-automatizacion-para-mejorar-la-productividad",
-    image: "/placeholder.svg?height=300&width=500",
-  },
-]
+// Tipos para los artículos
+type BlogPost = {
+  id?: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  category: string;
+  date: string;
+  slug: string;
+  image: string;
+  author: string;
+  [key: string]: any;
+};
 
 export default function BlogPage() {
-  return (
-    <>
-      {/* Hero Section */}
-      <section className="relative w-full min-h-[calc(100vh-100px)] md:min-h-screen">
-        {/* Background Images */}
-        <div className="absolute inset-0">
-          {/* Desktop Image */}
-          <div className="relative w-full h-full hidden md:block">
-            <Image
-              src="/images/pensamiento.webp"
-              alt="Blog hero background desktop"
-              fill
-              priority
-              quality={100}
-              sizes="100vw"
-              className="object-cover"
-            />
-          </div>
-          {/* Mobile Image */}
-          <div className="relative w-full h-full block md:hidden">
-            <Image
-              src="/images/sentado.webp"
-              alt="Blog hero background mobile"
-              fill
-              priority
-              quality={100}
-              sizes="100vw"
-              className="object-cover"
-            />
-          </div>
+  const [searchTerm, setSearchTerm] = useState("")
+  const [selectedCategory, setSelectedCategory] = useState<string>("Todas")
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+  const [posts, setPosts] = useState<BlogPost[]>([])
+  const [visiblePosts, setVisiblePosts] = useState(6)
+
+  // Cargar artículos al montar el componente
+  useEffect(() => {
+    const loadArticles = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch('/api/blog');
+        
+        if (!response.ok) {
+          throw new Error('Error al cargar los artículos');
+        }
+        
+        const articles = await response.json();
+        setPosts(articles);
+      } catch (err) {
+        console.error('Error al cargar artículos:', err);
+        setError('No se pudieron cargar los artículos. Por favor, inténtalo de nuevo más tarde.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadArticles();
+  }, [])
+
+  // Obtener categorías únicas de los artículos
+  const categoriesList = ["Todas", ...Array.from(new Set(posts.map(post => post.category)))]
+
+  // Función para normalizar texto (quitar acentos y convertir a minúsculas)
+  const normalizeText = (text: string) => {
+    return text
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, ''); // Elimina acentos
+  };
+
+  // Filtrar artículos por categoría (insensible a mayúsculas/minúsculas y acentos)
+  const filteredPosts = selectedCategory === "Todas"
+    ? [...posts] // Usar una copia para evitar mutación directa
+    : posts.filter(post =>
+        normalizeText(post.category) === normalizeText(selectedCategory)
+      );
+
+  // Filtrar artículos basados en la búsqueda
+  const filteredPostsBySearch = searchTerm
+    ? filteredPosts.filter((post) => {
+        const search = normalizeText(searchTerm);
+        const title = normalizeText(post.title);
+        const excerpt = post.excerpt ? normalizeText(post.excerpt) : '';
+        
+        // Buscar en título, extracto y categoría
+        return (
+          title.includes(search) ||
+          excerpt.includes(search) ||
+          normalizeText(post.category).includes(search)
+        );
+      })
+    : filteredPosts;
+  
+  // Ordenar artículos por fecha (más recientes primero)
+  const sortedPosts = [...posts].sort((a, b) => 
+    new Date(b.date).getTime() - new Date(a.date).getTime()
+  )
+  
+  // Ordenar y limitar los posts a mostrar
+  const postsToShow = [...filteredPostsBySearch]
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, visiblePosts);
+
+  const hasMorePosts = visiblePosts < filteredPostsBySearch.length;
+
+  // Función para cargar más posts
+  const loadMorePosts = () => {
+    setVisiblePosts(prev => prev + 6);
+  };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="container mx-auto px-4 py-12 text-center">
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+          <strong className="font-bold">Error: </strong>
+          <span className="block sm:inline">{error}</span>
         </div>
+      </div>
+    );
+  }
 
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black/40 z-10"></div>
-
-        {/* Content */}
-        <div className="relative z-20 container mx-auto px-4 h-full flex items-center justify-center">
-          <div className="text-white w-full">
-            {/* Mobile: Nuevo h1 y h2 */}
-            <div className="md:hidden text-left">
-              <h1 className="text-3xl font-bold mb-2">
-                Blog
-              </h1>
-              <h2 className="text-2xl font-semibold mb-4">
-                Estrategias y consejos
-              </h2>
-            </div>
-            
-            {/* Desktop: original h1 y h2 */}
-            <div className="hidden md:block text-center">
-              <h1 className="text-5xl font-bold mb-4">
-                Blog
-              </h1>
-              <h2 className="text-3xl font-semibold mb-4">
-                Estrategias y consejos
-              </h2>
-              <p className="text-xl mb-8">
-                Descubre las mejores prácticas para hacer crecer tu negocio
+  return (
+    <div className="min-h-screen bg-white">
+      {/* Artículos Destacados */}
+      <FeaturedArticles />
+      
+      {/* Contenido principal del blog */}
+      <div className="bg-gray-50 pt-12 pb-20">
+        {/* Hero Section */}
+        <section className="relative bg-gradient-to-r from-primary to-primary-dark text-white py-20 md:py-28">
+          <div className="absolute inset-0 bg-black/30"></div>
+          <div className="container mx-auto px-4 md:px-6 relative z-10">
+            <div className="max-w-3xl mx-auto text-center">
+              <h1 className="text-4xl md:text-5xl font-bold mb-4">Blog</h1>
+              <p className="text-xl text-white/90 mb-8">
+                Descubre artículos, guías y noticias sobre desarrollo web, diseño, marketing digital y más.
               </p>
             </div>
-            
-            <div className="text-left md:text-center">
-              <a 
-                href="https://wa.me/593963410409" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block bg-orange-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-orange-600 transition-colors"
-              >
-                📱 ¿Qué temas te gustaría que publicara?
-              </a>
-            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="py-16 bg-white">
-        <div className="container">
-          <h2 className="text-3xl font-bold mb-8">Categorías</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-            {categories.map((category) => (
-              <div key={category.id} className="bg-light p-6 rounded-lg">
-                <h3 className="text-xl font-bold mb-2">{category.title}</h3>
-                <p className="text-gray-600 mb-4">{category.description}</p>
-                <Link href={category.link} className="text-primary font-medium hover:underline">
-                  Ver artículos →
-                </Link>
+      {/* Filtros de búsqueda y lista de artículos */}
+      <section className="py-8 md:py-12">
+        <div className="container px-4 md:px-6">
+          <div className="max-w-6xl mx-auto">
+            {/* Barra de búsqueda */}
+            <div className="w-full mb-8">
+              <div className="relative group max-w-2xl mx-auto">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 group-focus-within:text-primary transition-colors" />
+                <input
+                  type="text"
+                  placeholder="Buscar artículos por título, contenido o categoría..."
+                  className="w-full pl-12 pr-10 py-3 bg-black text-white border border-gray-800 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent placeholder-gray-500 transition-all duration-200 text-base"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  aria-label="Buscar artículos"
+                />
+                {searchTerm && (
+                  <button
+                    onClick={() => setSearchTerm('')}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
+                    aria-label="Limpiar búsqueda"
+                  >
+                    <X className="h-5 w-5" />
+                  </button>
+                )}
               </div>
-            ))}
-          </div>
+            </div>
 
-          <h2 className="text-3xl font-bold mb-8">Artículos Recientes</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogPosts.map((post, index) => (
-              <BlogCard
-                key={index}
-                title={post.title}
-                excerpt={post.excerpt}
-                category={post.category}
-                date={post.date}
-                slug={`${post.categoryId}/${post.slug}`}
-                image={post.image}
-              />
-            ))}
+            {/* Filtros por categoría */}
+            <div className="w-full mb-8">
+              <div className="flex flex-wrap justify-center gap-2">
+                {categoriesList.map((category) => (
+                  <button
+                    key={category}
+                    onClick={() => setSelectedCategory(category)}
+                    className={`px-4 py-2 rounded-full text-sm font-medium transition-colors whitespace-nowrap ${
+                      selectedCategory === category
+                        ? 'bg-primary text-white'
+                        : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
+                    }`}
+                  >
+                    {category}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Lista de artículos */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {postsToShow.length > 0 ? (
+                postsToShow.map((post) => (
+                  <BlogCard
+                    key={post.slug || post.title.toLowerCase().replace(/\s+/g, '-')}
+                    title={post.title}
+                    excerpt={post.excerpt}
+                    category={post.category}
+                    date={post.date}
+                    slug={post.slug || post.title.toLowerCase().replace(/\s+/g, '-')}
+                    image={post.image}
+                  />
+                ))
+              ) : (
+                <div className="col-span-full text-center py-12">
+                  <h3 className="text-xl font-medium text-gray-900 mb-2">
+                    {posts.length === 0 ? 'No hay artículos disponibles' : 'No se encontraron artículos'}
+                  </h3>
+                  <p className="text-gray-500">
+                    {posts.length === 0 
+                      ? 'Pronto publicaremos nuevo contenido.' 
+                      : 'Intenta con otros términos de búsqueda o categorías.'}
+                  </p>
+                </div>
+              )}
+            </div>
+            
+            {/* Botón para cargar más artículos */}
+            {hasMorePosts && (
+              <div className="col-span-full flex justify-center mt-8">
+                <button
+                  onClick={loadMorePosts}
+                  className="px-6 py-2.5 bg-primary text-white font-medium rounded-lg hover:bg-primary-dark transition-colors"
+                >
+                  Cargar más artículos
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </section>
-    </>
+      </div>
+    </div>
   )
 }

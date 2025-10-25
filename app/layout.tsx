@@ -4,6 +4,7 @@ import { Inter, Poiret_One, Montserrat, Poppins, Playfair_Display } from "next/f
 import Footer from "@/components/footer"
 import VisitTracker from '@/components/VisitTracker'
 import TransparentHeader from '@/components/transparent-header'
+import { Providers } from './providers'
 
 // Importar metadata desde el archivo separado
 export { metadata, viewport } from './metadata'
@@ -51,11 +52,16 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="es">
-      <body className={`${inter.variable} ${poiretOne.variable} ${montserrat.variable} ${poppins.variable} ${playfairDisplay.variable} font-sans antialiased`}>
-        <TransparentHeader />
-        <main>{children}</main>
-        <Footer />
+    <html lang="es" className={`${inter.variable} ${poiretOne.variable} ${montserrat.variable} ${poppins.variable} ${playfairDisplay.variable}`} suppressHydrationWarning>
+      <body className="min-h-screen bg-white text-gray-900 antialiased">
+        <Providers>
+          <TransparentHeader />
+          <main className="min-h-[calc(100vh-64px)]">
+            {children}
+          </main>
+          <Footer />
+          <VisitTracker />
+        </Providers>
       </body>
     </html>
   )

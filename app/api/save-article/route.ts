@@ -1,6 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import path from "path";
 import { promises as fs } from "fs";
+import { createClient } from "@supabase/supabase-js";
+
+// Inicializar el cliente de Supabase
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+if (!supabaseUrl || !supabaseKey) {
+  throw new Error("Faltan las variables de entorno de Supabase");
+}
+
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 interface Frontmatter {
   category?: string;
@@ -46,7 +57,15 @@ function slugify(text: string): string {
     .replace(/^-+|-+$/g, '');
 }
 
-const ALLOWED_CATEGORIES = ['marketing', 'estrategia', 'tecnologia']; // Add your allowed categories
+const ALLOWED_CATEGORIES = [
+  'automatizacion',
+  'diseno-web',
+  'marketing-digital',
+  'asesoria',
+  'analisis-estrategico',
+  'desarrollo-web',
+  'posicionamiento-marca'
+];
 
 function validateFrontmatter(frontmatter: Frontmatter): { isValid: boolean; error?: string } {
   if (!frontmatter.category) {
@@ -130,16 +149,65 @@ export async function POST(req: NextRequest) {
       // Create directory if it doesn't exist
       await fs.mkdir(dir, { recursive: true });
       
-      // Write the file
-      const filePath = path.join(dir, `${slug}.md`);
-      await fs.writeFile(filePath, markdown, "utf-8");
+      // Guardar en Supabase
+      const { data: categoryData, error: categoryError } = await supabase
+        .from('categories')
+        .select('id')
+        .eq('id', safeCategory)
+        .single();
+
+      if (categoryError || !categoryData) {
+        console.error('Error al buscar la categoría:', categoryError);
+        return NextResponse.json(
+          { error: 'Categoría no encontrada en la base de datos' },
+          { status: 400 }
+        );
+      }
+
+      const articleData = {
+        title: frontmatter.title,
+        slug: slug,
+        content: markdown.split('---').slice(2).join('---').trim(), // Extraer solo el contenido markdown
+        excerpt: frontmatter.excerpt || '',
+        cover_image: frontmatter.image || '',
+        category_id: safeCategory,
+        published: true, // O podrías hacerlo configurable desde el frontend
+        published_at: new Date().toISOString(),
+        meta_title: frontmatter.metaDescription?.slice(0, 60) || frontmatter.title,
+        meta_description: frontmatter.metaDescription || frontmatter.excerpt || ''
+      };
+
+      // Insertar o actualizar el artículo en Supabase
+      const { data: article, error: upsertError } = await supabase
+        .from('articles')
+        .upsert(articleData, { onConflict: 'slug' })
+        .select()
+        .single();
+
+      if (upsertError) {
+        console.error('Error al guardar en Supabase:', upsertError);
+        return NextResponse.json(
+          { error: 'Error al guardar el artículo en la base de datos' },
+          { status: 500 }
+        );
+      }
+      
+      // Opcional: Guardar también en el sistema de archivos local
+      try {
+        const filePath = path.join(dir, `${slug}.md`);
+        await fs.writeFile(filePath, markdown, "utf-8");
+      } catch (fileError) {
+        console.error('Error al guardar en el sistema de archivos:', fileError);
+        // Continuamos aunque falle el guardado en archivo, ya que lo importante es Supabase
+      }
       
       // Return success response
       const url = `/blog/${safeCategory}/${slug}`;
       return NextResponse.json({ 
         success: true, 
         url,
-        message: "Artículo guardado exitosamente"
+        articleId: article.id,
+        message: "Artículo guardado exitosamente en Supabase"
       });
       
     } catch (error: any) {

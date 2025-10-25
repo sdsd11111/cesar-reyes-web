@@ -37,6 +37,9 @@ export default function NavigationHeader() {
     };
   }, [lastScrollY]);
 
+  // Check if we're on a blog page or article
+  const isBlogPage = pathname?.startsWith('/blog') || pathname === '/blog';
+  
   return (
     <header
       className={`bg-transparent fixed top-8 left-0 right-0 z-40 transition-transform duration-300 ${
@@ -45,19 +48,19 @@ export default function NavigationHeader() {
     >
       <div className="container py-4 flex justify-between items-center">
         <Link href="/" className="text-2xl font-bold flex items-center">
-          <span className="text-white">César Reyes</span>
+          <span className={`${isBlogPage ? 'text-black' : 'text-white'}`}>César Reyes</span>
         </Link>
 
         {/* Navegación de escritorio */}
         <div className="hidden md:flex items-center space-x-8">
           <nav className="flex items-center space-x-8">
             {pathname !== '/' && (
-              <Link href="/" className="font-medium text-white hover:text-gray-200">
+              <Link href="/" className={`font-medium ${isBlogPage ? 'text-black hover:text-gray-700' : 'text-white hover:text-gray-200'}`}>
                 Inicio
               </Link>
             )}
-            <MegaMenu categorias={categorias} />
-            <Link href="/blog" className="font-medium text-white hover:text-gray-200">
+            <MegaMenu categorias={categorias} isBlogArticle={isBlogPage} />
+            <Link href="/blog" className={`font-medium ${isBlogPage ? 'text-black hover:text-gray-700' : 'text-white hover:text-gray-200'}`}>
               Blog
             </Link>
             <Link href="/MenuObjetivo" className="bg-[#FF6B00] text-white px-3 py-2 rounded-md text-sm font-semibold hover:bg-[#E66000] transition-colors">
@@ -69,7 +72,7 @@ export default function NavigationHeader() {
         {/* Botón del menú móvil */}
         <div className="md:hidden">
           <button
-            className="text-white"
+            className={isBlogPage ? "text-black" : "text-white"}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label={isMenuOpen ? "Cerrar menú" : "Abrir menú"}
           >
@@ -79,7 +82,13 @@ export default function NavigationHeader() {
       </div>
 
       {/* Renderiza el nuevo componente de menú móvil */}
-      {isMenuOpen && <MobileMenu categorias={categorias} onClose={() => setIsMenuOpen(false)} />}
+      {isMenuOpen && (
+        <MobileMenu 
+          categorias={categorias} 
+          onClose={() => setIsMenuOpen(false)}
+          isBlogArticle={isBlogPage}
+        />
+      )}
     </header>
   );
 }

@@ -1,12 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  trailingSlash: true,
-  eslint: {
-    ignoreDuringBuilds: true,
+  // Configuración de autenticación
+  experimental: {
+    serverActions: true,
   },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
+  // Configuración de imágenes
   images: {
     domains: ['cesarreyesjaramillo.com', 'topdentcuenca.com', 'cesarweb.b-cdn.net'],
     remotePatterns: [
@@ -22,21 +20,18 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'drguidodiazortega.com',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'automatizotunegocio.net',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
         hostname: 'cesarweb.b-cdn.net',
         pathname: '/**',
       },
     ],
   },
+  trailingSlash: true,
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  }
 };
 
 export default nextConfig;

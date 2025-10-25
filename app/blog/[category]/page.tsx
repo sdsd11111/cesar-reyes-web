@@ -85,8 +85,8 @@ export function generateStaticParams() {
   }))
 }
 
-export async function generateMetadata(props: { params: Promise<{ category: string }> }) {
-  const { category } = await props.params;
+export async function generateMetadata({ params }: { params: Promise<{ category: string }> }) {
+  const { category } = await params;
   const categoryObj = categories.find((cat) => cat.id === category)
 
   if (!categoryObj) {
@@ -102,9 +102,9 @@ export async function generateMetadata(props: { params: Promise<{ category: stri
   }
 }
 
-export default async function CategoryPage(props: { params: Promise<{ category: string }>, searchParams: Promise<{ search?: string }> }) {
-  const { category } = await props.params;
-  const { search = "" } = await props.searchParams;
+export default async function CategoryPage({ params, searchParams }: { params: Promise<{ category: string }>, searchParams: Promise<{ search?: string }> }) {
+  const { category } = await params;
+  const { search = "" } = await searchParams;
   const categoryObj = categories.find((cat) => cat.id === category);
 
   if (!categoryObj) {

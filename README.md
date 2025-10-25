@@ -20,7 +20,7 @@ El proyecto se encontraba en un estado inconsistente debido a una actualización
 2.  **Restauración del Estado Funcional:**
     *   Tras confirmar que los problemas visuales persistían por cambios no guardados, se tomó la decisión de realizar un reseteo completo.
     *   Se ejecutó `git reset --hard HEAD` para descartar todos los cambios no guardados y devolver el proyecto al último commit funcional (`79bb85a`).
-    *   Se ejecutó `pnpm install` para reinstalar las dependencias correctas correspondientes a ese commit.
+    *   Se ejecutó `npm install` para reinstalar las dependencias correctas correspondientes a ese commit.
 
 3.  **Reparación del MegaMenu:**
     *   Se diagnosticó que el menú de escritorio no recibía los datos (`props`). Se corrigió la llamada en `transparent-header.tsx`.
