@@ -1,0 +1,245 @@
+JSON de Estilos para Visual Studio Code
+{
+  "brand": {
+    "name": "MenúObjetivo",
+    "version": "1.0.0"
+  "colors": {
+    "primary": {
+      "naranjaObjetivo": "#FF6B00",
+      "grisAntracita": "#2B2B2B",
+      "blancoPuro": "#FFFFFF"
+    },
+    "secondary": {
+      "verdeEstrategia": "#00C4A7",
+      "amarilloSuave": "#FFD166"
+    },
+    "states": {
+      "hover": "#FFD166",
+      "active": "#E66000",
+      "disabled": "#CCCCCC"
+    }
+  },
+  "typography": {
+    "fontFamilies": {
+      "primary": "'Poppins', sans-serif",
+      "secondary": "'Montserrat', sans-serif",
+      "body": "'Inter', sans-serif"
+    },
+    "fontWeights": {
+      "regular": 400,
+      "medium": 500,
+      "bold": 700
+    },
+    "fontSize": {
+      "h1": "36px",
+      "h2": "28px",
+      "h3": "20px",
+      "body": "16px",
+      "button": "14px",
+      "small": "12px"
+    },
+    "lineHeight": {
+      "h1": 1.2,
+      "h2": 1.3,
+      "h3": 1.4,
+      "body": 1.6,
+      "button": 1.4
+    }
+  },
+  "spacing": {
+    "xs": "4px",
+    "sm": "8px",
+    "md": "16px",
+    "lg": "24px",
+    "xl": "32px",
+    "xxl": "48px"
+  },
+  "borderRadius": {
+    "sm": "4px",
+    "md": "8px",
+    "lg": "16px",
+    "pill": "9999px"
+  },
+  "shadows": {
+    "sm": "0 2px 4px rgba(0, 0, 0, 0.05)",
+    "md": "0 4px 8px rgba(0, 0, 0, 0.1)",
+    "lg": "0 8px 16px rgba(0, 0, 0, 0.15)"
+  },
+  "components": {
+    "button": {
+      "primary": {
+        "backgroundColor": "#FF6B00",
+        "color": "#FFFFFF",
+        "borderRadius": "8px",
+        "padding": "12px 24px",
+        "fontFamily": "'Montserrat', sans-serif",
+        "fontWeight": 500,
+        "fontSize": "14px",
+        "hover": {
+          "backgroundColor": "#E66000"
+        }
+      },
+      "secondary": {
+        "backgroundColor": "#00C4A7",
+        "color": "#FFFFFF",
+        "borderRadius": "8px",
+        "padding": "12px 24px",
+        "fontFamily": "'Montserrat', sans-serif",
+        "fontWeight": 500,
+        "fontSize": "14px",
+        "hover": {
+          "backgroundColor": "#00B09A"
+        }
+      },
+      "outline": {
+        "backgroundColor": "transparent",
+        "color": "#2B2B2B",
+        "borderRadius": "8px",
+        "border": "2px solid #2B2B2B",
+        "padding": "10px 22px",
+        "fontFamily": "'Montserrat', sans-serif",
+        "fontWeight": 500,
+        "fontSize": "14px",
+        "hover": {
+          "backgroundColor": "#F5F5F5"
+        }
+      }
+    },
+    "card": {
+      "backgroundColor": "#FFFFFF",
+      "borderRadius": "8px",
+      "padding": "24px",
+      "boxShadow": "0 4px 8px rgba(0, 0, 0, 0.1)"
+    },
+    "input": {
+      "backgroundColor": "#FFFFFF",
+      "borderRadius": "8px",
+      "border": "1px solid #CCCCCC",
+      "padding": "12px 16px",
+      "fontFamily": "'Inter', sans-serif",
+      "fontSize": "16px",
+      "focus": {
+        "borderColor": "#FF6B00",
+        "boxShadow": "0 0 0 3px rgba(255, 107, 0, 0.2)"
+      }
+    },
+    "navbar": {
+      "backgroundColor": "#FFFFFF",
+      "boxShadow": "0 2px 4px rgba(0, 0, 0, 0.05)",
+      "height": "64px"
+    }
+  }
+}
+Cómo Implementar el Kit de Marca
+Para implementar correctamente la identidad visual de MenúObjetivo en tu plataforma, te recomiendo seguir estos pasos:
+
+Organización de Archivos:
+
+Crea una carpeta assets en tu proyecto
+Dentro de assets, crea subcarpetas:
+logos: Para almacenar todas las versiones del logo
+icons: Para los iconos del sistema
+images: Para imágenes de marca y fotografías
+styles: Para archivos CSS/SCSS
+Implementación de Logos:
+
+Guarda los logos generados en formato SVG y PNG (diferentes tamaños)
+Nombra los archivos de manera descriptiva:
+logo-menuobjetivo-color.svg
+logo-menuobjetivo-mono.svg
+favicon-menuobjetivo.svg
+logo-menuobjetivo-tagline.svg
+Implementación de Estilos:
+
+Crea un archivo de variables CSS o SCSS basado en el JSON proporcionado
+Ejemplo de implementación en SCSS:
+// variables.scss
+$naranja-objetivo: #FF6B00;
+$gris-antracita: #2B2B2B;
+$blanco-puro: #FFFFFF;
+$verde-estrategia: #00C4A7;
+$amarillo-suave: #FFD166;
+
+// Tipografía
+$font-primary: 'Poppins', sans-serif;
+$font-secondary: 'Montserrat', sans-serif;
+$font-body: 'Inter', sans-serif;
+
+// Tamaños de fuente
+$font-size-h1: 36px;
+$font-size-h2: 28px;
+$font-size-h3: 20px;
+$font-size-body: 16px;
+$font-size-button: 14px;
+$font-size-small: 12px;
+
+// Espaciado
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+$spacing-xxl: 48px;
+
+// Bordes redondeados
+$border-radius-sm: 4px;
+$border-radius-md: 8px;
+$border-radius-lg: 16px;
+$border-radius-pill: 9999px;
+
+// Sombras
+$shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.15);
+Implementación de Componentes:
+Crea componentes r basados en el diseño
+Ejemplo de un componente de botón en React // Button.jsx import React from 'react'; import './Button.scss';
+const Button = ({ children, variant = 'primary', ...props }) => { return ( <button className={btn btn-${variant}} {...props}> {children} </button> ); };
+
+export default Button;
+
+
+```scss
+// Button.scss
+@import '../styles/variables.scss';
+
+.btn {
+  font-family: $font-secondary;
+  font-weight: 500;
+  font-size: $font-size-button;
+  border-radius: $border-radius-md;
+  padding: $spacing-md $spacing-lg;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  &.btn-primary {
+    background-color: $naranja-objetivo;
+    color: $blanco-puro;
+    border: none;
+    
+    &:hover {
+      background-color: darken($naranja-objetivo, 5%);
+    }
+  }
+  
+  &.btn-secondary {
+    background-color: $verde-estrategia;
+    color: $blanco-puro;
+    border: none;
+    
+    &:hover {
+      background-color: darken($verde-estrategia, 5%);
+    }
+  }
+  
+  &.btn-outline {
+    background-color: transparent;
+    color: $gris-antracita;
+    border: 2px solid $gris-antracita;
+    padding: calc(#{$spacing-md} - 2px) calc(#{$spacing-lg} - 2px);
+    
+    &:hover {
+      background-color: rgba($gris-antracita, 0.05);
+    }
+  }
+}

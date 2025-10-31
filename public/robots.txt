@@ -1,0 +1,12 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /api
+
+# Host
+Host: https://cesarreyesjaramillo.com
+
+# Sitemaps
+Sitemap: https://cesarreyesjaramillo.com/sitemap.xml
+Sitemap: https://cesarreyesjaramillo.com/server-sitemap.xml
