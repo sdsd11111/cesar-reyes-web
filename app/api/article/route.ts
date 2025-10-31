@@ -17,8 +17,11 @@ export async function GET(request: Request) {
   }
 
   try {
+    // Normalizar la ruta para usar barras inclinadas hacia adelante
+    const normalizedPath = filePath.replace(/\\/g, '/');
+    
     // Construir la ruta completa al archivo
-    const fullPath = path.join(process.cwd(), filePath);
+    const fullPath = path.join(process.cwd(), ...normalizedPath.split('/'));
     
     // Verificar que el archivo existe
     if (!fs.existsSync(fullPath)) {

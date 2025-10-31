@@ -1,17 +1,32 @@
 {
-  "totalVisitas": 3053,
-  "visitasHoy": 3053,
+  "totalVisitas": 3061,
+  "visitasHoy": 3061,
   "articulosPublicados": 0,
   "suscriptoresNewsletter": 0,
   "ultimasVisitas": [
     {
       "fecha": "2025-10-31",
-      "pagina": "/blog/asesoria-de-negocios-para-pymes/rendimiento-en-campa%C3%B1as",
+      "pagina": "/blog/uncategorized/qu%C3%A9-son-tarjetas-digitales",
       "visitas": 1
     },
     {
       "fecha": "2025-10-31",
-      "pagina": "/blog/articulos-sobre-automatizacion-para-tu-empresa/tendencias-de-automatizaci%C3%B3n-para-pymes-en-2025",
+      "pagina": "/admin",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-10-31",
+      "pagina": "/blog",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-10-31",
+      "pagina": "/",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-10-31",
+      "pagina": "/admin",
       "visitas": 1
     },
     {
@@ -26,32 +41,17 @@
     },
     {
       "fecha": "2025-10-31",
-      "pagina": "/blog/uncategorized/blog_-_c%C3%A9sar",
+      "pagina": "/blog/asesoria-de-negocios-para-pymes/seo-y-campanas",
       "visitas": 1
     },
     {
       "fecha": "2025-10-31",
-      "pagina": "/blog/planificacion-estrategica-para-empresas/tus-competidores-se-est%C3%A1n-llevando-tus-clientes",
+      "pagina": "/blog/asesoria-de-negocios-para-pymes/rendimiento-en-campa%C3%B1as",
       "visitas": 1
     },
     {
       "fecha": "2025-10-31",
-      "pagina": "/admin",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-10-31",
-      "pagina": "/blog/planificacion-estrategica-para-empresas/tus_competidores_se_est%C3%A1n_llevando_tus_clientes",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-10-31",
-      "pagina": "/blog/planificacion-estrategica-para-empresas/tus_competidores_se_est%C3%A1n_llevando_tus_clientes",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-10-31",
-      "pagina": "/blog/planificacion-estrategica-para-empresas/tus_competidores_se_est%C3%A1n_llevando_tus_clientes",
+      "pagina": "/blog/articulos-sobre-automatizacion-para-tu-empresa/tendencias-de-automatizaci%C3%B3n-para-pymes-en-2025",
       "visitas": 1
     }
   ],
@@ -96,7 +96,7 @@
     "2025-10-28": 435,
     "2025-10-29": 285,
     "2025-10-30": 220,
-    "2025-10-31": 78
+    "2025-10-31": 86
   },
   "aperturasEmail": {}
 }
