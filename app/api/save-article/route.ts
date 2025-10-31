@@ -53,6 +53,7 @@ function slugify(text: string): string {
     .replace(/[\u0300-\u036f]/g, '') // Remove diacritics
     .toLowerCase()
     .replace(/[^\w\s-:]/g, '') // Mantener guiones y dos puntos
+    .replace(/_/g, '-') // Convertir guiones bajos a guiones
     .trim()
     .replace(/\s+/g, '-')
     .replace(/-+/g, '-')

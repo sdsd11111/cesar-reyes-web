@@ -1,8 +1,10 @@
 ---
 is_visible: false
 updated_at: |
-  2025-10-31T16:00:13.682Z
+  2025-10-31T16:37:41.575Z
 ---
+
+
 
 # Tarjetas de presentación con brillo UV selectivo - César Reyes
 # Transforma tu Marca🏆: Tarjetas con Brillo UV y Código QR

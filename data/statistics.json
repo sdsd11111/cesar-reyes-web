@@ -1,27 +1,22 @@
 {
-  "totalVisitas": 3032,
-  "visitasHoy": 3032,
+  "totalVisitas": 3053,
+  "visitasHoy": 3053,
   "articulosPublicados": 0,
   "suscriptoresNewsletter": 0,
   "ultimasVisitas": [
     {
       "fecha": "2025-10-31",
-      "pagina": "/blog",
+      "pagina": "/blog/asesoria-de-negocios-para-pymes/rendimiento-en-campa%C3%B1as",
       "visitas": 1
     },
     {
       "fecha": "2025-10-31",
-      "pagina": "/blog/automatizacion/asdasdasdasd",
+      "pagina": "/blog/articulos-sobre-automatizacion-para-tu-empresa/tendencias-de-automatizaci%C3%B3n-para-pymes-en-2025",
       "visitas": 1
     },
     {
       "fecha": "2025-10-31",
-      "pagina": "/admin",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-10-31",
-      "pagina": "/blog/planificacion-estrategica-para-empresas/oportunidades_de_negocio",
+      "pagina": "/blog/planificacion-estrategica-para-empresas/mujeres-artesanas-del-ecuador",
       "visitas": 1
     },
     {
@@ -31,22 +26,27 @@
     },
     {
       "fecha": "2025-10-31",
-      "pagina": "/blog/asesoria-de-negocios-para-pymes/marketing_digital_para_emprendedores",
+      "pagina": "/blog/uncategorized/blog_-_c%C3%A9sar",
       "visitas": 1
     },
     {
       "fecha": "2025-10-31",
-      "pagina": "/blog/asesoria-de-negocios-para-pymes/marketing_digital_para_emprendedores",
+      "pagina": "/blog/planificacion-estrategica-para-empresas/tus-competidores-se-est%C3%A1n-llevando-tus-clientes",
       "visitas": 1
     },
     {
       "fecha": "2025-10-31",
-      "pagina": "/blog/planificacion-estrategica-para-empresas/gesti%C3%B3n_de_redes_sociales_la_verdad_detr%C3%A1s_del_costo_de_venta",
+      "pagina": "/admin",
       "visitas": 1
     },
     {
       "fecha": "2025-10-31",
-      "pagina": "/blog/planificacion-estrategica-para-empresas/mujeres_artesanas_del_ecuador",
+      "pagina": "/blog/planificacion-estrategica-para-empresas/tus_competidores_se_est%C3%A1n_llevando_tus_clientes",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-10-31",
+      "pagina": "/blog/planificacion-estrategica-para-empresas/tus_competidores_se_est%C3%A1n_llevando_tus_clientes",
       "visitas": 1
     },
     {
@@ -96,7 +96,7 @@
     "2025-10-28": 435,
     "2025-10-29": 285,
     "2025-10-30": 220,
-    "2025-10-31": 57
+    "2025-10-31": 78
   },
   "aperturasEmail": {}
 }

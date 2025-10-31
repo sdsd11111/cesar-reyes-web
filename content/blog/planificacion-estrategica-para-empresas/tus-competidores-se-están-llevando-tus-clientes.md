@@ -1,8 +1,10 @@
 ---
 is_visible: false
 updated_at: |
-  2025-10-31T15:57:39.277Z
+  2025-10-31T16:36:21.312Z
 ---
+
+
 
 # ¿Tus competidores se están llevando tus clientes? - César Reyes
 # ¿Tus competidores se están llevando tus clientes?
