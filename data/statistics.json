@@ -1,27 +1,17 @@
 {
-  "totalVisitas": 2996,
-  "visitasHoy": 2996,
+  "totalVisitas": 3032,
+  "visitasHoy": 3032,
   "articulosPublicados": 0,
   "suscriptoresNewsletter": 0,
   "ultimasVisitas": [
     {
       "fecha": "2025-10-31",
-      "pagina": "/admin",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-10-31",
       "pagina": "/blog",
       "visitas": 1
     },
     {
       "fecha": "2025-10-31",
-      "pagina": "/",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-10-31",
-      "pagina": "/blog",
+      "pagina": "/blog/automatizacion/asdasdasdasd",
       "visitas": 1
     },
     {
@@ -31,12 +21,7 @@
     },
     {
       "fecha": "2025-10-31",
-      "pagina": "/blog",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-10-31",
-      "pagina": "/blog/analisis-estrategico/tiempo-actualizar-menu",
+      "pagina": "/blog/planificacion-estrategica-para-empresas/oportunidades_de_negocio",
       "visitas": 1
     },
     {
@@ -46,12 +31,27 @@
     },
     {
       "fecha": "2025-10-31",
-      "pagina": "/blog",
+      "pagina": "/blog/asesoria-de-negocios-para-pymes/marketing_digital_para_emprendedores",
       "visitas": 1
     },
     {
       "fecha": "2025-10-31",
-      "pagina": "/admin",
+      "pagina": "/blog/asesoria-de-negocios-para-pymes/marketing_digital_para_emprendedores",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-10-31",
+      "pagina": "/blog/planificacion-estrategica-para-empresas/gesti%C3%B3n_de_redes_sociales_la_verdad_detr%C3%A1s_del_costo_de_venta",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-10-31",
+      "pagina": "/blog/planificacion-estrategica-para-empresas/mujeres_artesanas_del_ecuador",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-10-31",
+      "pagina": "/blog/planificacion-estrategica-para-empresas/tus_competidores_se_est%C3%A1n_llevando_tus_clientes",
       "visitas": 1
     }
   ],
@@ -96,7 +96,7 @@
     "2025-10-28": 435,
     "2025-10-29": 285,
     "2025-10-30": 220,
-    "2025-10-31": 21
+    "2025-10-31": 57
   },
   "aperturasEmail": {}
 }

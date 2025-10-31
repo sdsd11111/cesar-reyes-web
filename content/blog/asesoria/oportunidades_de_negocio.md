@@ -1,10 +1,56 @@
 ---
-title: "Oportunidades De Negocio"
-date: "2025-10-30T23:30:48.677Z"
+title: Oportunidades De Negocio
+date: |
+  2025-10-30T23:30:48.677Z
+  
 is_visible: false
-updated_at: "2025-10-30T23:54:32.953Z"
+updated_at: |
+  2025-10-31T16:04:06.304Z
 draft: true
 ---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Oportunidades de negocio - César Reyes
 # Oportunidades de negocio

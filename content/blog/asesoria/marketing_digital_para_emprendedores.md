@@ -1,10 +1,28 @@
 ---
-title: "Marketing Digital Para Emprendedores"
-date: "2025-10-30T23:30:48.675Z"
+title: Marketing Digital Para Emprendedores
+date: |
+  2025-10-30T23:30:48.675Z
+  
 is_visible: false
-updated_at: "2025-10-30T23:54:31.694Z"
+updated_at: |
+  2025-10-31T16:08:49.215Z
 draft: true
 ---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Marketing Digital para Emprendedores - César Reyes
 # ⚠️ 2024: Por Qué los Emprendedores No Deben Ignorar el Marketing Digital
