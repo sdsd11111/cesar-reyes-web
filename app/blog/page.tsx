@@ -61,6 +61,7 @@ function BlogContent() {
   // Mapeo de categorías de URL a nombres para mostrar
   const categoryMapping: Record<string, string> = {
     'todas': 'Todas',
+    'menu-objetivo': 'Menú Objetivo',
     'automatizacion': 'Automatización',
     'diseno-web': 'Diseño Web',
     'marketing-digital': 'Marketing Digital',

@@ -1,21 +1,22 @@
 ---
+title: |
+  Menú por WhatsApp: ¿Enviar Foto o Enlace? La Diferencia entre Ganarse la Vida y Construir un Negocio Sólido
+date: 2025-10-23
+author: César Reyes Jaramillo
+excerpt: Descubra por qué cambiar de fotos de menú a enlaces puede transformar su negocio, mejorando la experiencia del cliente y su productividad.
+image: |
+  https://cesarweb.b-cdn.net/articulos/1761253490507-Imagen2.jpg
+category: automatizacion
+is_visible: false
+updated_at: |
+  2025-10-31T23:38:29.652Z
 draft: true
-title: "Menú por WhatsApp: ¿Enviar Foto o Enlace? La Diferencia entre Ganarse la Vida y Construir un Negocio Sólido"
-date: "2025-10-23"
-author: "César Reyes Jaramillo"
-tags: 
-  - "WhatsApp Business"
-  - "automatización"
-  - "experiencia del cliente"
-  - "productividad"
-  - "marketing digital"
-excerpt: "Descubra por qué cambiar de fotos de menú a enlaces puede transformar su negocio, mejorando la experiencia del cliente y su productividad."
-image: "https://cesarweb.b-cdn.net/articulos/1761253490507-Imagen2.jpg"
-category: "automatizacion"
-metaDescription: "Aprenda por qué los enlaces superan a las fotos para compartir menús por WhatsApp, mejorando la experiencia del cliente y su productividad."
-keyword: "menú digital, WhatsApp Business, automatización de ventas, experiencia del cliente, productividad"
-slug: "menu-por-whatsapp"
+tags: [WhatsApp Business, automatización, experiencia del cliente, productividad, marketing digital]
+metaDescription: Aprenda por qué los enlaces superan a las fotos para compartir menús por WhatsApp, mejorando la experiencia del cliente y su productividad.
+keyword: menú digital, WhatsApp Business, automatización de ventas, experiencia del cliente, productividad
+slug: menu-por-whatsapp
 ---
+
 
 # Menú por WhatsApp: ¿Enviar Foto o Enlace?
 

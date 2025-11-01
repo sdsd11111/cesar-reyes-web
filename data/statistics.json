@@ -1,17 +1,22 @@
 {
-  "totalVisitas": 3061,
-  "visitasHoy": 3061,
+  "totalVisitas": 3166,
+  "visitasHoy": 3166,
   "articulosPublicados": 0,
   "suscriptoresNewsletter": 0,
   "ultimasVisitas": [
     {
-      "fecha": "2025-10-31",
-      "pagina": "/blog/uncategorized/qu%C3%A9-son-tarjetas-digitales",
+      "fecha": "2025-11-01",
+      "pagina": "/blog",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-11-01",
+      "pagina": "/",
       "visitas": 1
     },
     {
       "fecha": "2025-10-31",
-      "pagina": "/admin",
+      "pagina": "/MenuObjetivo",
       "visitas": 1
     },
     {
@@ -21,37 +26,32 @@
     },
     {
       "fecha": "2025-10-31",
-      "pagina": "/",
+      "pagina": "/servicios/posicionamiento",
       "visitas": 1
     },
     {
       "fecha": "2025-10-31",
-      "pagina": "/admin",
+      "pagina": "/servicios/desarrollo-web",
       "visitas": 1
     },
     {
       "fecha": "2025-10-31",
-      "pagina": "/blog/planificacion-estrategica-para-empresas/mujeres-artesanas-del-ecuador",
+      "pagina": "/servicios/analisis-estrategico",
       "visitas": 1
     },
     {
       "fecha": "2025-10-31",
-      "pagina": "/admin",
+      "pagina": "/blog/menu-objetivo/el-gasto-mensual-que-puedes-eliminar-hoy-mismo",
       "visitas": 1
     },
     {
       "fecha": "2025-10-31",
-      "pagina": "/blog/asesoria-de-negocios-para-pymes/seo-y-campanas",
+      "pagina": "/reto-de-7-dias",
       "visitas": 1
     },
     {
       "fecha": "2025-10-31",
-      "pagina": "/blog/asesoria-de-negocios-para-pymes/rendimiento-en-campa%C3%B1as",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-10-31",
-      "pagina": "/blog/articulos-sobre-automatizacion-para-tu-empresa/tendencias-de-automatizaci%C3%B3n-para-pymes-en-2025",
+      "pagina": "/blog/asesoria/la-razon-por-la-que-pierdes-clientes-en-whatsapp-y-no-lo-sabias",
       "visitas": 1
     }
   ],
@@ -96,7 +96,8 @@
     "2025-10-28": 435,
     "2025-10-29": 285,
     "2025-10-30": 220,
-    "2025-10-31": 86
+    "2025-10-31": 189,
+    "2025-11-01": 2
   },
   "aperturasEmail": {}
 }

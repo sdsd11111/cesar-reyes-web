@@ -18,6 +18,12 @@ interface Frontmatter {
   category?: string;
   title?: string;
   slug?: string;
+  excerpt?: string;
+  meta_description?: string;
+  keyword?: string;
+  tags?: string;
+  image?: string;
+  date?: string;
   [key: string]: string | undefined;
 }
 
@@ -61,6 +67,7 @@ function slugify(text: string): string {
 }
 
 const ALLOWED_CATEGORIES = [
+  'menu-objetivo',
   'automatizacion',
   'diseno-web',
   'marketing-digital',
@@ -89,7 +96,16 @@ function validateFrontmatter(frontmatter: Frontmatter): { isValid: boolean; erro
   return { isValid: true };
 }
 
+// Handle both POST and PUT requests
 export async function POST(req: NextRequest) {
+  return handleArticleRequest(req, false);
+}
+
+export async function PUT(req: NextRequest) {
+  return handleArticleRequest(req, true);
+}
+
+async function handleArticleRequest(req: NextRequest, isUpdate: boolean) {
   try {
     // Validate request body
     if (!req.body) {
@@ -99,11 +115,19 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const { markdown } = await req.json().catch(() => ({}));
+    const { markdown, id, originalSlug } = await req.json().catch(() => ({}));
     
     if (!markdown || typeof markdown !== 'string') {
       return NextResponse.json(
         { error: "El campo 'markdown' es requerido y debe ser una cadena de texto" }, 
+        { status: 400 }
+      );
+    }
+    
+    // For updates, we need an ID
+    if (isUpdate && !id) {
+      return NextResponse.json(
+        { error: "Se requiere un ID de artículo para actualizar" },
         { status: 400 }
       );
     }
@@ -133,6 +157,35 @@ export async function POST(req: NextRequest) {
         { error: "No se pudo generar un slug válido a partir del título" }, 
         { status: 400 }
       );
+    }
+    
+    // If this is an update and the slug hasn't changed, keep the original slug
+    if (isUpdate && id && slug === originalSlug) {
+      // No need to check for duplicates if slug hasn't changed
+    } else {
+      // Check if slug already exists (for new articles or when slug changes)
+      const { data: existingArticle, error: slugCheckError } = await supabase
+        .from('articles')
+        .select('id')
+        .eq('slug', slug)
+        .maybeSingle();
+        
+      if (existingArticle) {
+        // If this is an update and the slug exists but belongs to a different article
+        if (isUpdate && id && existingArticle.id !== id) {
+          return NextResponse.json(
+            { error: 'Ya existe un artículo con este slug. Por favor, elige otro.' },
+            { status: 400 }
+          );
+        }
+        // If this is a new article and the slug exists
+        if (!isUpdate) {
+          // Append a random string to make the slug unique
+          const randomSuffix = Math.random().toString(36).substring(2, 8);
+          slug = `${slug}-${randomSuffix}`;
+          console.log(`Slug duplicado, usando nuevo slug: ${slug}`);
+        }
+      }
     }
     
     // Security: Limit slug length and prevent directory traversal
@@ -180,45 +233,115 @@ export async function POST(req: NextRequest) {
         meta_description: frontmatter.metaDescription || frontmatter.excerpt || ''
       };
 
-      // Insertar o actualizar el artículo en Supabase
-      const { data: article, error: upsertError } = await supabase
-        .from('articles')
-        .upsert(articleData, { onConflict: 'slug' })
-        .select()
-        .single();
-
-      if (upsertError) {
-        console.error('Error al guardar en Supabase:', upsertError);
-        return NextResponse.json(
-          { error: 'Error al guardar el artículo en la base de datos' },
-          { status: 500 }
-        );
+      let article;
+      let error;
+      
+      if (isUpdate && id) {
+        console.log('Actualizando artículo existente con ID:', id, 'con slug:', slug);
+        
+        // Construir los datos de actualización
+        const updateData: any = {
+          title: articleData.title,
+          slug: slug,
+          content: articleData.content,
+          excerpt: articleData.excerpt,
+          cover_image: articleData.cover_image,
+          category_id: articleData.category_id,
+          published_at: articleData.published_at,
+          meta_title: articleData.meta_title,
+          meta_description: articleData.meta_description,
+          updated_at: new Date().toISOString()
+        };
+        
+        // Actualizar artículo existente
+        const { data: updatedArticle, error: updateError } = await supabase
+          .from('articles')
+          .update(updateData)
+          .eq('id', id)
+          .select()
+          .single();
+          
+        if (updateError) {
+          console.error('Error al actualizar el artículo:', updateError);
+          throw updateError;
+        }
+        
+        article = updatedArticle;
+        
+        // Actualizar el archivo Markdown si el slug ha cambiado
+        if (originalSlug && slug !== originalSlug) {
+          const oldPath = path.join(process.cwd(), "content", "blog", safeCategory, `${originalSlug}.md`);
+          const newPath = path.join(process.cwd(), "content", "blog", safeCategory, `${slug}.md`);
+          
+          try {
+            await fs.rename(oldPath, newPath);
+          } catch (renameError) {
+            console.error('Error al renombrar el archivo:', renameError);
+            // No fallar si no se puede renombrar el archivo
+          }
+        }
+      } else {
+        // Crear nuevo artículo
+        const { data: newArticle, error: createError } = await supabase
+          .from('articles')
+          .insert(articleData)
+          .select()
+          .single();
+          
+        if (createError) throw createError;
+        
+        article = newArticle;
       }
       
-      // Opcional: Guardar también en el sistema de archivos local
+      // Guardar en el sistema de archivos local
       try {
         const filePath = path.join(dir, `${slug}.md`);
-        await fs.writeFile(filePath, markdown, "utf-8");
+        
+        // Si es una actualización y el slug cambió, eliminar el archivo antiguo
+        if (isUpdate && originalSlug && slug !== originalSlug) {
+          const oldPath = path.join(dir, `${originalSlug}.md`);
+          try {
+            await fs.unlink(oldPath);
+          } catch (unlinkError) {
+            console.warn('No se pudo eliminar el archivo antiguo:', unlinkError);
+          }
+        }
+        
+        // Escribir el archivo nuevo o actualizado
+        await fs.writeFile(filePath, markdown, 'utf8');
+        
+        // Invalidar la caché de las rutas relevantes
+        revalidatePath(`/blog/${safeCategory}/${slug}`);
+        revalidatePath('/blog');
+        revalidatePath('/');
+        revalidateTag('articles');
+        
+        // Si el slug cambió, invalidar también la ruta antigua
+        if (isUpdate && originalSlug && slug !== originalSlug) {
+          revalidatePath(`/blog/${safeCategory}/${originalSlug}`);
+        }
+        
+        return NextResponse.json({ 
+          success: true, 
+          message: isUpdate ? 'Artículo actualizado correctamente' : 'Artículo creado correctamente',
+          article: {
+            ...article,
+            url: `/blog/${safeCategory}/${slug}`
+          }
+        });
       } catch (fileError) {
         console.error('Error al guardar en el sistema de archivos:', fileError);
         // Continuamos aunque falle el guardado en archivo, ya que lo importante es Supabase
+        return NextResponse.json({ 
+          success: true, 
+          message: isUpdate ? 'Artículo actualizado correctamente' : 'Artículo creado correctamente',
+          article: {
+            ...article,
+            url: `/blog/${safeCategory}/${slug}`
+          },
+          warning: 'El artículo se guardó en la base de datos pero hubo un error al guardar el archivo local.'
+        });
       }
-      
-      // Invalidate cache
-      revalidatePath('/api/admin-articles');
-      revalidatePath(`/blog/${safeCategory}/${slug}`);
-      revalidatePath('/blog');
-      revalidateTag('articles');
-      
-      // Return success response
-      const url = `/blog/${safeCategory}/${slug}`;
-      return NextResponse.json({ 
-        success: true, 
-        url,
-        articleId: article.id,
-        message: "Artículo guardado exitosamente en Supabase"
-      });
-      
     } catch (error: any) {
       console.error("Error al guardar el archivo:", error);
       return NextResponse.json(

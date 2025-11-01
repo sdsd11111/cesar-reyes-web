@@ -2,8 +2,15 @@ import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 import { promisify } from 'util';
+import { createClient } from '@supabase/supabase-js';
 
 const readFile = promisify(fs.readFile);
+
+// Inicializar el cliente de Supabase
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
+);
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -34,10 +41,23 @@ export async function GET(request: Request) {
     // Leer el archivo
     const content = await readFile(fullPath, 'utf8');
     
-    // Devolver el contenido como texto plano
-    return new Response(content, {
+    // Extraer el slug del nombre del archivo
+    const slug = path.basename(normalizedPath, '.md').replace(/_/g, '-');
+    
+    // Buscar el artículo en Supabase para obtener el ID
+    const { data: article, error } = await supabase
+      .from('articles')
+      .select('id, title, slug, category_id')
+      .eq('slug', slug)
+      .single();
+
+    // Devolver el contenido junto con los metadatos del artículo
+    return NextResponse.json({
+      content,
+      metadata: article || null
+    }, {
       headers: {
-        'Content-Type': 'text/plain; charset=utf-8',
+        'Content-Type': 'application/json; charset=utf-8',
       },
     });
   } catch (error) {

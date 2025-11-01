@@ -1,16 +1,21 @@
 ---
+title: Cómo Hacer un Menú Digital para Restaurante Rápido (Guía 2025)
+date: 2025-10-27
+author: César Reyes Jaramillo
+excerpt: La urgencia de tener un menú digital te empuja a soluciones rápidas como Canva o un PDF simple, pero te están condenando a un ciclo infinito de frustración cada vez que cambias un precio. El camino más rápido hoy es el más lento y costoso mañana. Antes de elegir, detente. Te muestro las trampas comunes de los \"archivos muertos\" y el sistema que usan los restaurantes eficientes para que tu menú sea un activo y no un pasivo. Descubre la estrategia para tener un \"Menú Vivo\" y actualizarlo en segundos.
+image: |
+  https://cesarweb.b-cdn.net/articulos/1761581368254-Imagen3.jpg
+category: diseno-web
+is_visible: false
+updated_at: |
+  2025-10-31T23:39:23.313Z
 draft: true
-title: "Cómo Hacer un Menú Digital para Restaurante Rápido (Guía 2025)"
-date: "2025-10-27"
-author: "César Reyes Jaramillo"
-tags: "#menuqr, #menudigital, #restauranteslatam, #productividaddigital, #menuobjetivo"
-excerpt: "La urgencia de tener un menú digital te empuja a soluciones rápidas como Canva o un PDF simple, pero te están condenando a un ciclo infinito de frustración cada vez que cambias un precio. El camino más rápido hoy es el más lento y costoso mañana. Antes de elegir, detente. Te muestro las trampas comunes de los \\\"archivos muertos\\\" y el sistema que usan los restaurantes eficientes para que tu menú sea un activo y no un pasivo. Descubre la estrategia para tener un \\\"Menú Vivo\\\" y actualizarlo en segundos."
-image: "https://cesarweb.b-cdn.net/articulos/1761581368254-Imagen3.jpg"
-category: "diseno-web"
-metaDescription: "¡No uses Canva para tu menú QR! 🛑 Descubre las 3 trampas del menú estático y la solución \\\"Menú Vivo\\\" que te ahorra 100+ horas al año en tu restaurante. Guía rápida 2025."
-keyword: "menu digital para restaurante"
-slug: "menu-digital-rapido-y-sencillo"
+tags: #menuqr, #menudigital, #restauranteslatam, #productividaddigital, #menuobjetivo
+metaDescription: ¡No uses Canva para tu menú QR! 🛑 Descubre las 3 trampas del menú estático y la solución \"Menú Vivo\" que te ahorra 100+ horas al año en tu restaurante. Guía rápida 2025.
+keyword: menu digital para restaurante
+slug: menu-digital-rapido-y-sencillo
 ---
+
 
 # Cómo Hacer un Menú Digital para Restaurante Rápido (Guía 2025)
 

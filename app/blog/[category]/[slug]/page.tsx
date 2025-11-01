@@ -310,32 +310,32 @@ export default async function BlogPostPage({
                 <h2 className="text-2xl font-bold text-gray-900 mb-8">Artículos relacionados</h2>
                 <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                   {relatedArticles.map((relatedArticle: any) => (
-                    <div key={relatedArticle.slug} className="bg-white rounded-lg shadow-md overflow-hidden">
-                      <Link href={`/blog/${relatedArticle.category.toLowerCase().replace(/\s+/g, '-')}/${relatedArticle.slug}`}>
+                    <div key={relatedArticle.slug} className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition-shadow duration-300">
+                      <Link href={`/blog/${relatedArticle.category?.toLowerCase()?.replace(/\s+/g, '-') || 'blog'}/${relatedArticle.slug}`} className="block h-full">
                         <div className="h-48 bg-gray-100 relative">
                           {relatedArticle.image && relatedArticle.image !== '/placeholder.svg' ? (
                             <Image 
                               src={relatedArticle.image}
-                              alt={relatedArticle.title}
+                              alt={relatedArticle.title || 'Artículo relacionado'}
                               fill
                               className="object-cover"
                               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                             />
                           ) : (
                             <div className="h-full flex items-center justify-center bg-gray-200">
-                              <span className="text-gray-400">Sin imagen</span>
+                              <span className="text-gray-600">Sin imagen</span>
                             </div>
                           )}
                         </div>
-                        <div className="p-4">
-                          <h3 className="font-semibold text-lg mb-2 line-clamp-2">
+                        <div className="p-5">
+                          <h3 className="font-semibold text-lg mb-2 line-clamp-2 text-gray-900">
                             {relatedArticle.title || 'Sin título'}
                           </h3>
-                          <p className="text-sm text-gray-600 line-clamp-3">
+                          <p className="text-sm text-gray-700 line-clamp-3 mb-3">
                             {relatedArticle.excerpt || ''}
                           </p>
-                          <div className="mt-3 flex items-center justify-between">
-                            <span className="text-xs text-primary font-medium">
+                          <div className="mt-3 pt-3 border-t border-gray-100 flex items-center justify-between">
+                            <span className="text-xs font-medium text-blue-600 bg-blue-50 px-2 py-1 rounded">
                               {relatedArticle.category ? formatCategory(relatedArticle.category) : 'Sin categoría'}
                             </span>
                             <span className="text-xs text-gray-500">

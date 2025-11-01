@@ -13,6 +13,7 @@ interface ArticlePageProps {
 
 export default function ArticlePage({ articlePath }: ArticlePageProps) {
   const [article, setArticle] = useState<{
+    id?: string;
     title: string;
     content: string;
     image?: string;
@@ -22,6 +23,20 @@ export default function ArticlePage({ articlePath }: ArticlePageProps) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const pathname = usePathname();
+
+  // Función para registrar una vista del artículo
+  const registerView = async (articleId: string) => {
+    try {
+      await fetch(`/api/articles/${articleId}/view`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+    } catch (error) {
+      console.error('Error al registrar la vista:', error);
+    }
+  };
 
   useEffect(() => {
     const loadArticle = async () => {
@@ -33,19 +48,27 @@ export default function ArticlePage({ articlePath }: ArticlePageProps) {
           throw new Error('Artículo no encontrado');
         }
         
-        const data = await response.text();
-        const { data: frontmatter, content } = matter(data);
+        const { content, metadata } = await response.json();
+        const { data: frontmatter, content: markdownContent } = matter(content);
         
         // Convertir el contenido Markdown a HTML de forma asíncrona
-        const htmlContent = await marked(content);
+        const htmlContent = await marked(markdownContent);
         
-        setArticle({
+        const articleData = {
+          id: metadata?.id,
           title: frontmatter.title || 'Artículo sin título',
           content: htmlContent,
           image: frontmatter.image,
           date: frontmatter.date,
           author: frontmatter.author
-        });
+        };
+        
+        setArticle(articleData);
+        
+        // Registrar la vista si el artículo tiene un ID
+        if (metadata?.id) {
+          registerView(metadata.id);
+        }
       } catch (err) {
         console.error('Error al cargar el artículo:', err);
         setError('No se pudo cargar el artículo. Por favor, inténtalo de nuevo más tarde.');

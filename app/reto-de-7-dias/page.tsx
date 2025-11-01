@@ -472,21 +472,30 @@ export default function Reto7DiasPage() {
                   </p>
                   
                   {/* Logos Grid */}
-                  <div className="grid grid-cols-3 gap-6 py-4">
-                    <div className="flex items-center justify-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                      <span className="text-xs text-gray-500 dark:text-gray-400 text-center">
-                        [Logo Cámara de Comercio de Loja]
-                      </span>
+                  <div className="grid grid-cols-3 gap-8 py-6 items-center">
+                    <div className="flex items-center justify-center p-2 bg-white dark:bg-gray-800 rounded-xl h-40 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                      <img 
+                        src="/images/categorias/reto 7 dias/camara de comercio loja.png" 
+                        alt="Cámara de Comercio de Loja" 
+                        className="h-full w-auto object-contain filter drop-shadow-lg"
+                        style={{ maxWidth: '100%' }}
+                      />
                     </div>
-                    <div className="flex items-center justify-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                      <span className="text-xs text-gray-500 dark:text-gray-400 text-center">
-                        [Logo Asociación de Restaurantes]
-                      </span>
+                    <div className="flex items-center justify-center p-2 bg-white dark:bg-gray-800 rounded-xl h-40 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                      <img 
+                        src="/images/categorias/reto 7 dias/municipio de loja.png" 
+                        alt="Municipio de Loja" 
+                        className="h-full w-auto object-contain filter drop-shadow-lg"
+                        style={{ maxWidth: '100%' }}
+                      />
                     </div>
-                    <div className="flex items-center justify-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                      <span className="text-xs text-gray-500 dark:text-gray-400 text-center">
-                        [Logo Verificación]
-                      </span>
+                    <div className="flex items-center justify-center p-2 bg-white dark:bg-gray-800 rounded-xl h-40 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                      <img 
+                        src="/images/categorias/reto 7 dias/ministeria de turismo.png" 
+                        alt="Ministerio de Turismo" 
+                        className="h-full w-auto object-contain filter drop-shadow-lg"
+                        style={{ maxWidth: '100%' }}
+                      />
                     </div>
                   </div>
                   

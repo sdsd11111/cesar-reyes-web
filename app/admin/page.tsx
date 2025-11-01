@@ -175,8 +175,36 @@ function ImageSearch() {
   );
 }
 
-function ArticleEditor() {
+interface Article {
+  id?: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string;
+  category: string;
+  image?: string;
+  date?: string;
+  tags?: string;
+  metaDescription?: string;
+  meta_description?: string;
+  keyword?: string;
+  cover_image?: string;
+  published_at?: string;
+  meta?: {
+    tags?: string;
+    description?: string;
+    keyword?: string;
+  };
+}
+
+interface ArticleEditorProps {
+  articleToEdit?: Article;
+  onSave?: () => void;
+}
+
+function ArticleEditor({ articleToEdit, onSave }: ArticleEditorProps) {
   const categories = [
+    { id: "menu-objetivo", label: "Menú Objetivo" },
     { id: "automatizacion", label: "Automatización" },
     { id: "diseno-web", label: "Diseño Web" },
     { id: "marketing-digital", label: "Marketing Digital" },
@@ -185,22 +213,40 @@ function ArticleEditor() {
     { id: "desarrollo-web", label: "Desarrollo Web" },
     { id: "posicionamiento-marca", label: "Posicionamiento de Marca" }
   ];
-  const [title, setTitle] = useState("");
-  const [date, setDate] = useState("");
+  const [title, setTitle] = useState(articleToEdit?.title || "");
+  const [date, setDate] = useState(articleToEdit?.date || "");
   const [author, setAuthor] = useState("César Reyes Jaramillo");
-  const [tags, setTags] = useState("");
-  const [excerpt, setExcerpt] = useState("");
-  const [metaDescription, setMetaDescription] = useState("");
-  const [keyword, setKeyword] = useState("");
-  const [slug, setSlug] = useState("");
-  const [image, setImage] = useState("");
-  const [category, setCategory] = useState(categories[0].id);
-  const [content, setContent] = useState("");
+  const [tags, setTags] = useState(articleToEdit?.tags || "");
+  const [excerpt, setExcerpt] = useState(articleToEdit?.excerpt || "");
+  const [metaDescription, setMetaDescription] = useState(articleToEdit?.metaDescription || "");
+  const [keyword, setKeyword] = useState(articleToEdit?.keyword || "");
+  const [slug, setSlug] = useState(articleToEdit?.slug || "");
+  const [image, setImage] = useState(articleToEdit?.image || "");
+  const [category, setCategory] = useState(articleToEdit?.category || categories[0].id);
+  const [content, setContent] = useState(articleToEdit?.content || "");
   const [saved, setSaved] = useState(false);
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
   const [error, setError] = useState("");
   const [successUrl, setSuccessUrl] = useState("");
+
+  const buildYAML = () => {
+    const yamlParts = [
+      '---',
+      `title: "${title.replace(/"/g, '\\"')}"`,
+      `description: "${excerpt.replace(/"/g, '\\"')}"`,
+      `date: "${date || new Date().toISOString().split('T')[0]}"`,
+      `category: "${category}"`,
+      `meta_description: "${(metaDescription || '').replace(/"/g, '\\"')}"`,
+      `keyword: "${(keyword || '').replace(/"/g, '\\"')}"`,
+      `tags: "${(tags || '').replace(/"/g, '\\"')}"`
+    ];
+    
+    if (image) yamlParts.push(`image: "${image}"`);
+    
+    yamlParts.push('---');
+    return yamlParts.join('\n');
+  };
 
   // Guardar y restaurar el borrador aunque cambies de pestaña
   useEffect(() => {
@@ -240,6 +286,37 @@ function ArticleEditor() {
     window.addEventListener("focus", onFocus);
     return () => window.removeEventListener("focus", onFocus);
   }, []);
+
+  useEffect(() => {
+    if (articleToEdit) {
+      console.log('Inicializando editor con artículo:', articleToEdit);
+      setTitle(articleToEdit.title || '');
+      setSlug(articleToEdit.slug || '');
+      setContent(articleToEdit.content || '');
+      setExcerpt(articleToEdit.excerpt || '');
+      setCategory(articleToEdit.category || '');
+      setImage(articleToEdit.image || articleToEdit.cover_image || '');
+      setDate(articleToEdit.date || articleToEdit.published_at || new Date().toISOString().split('T')[0]);
+      setTags(articleToEdit.tags || articleToEdit.meta?.tags || '');
+      setMetaDescription(articleToEdit.metaDescription || articleToEdit.meta_description || articleToEdit.meta?.description || '');
+      setKeyword(articleToEdit.keyword || articleToEdit.meta?.keyword || '');
+      setMetaDescription(articleToEdit.metaDescription || articleToEdit.meta_description || articleToEdit.meta?.description || '');
+      setKeyword(articleToEdit.keyword || articleToEdit.meta?.keyword || '');
+    } else {
+      // Valores por defecto para nuevo artículo
+      setTitle('');
+      setSlug('');
+      setContent('');
+      setExcerpt('');
+      setCategory('');
+      setImage('');
+      setDate(new Date().toISOString().split('T')[0]);
+      setTags('');
+      setMetaDescription('');
+      setKeyword('');
+    }
+  }, [articleToEdit]);
+
   useEffect(() => {
     localStorage.setItem("admin-article-form", JSON.stringify({ title, date, author: "César Reyes Jaramillo", tags, excerpt, image, category, content, metaDescription, keyword, slug }));
   }, [title, date, tags, excerpt, image, category, content, metaDescription, keyword, slug]);
@@ -260,7 +337,7 @@ function ArticleEditor() {
     }
   };
 
-    // Función para generar un slug consistente
+  // Función para generar un slug consistente
   const generateSlug = (text: string) => {
     if (!text) return '';
     return text
@@ -271,60 +348,8 @@ function ArticleEditor() {
       .replace(/\s+/g, '-')
       .replace(/[^\w\-]+/g, '')
       .replace(/\-\-+/g, '-')
-      .replace(/^-+/, '')
-      .replace(/-+$/, '');
-  };
-
-  const buildYAML = () => {
-    // Validaciones iniciales
-    const finalTitle = title?.trim() || 'Título del artículo';
-
-    // Generar slug basado en el título si no se proporciona uno
-    const finalSlug = slug.trim() ? generateSlug(slug) : generateSlug(finalTitle);
-    if (!finalSlug) {
-      throw new Error('No se pudo generar un slug válido');
-    }
-
-    // Validar categoría
-    if (!category) {
-      throw new Error('Se requiere una categoría');
-    }
-
-    // Crear objeto frontmatter con valores validados
-    const frontmatter: Record<string, any> = {
-      title: finalTitle,
-      date: date || new Date().toISOString().split('T')[0],
-      author: 'César Reyes Jaramillo',
-      category: category,
-      slug: finalSlug,
-    };
-
-    // Añadir campos opcionales solo si tienen valor
-    if (excerpt) frontmatter.excerpt = excerpt.trim();
-    if (tags) {
-      const tagList = tags.split(',').map(t => t.trim()).filter(Boolean);
-      if (tagList.length > 0) {
-        frontmatter.tags = tagList.join(', ');
-      }
-    }
-    if (image) frontmatter.image = image.trim();
-    if (metaDescription) frontmatter.metaDescription = metaDescription.trim();
-    if (keyword) frontmatter.keyword = keyword.trim();
-
-    // Construir el YAML manualmente para mayor control
-    const yamlLines = [];
-    for (const [key, value] of Object.entries(frontmatter)) {
-      if (key === 'tags' && Array.isArray(value)) {
-        yamlLines.push(`${key}: [${value.map(v => `"${v}"`).join(', ')}]`);
-      } else if (typeof value === 'string' && value.includes(':')) {
-        // Si el valor contiene dos puntos, lo envolvemos en comillas
-        yamlLines.push(`${key}: "${value}"`);
-      } else {
-        yamlLines.push(`${key}: ${JSON.stringify(value)}`);
-      }
-    }
-
-    return `---\n${yamlLines.join('\n')}\n---`;
+      .replace(/^[-]+/, '')
+      .replace(/[-]+$/, '');
   };
 
   const handleCopy = () => {
@@ -353,6 +378,18 @@ function ArticleEditor() {
         throw new Error('El contenido del artículo no puede estar vacío');
       }
       
+      // Verificar si estamos editando
+      const isEditing = !!articleToEdit?.id;
+      
+      if (isEditing && !articleToEdit?.id) {
+        console.error('Error: Intento de edición sin ID válido');
+        throw new Error('No se pudo identificar el artículo a actualizar. Por favor, recarga la página e inténtalo de nuevo.');
+      }
+      
+      // Asegurar que la fecha tenga un valor por defecto
+      const articleDate = date || articleToEdit?.published_at || new Date().toISOString().split('T')[0];
+      setDate(articleDate); // Actualizar el estado de la fecha
+      
       // Asegurarse de que la categoría sea válida
       const safeCategory = category.toLowerCase().replace(/[^a-z0-9-]/g, '');
       if (!safeCategory) {
@@ -360,21 +397,9 @@ function ArticleEditor() {
       }
 
       // Construir el markdown con validaciones incluidas
-      const markdown = `${buildYAML()}\n\n${content}`;
+      const markdownContent = `${buildYAML()}\n\n${content}`;
       
       // Generar un slug consistente
-      const generateSlug = (text: string) => {
-        return text
-          .toString()
-          .normalize('NFD')
-          .replace(/[\u0300-\u036f]/g, '')
-          .toLowerCase()
-          .replace(/[^\w\s-:]/g, '')
-          .trim()
-          .replace(/\s+/g, '-')
-          .replace(/-+/g, '-');
-      };
-      
       const articleSlug = slug.trim() ? generateSlug(slug) : generateSlug(title);
 
       // Mostrar indicador de carga
@@ -383,51 +408,76 @@ function ArticleEditor() {
       }, 300);
 
       try {
-        const response = await fetch("/api/save-article", {
-          method: "POST",
+        const url = "/api/save-article";
+        const isUpdate = !!articleToEdit?.id;
+        
+        // Construir el markdown con los datos actuales
+        const markdownContent = buildYAML() + '\n\n' + content;
+        
+        const requestBody: any = {
+          markdown: markdownContent,
+          id: articleToEdit?.id,
+          originalSlug: articleToEdit?.slug,
+          title: title.trim(),
+          excerpt: excerpt.trim(),
+          category: safeCategory,
+          tags: tags.trim(),
+          metaDescription: metaDescription.trim(),
+          keyword: keyword.trim(),
+          image: image.trim(),
+          date: articleDate
+        };
+        
+        console.log('Enviando solicitud de ' + (isUpdate ? 'actualización' : 'creación') + ':', {
+          ...requestBody,
+          markdown: markdownContent.substring(0, 100) + '...' // Mostrar solo el inicio para no saturar la consola
+        });
+        
+        const response = await fetch(url, {
+          method: isUpdate ? "PUT" : "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ 
-            markdown,
-            // Asegurarse de que el slug y la categoría se envíen correctamente
-            slug: articleSlug,
-            category: safeCategory
-          }),
+          body: JSON.stringify(requestBody),
         });
 
         clearTimeout(loadingTimeout);
         setLoading(false);
 
-        let data;
-        try {
-          data = await response.json();
-        } catch (jsonErr) {
-          throw new Error('La respuesta del servidor no es válida');
-        }
+        const data = await response.json();
+        console.log('Respuesta del servidor:', data);
 
         if (!response.ok) {
           throw new Error(data?.error || 'Error al guardar el artículo');
         }
 
-        if (!data?.url) {
-          throw new Error('No se recibió la URL del artículo guardado');
-        }
-
-        // Éxito
-        setSaved(true);
-        setSuccessUrl(data.url);
-        
-        // Limpiar el formulario después de guardar
-        if (window.confirm("¿Deseas crear un nuevo artículo?")) {
-          setTitle("");
-          setContent("");
-          setExcerpt("");
-          setImage("");
-          setTags("");
-          setMetaDescription("");
-          setKeyword("");
-          setSlug("");
+        // Manejar la respuesta exitosa
+        if (data.success) {
+          setSaved(true);
+          setSuccessUrl(data.article?.url || '');
+          
+          // Si hay un callback de guardado, ejecutarlo
+          if (onSave) {
+            onSave();
+          }
+          
+          // Mostrar mensaje de éxito
+          alert(`Artículo ${isUpdate ? 'actualizado' : 'guardado'} correctamente`);
+          
+          // Limpiar el formulario solo si es un artículo nuevo
+          if (!isUpdate) {
+            setTitle('');
+            setContent('');
+            setExcerpt('');
+            setImage('');
+            setTags('');
+            setMetaDescription('');
+            setKeyword('');
+            setSlug('');
+            setDate(new Date().toISOString().split('T')[0]);
+          }
+        } else {
+          throw new Error(data.error || 'Error desconocido al guardar el artículo');
         }
 
         // Recargar la lista de artículos si está disponible
@@ -582,14 +632,14 @@ function ArticleEditor() {
           </button>
           <button 
             onClick={handleSave} 
-            className="bg-white text-[#111111] font-bold py-1 px-4 rounded-full hover:bg-[#e5e5e5] transition-colors disabled:opacity-50"
+            className="bg-blue-600 text-white font-bold py-2 px-6 rounded-full hover:bg-blue-700 transition-colors disabled:opacity-50"
             disabled={loading}
           >
-            {loading ? 'Guardando...' : 'Guardar y publicar'}
+            {loading ? 'Guardando...' : (articleToEdit?.id ? 'Actualizar artículo' : 'Guardar y publicar')}
           </button>
         </div>
       </div>
-      <div className="flex-1 bg-[#111111] rounded-lg p-4 border border-[#111111] overflow-auto min-w-0 relative">
+      <div className="flex-1 bg-white text-black rounded-lg p-4 border border-gray-200 overflow-auto min-w-0 relative">
         {/* Mostrar indicador de carga */}
         {loading && (
           <div className="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center z-10 rounded-lg">
@@ -649,6 +699,7 @@ function validateYAML(yaml: string) {
 
 
 function ArticleManager() {
+  const [editingArticle, setEditingArticle] = useState<any>(null);
   const [articles, setArticles] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -741,18 +792,20 @@ function ArticleManager() {
   const handleSendNewsletter = async (art: any) => {
     setNewsletterStatus("");
     try {
-      const res = await fetch("/api/send-newsletter", {
+      const articleData = {
+        title: art.title,
+        excerpt: art.excerpt,
+        category: art.category,
+        slug: art.slug,
+      };
+      
+      const response = await fetch("/api/send-newsletter", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          title: art.title,
-          excerpt: art.excerpt,
-          category: art.category,
-          slug: art.slug,
-        })
+        body: JSON.stringify(articleData),
       });
-      const data = await res.json();
-      if (res.ok && data.success) {
+      const data = await response.json();
+      if (response.ok && data.success) {
         setNewsletterStatus(`✅ Newsletter enviado: ${data.message}`);
       } else {
         setNewsletterStatus(`❌ Error: ${data.error || "No se pudo enviar el newsletter"}`);
@@ -820,9 +873,94 @@ function ArticleManager() {
     }
   };
 
+  const extractMetadata = (content: string) => {
+    if (!content) return {};
+    
+    const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
+    if (!frontmatterMatch) return {};
+    
+    const frontmatter = frontmatterMatch[1];
+    const metadata: Record<string, string> = {};
+    
+    frontmatter.split('\n').forEach(line => {
+      const match = line.match(/^([^:]+):\s*(.*)$/);
+      if (match) {
+        const key = match[1].trim();
+        const value = match[2].trim().replace(/^['"](.*)['"]$/, '$1');
+        metadata[key] = value;
+      }
+    });
+    
+    return metadata;
+  };
+
+  const handleEditArticle = (article: any) => {
+    console.log('Editando artículo:', article);
+    
+    // Extraer metadatos del contenido
+    const metadata = article.content ? extractMetadata(article.content) : {};
+    
+    // Cargar el artículo en el editor
+    const articleData = {
+      id: article.id,
+      title: metadata.title || article.title || "",
+      slug: metadata.slug || article.slug || "",
+      content: article.content ? article.content.replace(/^---[\s\S]*?---\n*/, '') : "",
+      excerpt: metadata.description || article.excerpt || "",
+      category: metadata.category || article.category || "",
+      tags: metadata.tags || article.tags || "",
+      metaDescription: metadata.meta_description || article.meta_description || metadata.description || "",
+      keyword: metadata.keyword || article.keyword || "",
+      image: metadata.image || article.image || article.cover_image || "",
+      date: metadata.date || article.published_at || article.date || new Date().toISOString().split('T')[0]
+    };
+    
+    console.log('Datos del artículo a editar:', articleData);
+    setEditingArticle(articleData);
+    
+    // Desplazarse al editor
+    document.getElementById('article-editor')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleSaveComplete = () => {
+    // Recargar la lista de artículos después de guardar
+    fetchArticles(true);
+    // Limpiar el artículo en edición
+    setEditingArticle(null);
+  };
+
   if (loading) return <div className="text-gray-400">Cargando artículos...</div>;
   if (error) return <div className="text-red-400">{error}</div>;
   if (articles.length === 0) return <div className="text-gray-400">No hay artículos publicados.</div>;
+
+  // Si estamos editando un artículo, mostrar el editor
+  if (editingArticle) {
+    return (
+      <div id="article-editor" className="p-6 bg-white rounded-lg shadow">
+        <div className="flex justify-between items-center mb-6 pb-4 border-b border-gray-200">
+          <div>
+            <h2 className="text-2xl font-bold text-gray-800">
+              {editingArticle.id ? 'Editando: ' : 'Nuevo artículo: '}
+              {editingArticle.title || 'Sin título'}
+            </h2>
+            <p className="text-sm text-gray-500">
+              ID: {editingArticle.id || 'Nuevo'}
+            </p>
+          </div>
+          <button
+            onClick={() => setEditingArticle(null)}
+            className="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 transition-colors"
+          >
+            ← Volver a la lista
+          </button>
+        </div>
+        <ArticleEditor 
+          articleToEdit={editingArticle} 
+          onSave={handleSaveComplete}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="overflow-x-auto">
@@ -873,6 +1011,13 @@ function ArticleManager() {
                 <a href={`/blog/${art.category}/${art.slug}`} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 transition-colors">
                   Ver
                 </a>
+                <button 
+                  onClick={() => handleEditArticle(art)}
+                  className="text-purple-400 hover:text-purple-300 transition-colors"
+                  disabled={loading}
+                >
+                  Editar
+                </button>
                 <button 
                   onClick={() => toggleArticleVisibility(art)}
                   className={`${
