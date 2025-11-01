@@ -7,7 +7,7 @@ import Link from 'next/link';
 import StrategyTabs from "@/components/StrategyTabs";
 import dynamic from 'next/dynamic';
 import { motion } from "framer-motion";
-import { Check, Stethoscope, ShoppingCart, BookOpen, Briefcase, AreaChart, TrendingUp, Users, MapPin } from "lucide-react";
+import { Check, Stethoscope, ShoppingCart, BookOpen, Briefcase, AreaChart, TrendingUp, Users, MapPin, ChevronDown, ChevronUp } from "lucide-react";
 import StrategyTabContent from "@/components/StrategyTabContent";
 
 // Importación de contenido y componentes
@@ -86,6 +86,10 @@ export default function HomeTestClient({ content, isEmotionalView }: { content: 
   const [isChatModalOpen, setIsChatModalOpen] = useState(false);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [isPortfolioModalOpen, setIsPortfolioModalOpen] = useState(false);
+  const [showFullText, setShowFullText] = useState(false);
+
+  const shortText = "Especializado en estudios de mercado";
+  const fullText = "Especializado en estudios de mercado para microempresas, diseño web para profesionales y artesanos, y posicionamiento web en Ecuador. Soy César Reyes Jaramillo, tu asesor local para resultados medibles en Loja y todo el Ecuador.";
 
   useEffect(() => {
     if (localStorage.getItem('userChoice')) {
@@ -134,9 +138,31 @@ export default function HomeTestClient({ content, isEmotionalView }: { content: 
             <div className="hidden md:block">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white drop-shadow-lg mb-4" style={{ fontFamily: 'var(--font-poiret-one)' }}>Consultor para Microempresas en Ecuador</h1>
               <h2 className="text-xl md:text-2xl font-medium text-white/90 mb-6 drop-shadow-md" style={{ fontFamily: 'var(--font-montserrat)' }}>Crece Más del 4% Anual con Datos Reales y Estrategias Probadas</h2>
-              <p className="text-white/90 max-w-2xl mx-auto text-lg leading-relaxed mb-8">
-                Especializado en estudios de mercado para microempresas, diseño web para profesionales y artesanos, y posicionamiento web en Ecuador. Soy César Reyes Jaramillo, tu asesor local para resultados medibles en Loja y todo el Ecuador.
-              </p>
+              <div className="max-w-2xl mx-auto text-lg leading-relaxed mb-8">
+                <p className="text-white/90">
+                  {showFullText ? (
+                    <>
+                      {fullText}
+                      <button 
+                        onClick={() => setShowFullText(false)}
+                        className="text-white/90 font-medium hover:underline ml-1 focus:outline-none inline-flex items-center"
+                      >
+                        <ChevronUp className="w-4 h-4 ml-1" />
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      {shortText}
+                      <button 
+                        onClick={() => setShowFullText(true)}
+                        className="text-white/90 font-medium hover:underline ml-1 focus:outline-none"
+                      >
+                        ...seguir leyendo
+                      </button>
+                    </>
+                  )}
+                </p>
+              </div>
               <Button size="lg" className="bg-white/90 text-black font-bold hover:bg-white transition-transform hover:scale-105 px-8 py-6 text-lg">
                 Agenda una Llamada Ahora
               </Button>

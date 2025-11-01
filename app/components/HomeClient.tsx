@@ -3,7 +3,7 @@
 import Image from "next/image"
 import { useState } from "react"
 import { useRouter } from 'next/navigation';
-import { AreaChart, TrendingUp, Users } from "lucide-react";
+import { AreaChart, TrendingUp, Users, ChevronDown, ChevronUp } from "lucide-react";
 
 // Importación de contenido y componentes
 import { pageContent } from "../../lib/content";
@@ -16,7 +16,12 @@ type ServiceCard = {
 
 export default function HomeClient({ content, isEmotionalView }: { content: typeof pageContent.logico | typeof pageContent.emocional, isEmotionalView: boolean }) {
   const [isChatModalOpen, setIsChatModalOpen] = useState(false);
+  const [showFullText, setShowFullText] = useState(false);
   const router = useRouter();
+  
+  const heroText = "Especializado en estudios de mercado para microempresas, diseño web para profesionales y artesanos, y posicionamiento web en Ecuador.";
+  const shortText = "Especializado en estudios de mercado";
+  const fullText = "Especializado en estudios de mercado para microempresas, diseño web para profesionales y artesanos, y posicionamiento web en Ecuador. Soy César Reyes Jaramillo, tu asesor local para resultados medibles en Loja y todo el Ecuador.";
 
   const handleChoice = (choice: 'logico' | 'emocional') => {
     if (typeof window !== 'undefined') {
@@ -70,9 +75,28 @@ export default function HomeClient({ content, isEmotionalView }: { content: type
           <h2 className="text-xl md:text-2xl font-medium text-white/90 mb-6 drop-shadow-md" style={{ fontFamily: 'var(--font-montserrat)' }}>
             Crece Más del 4% Anual con Datos Reales y Estrategias Probadas
           </h2>
-          <p className="text-white/90 max-w-2xl mx-auto text-lg leading-relaxed mb-8">
-            Especializado en estudios de mercado para microempresas, diseño web para profesionales y artesanos, y posicionamiento web en Ecuador.
-          </p>
+          <div className="max-w-2xl mx-auto text-lg leading-relaxed mb-8">
+            <p className="text-white/90 inline">
+              {showFullText ? fullText : shortText}
+            </p>
+            {!showFullText && (
+              <button 
+                onClick={() => setShowFullText(true)}
+                className="text-white/90 font-medium hover:underline ml-1 focus:outline-none"
+              >
+                ...seguir leyendo
+              </button>
+            )}
+            {showFullText && (
+              <button 
+                onClick={() => setShowFullText(false)}
+                className="text-white/90 font-medium hover:underline ml-1 focus:outline-none flex items-center justify-center mt-2"
+              >
+                <ChevronUp className="w-4 h-4 mr-1" />
+                Mostrar menos
+              </button>
+            )}
+          </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button 
               className="bg-white/90 text-black font-bold hover:bg-white transition-transform hover:scale-105 px-8 py-4 text-lg rounded-lg"

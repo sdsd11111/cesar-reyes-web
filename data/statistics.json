@@ -1,9 +1,29 @@
 {
-  "totalVisitas": 3241,
-  "visitasHoy": 3241,
+  "totalVisitas": 3253,
+  "visitasHoy": 3253,
   "articulosPublicados": 0,
   "suscriptoresNewsletter": 0,
   "ultimasVisitas": [
+    {
+      "fecha": "2025-11-01",
+      "pagina": "/",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-11-01",
+      "pagina": "/servicios/desarrollo-web",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-11-01",
+      "pagina": "/",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-11-01",
+      "pagina": "/servicios/analisis-estrategico",
+      "visitas": 1
+    },
     {
       "fecha": "2025-11-01",
       "pagina": "/blog",
@@ -11,47 +31,27 @@
     },
     {
       "fecha": "2025-11-01",
-      "pagina": "/admin",
+      "pagina": "/home-test",
       "visitas": 1
     },
     {
       "fecha": "2025-11-01",
-      "pagina": "/admin",
+      "pagina": "/",
       "visitas": 1
     },
     {
       "fecha": "2025-11-01",
-      "pagina": "/admin",
+      "pagina": "/",
       "visitas": 1
     },
     {
       "fecha": "2025-11-01",
-      "pagina": "/admin",
+      "pagina": "/",
       "visitas": 1
     },
     {
       "fecha": "2025-11-01",
-      "pagina": "/admin",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-11-01",
-      "pagina": "/admin",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-11-01",
-      "pagina": "/admin",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-11-01",
-      "pagina": "/admin",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-11-01",
-      "pagina": "/blog/asesoria/cuanto-dinero-pierdes-cada-semana-por-no-automatizar-tu-menu-y-como-recuperarlo-8lrp9d",
+      "pagina": "/",
       "visitas": 1
     }
   ],
@@ -97,7 +97,7 @@
     "2025-10-29": 285,
     "2025-10-30": 220,
     "2025-10-31": 189,
-    "2025-11-01": 77
+    "2025-11-01": 89
   },
   "aperturasEmail": {}
 }
