@@ -2,20 +2,22 @@
 title: ¿Por qué Nadie Encuentra mi Restaurante en Internet?
 date: |
   2025-10-27T00:00:00.000Z
+  
 author: César Reyes Jaramillo
 excerpt: nadie encuentra mi restaurante
 image: |
   https://cesarweb.b-cdn.net/articulos/1761589194638-Imagen6.png
   
 category: asesoria
-is_visible: true
+is_visible: false
 updated_at: |
-  2025-10-31T00:11:59.703Z
+  2025-11-01T17:42:00.461Z
 draft: true
 slug: restaurante-invisible-google
 metaDescription: ¿Nadie encuentra tu restaurante en Google? 🛑 Descubre las 3 trampas de visibilidad y el sistema de SEO local para aparecer primero en Google Maps. ¡Guía práctica!
 keyword: nadie encuentra mi restaurante
 ---
+
 
 
 

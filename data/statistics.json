@@ -1,6 +1,6 @@
 {
-  "totalVisitas": 3166,
-  "visitasHoy": 3166,
+  "totalVisitas": 3241,
+  "visitasHoy": 3241,
   "articulosPublicados": 0,
   "suscriptoresNewsletter": 0,
   "ultimasVisitas": [
@@ -11,47 +11,47 @@
     },
     {
       "fecha": "2025-11-01",
-      "pagina": "/",
+      "pagina": "/admin",
       "visitas": 1
     },
     {
-      "fecha": "2025-10-31",
-      "pagina": "/MenuObjetivo",
+      "fecha": "2025-11-01",
+      "pagina": "/admin",
       "visitas": 1
     },
     {
-      "fecha": "2025-10-31",
-      "pagina": "/blog",
+      "fecha": "2025-11-01",
+      "pagina": "/admin",
       "visitas": 1
     },
     {
-      "fecha": "2025-10-31",
-      "pagina": "/servicios/posicionamiento",
+      "fecha": "2025-11-01",
+      "pagina": "/admin",
       "visitas": 1
     },
     {
-      "fecha": "2025-10-31",
-      "pagina": "/servicios/desarrollo-web",
+      "fecha": "2025-11-01",
+      "pagina": "/admin",
       "visitas": 1
     },
     {
-      "fecha": "2025-10-31",
-      "pagina": "/servicios/analisis-estrategico",
+      "fecha": "2025-11-01",
+      "pagina": "/admin",
       "visitas": 1
     },
     {
-      "fecha": "2025-10-31",
-      "pagina": "/blog/menu-objetivo/el-gasto-mensual-que-puedes-eliminar-hoy-mismo",
+      "fecha": "2025-11-01",
+      "pagina": "/admin",
       "visitas": 1
     },
     {
-      "fecha": "2025-10-31",
-      "pagina": "/reto-de-7-dias",
+      "fecha": "2025-11-01",
+      "pagina": "/admin",
       "visitas": 1
     },
     {
-      "fecha": "2025-10-31",
-      "pagina": "/blog/asesoria/la-razon-por-la-que-pierdes-clientes-en-whatsapp-y-no-lo-sabias",
+      "fecha": "2025-11-01",
+      "pagina": "/blog/asesoria/cuanto-dinero-pierdes-cada-semana-por-no-automatizar-tu-menu-y-como-recuperarlo-8lrp9d",
       "visitas": 1
     }
   ],
@@ -97,7 +97,7 @@
     "2025-10-29": 285,
     "2025-10-30": 220,
     "2025-10-31": 189,
-    "2025-11-01": 2
+    "2025-11-01": 77
   },
   "aperturasEmail": {}
 }

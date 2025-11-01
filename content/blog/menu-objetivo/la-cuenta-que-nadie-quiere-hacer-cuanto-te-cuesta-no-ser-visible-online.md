@@ -1,12 +1,13 @@
 ---
-title: "La Cuenta Que Nadie Quiere Hacer, Cuánto Te Cuesta NO Ser Visible Online"
-description: "Existe una pérdida que no ves en tu Excel: la venta que nunca ocurrió porque el cliente te buscó y no te encontró. Datos 2024 revelan que el 60% de clientes busca el menú online antes de decidir. Hacemos la matemática conservadora de cuánto dinero estás perdiendo al año por ser invisible."
-date: "2025-10-31"
+title: "La Cuenta Que Nadie Quiere Hacer, cuánto Te Cuesta NO Ser Visible Online"
+description: "Existe una pérdida que no ves en tu Excel: la venta que nunca ocurrió porque el cliente te buscó y no te encontró. Datos 2024 revelan que el 60% de clientes busca el menú online antes de decidir. Hacemos la matemática conservadora de cuánto dinero estás perdiendo al año por ser invisible.
+"
+date: "2025-11-01"
 category: "menu-objetivo"
 meta_description: "Calcula cuánto dinero pierdo sin menu digital restaurante. El 60% de clientes te busca online primero. Descubre el costo real de la invisibilidad."
-keyword: "cuanto dinero pierdo sin menu digital restaurante"
+keyword: "Principal: cuanto dinero pierdo sin menu digital restaurante"
 tags: "#menuobjetivo, #menudigital, #costodeoportunidad, #ventasperdidas, #seorestaurante, #cuantodineropierdo"
-image: "https://cesarweb.b-cdn.net/articulos/1761952277795-Generated_Image_October_31__2025_-_6_08PM.webp"
+image: "https://cesarweb.b-cdn.net/articulos/1762017285210-Generated_Image_October_31__2025_-_6_08PM.webp"
 ---
 
 # 💰 La Cuenta Que Nadie Quiere Hacer: Cuánto Te Cuesta NO Ser Visible Online

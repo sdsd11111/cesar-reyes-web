@@ -583,7 +583,7 @@ export default function Reto7DiasPage() {
                   { icon: '🍽️', title: 'Menú Objetivo', price: 'Precio Normal $1000' },
                   { icon: '🔍', title: 'Estrategia SEO', price: '$700' },
                   { icon: '💡', title: '3 Sesiones Estratégicas con César', price: '$300 valor' },
-                  { icon: '⚡', title: 'Prioridad en implementación (3-5 días)', price: '$2000 valor' }
+                  { icon: '⚡', title: 'Prioridad en implementación (3-5 días)', price: '$1000 valor' }
                 ].map((item, index) => (
                   <div key={index} className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
                     <div className="flex items-start">
@@ -599,7 +599,7 @@ export default function Reto7DiasPage() {
               
               <div className="text-center bg-yellow-50 dark:bg-yellow-900/20 p-4 rounded-lg mb-6">
                 <p className="text-2xl font-bold text-gray-900 dark:text-white">
-                  $2000 dólares en descuentos
+                  $1000 dólares en descuentos
                 </p>
                 <p className="text-3xl font-extrabold text-orange-500">
                   X
@@ -627,7 +627,7 @@ export default function Reto7DiasPage() {
                 
                 <div className="bg-gradient-to-r from-orange-500 to-orange-600 rounded-xl p-6 text-white mb-6">
                   <h4 className="text-xl font-bold mb-2">50% DE DESCUENTO EN MENÚ OBJETIVO</h4>
-                  <p className="font-medium">Ahorro real: $1500</p>
+                  <p className="font-medium">Ahorro real: $500</p>
                 </div>
                 
                 <p className="text-gray-700 dark:text-gray-300 mb-4">
@@ -643,7 +643,7 @@ export default function Reto7DiasPage() {
                 
                 <div className="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                   <p className="text-sm text-gray-500 dark:text-gray-400">
-                    💰 Precio regular: <span className="line-through">$2000</span> | 
+                    💰 Precio regular: <span className="line-through">$1000</span> | 
                     Precio con reto: <span className="font-bold text-orange-500">$500</span>
                   </p>
                 </div>

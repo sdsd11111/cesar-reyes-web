@@ -10,7 +10,7 @@ export function FAQAccordion() {
       answer: (
         <div className="space-y-4">
           <p>No hay trampa. Aquí la respuesta honesta:</p>
-          <p className="font-bold">¿Por qué regalamos $1,000 en valor?</p>
+          <p className="font-bold">¿Por qué regalamos $500 en valor?</p>
           <p>Porque queremos que te conviertas en un caso de éxito visible. Si tu restaurante empieza a aparecer en Google y atraes clientes nuevos gracias a Menú Objetivo, TÚ vas a contarles a otros dueños. Vas a mostrarles tu web. Vas a recomendarnos. Ese marketing de boca a boca vale mucho más que cualquier descuento que te demos hoy.</p>
           <p>Además, solo ganas si completas el reto. Eso significa que:</p>
           <ul className="list-disc pl-5 space-y-2">
@@ -237,7 +237,7 @@ export function FAQAccordion() {
           <p>Te entendemos. La industria del marketing digital está llena de promesas vacías.</p>
           
           <p className="font-bold">Diferencia #1: Esto es gratis participar</p>
-          <p>No te pedimos $500 por adelantado "para empezar". No hay pago de inscripción. No hay "membresía premium". Participas gratis. Aprendes gratis. Solo pagas si ganas Y decides contratar después.</p>
+          <p>No te pedimos $250 por adelantado "para empezar". No hay pago de inscripción. No hay "membresía premium". Participas gratis. Aprendes gratis. Solo pagas si ganas Y decides contratar después.</p>
           
           <p className="font-bold">Diferencia #2: Te educamos primero</p>
           <p>Otros te dicen: "Confía en mí, yo sé de esto". Nosotros te decimos: "Aprende con nosotros, luego tú decides". Al final del reto, tú mismo sabrás si Menú Objetivo funciona para ti. No hay "letras chicas" que descubres después.</p>
@@ -284,7 +284,6 @@ export function FAQAccordion() {
           <p>Los restaurantes pequeños (5-20 mesas) NO pueden pagar eso. Por eso Menú Objetivo es perfecto para ti:</p>
           <ul className="list-disc pl-5 space-y-1">
             <li>✅ Un solo pago de setup ($247 con descuento)</li>
-            <li>✅ Mantenimiento de $29/mes (menos que un diseñador por UN proyecto)</li>
             <li>✅ Tú actualizas todo desde tu celular (no dependes de nadie)</li>
             <li>✅ Compites en igualdad con grandes en Google (SEO nivela el juego)</li>
           </ul>
@@ -320,7 +319,6 @@ export function FAQAccordion() {
             <li>
               <p className="font-bold">ROI más rápido</p>
               <p>Un cliente nuevo por semana = $200+ al mes extra</p>
-              <p>Eso ya cubre el mantenimiento mensual ($29) 7 veces.</p>
             </li>
             <li>
               <p className="font-bold">Impacto visible</p>
@@ -381,7 +379,6 @@ export function FAQAccordion() {
             <p className="font-bold text-lg text-green-800 dark:text-green-200">📅 DESPUÉS DEL MES 1 (Sin Contratos Largos):</p>
             <p>NO firmamos contratos de "mínimo 12 meses" o trampas similares. Funciona así:</p>
             <ul className="list-disc pl-5 space-y-1 mt-2">
-              <li>Mantenimiento mensual: $29/mes</li>
               <li>Puedes cancelar CUALQUIER mes</li>
               <li>Avisas con 15 días de anticipación</li>
               <li>No hay penalidades</li>

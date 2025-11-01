@@ -1,12 +1,12 @@
 ---
 title: "La Razón Por La Que Pierdes Clientes en WhatsApp (Y No Lo Sabías)"
-description: " Cuando un cliente te pide el menú por WhatsApp, ¿qué envías? Si es una foto borrosa o un PDF pesado, estás perdiendo ventas. Datos 2024 revelan que el 75% de clientes usa su móvil para ordenar. Te muestro por qué esa \"solución rápida\" es la fricción que mata tu conversión y qué prefieren tus clientes en su lugar."
-date: "2025-10-31"
-category: "asesoria"
+description: "Cuando un cliente te pide el menú por WhatsApp, ¿qué envías? Si es una foto borrosa o un PDF pesado, estás perdiendo ventas. Datos 2024 revelan que el 75% de clientes usa su móvil para ordenar. Te muestro por qué esa \"solución rápida\" es la fricción que mata tu conversión y qué prefieren tus clientes en su lugar."
+date: "2025-11-01"
+category: "menu-objetivo"
 meta_description: "Que prefieren clientes menu digital o foto whatsapp? Enviar fotos borrosas te cuesta ventas. Descubre la alternativa profesional que aumenta tu ticket."
-keyword: "que prefieren clientes menu digital o foto whatsapp"
+keyword: "Clave Principal: que prefieren clientes menu digital o foto whatsapp"
 tags: "#menuobjetivo, #whatsappbusiness, #menudigital, #ventaswhatsapp, #experienciamovil, #conversionrestaurante"
-image: "https://cesarweb.b-cdn.net/articulos/1761953298693-Gemini_Generated_Image_o5w34oo5w34oo5w3.webp"
+image: "https://cesarweb.b-cdn.net/articulos/1762017665094-Gemini_Generated_Image_o5w34oo5w34oo5w3.webp"
 ---
 
 # 📱 La Razón Por La Que Pierdes Clientes en WhatsApp (Y No Lo Sabías)

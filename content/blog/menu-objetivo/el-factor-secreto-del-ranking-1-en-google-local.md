@@ -1,12 +1,12 @@
 ---
 title: "El Factor Secreto del Ranking #1 en Google Local"
-description: " ¿Quieres saber como ser el numero 1 en google mi restaurante? No son las reseñas ni los años. Es una estrategia de 2 factores que Google prioriza y que el 97% de usuarios usa para encontrarte. Te revelamos el factor secreto que tu competencia ignora y cómo puedes automatizarlo para dominar tu zona."
-date: "2025-10-31"
-category: "analisis-estrategico"
-meta_description: " Descubre como ser el numero 1 en google mi restaurante. No son las reseñas. Son 2 factores de SEO local que puedes automatizar hoy."
-keyword: "como ser el numero 1 en google mi restaurante"
-tags: " #menuobjetivo, #seolocal, #googlemybusiness, #rankinggoogle, #seorestaurante, #comosernumero1engoogle"
-image: "https://cesarweb.b-cdn.net/articulos/1761953065118-Gemini_Generated_Image_2ruo9p2ruo9p2ruo.webp"
+description: "¿Quieres saber como ser el numero 1 en google mi restaurante? No son las reseñas ni los años. Es una estrategia de 2 factores que Google prioriza y que el 97% de usuarios usa para encontrarte. Te revelamos el factor secreto que tu competencia ignora y cómo puedes automatizarlo para dominar tu zona."
+date: "2025-11-01"
+category: "menu-objetivo"
+meta_description: "Descubre como ser el numero 1 en google mi restaurante. No son las reseñas. Son 2 factores de SEO local que puedes automatizar hoy."
+keyword: "Clave Principal: como ser el numero 1 en google mi restaurante"
+tags: "#menuobjetivo, #seolocal, #googlemybusiness, #rankinggoogle, #seorestaurante, #comosernumero1engoogle"
+image: "https://cesarweb.b-cdn.net/articulos/1762017525393-Gemini_Generated_Image_2ruo9p2ruo9p2ruo.webp"
 ---
 
 # 🌟 El Factor Secreto del Ranking #1 en Google Local

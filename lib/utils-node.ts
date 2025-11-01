@@ -3,6 +3,14 @@ import path from "path";
 import matter from "gray-matter";
 import { marked } from "marked";
 
+// Función para manejar fechas de forma segura
+function safeDate(dateString: string | undefined): string {
+  if (!dateString) return new Date().toISOString();
+  
+  const date = new Date(dateString);
+  return isNaN(date.getTime()) ? new Date().toISOString() : date.toISOString();
+}
+
 function normalizeFrontmatter(data: any) {
   const result: Record<string, string> = {};
   for (const key in data) {
@@ -106,7 +114,7 @@ export async function getAllArticles(includeHidden = false) {
           title: frontmatter.title || 'Sin título',
           excerpt: frontmatter.excerpt || frontmatter.description || '',
           image: frontmatter.image || '/images/placeholder-blog.jpg',
-          date: frontmatter.date ? new Date(frontmatter.date).toISOString() : new Date().toISOString(),
+          date: safeDate(frontmatter.date),
           author: frontmatter.author || 'César Reyes',
           content: htmlContent,
           slug: frontmatter.slug || slug,
@@ -185,7 +193,7 @@ function parseArticleFile(filePath: string, category: string): BlogArticle | nul
       title: normalized.title || filenameMetadata.title || 'Sin título',
       excerpt: normalized.excerpt || normalized.description || '',
       image: normalized.image || '/images/placeholder-blog.jpg',
-      date: normalized.date ? new Date(normalized.date).toISOString() : new Date().toISOString(),
+      date: safeDate(normalized.date),
       author: normalized.author || 'César Reyes',
       content: htmlContent,
       slug: normalized.slug || filenameMetadata.slug || slug,

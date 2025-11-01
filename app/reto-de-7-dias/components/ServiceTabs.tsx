@@ -299,28 +299,29 @@ export function ServiceTabs() {
         Descripción de Servicios
       </h3>
       <div className="w-full">
-        <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 mb-8 md:mb-10">
+        <div className="flex flex-wrap justify-center gap-2 mb-8">
           {tabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors w-full sm:w-auto text-center ${
+              className={`px-6 py-3 rounded-full font-medium transition-colors flex items-center ${
                 activeTab === tab.id
-                  ? 'bg-orange-500 text-white'
-                  : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600'
+                  ? 'bg-orange-500 text-white shadow-md'
+                  : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
               }`}
             >
-              <span className="mr-1">{tab.icon}</span>
-              <span className="whitespace-normal">{tab.title}</span>
+              <span className="mr-2">{tab.icon}</span>
+              {tab.title}
             </button>
           ))}
         </div>
-        
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
-          <div className="p-6 md:p-8">
-            {tabs.find(tab => tab.id === activeTab)?.content}
-          </div>
-          {tabs.find(tab => tab.id === activeTab)?.content}
+
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 md:p-8">
+          {tabs.map((tab) => (
+            <div key={tab.id} className={activeTab === tab.id ? 'block' : 'hidden'}>
+              {tab.content}
+            </div>
+          ))}
         </div>
       </div>
     </div>
