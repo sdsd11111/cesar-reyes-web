@@ -1,0 +1,65 @@
+{
+  "totalVisitas": 647,
+  "visitasHoy": 647,
+  "articulosPublicados": 0,
+  "suscriptoresNewsletter": 0,
+  "ultimasVisitas": [
+    {
+      "fecha": "2025-11-15",
+      "pagina": "/servicios/promo-artes-vivas",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-11-15",
+      "pagina": "/",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-11-14",
+      "pagina": "/",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-11-14",
+      "pagina": "/",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-11-14",
+      "pagina": "/",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-11-14",
+      "pagina": "/",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-11-14",
+      "pagina": "/",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-11-14",
+      "pagina": "/",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-11-14",
+      "pagina": "/servicios/promo-artes-vivas",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-11-14",
+      "pagina": "/",
+      "visitas": 1
+    }
+  ],
+  "visitasPorDia": {
+    "2025-11-11": 258,
+    "2025-11-12": 168,
+    "2025-11-13": 46,
+    "2025-11-14": 173,
+    "2025-11-15": 2
+  }
+}
