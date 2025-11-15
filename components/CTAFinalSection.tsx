@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Check, ArrowRight, Download } from 'lucide-react';
 import { supabaseArtes } from '@/src/lib/supabaseArtesClient';
+import { sendArtesVivasEmail } from '@/app/utils/emailService';
 
 export default function CTAFinalSection() {
   const [timeLeft, setTimeLeft] = useState({
@@ -223,59 +224,39 @@ export default function CTAFinalSection() {
       // 5. Si llegamos aquí, el guardado fue exitoso
       console.log('Datos guardados correctamente:', data);
       
-      // 6. Enviar correo de confirmación usando el servicio principal
+      // 6. Enviar correo de confirmación a través de la API
       const sendEmail = async () => {
         try {
-          const emailData = {
+          console.log('Preparando envío de correo de Artes Vivas con datos:', {
             to: formData.email.trim().toLowerCase(),
             nombre: formData.nombre.trim(),
-            restaurante: `Artesanías Vivas - ${formData.tipo_artesania}`,
-            mensaje: `Hola ${formData.nombre.trim()},
-            
-Gracias por registrarte en Artes Vivas. Aquí están los detalles de tu registro:
-
-` +
-            `• Tipo de artesanía: ${formData.tipo_artesania}
-` +
-            (formData.tipo_personalizado ? `• Tipo personalizado: ${formData.tipo_personalizado}
-` : '') +
-            `• WhatsApp: ${formData.whatsapp}
-
-` +
-            `Pronto nos pondremos en contacto contigo para darte más información.
-
-` +
-            `Saludos,
-El equipo de Artes Vivas`
-          };
-          
-          console.log('Preparando envío de correo con datos:', {
-            to: emailData.to,
-            nombre: emailData.nombre,
-            restaurante: emailData.restaurante
+            tipoArtesania: formData.tipo_artesania,
+            whatsapp: formData.whatsapp,
+            tipoPersonalizado: formData.tipo_personalizado || undefined
           });
           
-          const emailResponse = await fetch('/api/send-email', {
+          const response = await fetch('/api/send-artes-vivas-email', {
             method: 'POST',
-            headers: { 
+            headers: {
               'Content-Type': 'application/json',
-              'Cache-Control': 'no-cache'
             },
-            body: JSON.stringify(emailData),
+            body: JSON.stringify({
+              to: formData.email.trim().toLowerCase(),
+              nombre: formData.nombre.trim(),
+              tipoArtesania: formData.tipo_artesania,
+              whatsapp: formData.whatsapp,
+              tipoPersonalizado: formData.tipo_personalizado || undefined
+            }),
           });
           
-          if (!emailResponse.ok) {
-            const errorText = await emailResponse.text();
-            console.error('Error en la respuesta del servidor de correo:', {
-              status: emailResponse.status,
-              statusText: emailResponse.statusText,
-              error: errorText
-            });
-            throw new Error(`Error al enviar el correo: ${emailResponse.status} ${emailResponse.statusText}`);
+          if (!response.ok) {
+            const errorData = await response.json();
+            console.error('Error al enviar el correo:', errorData.error || 'Error desconocido');
+            return false;
           }
           
-          const emailResult = await emailResponse.json();
-          console.log('Correo enviado correctamente:', emailResult);
+          const result = await response.json();
+          console.log('Correo de Artes Vivas enviado correctamente:', result.messageId);
           return true;
           
         } catch (emailError) {

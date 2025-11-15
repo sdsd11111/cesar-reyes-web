@@ -1,24 +1,35 @@
 'use client'
 
+// Importaciones de Next.js
 import Image from "next/image"
-import { useState, useEffect } from "react"
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import StrategyTabs from "@/components/StrategyTabs";
 import dynamic from 'next/dynamic';
+
+// Importaciones de React
+import { useState, useEffect } from "react"
+
+// Importaciones de librerías externas
 import { motion } from "framer-motion";
 import { Check, Stethoscope, ShoppingCart, BookOpen, Briefcase, AreaChart, TrendingUp, Users, MapPin, ChevronDown, ChevronUp } from "lucide-react";
-import StrategyTabContent from "@/components/StrategyTabContent";
 
-// Importación de contenido y componentes
-import { pageContent } from "../../lib/content";
-import BusinessSuccessQuiz from "@/components/BusinessSuccessQuiz"
+// Importaciones de componentes locales
+import StrategyTabs from "@/components/StrategyTabs";
+import StrategyTabContent from "@/components/StrategyTabContent";
+import BusinessSuccessQuiz from "@/components/BusinessSuccessQuiz";
 import BusinessSuccessQuizEmocional from "@/components/BusinessSuccessQuiz_emocional";
 import FaqSection from "@/components/FaqSection";
 import { LogoSlider } from "@/components/logo-slider";
 import TestimonialSlider from "@/components/testimonial-slider";
-import ChatModal from "@/components/ChatModal";
-import VideoModal from "@/components/VideoModal";
+import LearnMoreButton from "@/components/LearnMoreButton";
+import NewsletterForm from "@/components/newsletter-form";
+
+// Importación de componentes modales con carga dinámica
+const ChatModal = dynamic(() => import('@/components/ChatModal'), { ssr: false });
+const PortfolioModal = dynamic(() => import('@/components/PortfolioModal'), { ssr: false });
+const VideoModal = dynamic(() => import('@/components/VideoModal'), { ssr: false });
+
+// Importaciones de componentes de UI
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardFooter, CardTitle } from "@/components/ui/card";
@@ -29,10 +40,13 @@ import {
   CarouselNext, 
   CarouselPrevious 
 } from "@/components/ui/carousel";
-import LearnMoreButton from "@/components/LearnMoreButton";
+
+// Importación de hooks personalizados
 import { useMediaQuery } from "@/hooks/use-media-query";
 
-const PortfolioModal = dynamic(() => import('@/components/PortfolioModal'), { ssr: false });
+// Importación de contenido
+import { pageContent } from "../../lib/content";
+
 
 const iconMap: { [key: string]: React.ElementType } = {
   Stethoscope,
@@ -821,7 +835,20 @@ export default function HomeTestClient({ content, isEmotionalView }: { content: 
                   </div>
                 </Carousel>
               </div>
-              
+            </div>
+          </section>
+
+          {/* Sección de Newsletter */}
+          <section className="w-full py-16 bg-[#1a1a1a] text-white">
+            <div className="container mx-auto px-4">
+              <div className="max-w-4xl mx-auto">
+                <NewsletterForm />
+              </div>
+            </div>
+          </section>
+
+          <section className="w-full py-12 bg-white">
+            <div className="container mx-auto px-4">
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a 
                   href="https://api.whatsapp.com/send/?phone=593963410409&text=Hola+C%C3%A9sar%2C+estoy+interesado+en+tus+servicios&type=phone_number&app_absent=0"

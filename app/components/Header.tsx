@@ -211,6 +211,7 @@ export default function Header() {
   const navigation: NavigationItem[] = [
     { name: 'Inicio', href: '/' },
     { name: 'Sobre Mí', href: '/sobre-mi' },
+    { name: 'Artes Vivas', href: '/servicios/promo-artes-vivas' },
     { 
       name: 'Servicios', 
       href: '/servicios',
@@ -327,7 +328,13 @@ export default function Header() {
           </Link>
         </div>
         
-        <div className="flex lg:hidden">
+        <div className="flex items-center space-x-2 lg:hidden">
+          <Link
+            href="/servicios/promo-artes-vivas"
+            className="inline-flex items-center justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          >
+            Artes Vivas
+          </Link>
           <button
             type="button"
             className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"

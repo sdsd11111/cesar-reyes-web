@@ -151,6 +151,19 @@ export default function MobileMenu({
             Sobre Mí
           </Link>
           
+          <Link 
+            href="/servicios/promo-artes-vivas" 
+            className="block py-4 px-4 text-gray-800 active:bg-gray-50 rounded-lg font-medium border border-gray-100 transition-colors touch-manipulation"
+            onClick={onClose}
+            style={{
+              minHeight: '48px',
+              display: 'flex',
+              alignItems: 'center'
+            }}
+          >
+            Artes Vivas
+          </Link>
+          
           <div className="border border-gray-100 rounded-lg overflow-hidden">
             <button
               onClick={toggleServicesMenu}
