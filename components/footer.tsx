@@ -1,20 +1,29 @@
 import Link from "next/link"
+import NewsletterForm from "./newsletter-form"
 
 export default function Footer() {
   return (
-    <footer className="bg-[#121212] text-gray-200 border-t border-neutral-800 py-8">
-      <div className="container mx-auto flex flex-col md:flex-row items-center md:justify-between gap-6 px-4 md:px-0">
-        {/* Sección izquierda: Nombre y Copyright */}
-        <div className="flex flex-col items-center md:items-start text-center md:text-left mb-4 md:mb-0">
-          <p className="text-xl font-bold text-white mb-2">César Reyes</p>
-          <p className="text-sm text-gray-400">© 2020 César Reyes. Todos los derechos reservados.</p>
+    <footer className="bg-[#1a1a1a] text-gray-200 border-t border-neutral-800 py-8">
+      <div className="container mx-auto px-4 md:px-0">
+        {/* Newsletter Section */}
+        <div className="mb-8">
+          <NewsletterForm />
         </div>
+        
+        <div className="flex flex-col md:flex-row items-start md:justify-between gap-6">
+          {/* Sección izquierda: Nombre y Copyright */}
+          <div className="flex flex-col items-center md:items-start text-center md:text-left">
+            <p className="text-xl font-bold text-white mb-2">César Reyes</p>
+            <p className="text-sm text-gray-400">© 2024 César Reyes. Todos los derechos reservados.</p>
+          </div>
 
         {/* Sección central: Enlaces de Navegación */}
         <nav className="flex flex-wrap justify-center md:justify-start gap-x-6 gap-y-2 text-sm mb-4 md:mb-0">
           <Link href="/" className="hover:underline text-gray-300" target="_blank" rel="noopener noreferrer">Inicio</Link>
           <Link href="/blog" className="hover:underline text-gray-300" target="_blank" rel="noopener noreferrer">Blog</Link>
-          <Link href="/mensajeria" className="hover:underline text-gray-300" target="_blank" rel="noopener noreferrer">Mensajería</Link>
+          <Link href="/servicios" className="hover:underline text-gray-300" target="_blank" rel="noopener noreferrer">Servicios</Link>
+          <Link href="/sobre-mi" className="hover:underline text-gray-300" target="_blank" rel="noopener noreferrer">Sobre mí</Link>
+          <Link href="/contacto" className="hover:underline text-gray-300" target="_blank" rel="noopener noreferrer">Contacto</Link>
         </nav>
 
         {/* Sección derecha: Redes Sociales y Email */}
@@ -37,6 +46,7 @@ export default function Footer() {
             </a>
           </div>
           <a href="mailto:negocios@cesarreyesjaramillo.com" className="text-gray-400 hover:underline text-sm">negocios@cesarreyesjaramillo.com</a>
+        </div>
         </div>
       </div>
     </footer>

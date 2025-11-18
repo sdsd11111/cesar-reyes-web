@@ -11,64 +11,60 @@ import CtaSection from './CtaSection';
 // Contenido de la página
 const pageContent = {
   hero: {
-    title: 'César Reyes Jaramillo',
+    title: 'César Reyes',
     subtitle: 'Estratega de negocios y posicionamiento web',
-    description: 'Más de 23 años ayudando a emprendedores, profesionales y pymes a convertir su propósito en crecimiento real.',
-    cta: 'Agendar diagnóstico gratuito',
-    ctaLink: 'https://api.whatsapp.com/send/?phone=593963410409&text=Hola+C%C3%A9sar%2C+estoy+interesado+en+un+diagn%C3%B3stico+gratuito&type=phone_number&app_absent=0',
+    description: 'Con más de 24 años de experiencia ayudando a emprendedores y empresarios a hacer crecer sus negocios de manera sostenible.',
+    cta: 'Conoce mi historia',
+    ctaLink: '#inicio',
   },
   sections: [
     {
       id: 'inicio',
       title: 'Todo comenzó con una jabonera',
       content: [
-        'A los siete años acompañé a mi madre al Huaquillas para hacer compras para su pequeño negocio. Recuerdo que, cuando me iba a comprar unas cosas de niño, me dio un consejo que nunca olvidaría:',
+        'A los siete años acompañé a mi madre al Huaquillas para hacer compras para su pequeño negocio. Recuerdo que, cuando me iba a comprar unas cosas para mi, me dio un consejo que nunca olvidaría:',
         '“Si compras esta jabonera en 1 sucre y la vendes en 3, ¿cuánto habrás ganado si vendes 10 con lo que te dio tu papá?”',
-        'Ese día entendí que los números cuentan una historia más profunda que el dinero. Hablan del valor, del esfuerzo y de la visión.'
+        'Ese día entendí que los números no solo son una suma o una multiplicación, si no, la visión que tenemos de lo que queremos ser, cuentan una historia de como quiero verme más adelante. Hablan del valor, del esfuerzo y de la visión.'
       ],
-      image: '/images/sobre-mi/jabonera.webp',
+      image: '/images/sobre-mi/cesar reyes y su madre.webp',
       imagePosition: 'right' as const,
       bgColor: 'white'
     },
     {
       id: 'decision',
-      title: 'Cuando decidí qué quería hacer crecer',
+      title: 'Una decisión que lo cambiaría todo',
       content: [
-        'En la universidad estuve a punto de estudiar Agronomía, pero elegí Administración de Empresas.',
-        'No porque no me gustara el campo, sino porque entendí que mi propósito no era hacer producir más vacas o cultivos, sino hacer producir ideas, personas y negocios.',
-        'Desde entonces, todo mi camino profesional gira en torno a eso: ayudar a que otros crezcan con estrategia.'
+        'En la universidad, para elegir las carreras, nos poníamos en fila frente a una persona que tenía un escritorio y un letrero en cartulina con el nombre de la carrera. Cuando estaba a un paso de elegir Agronomía, surgió una reflexión que cambiaría el camino por el cual mi vida se desarrollaría: entendí que no era mi afán aprender cómo hacer crecer una planta o qué darle a un animal para que produzca más carne o leche. Lo que realmente me movía eran las proyecciones que hacía en mi cabeza: cuánto iba a producir en un año, cuánto me costaría hacerlo y cuánta utilidad dejaría.',
+        'En ese momento, di un paso a la derecha, hacia la carrera de Administración de Empresas, y me convertiría en un profesional apasionado que entiende que un negocio no se trata solo de ganar uno, sino de ayudar a que otros también ganen.'
       ],
-      image: '/images/sobre-mi/universidad.webp',
+      image: '/images/sobre-mi/cesar reyes aroma de montaña.webp',
       imagePosition: 'left' as const,
       bgColor: 'gray-50'
     },
     {
-      id: 'quiebre',
+      id: 'cambio-enfoque',
       title: 'El cambio de enfoque que lo cambió todo',
       content: [
-        'Desde joven entendí que atraemos lo que enfocamos nuestra energía. Durante años me concentré en ahorrar, en reducir gastos, en hacerlo todo yo mismo. Creía que así ganaba.',
-        'Hasta que un amigo de Cuenca me dijo algo que me cambió la manera de ver los negocios:',
-        '“Si liberas tiempo y te dedicas a ser el dueño —a pensar, a crear alianzas, a dirigir— ganarás diez veces más de lo que ahorras.”',
-        'Tenía razón. Cuando dejé de ser el empleado de mi propio negocio y empecé a ser su gerente, nació La Batalla del Sharwest, un evento que llegó a generar ingresos de 1.500 dólares por noche.',
-        'No fue suerte, fue cambio de enfoque.'
+        'Desde joven entendí que atraemos en lo que enfocamos nuestra energía. Durante años me concentré en ahorrar, en reducir gastos, en hacerlo todo yo mismo.',
+        <div key="highlighted-text" className="space-y-4">
+          <p className="text-xl font-medium">Creía que así ganaba.</p>
+          <p>Hasta que un amigo de Cuenca me dijo algo que me cambió la manera de ver los negocios:</p>
+          <div className="bg-blue-800/30 border-l-4 border-yellow-400 pl-6 py-4 my-4">
+            <p className="text-lg italic">"Si liberas tiempo y te dedicas a hacer las cosas que hace un dueño, contactos, eventos, alianzas, a dirigir, ganarás diez veces más de lo que ahorras."</p>
+            <p className="font-medium mt-2">- Un amigo de Cuenca</p>
+          </div>
+          <p>Tenía razón. Cuando dejé de ser el empleado de mi propio negocio y empecé a ser su gerente, nació La Batalla del Sharwest, un evento que llegó a generar ingresos de 1.500 dólares por noche.</p>
+          <p className="text-xl font-bold">No fue suerte, fue cambio de enfoque.</p>
+        </div>
       ],
-      image: '/images/sobre-mi/evento.webp',
-      imagePosition: 'right' as const,
-      bgColor: 'white',
+      bgColor: 'blue-900',
+      isDark: true,
+      textWhite: true,
       fullWidth: true,
-      overlay: false,
-      customClass: 'bg-white',
-      textWhite: false,
-      highlightText: '“Si liberas tiempo y te dedicas a ser el dueño —a pensar, a crear alianzas, a dirigir— ganarás diez veces más de lo que ahorras.”',
-      highlightAuthor: '— Un consejo que cambió mi vida',
-      stats: [
-        { value: '10x', label: 'Más ingresos' },
-        { value: '1,500', label: 'Dólares por noche', sublabel: 'en eventos' },
-        { value: '100%', label: 'Enfoque estratégico' }
-      ]
+      customClass: 'py-16 md:py-24'
     },
     {
-      id: 'objetivo',
+      id: 'problema-proposito',
       title: 'Cuando un problema se convirtió en propósito',
       content: [
         'En 2018, cuando tenía un salón de eventos, contraté una página web. Nunca me la entregaron ni me devolvieron el anticipo.',
@@ -76,29 +72,73 @@ const pageContent = {
         'Así nació Objetivo, que en sus inicios se llamaba Automatizotunegocio: una empresa nacida desde la frustración, pero sostenida por la disciplina y el aprendizaje constante.',
         'Me volví autodidacta. Aprendí que no basta con copiar lo que se ve en internet: hay que entender la ciencia detrás de cada acción.'
       ],
-      image: '/images/sobre-mi/trabajando.webp',
-      imagePosition: 'left' as const,
-      bgColor: 'gray-50'
+      image: '/images/sobre-mi/loxa.webp',
+      imagePosition: 'right' as const,
+      bgColor: 'white',
+      customClass: 'py-16 md:py-24'
     },
     {
-      id: 'oferta',
-      title: 'Lo que hoy ofrezco',
+      id: 'servicios',
+      title: '',
       content: [
-        'Hoy trabajo directamente con los dueños de negocio, no con encargados.',
-        'En una llamada estratégica, analizamos juntos su situación, sin promesas vacías ni tecnicismos.',
-        'No lo sé todo, pero tengo la capacidad y la experiencia para ayudar a muchos.',
-        'Mi método parte siempre de un diagnóstico, porque no todos necesitan una página web. A veces lo que hace falta es algo más simple: claridad, dirección y propósito.',
-        'Por eso, cuando posicioné la frase “comprar baterías en Loja” y un cliente apareció en segundo lugar por encima de grandes empresas —sin campañas, sin presupuesto, solo con estrategia— supe que estaba en el camino correcto.'
+        <div key="services-container" className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Lo que hacemos</h2>
+            <p className="text-xl text-gray-600">Soluciones integrales para potenciar tu presencia digital</p>
+          </div>
+          <div className="flex flex-col md:flex-row justify-center items-stretch gap-8">
+            {/* Card 1 */}
+            <div key="analisis" className="flex-1 min-w-[300px] bg-white rounded-xl p-8 text-center hover:shadow-xl transition-all duration-300 flex flex-col">
+              <div className="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg className="w-12 h-12 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                </svg>
+              </div>
+              <h3 className="text-xl font-bold text-gray-800 mb-4">Análisis Estratégico</h3>
+              <p className="text-gray-600 mb-6 flex-grow">Estudiamos tu mercado y competencia para crear una estrategia digital efectiva que impulse tu negocio.</p>
+              <div className="mt-auto">
+                <a href="/servicios/analisis-estrategico" className="inline-flex items-center justify-center px-8 py-3 w-full max-w-xs mx-auto border border-transparent text-base font-medium rounded-full text-white bg-blue-600 hover:bg-blue-700 transition-colors duration-300">
+                  Ver más
+                </a>
+              </div>
+            </div>
+            
+            {/* Card 2 */}
+            <div key="desarrollo" className="flex-1 min-w-[300px] bg-white rounded-xl p-8 text-center hover:shadow-xl transition-all duration-300 flex flex-col">
+              <div className="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg className="w-12 h-12 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                </svg>
+              </div>
+              <h3 className="text-xl font-bold text-gray-800 mb-4">Desarrollo Web</h3>
+              <p className="text-gray-600 mb-6 flex-grow">Creamos sitios web rápidos, seguros y optimizados para conversiones que generan resultados.</p>
+              <div className="mt-auto">
+                <a href="/servicios/desarrollo-web" className="inline-flex items-center justify-center px-8 py-3 w-full max-w-xs mx-auto border border-transparent text-base font-medium rounded-full text-white bg-blue-600 hover:bg-blue-700 transition-colors duration-300">
+                  Ver más
+                </a>
+              </div>
+            </div>
+            
+            {/* Card 3 */}
+            <div key="posicionamiento" className="flex-1 min-w-[300px] bg-white rounded-xl p-8 text-center hover:shadow-xl transition-all duration-300 flex flex-col">
+              <div className="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg className="w-12 h-12 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
+                </svg>
+              </div>
+              <h3 className="text-xl font-bold text-gray-800 mb-4">Posicionamiento de Marca</h3>
+              <p className="text-gray-600 mb-6 flex-grow">Mejoramos tu visibilidad en línea y construimos una presencia digital sólida y reconocible.</p>
+              <div className="mt-auto">
+                <a href="/servicios/posicionamiento-marca" className="inline-flex items-center justify-center px-8 py-3 w-full max-w-xs mx-auto border border-transparent text-base font-medium rounded-full text-white bg-blue-600 hover:bg-blue-700 transition-colors duration-300">
+                  Ver más
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
       ],
-      cta: 'Agenda una llamada conmigo',
-      ctaLink: 'https://api.whatsapp.com/send/?phone=593963410409&text=Hola+C%C3%A9sar%2C+estoy+interesado+en+tus+servicios&type=phone_number&app_absent=0',
-      bgColor: 'white',
-      hasCta: true,
-      image: '/images/sobre-mi/ofrezco.webp',
-      imagePosition: 'left' as const,
-      overlay: true,
-      customClass: 'relative bg-cover bg-center',
-      textWhite: true
+      bgColor: 'blue-50',
+      customClass: 'py-16 md:py-24'
     },
     {
       id: 'resumen',
@@ -140,12 +180,12 @@ export default function SobremiClientWrapper() {
             image={section.image}
             imagePosition={section.imagePosition}
             bgColor={section.bgColor || 'white'}
-            isDark={section.isDark || false}
-            fullWidth={section.fullWidth || false}
-            overlay={section.overlay || false}
-            hasCta={section.hasCta || false}
-            cta={section.cta}
-            ctaLink={section.ctaLink}
+            isDark={(section as any).isDark || false}
+            fullWidth={(section as any).fullWidth || false}
+            overlay={(section as any).overlay ?? false}
+            hasCta={(section as any).hasCta ?? false}
+            cta={(section as any).cta ?? ''}
+            ctaLink={(section as any).ctaLink ?? ''}
             index={index}
           />
         ))}

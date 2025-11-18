@@ -22,7 +22,6 @@ import FaqSection from "@/components/FaqSection";
 import { LogoSlider } from "@/components/logo-slider";
 import TestimonialSlider from "@/components/testimonial-slider";
 import LearnMoreButton from "@/components/LearnMoreButton";
-import NewsletterForm from "@/components/newsletter-form";
 
 // Importación de componentes modales con carga dinámica
 const ChatModal = dynamic(() => import('@/components/ChatModal'), { ssr: false });
@@ -834,15 +833,6 @@ export default function HomeTestClient({ content, isEmotionalView }: { content: 
                     <CarouselNext className="relative right-0 top-0 -translate-y-0" />
                   </div>
                 </Carousel>
-              </div>
-            </div>
-          </section>
-
-          {/* Sección de Newsletter */}
-          <section className="w-full py-16 bg-[#1a1a1a] text-white">
-            <div className="container mx-auto px-4">
-              <div className="max-w-4xl mx-auto">
-                <NewsletterForm />
               </div>
             </div>
           </section>

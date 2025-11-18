@@ -17,7 +17,7 @@ export default function HeroSection({ title, subtitle, description, cta, ctaLink
       {/* Fondo */}
       <div className="absolute inset-0 z-[-1]">
         <Image
-          src="/images/sobre-mi/hero-bg.webp"
+          src="/images/sobre-mi/portada sobre mi.webp"
           alt="César Reyes Jaramillo"
           fill
           className="object-cover"
@@ -32,7 +32,7 @@ export default function HeroSection({ title, subtitle, description, cta, ctaLink
         <p className="text-base sm:text-lg max-w-3xl mx-auto mb-6 sm:mb-8 px-2 sm:px-0">{description}</p>
         <Link 
           href={ctaLink}
-          className="inline-block bg-primary hover:bg-primary-600 text-white font-semibold px-5 py-2 sm:px-6 sm:py-3 rounded-lg transition-colors duration-300 text-sm sm:text-base"
+          className="inline-block border-2 border-white hover:bg-white hover:text-black text-white font-medium px-8 py-3 rounded-full transition-all duration-300 text-base sm:text-lg"
         >
           {cta}
         </Link>

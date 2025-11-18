@@ -1,11 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef } from 'react';
+import React from 'react';
 
 interface SectionProps {
   id?: string;
   title: string;
-  content: string[];
+  content: (string | React.ReactNode)[];
+  contentAfterStats?: (string | React.ReactNode)[];
   image?: string;
   imagePosition?: 'left' | 'right';
   bgColor?: string;
@@ -46,6 +48,7 @@ export default function Section({
   stats = []
 }: SectionProps) {
   const bgColorClass = isDark ? 'bg-gray-900 text-white' : 
+                      bgColor === 'blue-900' ? 'bg-blue-900 text-white' :
                       bgColor === 'gray-50' ? 'bg-gray-50' : 'bg-white';
   
   const textColorClass = isDark ? 'text-white' : 'text-gray-800';
@@ -119,6 +122,7 @@ export default function Section({
   }, []);
 
   const renderContent = () => {
+
     // Special case for "En resumen" section
     if (id === 'resumen') {
       return (
@@ -533,76 +537,6 @@ export default function Section({
         <div className="container mx-auto px-4 sm:px-6">
           {renderContent()}
         </div>
-      </section>
-    );
-  }
-
-  // Special case for quiebre section
-  if (id === 'quiebre') {
-    return (
-      <section 
-        id={id} 
-        className={`relative overflow-hidden bg-white text-gray-900`}
-      >
-        <div className="relative z-10">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
-            <div className="max-w-4xl mx-auto text-center mb-12">
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
-                {title}
-              </h2>
-              <div className="w-24 h-1 bg-primary-500 mx-auto mb-8"></div>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-8 mb-12">
-              {stats?.map((stat, index) => (
-                <div key={index} className="bg-gray-50 p-6 rounded-xl border border-gray-200 shadow-sm">
-                  <div className="text-4xl font-bold text-primary-600 mb-2">{stat.value}</div>
-                  <div className="text-lg font-medium text-gray-800">{stat.label}</div>
-                  {stat.sublabel && <div className="text-sm text-gray-600">{stat.sublabel}</div>}
-                </div>
-              ))}
-            </div>
-
-            <div className="max-w-3xl mx-auto space-y-6 text-lg leading-relaxed mb-12 text-gray-800">
-              {content.map((paragraph, i) => (
-                <p key={i} className={i === 2 ? 'text-2xl font-medium italic text-gray-900' : 'text-gray-800'}>
-                  {i === 2 ? (
-                    <span className="relative inline-block">
-                      <span className="relative z-10">{paragraph}</span>
-                      <span className="absolute bottom-0 left-0 w-full h-3 bg-primary-200 -z-0"></span>
-                    </span>
-                  ) : (
-                    paragraph
-                  )}
-                </p>
-              ))}
-            </div>
-
-            {hasCta && cta && ctaLink && (
-              <div className="text-center mt-12">
-                <a 
-                  href={ctaLink}
-                  className="inline-block bg-primary-600 hover:bg-primary-700 text-white font-semibold px-8 py-4 rounded-lg transition-colors duration-300 transform hover:scale-105"
-                >
-                  {cta}
-                </a>
-              </div>
-            )}
-          </div>
-        </div>
-        
-        {image && (
-          <div className="absolute inset-0 z-0">
-            <Image
-              src={image}
-              alt={title}
-              fill
-              className="object-cover opacity-20"
-              sizes="100vw"
-              priority
-            />
-          </div>
-        )}
       </section>
     );
   }
