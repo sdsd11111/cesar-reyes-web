@@ -1,7 +1,7 @@
 import type React from "react"
 import "./globals.css"
 import { Inter, Poiret_One, Montserrat, Poppins, Playfair_Display } from "next/font/google"
-import { GoogleTagManager } from '@next/third-parties/google'
+// Google Tag Manager will be implemented manually with Script component
 import Footer from "@/components/footer"
 import VisitTracker from '@/components/VisitTracker'
 import TransparentHeader from '@/components/transparent-header'
@@ -180,6 +180,17 @@ export default function RootLayout({
           height: '100%',
         }}
       >
+        {/* Google Tag Manager */}
+        <Script id="google-tag-manager" strategy="afterInteractive">
+          {`
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-NLQ7BVT8');
+          `}
+        </Script>
+        {/* End Google Tag Manager */}
         <Providers>
           <SearchProvider>
             <TransparentHeader />
