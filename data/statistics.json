@@ -1,6 +1,6 @@
 {
-  "totalVisitas": 704,
-  "visitasHoy": 704,
+  "totalVisitas": 706,
+  "visitasHoy": 706,
   "articulosPublicados": 0,
   "suscriptoresNewsletter": 0,
   "ultimasVisitas": [
@@ -31,12 +31,12 @@
     },
     {
       "fecha": "2025-11-18",
-      "pagina": "/",
+      "pagina": "/sobre-mi",
       "visitas": 1
     },
     {
       "fecha": "2025-11-18",
-      "pagina": "/",
+      "pagina": "/sobre-mi",
       "visitas": 1
     },
     {
@@ -61,6 +61,6 @@
     "2025-11-13": 46,
     "2025-11-14": 173,
     "2025-11-15": 24,
-    "2025-11-18": 35
+    "2025-11-18": 37
   }
 }

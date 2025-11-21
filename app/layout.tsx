@@ -1,6 +1,7 @@
 import type React from "react"
 import "./globals.css"
 import { Inter, Poiret_One, Montserrat, Poppins, Playfair_Display } from "next/font/google"
+import { GoogleTagManager } from '@next/third-parties/google'
 import Footer from "@/components/footer"
 import VisitTracker from '@/components/VisitTracker'
 import TransparentHeader from '@/components/transparent-header'
