@@ -141,7 +141,7 @@ export default function PrecioOfertaSection() {
               
               <div className="mt-4 text-center">
                 <p className="text-xs text-orange-100">
-                  Oferta exclusiva para participantes de Artes Vivas 2025
+                  Oferta exclusiva hasta este Diciembre del 2025
                 </p>
               </div>
             </div>
@@ -163,13 +163,13 @@ export default function PrecioOfertaSection() {
                     Oferta Especial para Artesanos
                   </h3>
                   <p className="text-sm text-blue-700 mt-1">
-                    Precio promocional disponible por tiempo limitado. Aprovecha esta oportunidad para tener tu presencia web profesional.
+                    Aprovecha esta oferta especial hasta diciembre 2025 para asegurar tu presencia digital profesional con un precio exclusivo.
                   </p>
                 </div>
               </div>
             </div>
             <p className="text-xs text-gray-500 mt-3">
-              Oferta exclusiva para participantes de Artes Vivas 2025 | Cupos limitados
+              Solo 30 lugares disponibles | Reserva ahora y asegúrate un sitio profesional para tu proyecto artístico o artesanal. Oferta limitada
             </p>
           </div>
         </div>

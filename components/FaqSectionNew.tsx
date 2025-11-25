@@ -14,6 +14,34 @@ export default function FaqSectionNew() {
 
   const faqs: FaqItem[] = [
     {
+      question: '¿Quiénes pueden aprovechar esta promoción?',
+      answer: (
+        <div className="space-y-4">
+          <p>Esta oferta está dirigida a artesanos y artistas que quieran tener una página web profesional, especialmente si participan del Festival de Artes Vivas 2025 o simplemente quieren aprovechar esta oportunidad.</p>
+        </div>
+      )
+    },
+    {
+      question: '¿Cuántos cupos hay disponibles?',
+      answer: (
+        <div className="space-y-4">
+          <p>Son <span className="font-bold text-yellow-300">30 cupos promocionales</span>. Una vez completados, la oferta ya no será válida bajo estas condiciones.</p>
+          <div className="bg-yellow-900 bg-opacity-30 border-l-4 border-yellow-400 pl-4 py-2 my-2">
+            <p className="font-medium">¡No pierdas la oportunidad de asegurar tu cupo con el precio promocional!</p>
+          </div>
+        </div>
+      )
+    },
+    {
+      question: '¿Cuál es el plazo para enviar la información para mi página?',
+      answer: (
+        <div className="space-y-4">
+          <p>Debes entregarnos <span className="font-medium">todos los textos, imágenes y material necesario</span> antes del <span className="font-bold text-yellow-300">31 de diciembre de 2025</span>.</p>
+          <p>Esto nos permite asegurar que tu página esté lista a tiempo y con la mejor calidad posible.</p>
+        </div>
+      )
+    },
+    {
       question: '¿Necesito saber de computadoras?',
       answer: (
         <div className="space-y-4">

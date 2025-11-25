@@ -531,7 +531,7 @@ export default function PromoArtesVivas() {
       <footer className="bg-black text-white py-8">
         <div className="container mx-auto px-4 text-center">
           <p className="text-sm text-gray-400">
-            Promoción válida exclusivamente para participantes del Festival Artes Vivas Loja 2025
+            Una vez vencido el plazo o llenos los cupos, el precio volverá a $250 (o al valor estándar), y los tiempos de entrega podrán cambiar según disponibilidad.
           </p>
         </div>
       </footer>

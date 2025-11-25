@@ -582,12 +582,27 @@ export default function CTAFinalSection() {
                 </svg>
                 <h3 className="text-xl font-bold">IMPORTANTE:</h3>
               </div>
-              <p className="mt-2">
-                Esta oferta termina cuando se completen los 20 cupos o el 30 de noviembre, lo que ocurra primero.
-              </p>
-              <p className="mt-1 font-medium">
-                Después de eso, el precio vuelve a $250 y los tiempos de entrega son de 15 días.
-              </p>
+              <div className="space-y-3">
+                <div className="flex items-start">
+                  <span className="text-yellow-300 mr-2">•</span>
+                  <p className="flex-1 font-medium">
+                    La promoción está disponible solo para los primeros 30 artesanos o artistas que reserven.
+                  </p>
+                </div>
+                <div className="flex items-start">
+                  <span className="text-yellow-300 mr-2">•</span>
+                  <p className="flex-1 font-medium">
+                    Debes enviar toda la información necesaria para tu sitio (textos, imágenes, etc.) antes del 
+                    <span className="text-yellow-300 font-bold"> 31 de diciembre de 2025</span>.
+                  </p>
+                </div>
+                <div className="flex items-start">
+                  <span className="text-yellow-300 mr-2">•</span>
+                  <p className="flex-1 font-medium">
+                    Después de completar los 30 cupos, la oferta ya no estará disponible bajo las condiciones promocionales.
+                  </p>
+                </div>
+              </div>
             </div>
             
             <div className="bg-black bg-opacity-20 p-4 rounded-lg text-center min-w-[200px]">

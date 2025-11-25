@@ -14,7 +14,7 @@ export default function Footer() {
           {/* Sección izquierda: Nombre y Copyright */}
           <div className="flex flex-col items-center md:items-start text-center md:text-left">
             <p className="text-xl font-bold text-white mb-2">César Reyes</p>
-            <p className="text-sm text-gray-400">© 2024 César Reyes. Todos los derechos reservados.</p>
+            <p className="text-sm text-gray-400">© 2025 César Reyes. Todos los derechos reservados.</p>
           </div>
 
         {/* Sección central: Enlaces de Navegación */}

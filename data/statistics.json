@@ -1,52 +1,52 @@
 {
-  "totalVisitas": 706,
-  "visitasHoy": 706,
+  "totalVisitas": 708,
+  "visitasHoy": 708,
   "articulosPublicados": 0,
   "suscriptoresNewsletter": 0,
   "ultimasVisitas": [
     {
-      "fecha": "2025-11-18",
-      "pagina": "/sobre-mi",
+      "fecha": "2025-11-25",
+      "pagina": "/servicios/promo-artes-vivas",
       "visitas": 1
     },
     {
-      "fecha": "2025-11-18",
-      "pagina": "/sobre-mi",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-11-18",
-      "pagina": "/sobre-mi",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-11-18",
-      "pagina": "/sobre-mi",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-11-18",
-      "pagina": "/sobre-mi",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-11-18",
-      "pagina": "/sobre-mi",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-11-18",
-      "pagina": "/sobre-mi",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-11-18",
+      "fecha": "2025-11-25",
       "pagina": "/",
       "visitas": 1
     },
     {
       "fecha": "2025-11-18",
-      "pagina": "/",
+      "pagina": "/sobre-mi",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-11-18",
+      "pagina": "/sobre-mi",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-11-18",
+      "pagina": "/sobre-mi",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-11-18",
+      "pagina": "/sobre-mi",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-11-18",
+      "pagina": "/sobre-mi",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-11-18",
+      "pagina": "/sobre-mi",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-11-18",
+      "pagina": "/sobre-mi",
       "visitas": 1
     },
     {
@@ -61,6 +61,7 @@
     "2025-11-13": 46,
     "2025-11-14": 173,
     "2025-11-15": 24,
-    "2025-11-18": 37
+    "2025-11-18": 37,
+    "2025-11-25": 2
   }
 }
