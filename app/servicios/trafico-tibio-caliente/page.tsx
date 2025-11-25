@@ -37,11 +37,15 @@ export default function TraficoTibioCaliente() {
       if (target.matches('a[href^="#"]')) {
         e.preventDefault();
         const targetId = target.getAttribute('href');
-        if (targetId === '#') return;
+        if (!targetId || targetId === '#') return;
         
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-          targetElement.scrollIntoView({ behavior: 'smooth' });
+        try {
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth' });
+          }
+        } catch (error) {
+          console.error('Error al hacer scroll:', error);
         }
       }
     };

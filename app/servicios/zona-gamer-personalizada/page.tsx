@@ -55,7 +55,7 @@ export default function ZonaGamerPersonalizada() {
     return (
       <div
         className={className}
-        style={{ ...style, display: 'block', background: 'rgba(0, 0, 0, 0.1)', borderRadius: '50%', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+        style={{ ...style, background: 'rgba(0, 0, 0, 0.1)', borderRadius: '50%', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
         onClick={onClick}
       >
         <ChevronRight className="text-gray-700" />
@@ -68,7 +68,7 @@ export default function ZonaGamerPersonalizada() {
     return (
       <div
         className={className}
-        style={{ ...style, display: 'block', background: 'rgba(0, 0, 0, 0.1)', borderRadius: '50%', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1 }}
+        style={{ ...style, background: 'rgba(0, 0, 0, 0.1)', borderRadius: '50%', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1 }}
         onClick={onClick}
       >
         <ChevronLeft className="text-gray-700" />
@@ -85,11 +85,18 @@ export default function ZonaGamerPersonalizada() {
       if (target.matches('a[href^="#"]')) {
         e.preventDefault();
         const targetId = target.getAttribute('href');
-        if (targetId === '#') return;
+        if (!targetId || targetId === '#') return;
         
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-          targetElement.scrollIntoView({ behavior: 'smooth' });
+        // Aseguramos que targetId es string
+        const selector = targetId as string;
+        
+        try {
+          const targetElement = document.querySelector(selector);
+          if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth' });
+          }
+        } catch (error) {
+          console.error('Error al hacer scroll:', error);
         }
       }
     };
