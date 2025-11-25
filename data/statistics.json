@@ -1,9 +1,19 @@
 {
-  "totalVisitas": 755,
-  "visitasHoy": 755,
+  "totalVisitas": 757,
+  "visitasHoy": 757,
   "articulosPublicados": 0,
   "suscriptoresNewsletter": 0,
   "ultimasVisitas": [
+    {
+      "fecha": "2025-11-25",
+      "pagina": "/servicios/promo-restaurantes-artes-vivas",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-11-25",
+      "pagina": "/",
+      "visitas": 1
+    },
     {
       "fecha": "2025-11-25",
       "pagina": "/MenuObjetivo",
@@ -43,16 +53,6 @@
       "fecha": "2025-11-25",
       "pagina": "/servicios/promo-restaurantes-artes-vivas",
       "visitas": 1
-    },
-    {
-      "fecha": "2025-11-25",
-      "pagina": "/servicios/promo-artes-vivas",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-11-25",
-      "pagina": "/servicios/viralidad-estrategica",
-      "visitas": 1
     }
   ],
   "visitasPorDia": {
@@ -62,6 +62,6 @@
     "2025-11-14": 173,
     "2025-11-15": 24,
     "2025-11-18": 37,
-    "2025-11-25": 49
+    "2025-11-25": 51
   }
 }

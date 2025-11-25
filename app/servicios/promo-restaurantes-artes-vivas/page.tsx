@@ -25,7 +25,7 @@ export default function PromoRestaurantesArtesVivas() {
     eyebrow: '🟢 Tecnología Apta para No-Tecnológicos',
     title: 'Si sabes enviar un WhatsApp, sabes administrar tu nuevo Sitio Web.',
     subtitle: 'Olvida a los programadores y las demoras. Actualiza precios en 1 minuto mientras te tomas un café. Tu restaurante abierto 24/7 por el precio de una sola mesa.',
-    bgImage: '/images/promo-artes-vivas/hero 1.webp',
+    bgImage: '/images/promo-artes-vivas/promo-hero.webp',
     cta: 'Quiero mi Página Web Ahora',
     ctaLink: '#contacto'
   };
