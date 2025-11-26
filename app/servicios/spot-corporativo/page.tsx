@@ -1226,8 +1226,9 @@ export default function SpotCorporativo() {
                     '--swiper-pagination-bullet-size': '8px',
                     '--swiper-pagination-bullet-horizontal-gap': '6px',
                     '--swiper-pagination-bottom': '0',
-                    '--swiper-pagination-top': 'auto'
-                  }}
+                    '--swiper-pagination-top': 'auto',
+                    '--swiper-pagination-color': '#FF6B0'
+                  } as React.CSSProperties}
                 >
                   {[
                     {

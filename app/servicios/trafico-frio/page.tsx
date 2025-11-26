@@ -50,7 +50,10 @@ function getEndOfDay() {
 
 export default function TraficoFrio() {
   const [showNoWebsiteInfo, setShowNoWebsiteInfo] = useState(false);
-  const [activeTab, setActiveTab] = useState(1);
+  // State for main tabs (1, 2, 3)
+  const [activeMainTab, setActiveMainTab] = useState<number>(1);
+  // State for mobile view tabs ('tu' | 'nosotros')
+  const [activeMobileTab, setActiveMobileTab] = useState<'tu' | 'nosotros'>('tu');
   const [activeInstallationTab, setActiveInstallationTab] = useState('necesitas');
   const [faqOpen, setFaqOpen] = useState<Record<number, boolean>>({ 0: false, 1: false, 2: false });
   const [showMore, setShowMore] = useState(false);
@@ -594,9 +597,9 @@ export default function TraficoFrio() {
             <div className="max-w-4xl mx-auto">
               <div className="flex flex-col md:flex-row border-b border-gray-200 mb-8">
                 <button
-                  onClick={() => setActiveTab(1)}
+                  onClick={() => setActiveMainTab(1)}
                   className={`py-4 px-6 text-center border-b-2 font-medium text-sm md:text-base ${
-                    activeTab === 1
+                    activeMainTab === 1
                       ? 'border-orange-500 text-orange-600'
                       : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                   }`}
@@ -606,9 +609,9 @@ export default function TraficoFrio() {
                   </span>
                 </button>
                 <button
-                  onClick={() => setActiveTab(2)}
+                  onClick={() => setActiveMainTab(2)}
                   className={`py-4 px-6 text-center border-b-2 font-medium text-sm md:text-base ${
-                    activeTab === 2
+                    activeMainTab === 2
                       ? 'border-orange-500 text-orange-600'
                       : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                   }`}
@@ -618,9 +621,9 @@ export default function TraficoFrio() {
                   </span>
                 </button>
                 <button
-                  onClick={() => setActiveTab(3)}
+                  onClick={() => setActiveMainTab(3)}
                   className={`py-4 px-6 text-center border-b-2 font-medium text-sm md:text-base ${
-                    activeTab === 3
+                    activeMainTab === 3
                       ? 'border-orange-500 text-orange-600'
                       : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                   }`}
@@ -634,7 +637,7 @@ export default function TraficoFrio() {
               {/* Contenido de los Tabs */}
               <div className="bg-white rounded-xl shadow-lg overflow-hidden">
                 {/* Tab 1 */}
-                {activeTab === 1 && (
+                {activeMainTab === 1 && (
                   <div className="p-6 md:p-8">
                     <h3 className="text-2xl font-bold text-gray-900 mb-4">¿Qué pasa con las calificaciones de 1-3 estrellas?</h3>
                     <p className="text-gray-600 mb-6">
@@ -697,7 +700,7 @@ export default function TraficoFrio() {
                 )}
 
                 {/* Tab 2 */}
-                {activeTab === 2 && (
+                {activeMainTab === 2 && (
                   <div className="p-6 md:p-8">
                     <h3 className="text-2xl font-bold text-gray-900 mb-4">¿Cómo multiplicamos las 4-5 estrellas?</h3>
                     <p className="text-gray-600 mb-6">
@@ -760,7 +763,7 @@ export default function TraficoFrio() {
                 )}
 
                 {/* Tab 3 */}
-                {activeTab === 3 && (
+                {activeMainTab === 3 && (
                   <div className="p-6 md:p-8">
                     <h3 className="text-2xl font-bold text-gray-900 mb-4">¿Necesito un sitio web para que funcione?</h3>
                     
@@ -1899,8 +1902,9 @@ export default function TraficoFrio() {
                 <div className="md:hidden">
                   <div className="flex border-b border-gray-200 mb-6">
                     <button 
+                      type="button"
                       className="flex-1 py-3 px-1 text-center border-b-2 font-medium text-sm focus:outline-none"
-                      onClick={() => setActiveTab('tu')}
+                      onClick={() => setActiveMobileTab('tu')}
                     >
                       <div className="flex items-center justify-center text-blue-600">
                         <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -1910,8 +1914,9 @@ export default function TraficoFrio() {
                       </div>
                     </button>
                     <button 
+                      type="button"
                       className="flex-1 py-3 px-1 text-center border-b-2 font-medium text-sm focus:outline-none"
-                      onClick={() => setActiveTab('nosotros')}
+                      onClick={() => setActiveMobileTab('nosotros')}
                     >
                       <div className="flex items-center justify-center text-orange-600">
                         <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -1923,7 +1928,7 @@ export default function TraficoFrio() {
                   </div>
 
                   {/* Tú Tab Content */}
-                  <div className={`space-y-4 ${activeTab === 'tu' ? 'block' : 'hidden'}`}>
+                  <div className={`space-y-4 ${activeMobileTab === 'tu' ? 'block' : 'hidden'}`}>
                     <div className="bg-white p-4 rounded-lg border border-gray-100">
                       <div className="flex items-center">
                             <svg className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -1951,7 +1956,7 @@ export default function TraficoFrio() {
                   </div>
 
                   {/* Nosotros Tab Content */}
-                  <div className={`space-y-4 ${activeTab === 'nosotros' ? 'block' : 'hidden'}`}>
+                  <div className={`space-y-4 ${activeMobileTab === 'nosotros' ? 'block' : 'hidden'}`}>
                     <div className="bg-white p-4 rounded-lg border border-gray-100">
                       <div className="flex items-center">
                         <svg className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
