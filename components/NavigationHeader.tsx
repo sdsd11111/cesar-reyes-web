@@ -228,18 +228,6 @@ export default function NavigationHeader({ currentPath }: NavigationHeaderProps)
               Blog
             </Link>
             <Link 
-              href="/servicios/promo-artes-vivas" 
-              className={`font-medium px-3 py-2 rounded-md hover:opacity-80 transition-opacity ${textColor}`}
-              style={{
-                minHeight: '40px',
-                display: 'flex',
-                alignItems: 'center',
-                textShadow: textShadow,
-              }}
-            >
-              Artes Vivas
-            </Link>
-            <Link 
               href="/MenuObjetivo" 
               className="bg-[#FF6B00] text-white px-4 py-2.5 rounded-md text-sm font-semibold hover:bg-[#E66000] transition-colors shadow-md"
               style={{

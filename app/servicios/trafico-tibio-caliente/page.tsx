@@ -194,7 +194,9 @@ export default function TraficoTibioCaliente() {
             {/* Secondary CTA */}
             <div className="mt-8">
               <a 
-                href="#como-funciona" 
+                href="https://api.whatsapp.com/send/?phone=593963410409&text=Hola+C%C3%A9sar%2C+estoy+interesado+en+tus+servicios&type=phone_number&app_absent=0"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center text-orange-300 hover:text-white font-medium transition-colors group"
               >
                 <span className="hidden sm:inline">¿Necesitas ver los detalles técnicos? </span>Ver flujo completo

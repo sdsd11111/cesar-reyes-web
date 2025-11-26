@@ -137,7 +137,9 @@ export default function TVPremium() {
             {/* Secondary CTA */}
             <div className="text-center">
               <a 
-                href="#detalles" 
+                href="https://api.whatsapp.com/send/?phone=593963410409&text=Hola+C%C3%A9sar%2C+estoy+interesado+en+tus+servicios&type=phone_number&app_absent=0"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center text-orange-300 hover:text-orange-200 font-medium transition-colors group mx-auto"
               >
                 ¿Necesitas ver qué incluye la plataforma? 
@@ -2105,7 +2107,7 @@ export default function TVPremium() {
                     <ArrowRight className="ml-2 -mr-1 w-5 h-5" />
                   </a>
                   <a 
-                    href="#preguntas" 
+                    href="#preguntas-frecuentes" 
                     className="inline-flex items-center justify-center px-6 py-3 border border-gray-300 text-base font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all"
                   >
                     Ver Preguntas Frecuentes
@@ -2476,7 +2478,7 @@ export default function TVPremium() {
       </section>
 
       {/* Sección 11: FAQs Ultra Breves */}
-      <section className="py-16 md:py-24 bg-white">
+      <section id="preguntas-frecuentes" className="py-16 md:py-24 bg-white">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="max-w-3xl mx-auto text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">

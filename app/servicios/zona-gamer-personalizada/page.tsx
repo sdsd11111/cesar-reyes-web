@@ -174,9 +174,14 @@ export default function ZonaGamerPersonalizada() {
               className="bg-orange-500 hover:bg-orange-600 text-white text-sm sm:text-base md:text-xl font-bold px-4 sm:px-6 md:px-12 py-3 sm:py-4 md:py-6 rounded-full shadow-lg transform transition-all hover:scale-105 w-full sm:w-auto text-center whitespace-nowrap overflow-hidden text-ellipsis"
               size="lg"
             >
-              <Link href="#contacto" className="w-full text-center block overflow-hidden text-ellipsis">
+              <a 
+                href="https://api.whatsapp.com/send/?phone=593963410409&text=Hola+C%C3%A9sar%2C+estoy+interesado+en+tus+servicios&type=phone_number&app_absent=0"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full text-center block overflow-hidden text-ellipsis"
+              >
                 Instalar Zona Gamer - $120 USD
-              </Link>
+              </a>
             </Button>
             
             {/* Micro-copy */}
@@ -200,7 +205,7 @@ export default function ZonaGamerPersonalizada() {
               <Button 
                 variant="link" 
                 className="text-orange-300 hover:text-orange-200 text-sm sm:text-base font-medium group text-center w-full sm:w-auto px-0"
-                onClick={() => document.getElementById('juegos-incluidos')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => window.open('https://api.whatsapp.com/send/?phone=593963410409&text=Hola+C%C3%A9sar%2C+estoy+interesado+en+tus+servicios&type=phone_number&app_absent=0', '_blank', 'noopener,noreferrer')}
               >
                 <div className="flex flex-col sm:flex-row items-center">
                   <span className="block sm:inline">¿Necesitas ver los juegos incluidos?</span>
@@ -500,9 +505,14 @@ export default function ZonaGamerPersonalizada() {
               className="bg-orange-500 hover:bg-orange-600 text-white text-base sm:text-lg font-bold px-6 sm:px-8 py-4 sm:py-6 rounded-full shadow-lg transform transition-all hover:scale-105 w-full sm:w-auto"
               size="lg"
             >
-              <Link href="#contacto" className="w-full text-center">
+              <a 
+                href="https://api.whatsapp.com/send/?phone=593963410409&text=Hola+C%C3%A9sar%2C+estoy+interesado+en+tus+servicios&type=phone_number&app_absent=0"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full text-center block"
+              >
                 Quiero mi Zona Gamer
-              </Link>
+              </a>
             </Button>
           </div>
         </div>
@@ -1120,7 +1130,9 @@ export default function ZonaGamerPersonalizada() {
                   </div>
 
                   <a 
-                    href="#contacto" 
+                    href="https://api.whatsapp.com/send/?phone=593963410409&text=Hola+C%C3%A9sar%2C+estoy+interesado+en+tus+servicios&type=phone_number&app_absent=0"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="block w-full bg-white hover:bg-gray-100 text-orange-600 font-bold py-4 px-6 rounded-xl text-center text-lg transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-white/20 flex items-center justify-center space-x-2"
                   >
                     <span>¡Lo quiero ahora!</span>
@@ -1243,7 +1255,9 @@ export default function ZonaGamerPersonalizada() {
               <span className="font-medium text-amber-700">Oferta válida por tiempo limitado</span>
             </div>
             <a 
-              href="#contacto" 
+              href="https://api.whatsapp.com/send/?phone=593963410409&text=Hola+C%C3%A9sar%2C+estoy+interesado+en+tus+servicios&type=phone_number&app_absent=0"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-block bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-medium py-2 px-6 rounded-lg shadow-sm hover:shadow-md transition-all duration-300"
             >
               Aprovechar oferta
@@ -1350,7 +1364,9 @@ export default function ZonaGamerPersonalizada() {
               <h3 className="text-2xl font-bold text-gray-900 mb-6">Sí, quiero diferenciar mi restaurante</h3>
               
               <a 
-                href="#contacto" 
+                href="https://api.whatsapp.com/send/?phone=593963410409&text=Hola+C%C3%A9sar%2C+estoy+interesado+en+tus+servicios&type=phone_number&app_absent=0"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-block bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold text-xl py-5 px-10 rounded-xl shadow-lg hover:shadow-orange-200 transition-all duration-300 transform hover:scale-105 mb-6 w-full max-w-md"
               >
                 Instalar la Zona Gamer por $120 USD
@@ -1500,7 +1516,7 @@ export default function ZonaGamerPersonalizada() {
             </p>
             
             <a 
-              href="https://wa.me/1234567890" 
+              href="https://api.whatsapp.com/send/?phone=593963410409&text=Hola+C%C3%A9sar%2C+estoy+interesado+en+tus+servicios&type=phone_number&app_absent=0"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center bg-green-500 hover:bg-green-600 text-white font-bold text-lg py-4 px-8 rounded-xl shadow-lg hover:shadow-green-200 transition-all duration-300 transform hover:scale-105 mb-6"

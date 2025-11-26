@@ -1,14 +1,9 @@
 {
-  "totalVisitas": 881,
-  "visitasHoy": 881,
+  "totalVisitas": 983,
+  "visitasHoy": 983,
   "articulosPublicados": 0,
   "suscriptoresNewsletter": 0,
   "ultimasVisitas": [
-    {
-      "fecha": "2025-11-26",
-      "pagina": "/servicios/promo-artes-vivas",
-      "visitas": 1
-    },
     {
       "fecha": "2025-11-26",
       "pagina": "/",
@@ -16,7 +11,27 @@
     },
     {
       "fecha": "2025-11-26",
-      "pagina": "/servicios/trafico-frio",
+      "pagina": "/sobre-mi",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-11-26",
+      "pagina": "/sobre-mi",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-11-26",
+      "pagina": "/sobre-mi",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-11-26",
+      "pagina": "/servicios/promo-restaurantes-artes-vivas",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-11-26",
+      "pagina": "/servicios/spot-corporativo",
       "visitas": 1
     },
     {
@@ -26,32 +41,17 @@
     },
     {
       "fecha": "2025-11-26",
-      "pagina": "/servicios/trafico-frio",
+      "pagina": "/servicios/tv-premium",
       "visitas": 1
     },
     {
       "fecha": "2025-11-26",
-      "pagina": "/servicios/trafico-frio",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-11-26",
-      "pagina": "/servicios/trafico-frio",
+      "pagina": "/servicios/tv-premium",
       "visitas": 1
     },
     {
       "fecha": "2025-11-26",
       "pagina": "/servicios/trafico-tibio-caliente",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-11-26",
-      "pagina": "/servicios/tv-premium",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-11-26",
-      "pagina": "/servicios/tv-premium",
       "visitas": 1
     }
   ],
@@ -63,6 +63,6 @@
     "2025-11-15": 24,
     "2025-11-18": 37,
     "2025-11-25": 95,
-    "2025-11-26": 80
+    "2025-11-26": 182
   }
 }

@@ -7,6 +7,7 @@ interface Servicio {
   slug: string;
   descripcionCorta: string;
   imagen?: string;
+  directPath?: boolean;
 }
 
 interface Categoria {
@@ -138,7 +139,7 @@ export default function MegaMenu({ categorias = [], isBlogArticle = false, textC
                   {activeCategory.servicios.map((servicio) => (
                     <Link
                       key={servicio.id}
-                      href={`/servicios/${activeCategory.slug}/${servicio.slug}`}
+                      href={servicio.directPath ? `/servicios/${servicio.slug}` : `/servicios/${activeCategory.slug}/${servicio.slug}`}
                       className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md transition-colors"
                       onClick={() => setIsOpen(false)}
                     >

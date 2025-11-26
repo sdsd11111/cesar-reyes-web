@@ -120,10 +120,15 @@ export default function ViralidadEstrategica() {
               className="bg-orange-500 hover:bg-orange-600 text-white text-base sm:text-lg md:text-xl font-bold px-4 sm:px-8 py-4 sm:py-6 rounded-full shadow-lg transform transition-all hover:scale-105 w-full sm:w-auto"
               size="lg"
             >
-              <Link href="#contacto" className="flex flex-col items-center justify-center w-full h-full min-h-[56px] px-4 py-3 sm:flex-row">
+              <a 
+                href="https://api.whatsapp.com/send/?phone=593963410409&text=Hola+C%C3%A9sar%2C+estoy+interesado+en+tus+servicios&type=phone_number&app_absent=0"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex flex-col items-center justify-center w-full h-full min-h-[56px] px-4 py-3 sm:flex-row"
+              >
                 <span className="whitespace-nowrap text-center">Activar Viralidad</span>
                 <span className="text-sm sm:text-base sm:ml-2 whitespace-nowrap">por $60 USD</span>
-              </Link>
+              </a>
             </Button>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center text-gray-200 text-sm mt-4">
@@ -145,7 +150,7 @@ export default function ViralidadEstrategica() {
               <Button 
                 variant="link" 
                 className="text-orange-300 hover:text-orange-200 font-medium text-center w-full px-0"
-                onClick={() => document.getElementById('como-funciona')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => window.open('https://api.whatsapp.com/send/?phone=593963410409&text=Hola+C%C3%A9sar%2C+estoy+interesado+en+tus+servicios&type=phone_number&app_absent=0', '_blank', 'noopener,noreferrer')}
               >
                 <div className="flex flex-col items-center text-sm sm:text-base">
                   <span className="whitespace-nowrap">¿Cómo funciona el flujo?</span>
@@ -1220,10 +1225,15 @@ export default function ViralidadEstrategica() {
               className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white text-lg font-bold rounded-full shadow-xl transform transition-all hover:scale-105 w-full max-w-md mx-auto mb-8"
               size="lg"
             >
-              <Link href="#contacto" className="flex flex-col sm:flex-row items-center justify-center w-full px-4 py-3 text-center">
+              <a 
+                href="https://api.whatsapp.com/send/?phone=593963410409&text=Hola+C%C3%A9sar%2C+estoy+interesado+en+tus+servicios&type=phone_number&app_absent=0"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex flex-col sm:flex-row items-center justify-center w-full px-4 py-3 text-center"
+              >
                 <span className="whitespace-nowrap">Activar Viralidad</span>
                 <span className="text-sm sm:text-base sm:ml-1">por $60 USD</span>
-              </Link>
+              </a>
             </Button>
             
             <div className="space-y-2 text-gray-600 mb-8">
