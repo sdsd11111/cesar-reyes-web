@@ -1,14 +1,18 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper/modules';
 import { Button } from '@/components/ui/button';
 import { Check, CheckCircle, ArrowRight, ChevronRight, ChevronDown, Star, MessageCircle, XCircle } from 'lucide-react';
 
 export default function TVPremium() {
   const [isVisible, setIsVisible] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState('caracteristicas');
+  const [activeTab, setActiveTab] = useState('contenido');
   const [showFullText, setShowFullText] = useState(false);
   
   // Efecto para la animación de entrada
@@ -20,13 +24,44 @@ export default function TVPremium() {
   const targetDate = new Date();
   targetDate.setHours(targetDate.getHours() + 24);
 
+  // Initialize Swiper on component mount
+  useEffect(() => {
+    // Only run on client-side and if Swiper is available
+    if (typeof window !== 'undefined') {
+      const initSwiper = async () => {
+        const Swiper = (await import('swiper')).default;
+        const { Navigation, Pagination } = await import('swiper/modules');
+        
+        new Swiper('.swiper-container', {
+          modules: [Navigation, Pagination],
+          slidesPerView: 1,
+          spaceBetween: 20,
+          centeredSlides: true,
+          loop: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          breakpoints: {
+            640: {
+              slidesPerView: 1.2,
+            },
+          },
+        });
+      };
+
+      initSwiper();
+    }
+  }, []);
+
   return (
-    <div className={`min-h-screen bg-white ${isVisible ? 'opacity-100' : 'opacity-0'} transition-opacity duration-500`}>
+    <div className={`min-h-screen transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+      {/* Main content container */}
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gray-900">
         {/* Background with Overlay */}
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/80"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-black/90"></div>
           <div className="absolute inset-0 bg-[url('/images/tv-premium-hero.webp')] bg-cover bg-center"></div>
         </div>
         
@@ -36,23 +71,20 @@ export default function TVPremium() {
             {/* Removed welcome message as requested */}
             
             {/* Main Heading */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-8 leading-tight text-shadow-lg">
               Aquí está la TV Premium Legal que leíste en el artículo
             </h1>
             
             {/* Subheading */}
-            <div className="mb-8 max-w-3xl mx-auto">
-              <p className="text-lg sm:text-xl text-gray-200">
-                Actívala en 2 horas. Protege tu negocio de multas y de publicidad enemiga.
-              </p>
-              <p className="text-lg sm:text-xl text-gray-300 mt-2">
-                Sin YouTube. Sin anuncios de McDonald's. Sin riesgos legales.
+            <div className="mb-10 max-w-3xl mx-auto">
+              <p className="text-xl sm:text-2xl text-white font-semibold bg-black/30 px-4 py-2 rounded-lg inline-block border border-white/10 mb-6">
+                🚫 Sin YouTube. 🚫 Sin anuncios de McDonald's. 🚫 Sin riesgos legales.
               </p>
               
               {/* Hidden content that appears on button click */}
-              <div className={`overflow-hidden transition-all duration-300 ${showFullText ? 'max-h-96 mt-4' : 'max-h-0'}`}>
-                <p className="text-xl sm:text-2xl text-white font-medium mt-4">
-                  Solo <span className="text-orange-400 font-bold">$54 USD al año</span> y tu pantalla trabaja para ti,
+              <div className={`overflow-hidden transition-all duration-500 ${showFullText ? 'max-h-96 mt-6' : 'max-h-0'}`}>
+                <p className="text-2xl sm:text-3xl text-white font-semibold mt-4">
+                  Solo <span className="text-orange-400 font-bold text-3xl sm:text-4xl">$54 USD al año</span> y tu pantalla trabaja para ti,
                   no para tu competencia.
                 </p>
               </div>
@@ -60,10 +92,10 @@ export default function TVPremium() {
               {/* Toggle Button */}
               <button 
                 onClick={() => setShowFullText(!showFullText)}
-                className="text-orange-400 hover:text-orange-300 font-medium mt-4 inline-flex items-center group transition-colors"
+                className="text-orange-400 hover:text-orange-300 font-semibold mt-6 inline-flex items-center group transition-all text-lg"
               >
-                {showFullText ? 'Ocultar' : 'Seguir leyendo'}
-                <ChevronDown className={`ml-1 w-4 h-4 group-hover:translate-y-0.5 transition-transform ${showFullText ? 'transform rotate-180' : ''}`} />
+                {showFullText ? 'Ver menos' : 'Seguir leyendo'}
+                <ChevronDown className={`ml-2 w-5 h-5 group-hover:translate-y-1 transition-transform ${showFullText ? 'transform rotate-180' : ''}`} />
               </button>
             </div>
             
@@ -71,7 +103,7 @@ export default function TVPremium() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
               <Button 
                 asChild
-                className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white text-sm sm:text-base md:text-lg font-bold px-4 sm:px-6 py-3 sm:py-4 md:py-5 rounded-full shadow-xl transform transition-all hover:scale-105 w-full sm:w-auto whitespace-nowrap"
+                className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white text-sm sm:text-base md:text-lg font-bold px-6 sm:px-8 py-4 sm:py-5 md:py-6 rounded-full shadow-xl transform transition-all hover:scale-105 w-full sm:w-auto whitespace-nowrap shadow-orange-500/30 hover:shadow-orange-500/50"
                 size="lg"
               >
                 <a 
@@ -180,116 +212,153 @@ export default function TVPremium() {
         </div>
       </section>
 
-      {/* Sección 3: Cómo Funciona */}
-      <section id="como-funciona" className="py-16 md:py-24 bg-gray-50">
+      {/* Sección 3: Transformación Profesional */}
+      <section id="como-funciona" className="pt-0 pb-16 md:pb-24 bg-gradient-to-b from-white to-gray-50 -mt-8">
         <div className="container mx-auto px-4 sm:px-6">
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
+              <span className="inline-block bg-orange-100 text-orange-600 text-sm font-medium px-4 py-1 rounded-full mb-4">
+                Transformación Digital
+              </span>
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                De YouTube ilegal a plataforma corporativa en 2 horas
+                De YouTube Ilegal a Plataforma Corporativa en <span className="text-orange-500">2 Horas</span>
               </h2>
               <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                Transforma tu TV en una poderosa herramienta de marketing sin riesgos legales
+                Moderniza tu negocio con una solución profesional y legal para tu televisor
               </p>
             </div>
 
-            {/* Diagrama Visual */}
-            <div className="bg-white rounded-xl shadow-lg overflow-hidden mb-16 border border-gray-200">
-              <div className="p-6 md:p-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  {/* Columna Izquierda: Situación Actual */}
-                  <div className="space-y-6">
-                    <div className="bg-red-50 p-4 rounded-lg border-l-4 border-red-500">
-                      <h3 className="text-xl font-bold text-gray-900 mb-2">TU SITUACIÓN ACTUAL</h3>
-                      <div className="flex justify-center py-4">
-                        <div className="w-1 h-16 bg-red-500 absolute"></div>
-                        <div className="w-4 h-4 rounded-full bg-red-500 mt-6 -ml-2"></div>
+            {/* Timeline de Transformación */}
+            <div className="relative">
+              {/* Línea de tiempo */}
+              <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-orange-400 via-orange-300 to-green-400 transform -translate-x-1/2"></div>
+              
+              {/* Punto de Inicio */}
+              <div className="relative z-10 flex flex-col md:flex-row items-center justify-between mb-16">
+                {/* Columna Izquierda - Situación Actual */}
+                <div className="w-full md:w-5/12 mb-8 md:mb-0">
+                  <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 transform transition-all hover:scale-[1.02]">
+                    <div className="flex items-center mb-4">
+                      <div className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center mr-4 flex-shrink-0">
+                        <svg className="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                        </svg>
                       </div>
-                      <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
-                        <p className="text-gray-700">TV conectada a YouTube o canal con contenido no licenciado</p>
-                      </div>
+                      <h3 className="text-xl font-bold text-gray-900">Situación Actual</h3>
+                    </div>
+                    <div className="pl-14">
+                      <p className="text-gray-600 mb-4">TV conectada a fuentes no autorizadas con contenido sin licencia</p>
                       
-                      <div className="mt-8">
-                        <h4 className="text-red-600 font-bold mb-3">🚨 RIESGOS QUE CORRES HOY:</h4>
-                        <ul className="space-y-3">
-                          <li className="flex items-start">
-                            <span className="text-red-500 mr-2">⚖️</span>
-                            <span>Multa SAYCE ($500+)</span>
-                          </li>
-                          <li className="flex items-start">
-                            <span className="text-red-500 mr-2">🍔</span>
-                            <span>Anuncios de competencia</span>
-                          </li>
-                          <li className="flex items-start">
-                            <span className="text-red-500 mr-2">💸</span>
-                            <span>Cero control sobre qué se muestra</span>
-                          </li>
-                        </ul>
+                      <div className="space-y-3">
+                        <div className="flex items-start p-3 bg-red-50 rounded-lg">
+                          <svg className="w-5 h-5 text-red-500 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                          <div>
+                            <h4 className="font-medium text-gray-900">Riesgos Inmediatos</h4>
+                            <p className="text-sm text-gray-600">Multas de $500+ por infracción de derechos de autor</p>
+                          </div>
+                        </div>
+                        
+                        <div className="flex items-start p-3 bg-red-50 rounded-lg">
+                          <svg className="w-5 h-5 text-red-500 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                          </svg>
+                          <div>
+                            <h4 className="font-medium text-gray-900">Pérdida de Control</h4>
+                            <p className="text-sm text-gray-600">Anuncios de competencia y contenido inapropiado</p>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
+                </div>
 
-                  {/* Línea divisoria */}
-                  <div className="hidden md:flex items-center justify-center">
-                    <div className="h-full w-0.5 bg-gradient-to-b from-gray-200 via-gray-400 to-gray-200"></div>
+                {/* Punto central - Proceso */}
+                <div className="hidden md:flex flex-col items-center justify-center w-32 flex-shrink-0 mx-4">
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-orange-400 to-orange-500 flex items-center justify-center text-white font-bold text-xl shadow-lg">
+                    2h
                   </div>
-                  <div className="md:hidden my-8 flex justify-center">
-                    <div className="h-0.5 w-1/2 bg-gradient-to-r from-gray-200 via-gray-400 to-gray-200"></div>
-                  </div>
+                  <p className="mt-2 text-sm text-gray-500 text-center">Proceso de migración</p>
+                </div>
 
-                  {/* Columna Derecha: Solución Legazy */}
-                  <div className="space-y-6">
-                    <div className="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
-                      <h3 className="text-xl font-bold text-gray-900 mb-2">CON LEGAZY TV (Legal)</h3>
-                      <div className="space-y-4 mt-6">
-                        <div className="flex items-center p-3 bg-white rounded-lg border border-green-100 shadow-sm">
-                          <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center mr-3 flex-shrink-0">
-                            <span className="text-green-600">1</span>
+                {/* Columna Derecha - Solución */}
+                <div className="w-full md:w-5/12">
+                  <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 transform transition-all hover:scale-[1.02]">
+                    <div className="flex items-center mb-4">
+                      <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-4 flex-shrink-0">
+                        <svg className="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <h3 className="text-xl font-bold text-gray-900">Solución Profesional</h3>
+                    </div>
+                    
+                    <div className="pl-14">
+                      <p className="text-gray-600 mb-4">Plataforma corporativa legal y personalizada para tu negocio</p>
+                      
+                      <div className="space-y-4">
+                        <div className="flex items-start">
+                          <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-sm font-medium mr-3 mt-0.5">
+                            1
                           </div>
-                          <p className="text-gray-700">Contratas Legazy ($54/año)</p>
+                          <div>
+                            <h4 className="font-medium text-gray-900">Suscripción Anual</h4>
+                            <p className="text-sm text-gray-600">Acceso completo por solo $54/año</p>
+                          </div>
                         </div>
                         
-                        <div className="flex items-center p-3 bg-white rounded-lg border border-green-100 shadow-sm">
-                          <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center mr-3 flex-shrink-0">
-                            <span className="text-green-600">2</span>
+                        <div className="flex items-start">
+                          <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-sm font-medium mr-3 mt-0.5">
+                            2
                           </div>
-                          <p className="text-gray-700">Recibes credenciales + app por WhatsApp</p>
+                          <div>
+                            <h4 className="font-medium text-gray-900">Activación Inmediata</h4>
+                            <p className="text-sm text-gray-600">Credenciales y guía por WhatsApp</p>
+                          </div>
                         </div>
                         
-                        <div className="flex items-center p-3 bg-white rounded-lg border border-green-100 shadow-sm">
-                          <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center mr-3 flex-shrink-0">
-                            <span className="text-green-600">3</span>
+                        <div className="flex items-start">
+                          <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-sm font-medium mr-3 mt-0.5">
+                            3
                           </div>
-                          <p className="text-gray-700">Instalas en tu Smart TV / Fire TV / Roku</p>
+                          <div>
+                            <h4 className="font-medium text-gray-900">Instalación Sencilla</h4>
+                            <p className="text-sm text-gray-600">Compatible con Smart TV, Fire TV y Roku</p>
+                          </div>
                         </div>
                       </div>
                       
-                      <div className="mt-8 p-4 bg-green-50 rounded-lg border border-green-100">
-                        <h4 className="font-bold text-green-700 mb-3">✅ RESULTADO: Plataforma legal con:</h4>
-                        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      <div className="mt-6 p-4 bg-green-50 rounded-lg">
+                        <h4 className="font-bold text-green-700 mb-2">Beneficios Clave:</h4>
+                        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
                           <li className="flex items-center">
-                            <Check className="w-4 h-4 text-green-500 mr-2" />
-                            <span>Canales en vivo</span>
+                            <Check className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
+                            <span className="text-black">Contenido 100% legal</span>
                           </li>
                           <li className="flex items-center">
-                            <Check className="w-4 h-4 text-green-500 mr-2" />
-                            <span>Series y películas</span>
+                            <Check className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
+                            <span className="text-black">Sin anuncios de competencia</span>
                           </li>
                           <li className="flex items-center">
-                            <Check className="w-4 h-4 text-green-500 mr-2" />
-                            <span>Deportes (UEFA, NBA, F1)</span>
+                            <Check className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
+                            <span className="text-black">Soporte técnico 24/7</span>
                           </li>
                           <li className="flex items-center">
-                            <Check className="w-4 h-4 text-green-500 mr-2" />
-                            <span>Música con licencia</span>
+                            <Check className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
+                            <span className="text-black">Actualizaciones incluidas</span>
                           </li>
                           <li className="flex items-center">
-                            <Check className="w-4 h-4 text-green-500 mr-2" />
-                            <span>Sin anuncios de terceros</span>
+                            <Check className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
+                            <span className="text-black">Música con licencia</span>
                           </li>
                           <li className="flex items-center">
-                            <Check className="w-4 h-4 text-green-500 mr-2" />
-                            <span>Sin riesgo legal</span>
+                            <Check className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
+                            <span className="text-black">Sin anuncios de terceros</span>
+                          </li>
+                          <li className="flex items-center">
+                            <Check className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
+                            <span className="text-black">Sin riesgo legal</span>
                           </li>
                         </ul>
                       </div>
@@ -297,17 +366,99 @@ export default function TVPremium() {
                   </div>
                 </div>
               </div>
+              
+              {/* Llamado a la acción */}
+              <div className="text-center mt-12">
+                <a
+                  href="https://api.whatsapp.com/send/?phone=593963410409&text=Hola+C%C3%A9sar%2C+estoy+interesado+en+tus+servicios&type=phone_number&app_absent=0"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-medium rounded-md text-white bg-green-600 hover:bg-green-700 md:py-4 md:text-lg md:px-10 transition-colors duration-200"
+                >
+                  <MessageCircle className="w-5 h-5 mr-2" />
+                  Migrar a Solución Legal
+                </a>
+                <p className="mt-3 text-sm text-gray-500">
+                  Asesoría gratuita sin compromiso
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Explicación en 3 Pasos */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
+              Cómo funciona en 3 sencillos pasos
+            </h2>
+            
+            {/* Mobile Slider */}
+            <div className="md:hidden relative">
+              <div className="swiper-container overflow-hidden">
+                <div className="swiper-wrapper pb-10">
+                  <div className="swiper-slide px-2">
+                    <div className="bg-white p-6 rounded-xl shadow-md border border-gray-100 h-full">
+                      <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center text-orange-600 text-xl font-bold mb-4 mx-auto">
+                        1
+                      </div>
+                      <h3 className="text-xl font-bold text-center mb-3 text-black">CONTRATAS</h3>
+                      <p className="text-gray-600 text-center">
+                        Pagas $54 USD por año. Nos das el modelo de tu TV o dispositivo (Smart TV, Fire TV, Roku, etc.)
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="swiper-slide px-2">
+                    <div className="bg-white p-6 rounded-xl shadow-md border border-gray-100 h-full">
+                      <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center text-orange-600 text-xl font-bold mb-4 mx-auto">
+                        2
+                      </div>
+                      <h3 className="text-xl font-bold text-center mb-3 text-black">INSTALAS</h3>
+                      <p className="text-gray-600 text-center">
+                        Te enviamos la app + credenciales por WhatsApp. La instalación toma 10 minutos con nuestro soporte en vivo.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="swiper-slide px-2">
+                    <div className="bg-white p-6 rounded-xl shadow-md border border-gray-100 h-full">
+                      <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center text-orange-600 text-xl font-bold mb-4 mx-auto">
+                        3
+                      </div>
+                      <h3 className="text-xl font-bold text-center mb-3 text-black">PROTEGES</h3>
+                      <ul className="space-y-2 text-gray-600">
+                        <li className="flex items-start">
+                          <Check className="w-4 h-4 text-green-500 mt-1 mr-2 flex-shrink-0" />
+                          <span><strong>Resultado legal:</strong> Cero riesgo de multas.</span>
+                        </li>
+                        <li className="flex items-start">
+                          <Check className="w-4 h-4 text-green-500 mt-1 mr-2 flex-shrink-0" />
+                          <span><strong>Resultado comercial:</strong> Tu pantalla muestra lo que TÚ decides.</span>
+                        </li>
+                        <li className="flex items-start">
+                          <Check className="w-4 h-4 text-green-500 mt-1 mr-2 flex-shrink-0" />
+                          <span><strong>Resultado operativo:</strong> Una preocupación menos en tu día a día.</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div className="swiper-pagination mt-6"></div>
+              </div>
             </div>
 
-            {/* Explicación en 3 Pasos */}
-            <div className="grid md:grid-cols-3 gap-8">
+            {/* Desktop Grid (hidden on mobile) */}
+            <div className="hidden md:grid md:grid-cols-3 gap-8">
               <div className="bg-white p-6 rounded-xl shadow-md border border-gray-100">
                 <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center text-orange-600 text-xl font-bold mb-4 mx-auto">
                   1
                 </div>
-                <h3 className="text-xl font-bold text-center mb-3">CONTRATAS</h3>
+                <h3 className="text-xl font-bold text-center mb-3 text-black">CONTRATAS</h3>
                 <p className="text-gray-600 text-center">
-                  Pagas $54 USD/año. Nos das el modelo de tu TV o dispositivo (Smart TV, Fire TV, Roku, etc.).
+                  Pagas $54 USD por año. Nos das el modelo de tu TV o dispositivo (Smart TV, Fire TV, Roku, etc.)
                 </p>
               </div>
 
@@ -315,7 +466,7 @@ export default function TVPremium() {
                 <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center text-orange-600 text-xl font-bold mb-4 mx-auto">
                   2
                 </div>
-                <h3 className="text-xl font-bold text-center mb-3">INSTALAS</h3>
+                <h3 className="text-xl font-bold text-center mb-3 text-black">INSTALAS</h3>
                 <p className="text-gray-600 text-center">
                   Te enviamos la app + credenciales por WhatsApp. La instalación toma 10 minutos con nuestro soporte en vivo.
                 </p>
@@ -325,7 +476,7 @@ export default function TVPremium() {
                 <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center text-orange-600 text-xl font-bold mb-4 mx-auto">
                   3
                 </div>
-                <h3 className="text-xl font-bold text-center mb-3">PROTEGES</h3>
+                <h3 className="text-xl font-bold text-center mb-3 text-black">PROTEGES</h3>
                 <ul className="space-y-2 text-gray-600">
                   <li className="flex items-start">
                     <Check className="w-4 h-4 text-green-500 mt-1 mr-2 flex-shrink-0" />
@@ -347,7 +498,7 @@ export default function TVPremium() {
       </section>
 
       {/* Sección 4: Qué Incluye Legazy */}
-      <section id="que-incluye" className="py-16 md:py-24 bg-white">
+      <section id="que-incluye" className="pt-0 pb-16 md:pb-24 bg-white -mt-8">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-12">
@@ -460,23 +611,23 @@ export default function TVPremium() {
                       <ul className="space-y-3">
                         <li className="flex items-center">
                           <CheckCircle className="w-5 h-5 text-green-500 mr-3" />
-                          <span>Smart TV (Samsung, LG, etc.)</span>
+                          <span className="text-black">Smart TV (Samsung, LG, etc.)</span>
                         </li>
                         <li className="flex items-center">
                           <CheckCircle className="w-5 h-5 text-green-500 mr-3" />
-                          <span>Fire TV Stick</span>
+                          <span className="text-black">Fire TV Stick</span>
                         </li>
                         <li className="flex items-center">
                           <CheckCircle className="w-5 h-5 text-green-500 mr-3" />
-                          <span>Android TV Box</span>
+                          <span className="text-black">Android TV Box</span>
                         </li>
                         <li className="flex items-center">
                           <CheckCircle className="w-5 h-5 text-green-500 mr-3" />
-                          <span>Roku</span>
+                          <span className="text-black">Roku</span>
                         </li>
                         <li className="flex items-center">
                           <CheckCircle className="w-5 h-5 text-green-500 mr-3" />
-                          <span>Dispositivos móviles (soporte secundario)</span>
+                          <span className="text-black">Dispositivos móviles (soporte secundario)</span>
                         </li>
                       </ul>
                       
@@ -499,15 +650,15 @@ export default function TVPremium() {
                       <ol className="space-y-4">
                         <li className="flex">
                           <div className="flex-shrink-0 w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center text-orange-600 font-bold mr-3">1</div>
-                          <p>Descargas la app Legazy en tu dispositivo</p>
+                          <p className="text-black">Descargas la app Legazy en tu dispositivo</p>
                         </li>
                         <li className="flex">
                           <div className="flex-shrink-0 w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center text-orange-600 font-bold mr-3">2</div>
-                          <p>Ingresas las credenciales que te enviamos</p>
+                          <p className="text-black">Ingresas las credenciales que te enviamos</p>
                         </li>
                         <li className="flex">
                           <div className="flex-shrink-0 w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center text-orange-600 font-bold mr-3">3</div>
-                          <p>¡Listo! Ya tienes acceso legal a todo el contenido</p>
+                          <p className="text-black">¡Listo! Ya tienes acceso legal a todo el contenido</p>
                         </li>
                       </ol>
                       
@@ -550,7 +701,12 @@ export default function TVPremium() {
                   variant="outline"
                   className="border-orange-500 text-orange-600 hover:bg-orange-50 w-full sm:w-auto"
                 >
-                  <a href="#contacto" className="flex items-center">
+                  <a 
+                    href="https://api.whatsapp.com/send/?phone=593963410409&text=Hola+C%C3%A9sar%2C+estoy+interesado+en+tus+servicios&type=phone_number&app_absent=0"
+                    className="flex items-center w-full h-full"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <MessageCircle className="w-4 h-4 mr-2" />
                     Hablar con un asesor
                   </a>
@@ -565,7 +721,7 @@ export default function TVPremium() {
       </section>
 
       {/* Sección 5: Instalación */}
-      <section id="instalacion" className="py-16 md:py-24 bg-gradient-to-br from-gray-50 to-white">
+      <section id="instalacion" className="pt-0 pb-16 md:pb-24 bg-gradient-to-br from-gray-50 to-white -mt-8">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-16">
@@ -580,7 +736,146 @@ export default function TVPremium() {
               </p>
             </div>
 
-            <div className="relative">
+            {/* Mobile Slider (only visible on mobile) */}
+            <div className="md:hidden mb-12">
+              <Swiper
+                spaceBetween={20}
+                slidesPerView={1.1}
+                centeredSlides={true}
+                pagination={{
+                  clickable: true,
+                }}
+                modules={[Pagination]}
+                className="pb-10"
+              >
+                {/* Paso 1 - Mobile */}
+                <SwiperSlide>
+                  <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200 mx-2">
+                    <div className="text-center mb-6">
+                      <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-orange-500 text-white text-2xl font-bold mb-4 mx-auto">
+                        1
+                      </div>
+                      <h3 className="text-2xl font-bold text-gray-900 mb-3">Descarga la App</h3>
+                      <p className="text-gray-600 mb-4">
+                        Recibirás un enlace de descarga por WhatsApp. Es compatible con Smart TV, Fire TV, Android TV y Roku.
+                      </p>
+                      <div className="flex flex-wrap gap-3 justify-center mb-6">
+                        <span className="inline-flex items-center bg-gray-100 px-3 py-1 rounded-full text-sm font-semibold text-gray-900">
+                          <svg className="w-4 h-4 mr-1.5" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                          </svg>
+                          Android TV
+                        </span>
+                        <span className="inline-flex items-center bg-gray-100 px-3 py-1 rounded-full text-sm font-semibold text-gray-900">
+                          <svg className="w-4 h-4 mr-1.5" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.05-.5 1.74-1.67 3.43"></path>
+                          </svg>
+                          Fire TV
+                        </span>
+                        <span className="inline-flex items-center bg-gray-100 px-3 py-1 rounded-full text-sm font-semibold text-gray-900">
+                          <svg className="w-4 h-4 mr-1.5" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 18a8 8 0 110-16 8 8 0 010 16z"/>
+                            <path d="M12 17a1 1 0 01-1-1v-4a1 1 0 012 0v4a1 1 0 01-1 1zm0-8a1 1 0 01-.92-1.38 1 1 0 011.84 0A1 1 0 0112 9z"/>
+                          </svg>
+                          Roku
+                        </span>
+                      </div>
+                      <div className="bg-white p-4 rounded-xl shadow-lg border border-gray-200 max-w-xs mx-auto">
+                        <div className="bg-gray-100 rounded-lg overflow-hidden mb-3">
+                          <div className="h-40 bg-gradient-to-r from-orange-100 to-amber-100 flex items-center justify-center">
+                            <svg className="w-16 h-16 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                            </svg>
+                          </div>
+                        </div>
+                        <p className="text-sm text-gray-600 text-center">Recibirás el enlace de descarga por WhatsApp</p>
+                      </div>
+                    </div>
+                  </div>
+                </SwiperSlide>
+
+                {/* Paso 2 - Mobile */}
+                <SwiperSlide>
+                  <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200 mx-2 h-full">
+                    <div className="text-center mb-6">
+                      <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-orange-500 text-white text-2xl font-bold mb-4 mx-auto">
+                        2
+                      </div>
+                      <h3 className="text-2xl font-bold text-gray-900 mb-3">Instala y Configura</h3>
+                      <p className="text-gray-600 mb-4">
+                        Sigue las instrucciones en pantalla. Te guiaremos paso a paso en la configuración inicial.
+                      </p>
+                      <ul className="space-y-2 text-left max-w-md mx-auto mb-6">
+                        <li className="flex items-start">
+                          <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
+                          <span className="font-semibold text-gray-900">Instalación guiada en 5 minutos</span>
+                        </li>
+                        <li className="flex items-start">
+                          <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
+                          <span className="font-semibold text-gray-900">Soporte en vivo por WhatsApp</span>
+                        </li>
+                        <li className="flex items-start">
+                          <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
+                          <span className="font-semibold text-gray-900">Sin conocimientos técnicos necesarios</span>
+                        </li>
+                      </ul>
+                      <div className="bg-white p-4 rounded-xl shadow-lg border border-gray-200 max-w-xs mx-auto">
+                        <div className="bg-gray-100 rounded-lg overflow-hidden mb-3">
+                          <div className="h-40 bg-gradient-to-r from-blue-50 to-cyan-50 flex items-center justify-center">
+                            <svg className="w-16 h-16 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                            </svg>
+                          </div>
+                        </div>
+                        <p className="text-sm text-gray-600 text-center">Nuestro equipo te guiará en cada paso</p>
+                      </div>
+                    </div>
+                  </div>
+                </SwiperSlide>
+
+                {/* Paso 3 - Mobile */}
+                <SwiperSlide>
+                  <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200 mx-2 h-full">
+                    <div className="text-center">
+                      <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-orange-500 text-white text-2xl font-bold mb-4 mx-auto">
+                        3
+                      </div>
+                      <h3 className="text-2xl font-bold text-gray-900 mb-3">Disfruta de tu TV Premium</h3>
+                      <p className="text-gray-600 mb-6">
+                        Accede a todo el contenido legal, sin preocupaciones y con la mejor calidad.
+                      </p>
+                      <div className="flex flex-wrap gap-3 justify-center mb-6">
+                        <span className="inline-flex items-center bg-green-50 text-green-700 px-3 py-1 rounded-full text-sm">
+                          <CheckCircle className="w-4 h-4 mr-1.5" />
+                          Sin riesgo de multas
+                        </span>
+                        <span className="inline-flex items-center bg-green-50 text-green-700 px-3 py-1 rounded-full text-sm">
+                          <CheckCircle className="w-4 h-4 mr-1.5" />
+                          Sin publicidad de competencia
+                        </span>
+                        <span className="inline-flex items-center bg-green-50 text-green-700 px-3 py-1 rounded-full text-sm">
+                          <CheckCircle className="w-4 h-4 mr-1.5" />
+                          Soporte 24/7
+                        </span>
+                      </div>
+                      <div className="bg-white p-4 rounded-xl shadow-lg border border-gray-200 max-w-xs mx-auto">
+                        <div className="bg-gray-100 rounded-lg overflow-hidden mb-3">
+                          <div className="h-40 bg-gradient-to-r from-green-50 to-emerald-50 flex items-center justify-center">
+                            <svg className="w-16 h-16 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                            </svg>
+                          </div>
+                        </div>
+                        <p className="text-sm text-gray-600 text-center">Disfruta de todo el contenido sin preocupaciones</p>
+                      </div>
+                    </div>
+                  </div>
+                </SwiperSlide>
+              </Swiper>
+            </div>
+
+            {/* Desktop Layout (hidden on mobile) */}
+            <div className="hidden md:block relative">
               {/* Línea de tiempo */}
               <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-orange-400 to-orange-200 transform -translate-x-1/2"></div>
               
@@ -595,19 +890,19 @@ export default function TVPremium() {
                     Recibirás un enlace de descarga por WhatsApp. Es compatible con Smart TV, Fire TV, Android TV y Roku.
                   </p>
                   <div className="flex flex-wrap gap-3 justify-center md:justify-end">
-                    <span className="inline-flex items-center bg-gray-100 px-3 py-1 rounded-full text-sm">
+                    <span className="inline-flex items-center bg-gray-100 px-3 py-1 rounded-full text-sm font-semibold text-gray-900">
                       <svg className="w-4 h-4 mr-1.5" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
                       </svg>
                       Android TV
                     </span>
-                    <span className="inline-flex items-center bg-gray-100 px-3 py-1 rounded-full text-sm">
+                    <span className="inline-flex items-center bg-gray-100 px-3 py-1 rounded-full text-sm font-semibold text-gray-900">
                       <svg className="w-4 h-4 mr-1.5" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.05-.5 1.74-1.67 3.43"></path>
                       </svg>
                       Fire TV
                     </span>
-                    <span className="inline-flex items-center bg-gray-100 px-3 py-1 rounded-full text-sm">
+                    <span className="inline-flex items-center bg-gray-100 px-3 py-1 rounded-full text-sm font-semibold text-gray-900">
                       <svg className="w-4 h-4 mr-1.5" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 18a8 8 0 110-16 8 8 0 010 16z"/>
                         <path d="M12 17a1 1 0 01-1-1v-4a1 1 0 012 0v4a1 1 0 01-1 1zm0-8a1 1 0 01-.92-1.38 1 1 0 011.84 0A1 1 0 0112 9z"/>
@@ -643,15 +938,15 @@ export default function TVPremium() {
                   <ul className="space-y-2 text-left max-w-md mx-auto md:mx-0">
                     <li className="flex items-start">
                       <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
-                      <span>Instalación guiada en 5 minutos</span>
+                      <span className="font-semibold text-gray-900">Instalación guiada en 5 minutos</span>
                     </li>
                     <li className="flex items-start">
                       <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
-                      <span>Soporte en vivo por WhatsApp</span>
+                      <span className="font-semibold text-gray-900">Soporte en vivo por WhatsApp</span>
                     </li>
                     <li className="flex items-start">
                       <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
-                      <span>Sin conocimientos técnicos necesarios</span>
+                      <span className="font-semibold text-gray-900">Sin conocimientos técnicos necesarios</span>
                     </li>
                   </ul>
                 </div>
@@ -736,15 +1031,17 @@ export default function TVPremium() {
                       Activar Ahora - $54/año
                     </a>
                   </Button>
-                  <Button 
-                    variant="outline"
-                    className="border-orange-500 text-orange-600 hover:bg-orange-50 w-full sm:w-auto flex items-center justify-center"
+                  <a 
+                    href="https://api.whatsapp.com/send/?phone=593963410409&text=Hola+C%C3%A9sar%2C+estoy+interesado+en+tus+servicios&type=phone_number&app_absent=0"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center rounded-md border border-orange-500 bg-transparent px-4 py-2 text-sm font-medium text-orange-600 shadow-sm hover:bg-orange-50 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 w-full sm:w-auto"
                   >
                     <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                     </svg>
                     Agendar Llamada
-                  </Button>
+                  </a>
                 </div>
                 <p className="text-sm text-gray-500 mt-4">
                   Sin letra pequeña. Garantía de devolución de 7 días.
@@ -756,7 +1053,7 @@ export default function TVPremium() {
       </section>
 
       {/* Sección 6: Timeline */}
-      <section id="timeline" className="py-16 md:py-24 bg-white">
+      <section id="timeline" className="pt-0 pb-16 md:pb-24 bg-white -mt-8">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-16">
@@ -893,18 +1190,52 @@ export default function TVPremium() {
                         </div>
                         <div className="text-sm font-medium text-gray-900">Guía de instalación</div>
                       </div>
-                      <div className="space-y-2 text-sm">
+                      
+                      {/* Mobile Slider */}
+                      <div className="md:hidden mt-4">
+                        <Swiper
+                          slidesPerView={1.2}
+                          spaceBetween={16}
+                          centeredSlides={true}
+                          pagination={{
+                            clickable: true,
+                          }}
+                          className="w-full"
+                        >
+                          <SwiperSlide>
+                            <div className="flex items-center p-4 bg-white rounded-lg border border-gray-200 shadow-sm h-full">
+                              <div className="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-sm font-bold mr-3 flex-shrink-0">1</div>
+                              <span className="text-black font-medium">Descarga la app</span>
+                            </div>
+                          </SwiperSlide>
+                          <SwiperSlide>
+                            <div className="flex items-center p-4 bg-white rounded-lg border border-gray-200 shadow-sm h-full">
+                              <div className="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-sm font-bold mr-3 flex-shrink-0">2</div>
+                              <span className="text-black font-medium">Inicia sesión</span>
+                            </div>
+                          </SwiperSlide>
+                          <SwiperSlide>
+                            <div className="flex items-center p-4 bg-white rounded-lg border border-gray-200 shadow-sm h-full">
+                              <div className="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-sm font-bold mr-3 flex-shrink-0">3</div>
+                              <span className="text-black font-medium">Configura tu TV</span>
+                            </div>
+                          </SwiperSlide>
+                        </Swiper>
+                      </div>
+                      
+                      {/* Desktop List */}
+                      <div className="hidden md:block space-y-2 text-sm">
                         <div className="flex items-center p-2 bg-white rounded border border-gray-200">
                           <div className="w-5 h-5 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xs font-bold mr-2">1</div>
-                          <span>Descarga la app</span>
+                          <span className="text-black font-medium">Descarga la app</span>
                         </div>
                         <div className="flex items-center p-2 bg-white rounded border border-gray-200">
                           <div className="w-5 h-5 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xs font-bold mr-2">2</div>
-                          <span>Inicia sesión</span>
+                          <span className="text-black font-medium">Inicia sesión</span>
                         </div>
                         <div className="flex items-center p-2 bg-white rounded border border-gray-200">
                           <div className="w-5 h-5 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xs font-bold mr-2">3</div>
-                          <span>Configura tu TV</span>
+                          <span className="text-black font-medium">Configura tu TV</span>
                         </div>
                       </div>
                     </div>
@@ -1025,7 +1356,156 @@ export default function TVPremium() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8 mb-16">
+            {/* Mobile Slider */}
+            <div className="md:hidden mb-12">
+              <Swiper
+                slidesPerView={1.1}
+                spaceBetween={20}
+                centeredSlides={true}
+                pagination={{
+                  clickable: true,
+                }}
+                className="w-full pb-10"
+              >
+                {/* Plan Básico */}
+                <SwiperSlide>
+                  <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200 h-full">
+                    <div className="p-6 text-center">
+                      <h3 className="text-lg font-bold text-gray-900 mb-2">Plan Básico</h3>
+                      <div className="flex items-baseline justify-center mb-6">
+                        <span className="text-4xl font-extrabold text-gray-900">$44</span>
+                        <span className="ml-1 text-gray-500">/año</span>
+                      </div>
+                      <a 
+                        href="https://api.whatsapp.com/send/?phone=593963410409&text=Hola%2C+quiero+el+Plan+Básico+de+TV+Legal+por+%2444+USD%2Faño&type=phone_number&app_absent=0" 
+                        className="block w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-3 px-4 rounded-lg transition-colors"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Elegir Plan Básico
+                      </a>
+                    </div>
+                    <div className="border-t border-gray-100 px-6 py-4">
+                      <ul className="space-y-3">
+                        <li className="flex items-start">
+                          <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
+                          <span className="text-black">1 pantalla a la vez</span>
+                        </li>
+                        <li className="flex items-start">
+                          <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
+                          <span className="text-black">Acceso a canales en vivo</span>
+                        </li>
+                        <li className="flex items-start">
+                          <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
+                          <span className="text-black">Películas y series</span>
+                        </li>
+                        <li className="flex items-start">
+                          <XCircle className="w-5 h-5 text-red-400 mt-0.5 mr-2 flex-shrink-0" />
+                          <span className="text-black">Soporte prioritario</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </SwiperSlide>
+
+                {/* Plan Premium */}
+                <SwiperSlide>
+                  <div className="bg-white rounded-2xl shadow-2xl border-2 border-orange-500 h-full">
+                    <div className="p-6 text-center">
+                      <div className="bg-gradient-to-r from-orange-500 to-red-500 text-white text-xs font-semibold px-3 py-1 rounded-full inline-block mb-3">
+                        MÁS POPULAR
+                      </div>
+                      <h3 className="text-lg font-bold text-gray-900 mb-2">Plan Premium</h3>
+                      <div className="flex items-baseline justify-center mb-2">
+                        <span className="text-4xl font-extrabold text-gray-900">$54</span>
+                        <span className="ml-1 text-gray-500">/año</span>
+                      </div>
+                      <p className="text-sm text-orange-600 font-medium mb-6">Ahorra $30 vs servicios ilegales</p>
+                      <a 
+                        href="https://api.whatsapp.com/send/?phone=593963410409&text=Hola%2C+quiero+el+Plan+Premium+de+TV+Legal+por+%2454+USD%2Faño&type=phone_number&app_absent=0" 
+                        className="block w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-medium py-3 px-4 rounded-lg shadow-lg hover:shadow-xl transition-all"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Elegir Plan Premium
+                      </a>
+                    </div>
+                    <div className="border-t border-gray-100 px-6 py-4">
+                      <ul className="space-y-3">
+                        <li className="flex items-start">
+                          <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
+                          <span className="text-black">Hasta 3 pantallas simultáneas</span>
+                        </li>
+                        <li className="flex items-start">
+                          <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
+                          <span className="text-black">Acceso a canales en vivo</span>
+                        </li>
+                        <li className="flex items-start">
+                          <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
+                          <span className="text-black">Películas y series ilimitadas</span>
+                        </li>
+                        <li className="flex items-start">
+                          <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
+                          <span className="text-black">Soporte prioritario 24/7</span>
+                        </li>
+                        <li className="flex items-start">
+                          <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
+                          <span className="text-black">Guía de programación</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </SwiperSlide>
+
+                {/* Plan Familiar */}
+                <SwiperSlide>
+                  <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200 h-full">
+                    <div className="p-6 text-center">
+                      <h3 className="text-lg font-bold text-gray-900 mb-2">Plan Familiar</h3>
+                      <div className="flex items-baseline justify-center mb-6">
+                        <span className="text-4xl font-extrabold text-gray-900">$89</span>
+                        <span className="ml-1 text-gray-500">/año</span>
+                      </div>
+                      <a 
+                        href="https://api.whatsapp.com/send/?phone=593963410409&text=Hola%2C+quiero+el+Plan+Familiar+de+TV+Legal+por+%2489+USD%2Faño&type=phone_number&app_absent=0" 
+                        className="block w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-3 px-4 rounded-lg transition-colors"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Elegir Plan Familiar
+                      </a>
+                    </div>
+                    <div className="border-t border-gray-100 px-6 py-4">
+                      <ul className="space-y-3">
+                        <li className="flex items-start">
+                          <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
+                          <span className="text-black">Hasta 5 pantallas simultáneas</span>
+                        </li>
+                        <li className="flex items-start">
+                          <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
+                          <span className="text-black">Acceso a canales en vivo</span>
+                        </li>
+                        <li className="flex items-start">
+                          <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
+                          <span className="text-black">Contenido ilimitado</span>
+                        </li>
+                        <li className="flex items-start">
+                          <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
+                          <span className="text-black">Soporte VIP 24/7</span>
+                        </li>
+                        <li className="flex items-start">
+                          <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
+                          <span className="text-black">Guía de programación avanzada</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </SwiperSlide>
+              </Swiper>
+            </div>
+
+            {/* Desktop Grid */}
+            <div className="hidden md:grid md:grid-cols-3 gap-8 mb-16">
               {/* Plan Básico */}
               <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow duration-300">
                 <div className="p-6 text-center">
@@ -1048,19 +1528,19 @@ export default function TVPremium() {
                   <ul className="space-y-3">
                     <li className="flex items-start">
                       <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
-                      <span>1 pantalla a la vez</span>
+                      <span className="text-black">1 pantalla a la vez</span>
                     </li>
                     <li className="flex items-start">
                       <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
-                      <span>Acceso a canales en vivo</span>
+                      <span className="text-black">Acceso a canales en vivo</span>
                     </li>
                     <li className="flex items-start">
                       <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
-                      <span>Películas y series</span>
+                      <span className="text-black">Películas y series</span>
                     </li>
-                    <li className="flex items-start text-gray-400">
-                      <XCircle className="w-5 h-5 mt-0.5 mr-2 flex-shrink-0" />
-                      <span>Soporte prioritario</span>
+                    <li className="flex items-start">
+                      <XCircle className="w-5 h-5 text-red-400 mt-0.5 mr-2 flex-shrink-0" />
+                      <span className="text-black">Soporte prioritario</span>
                     </li>
                   </ul>
                 </div>
@@ -1094,23 +1574,23 @@ export default function TVPremium() {
                     <ul className="space-y-3">
                       <li className="flex items-start">
                         <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
-                        <span>Hasta 3 pantallas simultáneas</span>
+                        <span className="text-black">Hasta 3 pantallas simultáneas</span>
                       </li>
                       <li className="flex items-start">
                         <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
-                        <span>Acceso a canales en vivo</span>
+                        <span className="text-black">Acceso a canales en vivo</span>
                       </li>
                       <li className="flex items-start">
                         <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
-                        <span>Películas y series ilimitadas</span>
+                        <span className="text-black">Películas y series ilimitadas</span>
                       </li>
                       <li className="flex items-start">
                         <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
-                        <span>Soporte prioritario 24/7</span>
+                        <span className="text-black">Soporte prioritario 24/7</span>
                       </li>
                       <li className="flex items-start">
                         <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
-                        <span>Guía de programación</span>
+                        <span className="text-black">Guía de programación</span>
                       </li>
                     </ul>
                   </div>
@@ -1139,31 +1619,94 @@ export default function TVPremium() {
                   <ul className="space-y-3">
                     <li className="flex items-start">
                       <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
-                      <span>Hasta 5 pantallas simultáneas</span>
+                      <span className="text-black">Hasta 5 pantallas simultáneas</span>
                     </li>
                     <li className="flex items-start">
                       <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
-                      <span>Acceso a canales en vivo</span>
+                      <span className="text-black">Acceso a canales en vivo</span>
                     </li>
                     <li className="flex items-start">
                       <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
-                      <span>Contenido ilimitado</span>
+                      <span className="text-black">Contenido ilimitado</span>
                     </li>
                     <li className="flex items-start">
                       <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
-                      <span>Soporte VIP 24/7</span>
+                      <span className="text-black">Soporte VIP 24/7</span>
                     </li>
                     <li className="flex items-start">
                       <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
-                      <span>Guía de programación avanzada</span>
+                      <span className="text-black">Guía de programación avanzada</span>
                     </li>
                   </ul>
                 </div>
               </div>
             </div>
 
-            {/* Comparativa de Precios */}
-            <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200 mb-16">
+            {/* Comparativa de Precios - Mobile Tabs */}
+            <div className="md:hidden bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200 mb-16">
+              <div className="p-6 border-b border-gray-100">
+                <h3 className="text-xl font-bold text-gray-900">Comparativa de Precios Anuales</h3>
+                <p className="text-gray-600">Mira cuánto puedes ahorrar con Legazy TV</p>
+              </div>
+              
+              <div className="p-4">
+                <div className="grid gap-4">
+                  {/* Cable Tradicional */}
+                  <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
+                    <h4 className="font-bold text-gray-900 mb-2">Cable Tradicional</h4>
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-gray-500">Precio Anual:</span>
+                      <span className="text-sm font-bold text-black">$600-900</span>
+                    </div>
+                    <div className="flex justify-between items-center mt-1">
+                      <span className="text-sm text-gray-500">Ahorro con Legazy:</span>
+                      <span className="text-sm font-medium text-green-600">Hasta $846</span>
+                    </div>
+                  </div>
+                  
+                  {/* Servicios de Streaming */}
+                  <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 shadow-sm">
+                    <h4 className="font-bold text-gray-900 mb-2">Servicios de Streaming</h4>
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-gray-500">Precio Anual:</span>
+                      <span className="text-sm font-bold text-black">$300-500</span>
+                    </div>
+                    <div className="flex justify-between items-center mt-1">
+                      <span className="text-sm text-gray-500">Ahorro con Legazy:</span>
+                      <span className="text-sm font-medium text-green-600">Hasta $446</span>
+                    </div>
+                  </div>
+                  
+                  {/* Servicios Ilegales */}
+                  <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
+                    <h4 className="font-bold text-gray-900 mb-2">Servicios Ilegales de TV</h4>
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-gray-500">Precio Anual:</span>
+                      <span className="text-sm font-bold text-black">$80-120</span>
+                    </div>
+                    <div className="flex justify-between items-center mt-1">
+                      <span className="text-sm text-gray-500">Ahorro con Legazy:</span>
+                      <span className="text-sm font-medium text-green-600">Hasta $66</span>
+                    </div>
+                  </div>
+                  
+                  {/* Legazy TV Premium */}
+                  <div className="bg-green-50 border-2 border-green-200 rounded-lg p-4 shadow-sm">
+                    <h4 className="font-bold text-gray-900 mb-2">Legazy TV Premium</h4>
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-gray-500">Precio Anual:</span>
+                      <span className="text-sm font-bold text-black">$54</span>
+                    </div>
+                    <div className="mt-2 text-center">
+                      <span className="text-sm font-bold text-green-600">Mejor relación calidad-precio</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Comparativa de Precios - Desktop Table */}
+            <div className="hidden md:block bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200 mb-16">
               <div className="p-6 border-b border-gray-100">
                 <h3 className="text-xl font-bold text-gray-900">Comparativa de Precios Anuales</h3>
                 <p className="text-gray-600">Mira cuánto puedes ahorrar con Legazy TV</p>
@@ -1180,22 +1723,22 @@ export default function TVPremium() {
                   <tbody className="divide-y divide-gray-200">
                     <tr>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Cable Tradicional</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-right">$600-900</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-black font-medium text-right">$600-900</td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-green-600 text-right">Hasta $846 de ahorro</td>
                     </tr>
                     <tr className="bg-gray-50">
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Servicios de Streaming (Netflix, HBO, etc.)</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-right">$300-500</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-black font-medium text-right">$300-500</td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-green-600 text-right">Hasta $446 de ahorro</td>
                     </tr>
                     <tr>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Servicios Ilegales de TV</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-right">$80-120</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-black font-medium text-right">$80-120</td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-green-600 text-right">Hasta $66 de ahorro</td>
                     </tr>
                     <tr className="bg-green-50">
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900">Legazy TV Premium</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900 text-right">$54</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-black text-right">$54</td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-green-600 text-right">Mejor relación calidad-precio</td>
                     </tr>
                   </tbody>
@@ -1265,8 +1808,105 @@ export default function TVPremium() {
               </p>
             </div>
 
-            {/* Tabla de Comparación */}
-            <div className="overflow-hidden shadow-xl rounded-xl border border-gray-200 mb-16">
+            {/* Mobile Comparison Tabs */}
+            <div className="md:hidden space-y-6 mb-16">
+              <h3 className="text-2xl font-bold text-gray-900 text-center mb-6">Compara las opciones de TV</h3>
+              
+              {/* TV Tradicional Tab */}
+              <div className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                <div className="bg-gray-100 p-4 border-b border-gray-200">
+                  <h4 className="font-bold text-gray-900 text-center">TV Tradicional</h4>
+                  <p className="text-sm text-gray-600 text-center">Cable/Satélite</p>
+                </div>
+                <div className="p-4 space-y-4">
+                  <div>
+                    <p className="text-sm font-medium text-gray-900">Inversión Anual</p>
+                    <p className="text-black font-bold text-lg">$600-900</p>
+                    <p className="text-xs text-gray-500">+ cargos ocultos</p>
+                  </div>
+                  <div className="flex items-center">
+                    <XCircle className="w-5 h-5 text-red-500 mr-2" />
+                    <span className="text-base font-bold text-black">Sin contenido premium</span>
+                  </div>
+                  <div className="flex items-center">
+                    <CheckCircle className="w-5 h-5 text-green-500 mr-2" />
+                    <span className="text-base font-bold text-black">100% Legal</span>
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium">Soporte Técnico</p>
+                    <p className="text-base font-bold text-black">Largo tiempo de espera</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Legazy TV Tab - Highlighted */}
+              <div className="bg-white rounded-lg shadow-lg overflow-hidden border-2 border-blue-200 relative">
+                <div className="bg-blue-600 text-white p-2 text-center text-xs font-bold">
+                  MEJOR OPCIÓN
+                </div>
+                <div className="bg-blue-50 p-4 border-b border-blue-100">
+                  <h4 className="font-bold text-blue-800 text-center">Legazy TV</h4>
+                  <p className="text-sm text-blue-600 text-center">Solución Profesional</p>
+                </div>
+                <div className="p-4 space-y-4">
+                  <div>
+                    <p className="text-sm font-medium text-gray-900">Inversión Anual</p>
+                    <p className="text-3xl font-bold text-black">$54</p>
+                    <p className="text-xs text-blue-600">Pago único al año</p>
+                  </div>
+                  <div className="flex items-center">
+                    <CheckCircle className="w-5 h-5 text-green-500 mr-2" />
+                    <span className="text-sm font-medium text-black">Contenido Premium</span>
+                  </div>
+                  <div className="flex items-center">
+                    <CheckCircle className="w-5 h-5 text-green-500 mr-2" />
+                    <span className="text-sm font-medium text-black">100% Legal</span>
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-black">Soporte Técnico</p>
+                    <p className="text-sm font-medium text-black">Soporte prioritario 24/7</p>
+                  </div>
+                  <div className="pt-2">
+                    <p className="text-sm font-medium text-black">Múltiples Pantallas</p>
+                    <p className="text-sm text-black">Hasta 3 pantallas</p>
+                    <p className="text-xs text-blue-500">En el plan Premium</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Servicios Ilegales Tab */}
+              <div className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                <div className="bg-gray-100 p-4 border-b border-gray-200">
+                  <h4 className="font-bold text-gray-900 text-center">Servicios Ilegales</h4>
+                  <p className="text-sm text-gray-600 text-center">IPTV Pirata</p>
+                </div>
+                <div className="p-4 space-y-4">
+                  <div>
+                    <p className="text-sm font-medium text-gray-900">Inversión Anual</p>
+                    <p className="font-bold text-black text-lg">$80-120</p>
+                    <p className="text-xs text-red-600">+ riesgo de estafa</p>
+                  </div>
+                  <div className="flex items-center">
+                    <CheckCircle className="w-5 h-5 text-green-500 mr-2" />
+                    <span className="text-sm text-black">Contenido Premium</span>
+                  </div>
+                  <div className="flex items-center">
+                    <XCircle className="w-5 h-5 text-red-500 mr-2" />
+                    <div>
+                      <span className="text-sm block text-black">No es legal</span>
+                      <span className="text-xs text-black">Riesgo de multas</span>
+                    </div>
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-black">Soporte Técnico</p>
+                    <p className="text-sm text-black">Inexistente</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Desktop Comparison Table */}
+            <div className="hidden md:block overflow-hidden shadow-xl rounded-xl border border-gray-200 mb-16">
               <div className="overflow-x-auto">
                 <table className="min-w-full divide-y divide-gray-200">
                   <thead className="bg-gray-50">
@@ -1301,7 +1941,7 @@ export default function TVPremium() {
                         Inversión Anual
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
-                        <span className="font-bold text-red-600">$600-900</span>
+                        <span className="font-bold text-black">$300-500</span>
                         <p className="text-xs text-gray-500 mt-1">+ cargos ocultos</p>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-center text-sm font-bold text-blue-700 bg-blue-50">
@@ -1478,7 +2118,7 @@ export default function TVPremium() {
       </section>
 
       {/* Sección 9: Reducción de Riesgo */}
-      <section id="reduccion-riesgo" className="py-16 md:py-24 bg-gray-50">
+      <section id="reduccion-riesgo" className="pt-0 pb-16 md:pb-24 bg-gray-50 -mt-8">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-16">
@@ -1493,7 +2133,112 @@ export default function TVPremium() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-8 mb-16">
+            {/* Mobile Slider */}
+            <div className="md:hidden mb-12">
+              <div className="swiper-container">
+                <div className="swiper-wrapper pb-10">
+                  {/* Tarjeta de Riesgo Legal */}
+                  <div className="swiper-slide px-2">
+                    <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200 h-full">
+                      <div className="bg-red-50 p-6 border-b border-red-100">
+                        <div className="flex items-center">
+                          <div className="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 text-red-600">
+                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                            </svg>
+                          </div>
+                          <h3 className="ml-4 text-xl font-bold text-red-700">Riesgo Actual</h3>
+                        </div>
+                      </div>
+                      <div className="p-6">
+                        <ul className="space-y-4">
+                          <li className="flex items-start">
+                            <XCircle className="w-5 h-5 text-red-500 mt-0.5 mr-2 flex-shrink-0" />
+                            <div>
+                              <h4 className="font-medium text-gray-900">Multas por Derechos de Autor</h4>
+                              <p className="text-sm text-gray-600 mt-1">Hasta $5,000 por infracción de derechos de autor</p>
+                            </div>
+                          </li>
+                          <li className="flex items-start">
+                            <XCircle className="w-5 h-5 text-red-500 mt-0.5 mr-2 flex-shrink-0" />
+                            <div>
+                              <h4 className="font-medium text-gray-900">Publicidad de la Competencia</h4>
+                              <p className="text-sm text-gray-600 mt-1">Tus clientes ven anuncios de tus competidores</p>
+                            </div>
+                          </li>
+                          <li className="flex items-start">
+                            <XCircle className="w-5 h-5 text-red-500 mt-0.5 mr-2 flex-shrink-0" />
+                            <div>
+                              <h4 className="font-medium text-gray-900">Contenido Inapropiado</h4>
+                              <p className="text-sm text-gray-600 mt-1">Riesgo de mostrar contenido no deseado</p>
+                            </div>
+                          </li>
+                          <li className="flex items-start">
+                            <XCircle className="w-5 h-5 text-red-500 mt-0.5 mr-2 flex-shrink-0" />
+                            <div>
+                              <h4 className="font-medium text-gray-900">Cortes de Servicio</h4>
+                              <p className="text-sm text-gray-600 mt-1">Inestabilidad en la programación</p>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Tarjeta de Solución */}
+                  <div className="swiper-slide px-2">
+                    <div className="bg-white rounded-2xl shadow-lg overflow-hidden border-2 border-green-500 h-full">
+                      <div className="bg-green-50 p-6 border-b border-green-100">
+                        <div className="flex items-center">
+                          <div className="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 text-green-600">
+                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                          </div>
+                          <h3 className="ml-4 text-xl font-bold text-green-700">Con Legazy TV</h3>
+                        </div>
+                      </div>
+                      <div className="p-6">
+                        <ul className="space-y-4">
+                          <li className="flex items-start">
+                            <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
+                            <div>
+                              <h4 className="font-medium text-gray-900">Protección Legal Total</h4>
+                              <p className="text-sm text-gray-600 mt-1">Contenido 100% licenciado y seguro</p>
+                            </div>
+                          </li>
+                          <li className="flex items-start">
+                            <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
+                            <div>
+                              <h4 className="font-medium text-gray-900">Marca Personalizada</h4>
+                              <p className="text-sm text-gray-600 mt-1">Solo tu marca, sin publicidad de terceros</p>
+                            </div>
+                          </li>
+                          <li className="flex items-start">
+                            <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
+                            <div>
+                              <h4 className="font-medium text-gray-900">Contenido Controlado</h4>
+                              <p className="text-sm text-gray-600 mt-1">Solo el contenido que tú apruebas</p>
+                            </div>
+                          </li>
+                          <li className="flex items-start">
+                            <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
+                            <div>
+                              <h4 className="font-medium text-gray-900">Estabilidad Garantizada</h4>
+                              <p className="text-sm text-gray-600 mt-1">Servicio confiable sin interrupciones</p>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="swiper-pagination mt-6"></div>
+              </div>
+            </div>
+
+            {/* Desktop Grid */}
+            <div className="hidden md:grid md:grid-cols-2 gap-8 mb-16">
               {/* Tarjeta de Riesgo Legal */}
               <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow duration-300 h-full">
                 <div className="bg-red-50 p-6 border-b border-red-100">
@@ -1591,7 +2336,7 @@ export default function TVPremium() {
       </section>
 
       {/* Sección 10: CTA Final (Escenarios) */}
-      <section className="py-16 md:py-24 bg-gradient-to-b from-white to-gray-50">
+      <section className="pt-0 pb-16 md:pb-24 bg-gradient-to-b from-white to-gray-50 -mt-8">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="max-w-5xl mx-auto text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
@@ -1854,94 +2599,28 @@ export default function TVPremium() {
         <div className="container mx-auto px-4 sm:px-6">
           <div className="max-w-4xl mx-auto">
             <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200">
-              <div className="md:flex
-">
-                <div className="md:w-1/2 bg-gradient-to-br from-green-600 to-green-700 p-8 md:p-12 text-white flex flex-col justify-center">
-                  <div className="max-w-xs mx-auto text-center md:text-left">
-                    <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto md:mx-0 mb-6">
-                      <MessageCircle className="w-8 h-8" />
-                    </div>
-                    <h2 className="text-2xl md:text-3xl font-bold mb-4">¿Aún tienes dudas? Hablemos</h2>
-                    <p className="text-green-100 mb-6">
-                      Entendemos que cada restaurante tiene necesidades únicas. Si quieres hablar de tu caso específico antes de decidir, estamos aquí para ti.
-                    </p>
-                    <a
-                      href="https://api.whatsapp.com/send/?phone=593963410409&text=Hola%2C+me+gustaría+hablar+con+un+asesor+sobre+Legazy+TV&type=phone_number&app_absent=0"
-                      className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-green-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white transition-all transform hover:scale-105"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <svg className="w-5 h-5 mr-2 text-green-600" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M17.5 2h-11C4 2 2 4 2 6.5v11C2 20 4 22 6.5 22h11c2.5 0 4.5-2 4.5-4.5v-11C22 4 20 2 17.5 2zm-11 1h11C19.4 3 21 4.6 21 6.5v11c0 1.9-1.6 3.5-3.5 3.5h-11C4.6 21 3 19.4 3 17.5v-11C3 4.6 4.6 3 6.5 3zm7.5 4c-3.6 0-6.5 2.9-6.5 6.5 0 1.4.5 2.8 1.3 3.8l-.8 2.3 2.4-.8c1 .7 2.2 1.1 3.4 1.1 3.6 0 6.5-2.9 6.5-6.5C20.5 9.9 17.6 7 14 7zm0 1c3 0 5.5 2.5 5.5 5.5S17 19 14 19c-1.1 0-2.1-.3-3-.9l-.2-.1-1.7.6.6-1.7-.1-.2c-.6-.8-1-1.8-1-2.9C9 10.5 11.5 8 14 8zm-2.4 2.2c-.1 0-.3.1-.4.1-.2.1-.3.2-.6.4-.2.1-.4.4-.6.6-.2.2-.4.4-.4.7 0 .2.1.4.2.6.1.2.2.4.3.6.1.2.3.5.5.7.2.2.4.4.6.6.2.2.5.4.7.6.3.2.6.4.9.5.3.1.6.2.9.2.2 0 .4 0 .6-.1.2 0 .4-.1.6-.2.2-.1.3-.2.4-.4.1-.1.2-.3.3-.5 0-.2 0-.4-.1-.5-.1-.2-.2-.4-.4-.5-.2-.1-.4-.3-.7-.5-.2-.2-.5-.4-.7-.6-.2-.2-.4-.4-.6-.6-.2-.2-.4-.4-.5-.6-.1-.2-.3-.4-.4-.6 0-.2-.1-.4-.1-.6 0-.3.1-.5.2-.7.1-.2.2-.4.4-.5.2-.1.3-.2.5-.2h.5c.1 0 .3.1.4.1.1 0 .2.1.3.2.1.1.2.2.2.3.1.1.2.3.2.4.1.1.1.3.1.4 0 .1 0 .2-.1.4 0 .1-.1.2-.1.3-.1.1-.1.2-.2.3-.1.1-.2.2-.3.3-.1.1-.2.2-.3.3-.1.1-.2.2-.3.3-.1.1-.2.2-.2.3-.1.1-.1.2-.1.3 0 .1 0 .2.1.3.1.1.2.2.3.3.2.2.4.4.6.6.2.2.5.4.7.6.3.2.5.5.7.8.2.3.4.6.5.9.1.3.2.6.2.9 0 .3-.1.7-.2 1-.1.3-.3.6-.5.9-.2.3-.5.5-.8.7-.3.2-.7.4-1.1.5-.4.1-.8.2-1.2.2-.5 0-1-.1-1.5-.3-.4-.2-.8-.4-1.2-.7l-.3-.2-1.4.5.5-1.4-.2-.3c-.3-.4-.5-.8-.7-1.2-.2-.4-.3-.9-.3-1.4 0-.6.1-1.2.4-1.8.3-.6.7-1.1 1.2-1.5.5-.4 1.1-.7 1.8-.8.3-.1.6-.1.9-.1.1 0 .2 0 .3.1z" />
-                      </svg>
-                      Hablar con un Asesor
-                    </a>
-                    <p className="text-sm text-green-100 mt-6">
-                      <span className="font-medium">Respuesta en menos de 1 hora</span>
-                      <br />
-                      <span className="inline-flex items-center mt-2">
-                        <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        Lunes a Viernes: 9am - 7pm
-                      </span>
-                      <br />
-                      <span className="inline-flex items-center">
-                        <svg className="w-4 h-4 mr-2 opacity-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        Sábados: 9am - 2pm
-                      </span>
-                    </p>
-                  </div>
+              <div className="w-full bg-gradient-to-br from-green-600 to-green-700 p-8 md:p-12 text-white text-center">
+                <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <MessageCircle className="w-10 h-10" />
                 </div>
-                <div className="md:w-1/2 p-8 md:p-12 flex items-center">
-                  <div className="text-center md:text-left">
-                    <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto md:mx-0 mb-6">
-                      <svg className="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                      </svg>
-                    </div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-4">¿Prefieres que te llamemos?</h3>
-                    <p className="text-gray-600 mb-6">
-                      Déjanos tu número y te contactaremos en el horario que prefieras.
-                    </p>
-                    <form className="space-y-4">
-                      <div>
-                        <label htmlFor="phone" className="sr-only">Número de teléfono</label>
-                        <input
-                          type="tel"
-                          id="phone"
-                          name="phone"
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
-                          placeholder="Tu número de teléfono"
-                        />
-                      </div>
-                      <div>
-                        <label htmlFor="schedule" className="sr-only">Horario de preferencia</label>
-                        <select
-                          id="schedule"
-                          name="schedule"
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
-                        >
-                          <option value="">Selecciona un horario</option>
-                          <option value="morning">Mañana (9am - 12pm)</option>
-                          <option value="afternoon">Tarde (2pm - 5pm)</option>
-                          <option value="evening">Noche (5pm - 7pm)</option>
-                        </select>
-                      </div>
-                      <button
-                        type="submit"
-                        className="w-full flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-all"
-                      >
-                        <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                        </svg>
-                        Solicitar llamada
-                      </button>
-                    </form>
-                  </div>
-                </div>
+                <h2 className="text-2xl md:text-4xl font-bold mb-4">¿Aún tienes dudas? Hablemos</h2>
+                <p className="text-green-100 text-lg mb-8 max-w-2xl mx-auto">
+                  Entendemos que cada restaurante tiene necesidades únicas. Si quieres hablar de tu caso específico antes de decidir, estamos aquí para ti.
+                </p>
+                <a
+                  href="https://api.whatsapp.com/send/?phone=593963410409&text=Hola%2C+me+gustaría+hablar+con+un+asesor+sobre+Legazy+TV&type=phone_number&app_absent=0"
+                  className="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-lg font-medium rounded-full shadow-lg text-white bg-transparent hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white transition-all transform hover:scale-105"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <svg className="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17.5 2h-11C4 2 2 4 2 6.5v11C2 20 4 22 6.5 22h11c2.5 0 4.5-2 4.5-4.5v-11C22 4 20 2 17.5 2zm-11 1h11C19.4 3 21 4.6 21 6.5v11c0 1.9-1.6 3.5-3.5 3.5h-11C4.6 21 3 19.4 3 17.5v-11C3 4.6 4.6 3 6.5 3zm7.5 4c-3.6 0-6.5 2.9-6.5 6.5 0 1.4.5 2.8 1.3 3.8l-.8 2.3 2.4-.8c1 .7 2.2 1.1 3.4 1.1 3.6 0 6.5-2.9 6.5-6.5C20.5 9.9 17.6 7 14 7zm0 1c3 0 5.5 2.5 5.5 5.5S17 19 14 19c-1.1 0-2.1-.3-3-.9l-.2-.1-1.7.6.6-1.7-.1-.2c-.6-.8-1-1.8-1-2.9C9 10.5 11.5 8 14 8zm-2.4 2.2c-.1 0-.3.1-.4.1-.2.1-.3.2-.6.4-.2.1-.4.4-.6.6-.2.2-.4.4-.4.7 0 .2.1.4.2.6.1.2.2.4.3.6.1.2.3.5.5.7.2.2.4.4.6.6.2.2.5.4.7.6.3.2.6.4.9.5.3.1.6.2.9.2.2 0 .4 0 .6-.1.2 0 .4-.1.6-.2.2-.1.3-.2.4-.4.1-.1.2-.3.3-.5 0-.2 0-.4-.1-.5-.1-.2-.2-.4-.4-.5-.2-.1-.4-.3-.7-.5-.2-.2-.5-.4-.7-.6-.2-.2-.4-.4-.6-.6-.2-.2-.4-.4-.5-.6-.1-.2-.3-.4-.4-.6 0-.2-.1-.4-.1-.6 0-.3.1-.5.2-.7.1-.2.2-.4.4-.5.2-.1.3-.2.5-.2h.5c.1 0 .3.1.4.1.1 0 .2.1.3.2.1.1.2.2.2.3.1.1.2.3.2.4.1.1.1.3.1.4 0 .1 0 .2-.1.4 0 .1-.1.2-.1.3-.1.1-.1.2-.2.3-.1.1-.2.2-.3.3-.1.1-.2.2-.3.3-.1.1-.2.2-.3.3-.1.1-.2.2-.2.3-.1.1-.1.2-.1.3 0 .1 0 .2.1.3.1.1.2.2.3.3.2.2.4.4.6.6.2.2.5.4.7.6.3.2.5.5.7.8.2.3.4.6.5.9.1.3.2.6.2.9 0 .3-.1.7-.2 1-.1.3-.3.6-.5.9-.2.3-.5.5-.8.7-.3.2-.7.4-1.1.5-.4.1-.8.2-1.2.2-.5 0-1-.1-1.5-.3-.4-.2-.8-.4-1.2-.7l-.3-.2-1.4.5.5-1.4-.2-.3c-.3-.4-.5-.8-.7-1.2-.2-.4-.3-.9-.3-1.4 0-.6.1-1.2.4-1.8.3-.6.7-1.1 1.2-1.5.5-.4 1.1-.7 1.8-.8.3-.1.6-.1.9-.1.1 0 .2 0 .3.1z" />
+                  </svg>
+                  Hablar con un Asesor por WhatsApp
+                </a>
+                <p className="text-sm text-green-100 mt-8">
+                  <span className="font-medium">Respuesta en menos de 1 hora</span>
+                </p>
               </div>
             </div>
           </div>
