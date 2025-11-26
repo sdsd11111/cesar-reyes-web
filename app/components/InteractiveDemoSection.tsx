@@ -142,7 +142,7 @@ export default function InteractiveDemoSection() {
 
         <div className="text-center mt-16">
           <a 
-            href="#contacto" 
+            href="#reserva" 
             className="inline-block bg-orange-500 text-white font-bold py-4 px-8 rounded-lg shadow-lg hover:bg-orange-600 transition-colors text-lg"
           >
             Quiero mi propio Menú Interactivo

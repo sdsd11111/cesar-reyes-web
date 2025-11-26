@@ -27,7 +27,7 @@ export default function PromoRestaurantesArtesVivas() {
     subtitle: 'Olvida a los programadores y las demoras. Actualiza precios en 1 minuto mientras te tomas un café. Tu restaurante abierto 24/7 por el precio de una sola mesa.',
     bgImage: '/images/promo-artes-vivas/promo-hero.webp',
     cta: 'Quiero mi Página Web Ahora',
-    ctaLink: '#contacto'
+    ctaLink: '#reserva'
   };
   
   
@@ -207,9 +207,22 @@ export default function PromoRestaurantesArtesVivas() {
                 </ul>
               </div>
               
-              <p className="text-orange-100 text-lg">
+              <p className="text-orange-100 text-lg mb-6">
                 <span className="font-semibold text-white">Garantía:</span> Si no te gusta el diseño, lo ajustamos hasta que lo ames.
               </p>
+              
+              {/* Botón de WhatsApp */}
+              <a 
+                href="https://wa.me/593963410409?text=Hola%20César,%20estoy%20interesado%20en%20tus%20servicios" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200"
+              >
+                <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.966-.273-.099-.471-.148-.67.15-.197.297-.767.963-.94 1.16-.173.199-.347.221-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.795-1.484-1.77-1.66-2.07-.173-.297-.018-.458.132-.606.136-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.611-.916-2.207-.242-.579-.487-.5-.669-.508-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.718 2.005-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.016a9.6 9.6 0 01-5.2-1.524l-.366-.219-3.735.982.998-3.648-.235-.374a9.6 9.6 0 01-1.51-5.127 9.7 9.7 0 0110.09-9.6 9.7 9.7 0 019.6 10.09 9.7 9.7 0 01-9.6 9.6z" fillRule="evenodd" clipRule="evenodd"/>
+                </svg>
+                Contáctame por WhatsApp
+              </a>
             </div>
             
             {/* Columna derecha - Formulario */}

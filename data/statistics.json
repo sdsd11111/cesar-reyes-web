@@ -1,9 +1,14 @@
 {
-  "totalVisitas": 804,
-  "visitasHoy": 804,
+  "totalVisitas": 805,
+  "visitasHoy": 805,
   "articulosPublicados": 0,
   "suscriptoresNewsletter": 0,
   "ultimasVisitas": [
+    {
+      "fecha": "2025-11-26",
+      "pagina": "/servicios/promo-restaurantes-artes-vivas",
+      "visitas": 1
+    },
     {
       "fecha": "2025-11-26",
       "pagina": "/servicios/promo-artes-vivas",
@@ -48,11 +53,6 @@
       "fecha": "2025-11-25",
       "pagina": "/servicios/tv-premium",
       "visitas": 1
-    },
-    {
-      "fecha": "2025-11-25",
-      "pagina": "/servicios/promo-artes-vivas",
-      "visitas": 1
     }
   ],
   "visitasPorDia": {
@@ -63,6 +63,6 @@
     "2025-11-15": 24,
     "2025-11-18": 37,
     "2025-11-25": 95,
-    "2025-11-26": 3
+    "2025-11-26": 4
   }
 }
