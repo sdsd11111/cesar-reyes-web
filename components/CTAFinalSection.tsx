@@ -422,7 +422,7 @@ export default function CTAFinalSection() {
             </div>
           )}
           
-          <form onSubmit={handleSubmit} className="space-y-5">
+          <form id="formulario-reserva-artes-vivas" onSubmit={handleSubmit} className="space-y-5">
               <div>
                 <label htmlFor="nombre" className="block text-sm font-medium text-gray-700 mb-1">
                   Nombre completo <span className="text-red-500">*</span>

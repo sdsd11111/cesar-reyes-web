@@ -169,35 +169,150 @@ export default function PromoRestaurantesArtesVivas() {
       </section>
       
       {/* Sección CTA Final */}
-      <section className="py-16 bg-gradient-to-r from-orange-500 to-orange-600 text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">No seas el último en modernizarte</h2>
-          <p className="text-xl md:text-2xl mb-6 max-w-3xl mx-auto">
-            Esta tecnología por $150 USD es un regalo insostenible. Lo hacemos para revolucionar Loja y Cuenca durante el festival.
-          </p>
+      <section id="reserva" className="py-16 bg-gradient-to-r from-orange-500 to-orange-600 text-white">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">No seas el último en modernizarte</h2>
           
-          {/* Contador de cupos */}
-          <div className="max-w-md mx-auto bg-white/20 backdrop-blur-sm rounded-lg p-4 mb-8">
-            <div className="text-lg font-medium mb-2">Cupos Restantes: 4/20</div>
-            <div className="w-full bg-white/30 rounded-full h-4">
-              <div className="bg-white h-4 rounded-full" style={{ width: '20%' }}></div>
+          <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+            {/* Columna izquierda - Contenido existente */}
+            <div className="space-y-6">
+              <p className="text-xl mb-6">
+                Esta tecnología por $150 USD es un regalo insostenible. Lo hacemos para revolucionar Loja y Cuenca durante el festival.
+              </p>
+              
+              {/* Contador de cupos */}
+              <div className="bg-white/20 backdrop-blur-sm rounded-lg p-6 mb-6">
+                <div className="text-xl font-medium mb-3 text-center">Cupos Restantes: 4/20</div>
+                <div className="w-full bg-white/30 rounded-full h-4 mb-4">
+                  <div className="bg-white h-4 rounded-full" style={{ width: '20%' }}></div>
+                </div>
+                
+                <ul className="space-y-3 text-left">
+                  <li className="flex items-start">
+                    <Check className="h-5 w-5 text-green-300 mt-0.5 mr-2 flex-shrink-0" />
+                    <span>Pago único de $150 (sin mensualidades ocultas)</span>
+                  </li>
+                  <li className="flex items-start">
+                    <Check className="h-5 w-5 text-green-300 mt-0.5 mr-2 flex-shrink-0" />
+                    <span>Diseño personalizado para tu restaurante</span>
+                  </li>
+                  <li className="flex items-start">
+                    <Check className="h-5 w-5 text-green-300 mt-0.5 mr-2 flex-shrink-0" />
+                    <span>Panel de control fácil de usar</span>
+                  </li>
+                  <li className="flex items-start">
+                    <Check className="h-5 w-5 text-green-300 mt-0.5 mr-2 flex-shrink-0" />
+                    <span>Soporte prioritario durante 3 meses</span>
+                  </li>
+                </ul>
+              </div>
+              
+              <p className="text-orange-100 text-lg">
+                <span className="font-semibold text-white">Garantía:</span> Si no te gusta el diseño, lo ajustamos hasta que lo ames.
+              </p>
+            </div>
+            
+            {/* Columna derecha - Formulario */}
+            <div className="bg-white rounded-xl shadow-xl p-6 border border-orange-100">
+              <h3 className="text-2xl font-bold text-orange-800 mb-6">
+                RESERVA TU CUPO AHORA
+              </h3>
+              
+              <form id="formulario-reserva-restaurantes" className="space-y-5">
+                <div>
+                  <label htmlFor="nombre" className="block text-sm font-medium text-gray-700 mb-1">
+                    Nombre completo <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="nombre"
+                    name="nombre"
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                    placeholder="Tu nombre completo"
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                    Correo electrónico <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                    placeholder="tucorreo@ejemplo.com"
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="telefono" className="block text-sm font-medium text-gray-700 mb-1">
+                    WhatsApp <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="tel"
+                    id="telefono"
+                    name="telefono"
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                    placeholder="Ejemplo: 593987654321"
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="tipo_restaurante" className="block text-sm font-medium text-gray-700 mb-1">
+                    Tipo de restaurante <span className="text-red-500">*</span>
+                  </label>
+                  <select
+                    id="tipo_restaurante"
+                    name="tipo_restaurante"
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                  >
+                    <option value="">Selecciona una opción</option>
+                    <option value="Comida rapida">Comida rápida</option>
+                    <option value="Restaurante">Restaurante</option>
+                    <option value="Cafetería">Cafetería</option>
+                    <option value="Pizzería">Pizzería</option>
+                    <option value="Otro">Otro (especificar abajo)</option>
+                  </select>
+                </div>
+                
+                <div className="flex items-start">
+                  <div className="flex items-center h-5">
+                    <input
+                      id="terminos"
+                      name="terminos"
+                      type="checkbox"
+                      required
+                      className="h-4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300 rounded"
+                    />
+                  </div>
+                  <div className="ml-3 text-sm">
+                    <label htmlFor="terminos" className="font-medium text-gray-700">
+                      Acepto los términos y condiciones <span className="text-red-500">*</span>
+                    </label>
+                  </div>
+                </div>
+                
+                <button
+                  type="submit"
+                  className="w-full flex justify-center items-center px-6 py-4 border border-transparent rounded-xl text-base font-medium text-white bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 transition-all duration-200 transform hover:scale-[1.02] shadow-lg"
+                >
+                  <span>RESERVAR MI LUGAR</span>
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </button>
+                
+                <p className="text-xs text-gray-500 text-center">
+                  Al hacer clic, te contactaremos en 24h para confirmar detalles y método de pago.
+                  <br />
+                  No se cobra hasta que confirmes.
+                </p>
+              </form>
             </div>
           </div>
-          
-          <Button 
-            asChild 
-            size="lg" 
-            className="bg-white text-orange-600 hover:bg-gray-100 text-lg py-6 px-8 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg"
-          >
-            <Link href="/contacto" className="flex items-center justify-center gap-2">
-              APROVECHAR LA PROMO AHORA
-              <ArrowRight className="w-5 h-5" />
-            </Link>
-          </Button>
-          
-          <p className="mt-6 text-orange-100 text-lg">
-            <span className="font-semibold">Garantía:</span> Si no te gusta el diseño, lo ajustamos hasta que lo ames.
-          </p>
         </div>
       </section>
     </div>
