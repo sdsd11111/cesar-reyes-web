@@ -1,12 +1,22 @@
-# *
+# Permitir todos los bots, incluidos LLMs
 User-agent: *
 Allow: /
-Disallow: /admin
-Disallow: /api
 
-# Host
-Host: https://cesarreyesjaramillo.com
+# Bots específicos de LLMs
+User-agent: GPTBot
+Allow: /
 
-# Sitemaps
-Sitemap: https://cesarreyesjaramillo.com/sitemap.xml
-Sitemap: https://cesarreyesjaramillo.com/server-sitemap.xml
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+# Sitemap
+Sitemap: https://www.cesarreyesjaramillo.com/sitemap.xml

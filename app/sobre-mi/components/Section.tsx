@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef } from 'react';
@@ -47,23 +49,23 @@ export default function Section({
   textWhite = false,
   stats = []
 }: SectionProps) {
-  const bgColorClass = isDark ? 'bg-gray-900 text-white' : 
-                      bgColor === 'blue-900' ? 'bg-blue-900 text-white' :
-                      bgColor === 'gray-50' ? 'bg-gray-50' : 'bg-white';
-  
+  const bgColorClass = isDark ? 'bg-gray-900 text-white' :
+    bgColor === 'blue-900' ? 'bg-blue-900 text-white' :
+      bgColor === 'gray-50' ? 'bg-gray-50' : 'bg-white';
+
   const textColorClass = isDark ? 'text-white' : 'text-gray-800';
   const textColorLightClass = isDark ? 'text-gray-300' : 'text-gray-600';
   const borderClass = isDark ? 'border-gray-700' : 'border-gray-200';
-  
+
   const containerClass = `py-10 md:py-16 lg:py-24 ${fullWidth ? '' : 'container mx-auto px-4 sm:px-6 lg:px-8'}`;
-  
+
   const carouselRef = useRef<HTMLDivElement>(null);
   let scrollInterval: NodeJS.Timeout;
 
   // Efecto para el carrusel táctil
   useEffect(() => {
     if (typeof window === 'undefined' || window.innerWidth >= 1024) return;
-    
+
     const carousel = carouselRef.current;
     if (!carousel) return;
 
@@ -104,7 +106,7 @@ export default function Section({
     carousel.addEventListener('mouseleave', handleMouseLeave);
     carousel.addEventListener('mouseup', handleMouseUp);
     carousel.addEventListener('mousemove', handleMouseMove);
-    
+
     // Eventos para pantalla táctil
     carousel.addEventListener('touchstart', handleMouseDown);
     carousel.addEventListener('touchend', handleMouseUp);
@@ -132,7 +134,7 @@ export default function Section({
               {title}
             </h2>
           </div>
-          
+
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 mb-8 md:mb-12 items-start">
             {/* Video de YouTube Short */}
             <div className="relative mx-auto w-full max-w-sm mb-6 md:mb-0" style={{
@@ -164,7 +166,7 @@ export default function Section({
                   frameBorder="0"
                   loading="lazy"
                 ></iframe>
-                
+
                 {/* Overlay para mejorar la legibilidad del título */}
                 <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent z-10">
                   <h3 className="text-xl font-bold text-white mb-1">Mi Historia</h3>
@@ -172,7 +174,7 @@ export default function Section({
                 </div>
               </div>
             </div>
-            
+
             {/* Contenido de la sección */}
             <div className="w-full h-full">
               {/* Versión escritorio */}
@@ -185,7 +187,7 @@ export default function Section({
                 alignItems: 'stretch'
               }}>
                 {content.slice(0, 4).map((paragraph, i) => (
-                  <div 
+                  <div
                     key={`desktop-${i}`}
                     className="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-white/20 hover:bg-white/20 transition-all duration-300 transform hover:-translate-y-1 h-full flex flex-col justify-center"
                     style={{
@@ -205,7 +207,7 @@ export default function Section({
               {/* Versión móvil - Carrusel con scroll horizontal */}
               <div className="lg:hidden">
                 <p className="text-sm text-gray-400 mb-2 text-center">Desliza para ver más</p>
-                <div 
+                <div
                   ref={carouselRef}
                   className="flex overflow-x-auto pb-6 -mx-4 px-4 scrollbar-hide"
                   style={{
@@ -218,7 +220,7 @@ export default function Section({
                   }}
                 >
                   {content.slice(0, 4).map((paragraph, i) => (
-                    <div 
+                    <div
                       key={`mobile-${i}`}
                       className="flex-shrink-0 w-10/12 sm:w-8/12 md:w-6/12 px-2"
                       style={{
@@ -236,7 +238,7 @@ export default function Section({
                 {/* Indicadores de desplazamiento */}
                 <div className="flex justify-center space-x-2 mt-4">
                   {content.slice(0, 4).map((_, i) => (
-                    <span 
+                    <span
                       key={`indicator-${i}`}
                       className="w-2 h-2 rounded-full bg-white/30"
                     />
@@ -245,7 +247,7 @@ export default function Section({
               </div>
             </div>
           </div>
-          
+
           {/* Último párrafo centrado abajo */}
           {content[4] && (
             <div className="max-w-3xl mx-auto text-center">
@@ -263,7 +265,7 @@ export default function Section({
     // Special case for "Lo que ofrezco" section
     if (id === 'oferta') {
       const ofertaCarouselRef = useRef<HTMLDivElement>(null);
-      
+
       // Efecto para el auto-scroll del carrusel de oferta
       useEffect(() => {
         if (typeof window !== 'undefined' && window.innerWidth < 1024) {
@@ -272,7 +274,7 @@ export default function Section({
 
           const scrollStep = 1;
           const scrollSpeed = 30; // ms
-          
+
           const scrollCarousel = () => {
             if (!carousel) return;
             if (carousel.scrollLeft >= (carousel.scrollWidth - carousel.offsetWidth - 1)) {
@@ -291,7 +293,7 @@ export default function Section({
               scrollInterval = null;
             }
           };
-          
+
           const resumeScroll = () => {
             if (!scrollInterval) {
               scrollInterval = setInterval(scrollCarousel, scrollSpeed);
@@ -321,15 +323,14 @@ export default function Section({
               {title}
             </h2>
           </div>
-          
+
           {/* Versión escritorio */}
           <div className="hidden md:grid grid-cols-1 md:grid-cols-2 gap-6">
             {content.map((paragraph, i) => (
-              <div 
+              <div
                 key={`desktop-${i}`}
-                className={`bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-6 border border-white/20 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 ${
-                  i === 0 ? 'md:col-span-2' : ''
-                }`}
+                className={`bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-6 border border-white/20 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 ${i === 0 ? 'md:col-span-2' : ''
+                  }`}
               >
                 <p className="text-gray-800 leading-relaxed">
                   {paragraph}
@@ -337,10 +338,10 @@ export default function Section({
               </div>
             ))}
           </div>
-          
+
           {/* Versión móvil - Carrusel */}
           <div className="md:hidden">
-            <div 
+            <div
               ref={ofertaCarouselRef}
               className="flex overflow-x-auto pb-6 -mx-4 px-4 scrollbar-hide"
               style={{
@@ -352,16 +353,15 @@ export default function Section({
               }}
             >
               {content.map((paragraph, i) => (
-                <div 
+                <div
                   key={`mobile-${i}`}
                   className="flex-shrink-0 w-10/12 px-3"
                   style={{
                     scrollSnapAlign: 'start',
                   }}
                 >
-                  <div className={`bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-6 border border-white/20 h-full ${
-                    i === 0 ? 'pt-8' : ''
-                  }`}>
+                  <div className={`bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-6 border border-white/20 h-full ${i === 0 ? 'pt-8' : ''
+                    }`}>
                     <p className="text-gray-800 leading-relaxed">
                       {paragraph}
                     </p>
@@ -369,21 +369,21 @@ export default function Section({
                 </div>
               ))}
             </div>
-            
+
             {/* Indicadores de desplazamiento */}
             <div className="flex justify-center space-x-2 mt-4">
               {content.map((_, i) => (
-                <span 
+                <span
                   key={`indicator-${i}`}
                   className="w-2 h-2 rounded-full bg-white/30"
                 />
               ))}
             </div>
           </div>
-          
+
           {hasCta && cta && ctaLink && (
             <div className="text-center mt-8 md:mt-12">
-              <Link 
+              <Link
                 href={ctaLink}
                 className="inline-block bg-primary hover:bg-primary-600 text-white font-semibold px-8 py-3 rounded-lg transition-colors duration-300"
               >
@@ -403,27 +403,26 @@ export default function Section({
             {title}
           </h2>
         )}
-        
+
         <div className="space-y-4 mb-8">
           {content.map((paragraph, i) => (
-            <p 
-              key={i} 
+            <p
+              key={i}
               className={`text-lg ${textColorLightClass} leading-relaxed`}
             >
               {paragraph}
             </p>
           ))}
         </div>
-        
+
         {hasCta && cta && ctaLink && (
           <div className="mt-8">
-            <Link 
+            <Link
               href={ctaLink}
-              className={`inline-block px-8 py-3 rounded-lg font-semibold transition-colors duration-300 ${
-                isDark 
-                  ? 'bg-primary hover:bg-primary-600 text-white' 
+              className={`inline-block px-8 py-3 rounded-lg font-semibold transition-colors duration-300 ${isDark
+                  ? 'bg-primary hover:bg-primary-600 text-white'
                   : 'bg-primary text-white hover:bg-primary-600'
-              }`}
+                }`}
             >
               {cta}
             </Link>
@@ -432,10 +431,10 @@ export default function Section({
       </div>
     );
   };
-  
+
   const renderImage = () => {
     if (!image) return null;
-    
+
     // Special case for objetivo section with two images
     if (id === 'objetivo') {
       return (
@@ -451,27 +450,27 @@ export default function Section({
                 sizes="(max-width: 1024px) 100vw, 25vw"
               />
             </div>
-            
+
             {/* Center content */}
             <div className="w-full lg:w-2/4 px-4 lg:px-8">
               <h2 className={`text-3xl md:text-4xl font-bold mb-6 ${isDark ? 'text-white' : 'text-gray-900'} text-center`}>
                 {title}
               </h2>
-              
+
               <div className="space-y-4">
                 {content.map((paragraph, i) => (
-                  <p 
-                    key={i} 
+                  <p
+                    key={i}
                     className={`text-lg ${textColorLightClass} leading-relaxed text-center`}
                   >
                     {paragraph}
                   </p>
                 ))}
               </div>
-              
+
               {hasCta && cta && ctaLink && (
                 <div className="mt-8 text-center">
-                  <Link 
+                  <Link
                     href={ctaLink}
                     className="inline-block bg-primary hover:bg-primary-600 text-white font-semibold px-8 py-3 rounded-lg transition-colors duration-300"
                   >
@@ -480,7 +479,7 @@ export default function Section({
                 </div>
               )}
             </div>
-            
+
             {/* Right image */}
             <div className="w-full lg:w-1/4 h-64 md:h-96 relative">
               <Image
@@ -495,7 +494,7 @@ export default function Section({
         </div>
       );
     }
-    
+
     // Default single image
     return (
       <div className="w-full lg:w-1/2">
@@ -515,7 +514,7 @@ export default function Section({
       </div>
     );
   };
-  
+
   // Special case for oferta section with background image
   if (id === 'oferta') {
     return (
@@ -532,7 +531,7 @@ export default function Section({
           />
           <div className="absolute inset-0 bg-black/60"></div>
         </div>
-        
+
         {/* Content */}
         <div className="container mx-auto px-4 sm:px-6">
           {renderContent()}
@@ -542,8 +541,8 @@ export default function Section({
   }
 
   return (
-    <section 
-      id={id} 
+    <section
+      id={id}
       className={`${customClass || bgColorClass} ${index > 0 ? `border-t ${borderClass}` : ''} ${textWhite ? 'text-white' : ''}`}
     >
       {id === 'objetivo' ? (
@@ -551,10 +550,9 @@ export default function Section({
           {renderImage()}
         </div>
       ) : (
-        <div className={`${containerClass} flex flex-col ${imagePosition === 'left' ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center ${
-          id === 'inicio' ? 'lg:space-x-24' : 
-          imagePosition === 'left' ? 'lg:space-x-12' : 'lg:space-x-0'
-        }`}>
+        <div className={`${containerClass} flex flex-col ${imagePosition === 'left' ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center ${id === 'inicio' ? 'lg:space-x-24' :
+            imagePosition === 'left' ? 'lg:space-x-12' : 'lg:space-x-0'
+          }`}>
           {renderImage()}
           {renderContent()}
         </div>

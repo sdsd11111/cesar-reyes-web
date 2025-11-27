@@ -11,6 +11,7 @@ import Head from 'next/head'
 import Script from 'next/script'
 import ClarityAnalytics from '@/components/ClarityAnalytics'
 import FloatingPromoCardWrapper from '@/components/FloatingPromoCardWrapper';
+import PersonSchema from '@/components/schema/PersonSchema';
 
 declare global {
   interface Window {
@@ -64,8 +65,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html 
-      lang="es" 
+    <html
+      lang="es"
       className={`${inter.variable} ${poiretOne.variable} ${montserrat.variable} ${poppins.variable} ${playfairDisplay.variable}`}
       style={{
         // Prevenir zoom en iOS al hacer doble toque
@@ -77,7 +78,7 @@ export default function RootLayout({
       <Head>
         {/* Viewport optimizado para móviles */}
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover" />
-        
+
         {/* Preload critical resources */}
         <link
           rel="preload"
@@ -107,7 +108,7 @@ export default function RootLayout({
           type="font/woff2"
           crossOrigin="anonymous"
         />
-        
+
         {/* Contentsquare Analytics - Mapa de calor y análisis de comportamiento */}
         <Script
           id="contentsquare-analytics"
@@ -162,11 +163,12 @@ export default function RootLayout({
           type="font/woff2"
           crossOrigin="anonymous"
         />
-        
+
         {/* Prevenir el zoom automático en iOS al enfocar campos de entrada */}
         <meta name="format-detection" content="telephone=no, date=no, email=no, address=no" />
+        <PersonSchema />
       </Head>
-      <body 
+      <body
         className="min-h-screen bg-white text-gray-900 dark:bg-gray-900 dark:text-white"
         style={{
           // Mejorar el rendimiento de desplazamiento en iOS

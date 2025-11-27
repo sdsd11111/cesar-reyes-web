@@ -91,9 +91,9 @@ function CardItem({ card }: { card: any }) {
   );
 }
 
-export default function HomeTestClient({ content, isEmotionalView }: { content: typeof pageContent.logico | typeof pageContent.emocional, isEmotionalView: boolean }) {
+export default function HomeTestClient({ content, isEmotionalView, initialShowContent = false }: { content: typeof pageContent.logico | typeof pageContent.emocional, isEmotionalView: boolean, initialShowContent?: boolean }) {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
-  const [choiceMade, setChoiceMade] = useState(false);
+  const [choiceMade, setChoiceMade] = useState(initialShowContent);
   const [activeStep, setActiveStep] = useState(1);
   const router = useRouter();
   const [isChatModalOpen, setIsChatModalOpen] = useState(false);
@@ -113,16 +113,11 @@ export default function HomeTestClient({ content, isEmotionalView }: { content: 
     }
   }, []);
 
-  const handleChoice = (e: React.MouseEvent, choice: 'logico' | 'emocional') => {
-    e.preventDefault();
-    e.stopPropagation();
-    localStorage.setItem('userChoice', choice);
-    setChoiceMade(true);
-    if (choice === 'emocional') {
-      router.push('/home-test?view=emocional', { scroll: false });
-    } else {
-      router.push('/home-test', { scroll: false });
+  const handleChoice = (choice: 'logico' | 'emocional') => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('userChoice', choice);
     }
+    setChoiceMade(true);
   };
 
   const primaryActionClasses = isEmotionalView
@@ -137,26 +132,28 @@ export default function HomeTestClient({ content, isEmotionalView }: { content: 
     <>
       {/* Hero Section */}
       <section className="relative w-full h-screen min-h-[600px] flex items-center justify-center text-center overflow-hidden bg-black">
-        {isClient && (
-          <div className={`absolute inset-0 transition-opacity duration-1000 ${isVideoLoaded ? 'opacity-100' : 'opacity-0'}`}>
-            <video 
-              autoPlay 
-              loop 
-              muted 
-              playsInline 
-              className="w-full h-full object-cover object-center"
-              poster="/images/portada_cesarbn.webp"
-              onLoadedData={() => setIsVideoLoaded(true)}
-            >
-              <source src="/images/Videos/Promo Artes Vivas 2025 Objetivo.mp4" type="video/mp4" />
-              <img 
+        {/* Video Background - Client Only for Performance but Poster is SSR */}
+        <div className={`absolute inset-0 transition-opacity duration-1000 ${isClient && isVideoLoaded ? 'opacity-100' : 'opacity-100'}`}>
+             {/* Use img as fallback/poster always visible */}
+             <img 
                 src="/images/portada_cesarbn.webp" 
                 alt="Fondo de portada" 
-                className="w-full h-full object-cover"
+                className={`w-full h-full object-cover absolute inset-0 ${isClient && isVideoLoaded ? 'hidden' : 'block'}`}
               />
-            </video>
-          </div>
-        )}
+             {isClient && (
+                <video 
+                  autoPlay 
+                  loop 
+                  muted 
+                  playsInline 
+                  className="w-full h-full object-cover object-center absolute inset-0"
+                  poster="/images/portada_cesarbn.webp"
+                  onLoadedData={() => setIsVideoLoaded(true)}
+                >
+                  <source src="/images/Videos/Promo Artes Vivas 2025 Objetivo.mp4" type="video/mp4" />
+                </video>
+             )}
+        </div>
         <div className="absolute inset-0 bg-black/60 z-10"></div>
         <div className="relative z-20 container mx-auto px-4 flex flex-col items-center justify-center h-full">
             {/* Versión Desktop */}
@@ -256,20 +253,9 @@ export default function HomeTestClient({ content, isEmotionalView }: { content: 
           <h3 className="text-xl md:text-2xl font-semibold text-center text-gray-700 mt-2 max-w-5xl mx-auto">{pageContent.shared.choiceSection.h3}</h3>
           <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 max-w-6xl mx-auto">
             {/* Opción Lógica */}
-            <div 
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                handleChoice(e, 'logico');
-              }}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
-                  handleChoice(e as any, 'logico');
-                }
-              }}
-              role="button"
-              tabIndex={0}
+            <Link 
+              href="/?view=logico"
+              onClick={() => handleChoice('logico')}
               className="group relative overflow-hidden rounded-2xl border border-gray-200 cursor-pointer transition-all duration-300 hover:shadow-xl bg-white flex flex-col h-96 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
             >
               <div className="relative h-full w-full overflow-hidden">
@@ -296,23 +282,12 @@ export default function HomeTestClient({ content, isEmotionalView }: { content: 
                   </div>
                 </div>
               </div>
-            </div>
+            </Link>
 
             {/* Opción Emocional */}
-            <div 
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                handleChoice(e, 'emocional');
-              }}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
-                  handleChoice(e as any, 'emocional');
-                }
-              }}
-              role="button"
-              tabIndex={0}
+            <Link 
+              href="/?view=emocional"
+              onClick={() => handleChoice('emocional')}
               className="group relative overflow-hidden rounded-2xl border border-gray-200 cursor-pointer transition-all duration-300 hover:shadow-xl bg-white flex flex-col h-96 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
             >
               <div className="relative h-full w-full overflow-hidden">
@@ -339,7 +314,7 @@ export default function HomeTestClient({ content, isEmotionalView }: { content: 
                   </div>
                 </div>
               </div>
-            </div>
+            </Link>
           </div>
           {!choiceMade && <p className="text-center text-sm text-gray-500 mt-8">haz clic en una de ellas</p>}
         </motion.div>
