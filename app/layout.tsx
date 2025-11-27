@@ -7,7 +7,7 @@ import VisitTracker from '@/components/VisitTracker'
 import TransparentHeader from '@/components/transparent-header'
 import { Providers } from './providers'
 import { SearchProvider } from '@/context/SearchContext'
-import Head from 'next/head'
+
 import Script from 'next/script'
 import ClarityAnalytics from '@/components/ClarityAnalytics'
 import FloatingPromoCardWrapper from '@/components/FloatingPromoCardWrapper';
@@ -75,46 +75,45 @@ export default function RootLayout({
         WebkitOverflowScrolling: 'touch',
       }}
     >
-      <Head>
-        {/* Viewport optimizado para móviles */}
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover" />
+      {/* Viewport optimizado para móviles */}
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover" />
 
-        {/* Preload critical resources */}
-        <link
-          rel="preload"
-          href="/fonts/Inter.var.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/fonts/PoiretOne-Regular.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/fonts/Montserrat.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/fonts/Poppins-Bold.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
+      {/* Preload critical resources */}
+      <link
+        rel="preload"
+        href="/fonts/Inter.var.woff2"
+        as="font"
+        type="font/woff2"
+        crossOrigin="anonymous"
+      />
+      <link
+        rel="preload"
+        href="/fonts/PoiretOne-Regular.woff2"
+        as="font"
+        type="font/woff2"
+        crossOrigin="anonymous"
+      />
+      <link
+        rel="preload"
+        href="/fonts/Montserrat.woff2"
+        as="font"
+        type="font/woff2"
+        crossOrigin="anonymous"
+      />
+      <link
+        rel="preload"
+        href="/fonts/Poppins-Bold.woff2"
+        as="font"
+        type="font/woff2"
+        crossOrigin="anonymous"
+      />
 
-        {/* Contentsquare Analytics - Mapa de calor y análisis de comportamiento */}
-        <Script
-          id="contentsquare-analytics"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
+      {/* Contentsquare Analytics - Mapa de calor y análisis de comportamiento */}
+      <Script
+        id="contentsquare-analytics"
+        strategy="beforeInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
               // Crear script de Contentsquare
               window._uxa = window._uxa || [];
               !function(){var e=window._uxa;if(e)for(var t in e)if('push'!==t&&'length'!==t&&!e[t]){e[t]=function(e){return function(){var t=Array.prototype.slice.call(arguments);e.push(t)}}(e[t])}}();
@@ -154,20 +153,18 @@ export default function RootLayout({
                 }, 5000);
               })();
             `,
-          }}
-        />
-        <link
-          rel="preload"
-          href="/fonts/PlayfairDisplay-Bold.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
+        }}
+      />
+      <link
+        rel="preload"
+        href="/fonts/PlayfairDisplay-Bold.woff2"
+        as="font"
+        type="font/woff2"
+        crossOrigin="anonymous"
+      />
 
-        {/* Prevenir el zoom automático en iOS al enfocar campos de entrada */}
-        <meta name="format-detection" content="telephone=no, date=no, email=no, address=no" />
-        <PersonSchema />
-      </Head>
+      {/* Prevenir el zoom automático en iOS al enfocar campos de entrada */}
+      <meta name="format-detection" content="telephone=no, date=no, email=no, address=no" />
       <body
         className="min-h-screen bg-white text-gray-900 dark:bg-gray-900 dark:text-white"
         style={{
@@ -182,6 +179,7 @@ export default function RootLayout({
           height: '100%',
         }}
       >
+        <PersonSchema />
         {/* Google Tag Manager */}
         <Script id="google-tag-manager" strategy="afterInteractive">
           {`

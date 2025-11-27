@@ -87,7 +87,7 @@ export default async function BlogPage({
     <div className="min-h-screen flex flex-col">
       <main className="flex-grow bg-white">
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-r from-blue-600 to-blue-800 text-white py-20 md:py-28">
+        <section className="relative bg-gradient-to-br from-black via-gray-800 to-gray-100 text-white py-20 md:py-28">
           <div className="absolute inset-0 bg-black/30"></div>
           <div className="container mx-auto px-4 md:px-6 relative z-10">
             <div className="max-w-3xl mx-auto text-center">

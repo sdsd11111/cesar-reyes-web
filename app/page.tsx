@@ -3,6 +3,8 @@ import { Suspense } from 'react';
 import HomeTestClient from './home-test/HomeTestClient';
 import { pageContent } from '@/lib/content';
 import TransparentHeader from "@/components/transparent-header";
+import OrganizationSchema from '@/components/schema/OrganizationSchema';
+import WebsiteSchema from '@/components/schema/WebsiteSchema';
 
 export const metadata: Metadata = {
   title: 'César Reyes | Estratega de Negocios y Ventas',
@@ -51,6 +53,8 @@ export default async function HomePage({
         isEmotionalView={isEmotionalView}
         initialShowContent={initialShowContent}
       />
+      <OrganizationSchema />
+      <WebsiteSchema />
     </Suspense>
   );
 }

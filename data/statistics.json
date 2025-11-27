@@ -1,57 +1,57 @@
 {
-  "totalVisitas": 1004,
-  "visitasHoy": 1004,
+  "totalVisitas": 1016,
+  "visitasHoy": 1016,
   "articulosPublicados": 0,
   "suscriptoresNewsletter": 0,
   "ultimasVisitas": [
     {
       "fecha": "2025-11-27",
-      "pagina": "/servicios/zona-gamer-personalizada",
+      "pagina": "/",
       "visitas": 1
     },
     {
       "fecha": "2025-11-27",
-      "pagina": "/servicios/tv-premium",
+      "pagina": "/",
       "visitas": 1
     },
     {
       "fecha": "2025-11-27",
-      "pagina": "/servicios/tv-premium",
+      "pagina": "/blog/asesoria/4-estrategias-evitar-malos-comentarios",
       "visitas": 1
     },
     {
       "fecha": "2025-11-27",
-      "pagina": "/servicios/tv-premium",
+      "pagina": "/blog/asesoria/4-estrategias-evitar-malos-comentarios",
       "visitas": 1
     },
     {
       "fecha": "2025-11-27",
-      "pagina": "/servicios/viralidad-estrategica",
+      "pagina": "/blog/asesoria/4-estrategias-evitar-malos-comentarios",
       "visitas": 1
     },
     {
       "fecha": "2025-11-27",
-      "pagina": "/servicios/viralidad-estrategica",
+      "pagina": "/admin",
       "visitas": 1
     },
     {
       "fecha": "2025-11-27",
-      "pagina": "/servicios/viralidad-estrategica",
+      "pagina": "/admin",
       "visitas": 1
     },
     {
       "fecha": "2025-11-27",
-      "pagina": "/servicios/viralidad-estrategica",
+      "pagina": "/blog",
       "visitas": 1
     },
     {
       "fecha": "2025-11-27",
-      "pagina": "/servicios/zona-gamer-personalizada",
+      "pagina": "/sobre-mi",
       "visitas": 1
     },
     {
       "fecha": "2025-11-27",
-      "pagina": "/reto-de-7-dias",
+      "pagina": "/sobre-mi",
       "visitas": 1
     }
   ],
@@ -64,6 +64,6 @@
     "2025-11-18": 37,
     "2025-11-25": 95,
     "2025-11-26": 182,
-    "2025-11-27": 21
+    "2025-11-27": 33
   }
 }

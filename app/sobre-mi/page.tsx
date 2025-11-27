@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import TransparentHeader from '@/components/transparent-header';
 import HeroSection from './components/HeroSection';
 import Section from './components/Section';
+import { Rocket, Briefcase, Store, Search } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Sobre Mí - César Reyes',
@@ -158,11 +159,31 @@ const pageContent = {
       id: 'resumen',
       title: 'En resumen',
       content: [
-        'Soy César Reyes Jaramillo, tengo 47 años, y en todo este tiempo he tenido solo dos trabajos fijos.',
-        'Sé lo que es emprender, madrugar, trabajar hasta las seis de la mañana y volver a empezar.',
-        'Soy Ingeniero Comercial, graduado en la Universidad Nacional de Loja (2001), con especialización en Marketing y SEO (2020).',
-        'Después de más de dos décadas entre empresas, campo y estrategia digital, descubrí algo esencial:',
-        'Una empresa crece al mismo ritmo que crece la persona que la lidera.',
+        <div key="emprendedor" className="flex items-center gap-4 mb-2">
+          <div className="bg-orange-500/20 p-3 rounded-full">
+            <Rocket className="w-8 h-8 text-orange-500" />
+          </div>
+          <span className="text-2xl font-bold text-white">Emprendedor</span>
+        </div>,
+        <div key="pymes" className="flex items-center gap-4 mb-2 mt-6">
+          <div className="bg-orange-500/20 p-3 rounded-full">
+            <Store className="w-8 h-8 text-orange-500" />
+          </div>
+          <span className="text-2xl font-bold text-white">Pymes</span>
+        </div>,
+        <div key="experiencia" className="flex items-center gap-4 mb-2 mt-6">
+          <div className="bg-orange-500/20 p-3 rounded-full">
+            <Briefcase className="w-8 h-8 text-orange-500" />
+          </div>
+          <span className="text-2xl font-bold text-white">24 años de experiencia</span>
+        </div>,
+        <div key="seo" className="flex items-center gap-4 mb-2 mt-6">
+          <div className="bg-orange-500/20 p-3 rounded-full">
+            <Search className="w-8 h-8 text-orange-500" />
+          </div>
+          <span className="text-2xl font-bold text-white">Preparación SEO</span>
+        </div>,
+
         'Por eso, mi trabajo no solo trata de SEO o páginas web. Trata de personas que deciden crecer y necesitan una guía que entienda su contexto, su ritmo y su propósito.'
       ],
       bgColor: 'dark',
