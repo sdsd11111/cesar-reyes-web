@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import TraficoFrioClient from './TraficoFrioClient';
+import MaestroDeLasEstrellasBClient from './MaestroDeLasEstrellasBClient';
 
 export const metadata: Metadata = {
   title: 'Protección de Reputación en Google - El Maestro de las Estrellas | César Reyes',
@@ -20,6 +20,6 @@ export const metadata: Metadata = {
   },
 };
 
-export default function TraficoFrioPage() {
-  return <TraficoFrioClient />;
+export default function MaestroDeLasEstrellasBPage() {
+  return <MaestroDeLasEstrellasBClient />;
 }

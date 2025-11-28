@@ -59,7 +59,7 @@ function getEndOfDay() {
   return endOfDay;
 }
 
-export default function TraficoTibioCaliente() {
+export default function MaestroDeLasEstrellasA() {
   const [showNoWebsiteInfo, setShowNoWebsiteInfo] = useState(false);
   const [activeTab, setActiveTab] = useState('flujo-rojo');
   const [activeInstallationTab, setActiveInstallationTab] = useState('necesitas');

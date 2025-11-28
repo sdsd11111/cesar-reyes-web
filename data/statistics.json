@@ -1,11 +1,31 @@
 {
-  "totalVisitas": 1016,
-  "visitasHoy": 1016,
+  "totalVisitas": 1021,
+  "visitasHoy": 1021,
   "articulosPublicados": 0,
   "suscriptoresNewsletter": 0,
   "ultimasVisitas": [
     {
-      "fecha": "2025-11-27",
+      "fecha": "2025-11-28",
+      "pagina": "/servicios/maestro-de-las-estrellas-a",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-11-28",
+      "pagina": "/servicios/maestro-de-las-estrellas-b",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-11-28",
+      "pagina": "/",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-11-28",
+      "pagina": "/servicios/trafico-frio",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-11-28",
       "pagina": "/",
       "visitas": 1
     },
@@ -16,7 +36,7 @@
     },
     {
       "fecha": "2025-11-27",
-      "pagina": "/blog/asesoria/4-estrategias-evitar-malos-comentarios",
+      "pagina": "/",
       "visitas": 1
     },
     {
@@ -31,27 +51,7 @@
     },
     {
       "fecha": "2025-11-27",
-      "pagina": "/admin",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-11-27",
-      "pagina": "/admin",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-11-27",
-      "pagina": "/blog",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-11-27",
-      "pagina": "/sobre-mi",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-11-27",
-      "pagina": "/sobre-mi",
+      "pagina": "/blog/asesoria/4-estrategias-evitar-malos-comentarios",
       "visitas": 1
     }
   ],
@@ -64,6 +64,7 @@
     "2025-11-18": 37,
     "2025-11-25": 95,
     "2025-11-26": 182,
-    "2025-11-27": 33
+    "2025-11-27": 33,
+    "2025-11-28": 5
   }
 }

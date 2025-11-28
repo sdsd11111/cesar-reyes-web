@@ -144,9 +144,9 @@
         },
         {
           "id": "trafico-tibio-caliente",
-          "titulo": "Tráfico Tibio Caliente",
+          "titulo": "Maestro de las Estrellas A",
           "descripcionCorta": "Atrae clientes más comprometidos con tu oferta",
-          "slug": "trafico-tibio-caliente",
+          "slug": "maestro-de-las-estrellas-a",
           "directPath": true
         },
         {
@@ -158,9 +158,9 @@
         },
         {
           "id": "trafico-frio",
-          "titulo": "Tráfico Frío",
+          "titulo": "Maestro de las Estrellas B",
           "descripcionCorta": "Estrategias para atraer nuevos clientes a tu restaurante",
-          "slug": "trafico-frio",
+          "slug": "maestro-de-las-estrellas-b",
           "directPath": true
         },
         {

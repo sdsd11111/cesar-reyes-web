@@ -48,7 +48,7 @@ function getEndOfDay() {
   return endOfDay;
 }
 
-export default function TraficoFrio() {
+export default function MaestroDeLasEstrellasB() {
   const [showNoWebsiteInfo, setShowNoWebsiteInfo] = useState(false);
   // State for main tabs (1, 2, 3)
   const [activeMainTab, setActiveMainTab] = useState<number>(1);

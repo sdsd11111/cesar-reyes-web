@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import TraficoTibioCalienteClient from './TraficoTibioCalienteClient';
+import MaestroDeLasEstrellasAClient from './MaestroDeLasEstrellasAClient';
 
 export const metadata: Metadata = {
   title: 'El Maestro de las Estrellas - Gestión de Reputación | César Reyes',
@@ -20,6 +20,6 @@ export const metadata: Metadata = {
   },
 };
 
-export default function TraficoTibioCalientePage() {
-  return <TraficoTibioCalienteClient />;
+export default function MaestroDeLasEstrellasAPage() {
+  return <MaestroDeLasEstrellasAClient />;
 }
