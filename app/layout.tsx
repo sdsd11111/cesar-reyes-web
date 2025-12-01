@@ -111,48 +111,48 @@ export default function RootLayout({
       {/* Contentsquare Analytics - Mapa de calor y análisis de comportamiento */}
       <Script
         id="contentsquare-analytics"
-        strategy="beforeInteractive"
+        strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: `
-              // Crear script de Contentsquare
-              window._uxa = window._uxa || [];
-              !function(){var e=window._uxa;if(e)for(var t in e)if('push'!==t&&'length'!==t&&!e[t]){e[t]=function(e){return function(){var t=Array.prototype.slice.call(arguments);e.push(t)}}(e[t])}}();
+            // Crear script de Contentsquare
+            window._uxa = window._uxa || [];
+            !function(){var e=window._uxa;if(e)for(var t in e)if('push'!==t&&'length'!==t&&!e[t]){e[t]=function(e){return function(){var t=Array.prototype.slice.call(arguments);e.push(t)}}(e[t])}}();
+            
+            // Cargar el script
+            (function() {
+              var d = document, g = d.createElement('script');
+              g.type = 'text/javascript';
+              g.async = true;
+              g.src = 'https://t.contentsquare.net/uxa/275c1908ab462.js';
+              var s = d.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(g, s);
               
-              // Cargar el script
-              (function() {
-                var d = document, g = d.createElement('script');
-                g.type = 'text/javascript';
-                g.async = true;
-                g.src = 'https://t.contentsquare.net/uxa/275c1908ab462.js';
-                var s = d.getElementsByTagName('script')[0];
-                s.parentNode.insertBefore(g, s);
-                
-                // Verificación de carga
-                var checkInterval = setInterval(function() {
-                  if (window._uxa && window._uxa.push !== Array.prototype.push) {
-                    clearInterval(checkInterval);
-                    console.log('✅ Contentsquare script loaded successfully');
-                    console.log('🔍 _uxa object:', window._uxa);
-                    
-                    // Forzar un evento de prueba
-                    try {
-                      window._uxa.push(['trackPageview']);
-                      console.log('📊 Track pageview sent');
-                    } catch (e) {
-                      console.error('❌ Error sending trackPageview:', e);
-                    }
+              // Verificación de carga
+              var checkInterval = setInterval(function() {
+                if (window._uxa && window._uxa.push !== Array.prototype.push) {
+                  clearInterval(checkInterval);
+                  console.log('✅ Contentsquare script loaded successfully');
+                  console.log('🔍 _uxa object:', window._uxa);
+                  
+                  // Forzar un evento de prueba
+                  try {
+                    window._uxa.push(['trackPageview']);
+                    console.log('📊 Track pageview sent');
+                  } catch (e) {
+                    console.error('❌ Error sending trackPageview:', e);
                   }
-                }, 100);
-                
-                // Timeout después de 5 segundos
-                setTimeout(function() {
-                  if (!window._uxa || window._uxa.push === Array.prototype.push) {
-                    console.error('❌ Contentsquare failed to load after 5 seconds');
-                    console.log('ℹ️ Window object:', window);
-                  }
-                }, 5000);
-              })();
-            `,
+                }
+              }, 100);
+              
+              // Timeout después de 5 segundos
+              setTimeout(function() {
+                if (!window._uxa || window._uxa.push === Array.prototype.push) {
+                  console.error('❌ Contentsquare failed to load after 5 seconds');
+                  console.log('ℹ️ Window object:', window);
+                }
+              }, 5000);
+            })();
+          `,
         }}
       />
       <link

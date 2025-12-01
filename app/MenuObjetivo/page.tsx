@@ -292,43 +292,55 @@ const MenuObjetivoPage = () => {
         </div>
         <div className="mt-16 max-w-6xl mx-auto px-4">
           <CardSlider>
-            <div className="relative aspect-[9/16] bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col p-8 overflow-hidden">
-              <img src="/images/menu-objetivo/solucion-actualizar-menu-digital-facil.webp" alt="Control Total en 1 Minuto" className="absolute inset-0 w-full h-full object-cover z-0 brightness-50" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/70 to-black/30 z-10"></div>
-              <div className="relative z-20 text-white flex flex-col h-full justify-center px-8">
-                <h3 className="font-bold text-3xl font-playfair [text-shadow:0_2px_4px_rgba(0,0,0,0.8)]">Control Total en 1 Minuto</h3>
-                <p className="mt-6 text-lg font-medium leading-relaxed [text-shadow:0_1px_3px_rgba(0,0,0,0.8)]">
+            <div className="relative h-auto min-h-[400px] sm:min-h-[600px] bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col overflow-hidden">
+              <div className="relative h-48 sm:h-64 w-full">
+                <img src="/images/menu-objetivo/solucion-actualizar-menu-digital-facil.webp" alt="Control Total en 1 Minuto" className="absolute inset-0 w-full h-full object-cover z-0 brightness-75" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/70 to-black/30 z-10"></div>
+              </div>
+              <div className="relative z-20 text-white flex flex-col p-6 sm:p-8 bg-gradient-to-b from-gray-900 to-gray-800 flex-grow">
+                <h3 className="font-bold text-2xl sm:text-3xl font-playfair">Control Total en 1 Minuto</h3>
+                <p className="mt-4 sm:mt-6 text-base sm:text-lg font-medium leading-relaxed text-gray-200">
                   Panel de control desde tu celular. Activas o desactivas platos y tu web, QR y WhatsApp se actualizan al instante.
                 </p>
-                <a href="#" className="mt-6 bg-white/30 text-white self-start font-medium py-2 px-6 rounded-full hover:bg-white/50 transition-colors [text-shadow:0_0_1px_#000]">
-                  Saber más
-                </a>
+                <div className="mt-auto pt-6">
+                  <a href="#" className="inline-block bg-white/30 text-white font-medium py-2 px-6 rounded-full hover:bg-white/50 transition-colors">
+                    Saber más
+                  </a>
+                </div>
               </div>
             </div>
-            <div className="relative aspect-[9/16] bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col p-8 overflow-hidden">
-              <img src="/images/menu-objetivo/solucion-posicionamiento-google-restaurantes.webp" alt="Visible Cuando Te Buscan" className="absolute inset-0 w-full h-full object-cover z-0 brightness-50" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/70 to-black/30 z-10"></div>
-              <div className="relative z-20 text-white flex flex-col h-full justify-center px-8">
-                <h3 className="font-bold text-3xl font-playfair [text-shadow:0_2px_4px_rgba(0,0,0,0.8)]">Visible Cuando Te Buscan</h3>
-                <p className="mt-6 text-lg font-medium leading-relaxed [text-shadow:0_1px_3px_rgba(0,0,0,0.8)]">
+            <div className="relative h-auto min-h-[400px] sm:min-h-[600px] bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col overflow-hidden">
+              <div className="relative h-48 sm:h-64 w-full">
+                <img src="/images/menu-objetivo/solucion-posicionamiento-google-restaurantes.webp" alt="Visible Cuando Te Buscan" className="absolute inset-0 w-full h-full object-cover z-0 brightness-75" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/70 to-black/30 z-10"></div>
+              </div>
+              <div className="relative z-20 text-white flex flex-col p-6 sm:p-8 bg-gradient-to-b from-gray-900 to-gray-800 flex-grow">
+                <h3 className="font-bold text-2xl sm:text-3xl font-playfair">Visible Cuando Te Buscan</h3>
+                <p className="mt-4 sm:mt-6 text-base sm:text-lg font-medium leading-relaxed text-gray-200">
                   Cada plato tiene su propia página optimizada para Google. Cuando alguien busca "lasaña en Loja", tu restaurante aparece.
                 </p>
-                <a href="#" className="mt-6 bg-white/30 text-white self-start font-medium py-2 px-6 rounded-full hover:bg-white/50 transition-colors [text-shadow:0_0_1px_#000]">
-                  Saber más
-                </a>
+                <div className="mt-auto pt-6">
+                  <a href="#" className="inline-block bg-white/30 text-white font-medium py-2 px-6 rounded-full hover:bg-white/50 transition-colors">
+                    Saber más
+                  </a>
+                </div>
               </div>
             </div>
-            <div className="relative aspect-[9/16] bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col p-8 overflow-hidden">
-              <img src="/images/menu-objetivo/solucion-enlace-menu-digital-whatsapp.webp" alt="El Poder del Menú Digital" className="absolute inset-0 w-full h-full object-cover z-0 brightness-50" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/70 to-black/30 z-10"></div>
-              <div className="relative z-20 text-white flex flex-col h-full justify-center px-8">
-                <h3 className="font-bold text-3xl font-playfair [text-shadow:0_2px_4px_rgba(0,0,0,0.8)]">El Poder del Menú Digital</h3>
-                <p className="mt-6 text-lg font-medium leading-relaxed [text-shadow:0_1px_3px_rgba(0,0,0,0.8)]">
+            <div className="relative h-auto min-h-[400px] sm:min-h-[600px] bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col overflow-hidden">
+              <div className="relative h-48 sm:h-64 w-full">
+                <img src="/images/menu-objetivo/solucion-enlace-menu-digital-whatsapp.webp" alt="El Poder del Menú Digital" className="absolute inset-0 w-full h-full object-cover z-0 brightness-75" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/70 to-black/30 z-10"></div>
+              </div>
+              <div className="relative z-20 text-white flex flex-col p-6 sm:p-8 bg-gradient-to-b from-gray-900 to-gray-800 flex-grow">
+                <h3 className="font-bold text-2xl sm:text-3xl font-playfair">El Poder del Menú Digital</h3>
+                <p className="mt-4 sm:mt-6 text-base sm:text-lg font-medium leading-relaxed text-gray-200">
                   No más fotos por WhatsApp. Envía un solo enlace con tu menú completo, promociones y botón de pedidos directos.
                 </p>
-                <a href="#" className="mt-6 bg-white/30 text-white self-start font-medium py-2 px-6 rounded-full hover:bg-white/50 transition-colors [text-shadow:0_0_1px_#000]">
-                  Saber más
-                </a>
+                <div className="mt-auto pt-6">
+                  <a href="#" className="inline-block bg-white/30 text-white font-medium py-2 px-6 rounded-full hover:bg-white/50 transition-colors">
+                    Saber más
+                  </a>
+                </div>
               </div>
             </div>
           </CardSlider>
@@ -347,55 +359,22 @@ const MenuObjetivoPage = () => {
           </p>
         </div>
         <div className="mt-12 max-w-4xl mx-auto">
-          <div className="relative w-full rounded-xl shadow-xl overflow-hidden bg-black/20">
+          <div className="relative w-full rounded-xl shadow-xl overflow-hidden bg-black/20 cursor-pointer"
+               onClick={() => openModal('https://www.youtube.com/watch?v=oPySzkvDjDk')}>
             <div className="relative w-full h-0 pb-[56.25%] bg-black">
-              {/* Video Player (conditionally rendered) */}
-              <div className="absolute inset-0 w-full h-full">
-                {videoUrl ? (
-                  <iframe 
-                    id="videoPlayer"
-                    className="w-full h-full"
-                    src={videoUrl}
-                    title="Video explicativo"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen>
-                  </iframe>
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-gray-900 text-white">
-                    <p>Video no disponible</p>
-                  </div>
-                )}
+              <img 
+                src="https://img.youtube.com/vi/oPySzkvDjDk/maxresdefault.jpg" 
+                alt="Vista previa del video" 
+                className="absolute inset-0 w-full h-full object-cover"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-black/30 flex items-center justify-center group">
+                <div className="bg-white/90 hover:bg-white transition-all duration-300 rounded-full p-4 group-hover:scale-110">
+                  <PlayCircle className="w-12 h-12 text-[#FF6B00]" />
+                </div>
               </div>
-              
-              {/* Thumbnail with play button (shown by default) */}
-              <div 
-                id="videoThumbnail"
-                className="absolute inset-0 w-full h-full cursor-pointer transition-opacity duration-300 hover:opacity-90"
-                onClick={() => {
-                  const player = document.getElementById('videoPlayer') as HTMLIFrameElement;
-                  const thumbnail = document.getElementById('videoThumbnail');
-                  if (player && thumbnail) {
-                    player.src = 'https://www.youtube.com/embed/oPySzkvDjDk?autoplay=1&mute=0&rel=0&controls=1&showinfo=0&modestbranding=1';
-                    thumbnail.style.opacity = '0';
-                    thumbnail.style.pointerEvents = 'none';
-                  }
-                }}
-              >
-                <img 
-                  src="https://img.youtube.com/vi/oPySzkvDjDk/maxresdefault.jpg" 
-                  alt="Vista previa del video" 
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-black/30 flex items-center justify-center group">
-                  <div className="bg-white/90 hover:bg-white transition-all duration-300 rounded-full p-4 group-hover:scale-110">
-                    <PlayCircle className="w-12 h-12 text-[#FF6B00]" />
-                  </div>
-                </div>
-                <div className="absolute bottom-4 right-4 bg-black/70 text-white text-xs px-2 py-1 rounded">
-                  2:45
-                </div>
+              <div className="absolute bottom-4 right-4 bg-black/70 text-white text-xs px-2 py-1 rounded">
+                2:45
               </div>
             </div>
           </div>

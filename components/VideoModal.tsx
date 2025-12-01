@@ -53,16 +53,16 @@ export default function VideoModal({ isOpen, onClose, videoUrl, thumbnailUrl }: 
   return (
     <div 
       id="video-modal-container"
-      className="fixed inset-0 z-[9999] bg-black/90 flex items-start justify-center p-2 sm:p-4 pt-16 sm:pt-20 overflow-y-auto"
+      className="fixed inset-0 z-[9999] bg-black/90 flex items-start justify-center p-0 sm:p-4 overflow-y-auto"
       onClick={onClose}
     >
-      <div className="w-full max-w-4xl mx-auto my-4 sm:my-8 relative" onClick={(e) => e.stopPropagation()}>
-        <div className="text-center mb-3 sm:mb-6 px-2">
+      <div className="w-full h-full sm:h-auto sm:max-w-4xl mx-auto relative" onClick={(e) => e.stopPropagation()}>
+        <div className="text-center mb-2 sm:mb-4 px-2 pt-4 sm:pt-0">
           <h2 className="text-xl sm:text-3xl font-bold text-white mb-1 sm:mb-2">Mira nuestro video</h2>
           <p className="text-xs sm:text-sm text-gray-300">Conoce más sobre nuestro enfoque y cómo podemos ayudarte</p>
         </div>
         
-        <div className="relative bg-black rounded-lg overflow-hidden shadow-2xl mx-auto w-full" style={{ aspectRatio: '16/9' }}>
+        <div className="relative bg-black overflow-hidden w-full h-[calc(100vh-120px)] sm:h-auto sm:aspect-video sm:rounded-lg shadow-2xl mx-auto">
           <button
             onClick={onClose}
             className="absolute -top-10 right-0 z-50 p-2 text-white hover:text-gray-300 transition-colors"
@@ -77,14 +77,13 @@ export default function VideoModal({ isOpen, onClose, videoUrl, thumbnailUrl }: 
             <>
               <div className="w-full h-full relative">
                 <iframe
-                  className="w-full h-full min-h-[200px] sm:min-h-[400px]"
+                  className="absolute top-0 left-0 w-full h-full"
                   src={youtubeEmbedUrl}
                   title="YouTube video player"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
                   loading="lazy"
-                  style={{ minHeight: '50vh' }}
                 />
               </div>
             </>
