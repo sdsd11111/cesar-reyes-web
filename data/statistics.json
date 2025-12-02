@@ -1,11 +1,21 @@
 {
-  "totalVisitas": 1036,
-  "visitasHoy": 1036,
+  "totalVisitas": 1042,
+  "visitasHoy": 1042,
   "articulosPublicados": 0,
   "suscriptoresNewsletter": 0,
   "ultimasVisitas": [
     {
       "fecha": "2025-12-02",
+      "pagina": "/MenuObjetivo",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-12-02",
+      "pagina": "/blog",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-12-02",
       "pagina": "/",
       "visitas": 1
     },
@@ -25,33 +35,23 @@
       "visitas": 1
     },
     {
-      "fecha": "2025-12-01",
+      "fecha": "2025-12-02",
+      "pagina": "/",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-12-02",
       "pagina": "/MenuObjetivo",
       "visitas": 1
     },
     {
-      "fecha": "2025-12-01",
-      "pagina": "/",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-12-01",
-      "pagina": "/",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-12-01",
-      "pagina": "/",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-12-01",
-      "pagina": "/",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-12-01",
+      "fecha": "2025-12-02",
       "pagina": "/MenuObjetivo",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-12-02",
+      "pagina": "/",
       "visitas": 1
     }
   ],
@@ -67,6 +67,6 @@
     "2025-11-27": 33,
     "2025-11-28": 5,
     "2025-12-01": 11,
-    "2025-12-02": 4
+    "2025-12-02": 10
   }
 }

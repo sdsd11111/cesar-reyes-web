@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { PlayCircle, Clock, Smartphone, DollarSign, Zap, Search, Rocket, CheckCircle, MessageCircle, ArrowRight } from 'lucide-react';
+import { PlayCircle, Clock, Smartphone, DollarSign, Zap, Search, Rocket, CheckCircle, MessageCircle, ArrowRight, Check } from 'lucide-react';
 import FAQSection from '@/components/FaqSection';
 import VideoModal from '@/components/VideoModal';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -69,23 +69,43 @@ const MenuObjetivoClient = () => {
                 <div className="absolute inset-0 bg-black opacity-50"></div>
                 <div className="relative z-10 text-center px-4">
                     <h1 className="text-4xl md:text-6xl font-extrabold text-white" style={{ fontFamily: 'var(--font-poiret-one)' }}>
-                        <div className="block">Tu menú digital, sin complicaciones</div>
-                        <div className="text-[#FF6B00]">en menos de 1 minuto</div>
+                        <div className="block">En 2026, ChatGPT no va a recomendar tu restaurante</div>
+                        <div className="text-[#FF6B00]">si no te pones las pilas</div>
                     </h1>
                     <div className="text-lg md:text-2xl mt-4 font-montserrat">
                         <ExpandableText
-                            fullText="Recupera tu tiempo, atrae más clientes por Google y deja de pelear con la tecnología. La solución ideal para restaurantes en Quito, Guayaquil y todo Ecuador."
-                            shortText="Recupera..."
+                            fullText='Si no apareces cuando alguien pregunta en GOOGLE "Almuerzos cerca de mi", ya no importa qué tan buena sea tu comida.<br class="hidden md:block" /> Simplemente no existes para la nueva generación que busca con Inteligencia artificial.'
+                            shortText="Si no apareces cuando alguien pregunta en GOOGLE..."
                         />
                     </div>
-                    <button
-                        onClick={() => openModal('https://www.youtube.com/watch?v=4hot82GQezI')}
-                        className="mt-8 inline-block bg-[#FF6B00] text-white font-bold py-4 px-8 rounded-lg shadow-lg hover:bg-[#E66000] transition-colors text-lg"
-                    >
-                        <PlayCircle className="inline-block mr-2" />
-                        Quiero Ver Cómo Funciona
-                    </button>
+                    {/* Button removed as per request */}
                     <p className="mt-4 text-sm text-gray-300">✅ Sin tarjeta de crédito. Sin compromisos. Solo una conversación.</p>
+                </div>
+            </section>
+
+            {/* New Video Section */}
+            <section className="py-20 px-4 bg-black">
+                <div className="max-w-5xl mx-auto text-center">
+                    <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 font-montserrat">
+                        Mira cómo funciona <span className="text-[#FF6B00]">MenúObjetivo</span>
+                    </h2>
+                    <div className="relative w-full pb-[56.25%] h-0 rounded-2xl overflow-hidden shadow-2xl border-4 border-[#FF6B00]/30">
+                        <iframe
+                            src="https://www.youtube.com/embed/4hot82GQezI"
+                            title="MenúObjetivo Demo"
+                            className="absolute top-0 left-0 w-full h-full"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                        ></iframe>
+                    </div>
+                    <div className="mt-8">
+                        <a
+                            href="#formulario"
+                            className="inline-block bg-[#FF6B00] text-white font-bold py-4 px-8 rounded-lg shadow-lg hover:bg-[#E66000] transition-colors text-lg"
+                        >
+                            ¡Quiero Empezar Ahora!
+                        </a>
+                    </div>
                 </div>
             </section>
 
@@ -413,31 +433,164 @@ const MenuObjetivoClient = () => {
                 </div>
             </section>
 
-            {/* Section 7: Final Close */}
-            <section className="py-20 px-4 bg-[#2B2B2B] text-white">
-                <div className="text-center max-w-4xl mx-auto">
-                    <h2 className="text-4xl md:text-5xl font-bold font-poppins">
-                        Hoy puedes <span className="text-[#FF6B00]">cambiar la forma</span> en que vendes.
-                    </h2>
-                    <p className="text-gray-300 mt-4 text-lg">
-                        Tienes dos caminos: seguir perdiendo tiempo o unirte a los restaurantes que ya están automatizando su crecimiento.
-                    </p>
-                    <div className="mt-12 bg-[#FFF5E6] border-2 border-[#FF6B00] p-8 rounded-lg text-left text-[#2B2B2B]">
-                        <h3 className="font-bold text-2xl text-center font-montserrat">🍽️ Activa Tu MenúObjetivo Hoy Mismo</h3>
-                        <ul className="mt-6 space-y-4">
-                            <li className="flex items-start"><CheckCircle className="text-[#00C4A7] mr-3 flex-shrink-0" /> <span>Tu página web profesional con tu nombre y marca.</span></li>
-                            <li className="flex items-start"><CheckCircle className="text-[#00C4A7] mr-3 flex-shrink-0" /> <span>Actualizaciones ilimitadas con 1 clic desde tu celular.</span></li>
-                            <li className="flex items-start"><CheckCircle className="text-[#00C4A7] mr-3 flex-shrink-0" /> <span>Posicionamiento en Google incluido (SEO local por plato).</span></li>
-                            <li className="flex items-start"><CheckCircle className="text-[#00C4A7] mr-3 flex-shrink-0" /> <span>Código QR dinámico que siempre apunta a tu menú actualizado.</span></li>
-                        </ul>
+            {/* Section 7: Final Close - Reservation Form */}
+            <section id="formulario" className="py-16 bg-gradient-to-r from-orange-500 to-orange-600 text-white">
+                <div className="container mx-auto px-4">
+                    <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">No seas el último en modernizarte</h2>
+
+                    <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+                        {/* Columna izquierda - Contenido existente */}
+                        <div className="space-y-6">
+                            <p className="text-xl mb-6">
+                                Esta tecnología por $150 USD es un regalo insostenible. Lo hacemos para revolucionar Loja y Cuenca durante el festival.
+                            </p>
+
+                            {/* Contador de cupos */}
+                            <div className="bg-white/20 backdrop-blur-sm rounded-lg p-6 mb-6">
+                                <div className="text-xl font-medium mb-3 text-center">Cupos Restantes: 4/20</div>
+                                <div className="w-full bg-white/30 rounded-full h-4 mb-4">
+                                    <div className="bg-white h-4 rounded-full" style={{ width: '20%' }}></div>
+                                </div>
+
+                                <ul className="space-y-3 text-left">
+                                    <li className="flex items-start">
+                                        <Check className="h-5 w-5 text-green-300 mt-0.5 mr-2 flex-shrink-0" />
+                                        <span>Pago único de $150 (sin mensualidades ocultas)</span>
+                                    </li>
+                                    <li className="flex items-start">
+                                        <Check className="h-5 w-5 text-green-300 mt-0.5 mr-2 flex-shrink-0" />
+                                        <span>Diseño personalizado para tu restaurante</span>
+                                    </li>
+                                    <li className="flex items-start">
+                                        <Check className="h-5 w-5 text-green-300 mt-0.5 mr-2 flex-shrink-0" />
+                                        <span>Panel de control fácil de usar</span>
+                                    </li>
+                                    <li className="flex items-start">
+                                        <Check className="h-5 w-5 text-green-300 mt-0.5 mr-2 flex-shrink-0" />
+                                        <span>Soporte prioritario durante 3 meses</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <p className="text-orange-100 text-lg mb-6">
+                                <span className="font-semibold text-white">Garantía:</span> Si no te gusta el diseño, lo ajustamos hasta que lo ames.
+                            </p>
+
+                            {/* Botón de WhatsApp */}
+                            <a
+                                href="https://wa.me/593963410409?text=Hola%20César,%20estoy%20interesado%20en%20tus%20servicios"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center justify-center w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200"
+                            >
+                                <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.966-.273-.099-.471-.148-.67.15-.197.297-.767.963-.94 1.16-.173.199-.347.221-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.795-1.484-1.77-1.66-2.07-.173-.297-.018-.458.132-.606.136-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.611-.916-2.207-.242-.579-.487-.5-.669-.508-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.718 2.005-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.016a9.6 9.6 0 01-5.2-1.524l-.366-.219-3.735.982.998-3.648-.235-.374a9.6 9.6 0 01-1.51-5.127 9.7 9.7 0 0110.09-9.6 9.7 9.7 0 019.6 10.09 9.7 9.7 0 01-9.6 9.6z" fillRule="evenodd" clipRule="evenodd" />
+                                </svg>
+                                Contáctame por WhatsApp
+                            </a>
+                        </div>
+
+                        {/* Columna derecha - Formulario */}
+                        <div className="bg-white rounded-xl shadow-xl p-6 border border-orange-100">
+                            <h3 className="text-2xl font-bold text-orange-800 mb-6">
+                                RESERVA TU CUPO AHORA
+                            </h3>
+
+                            <form id="formulario-reserva-restaurantes" className="space-y-5">
+                                <div>
+                                    <label htmlFor="nombre" className="block text-sm font-medium text-gray-700 mb-1">
+                                        Nombre completo <span className="text-red-500">*</span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        id="nombre"
+                                        name="nombre"
+                                        required
+                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                                        placeholder="Tu nombre completo"
+                                    />
+                                </div>
+
+                                <div>
+                                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                                        Correo electrónico <span className="text-red-500">*</span>
+                                    </label>
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        name="email"
+                                        required
+                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                                        placeholder="tucorreo@ejemplo.com"
+                                    />
+                                </div>
+
+                                <div>
+                                    <label htmlFor="telefono" className="block text-sm font-medium text-gray-700 mb-1">
+                                        WhatsApp <span className="text-red-500">*</span>
+                                    </label>
+                                    <input
+                                        type="tel"
+                                        id="telefono"
+                                        name="telefono"
+                                        required
+                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                                        placeholder="Ejemplo: 593987654321"
+                                    />
+                                </div>
+
+                                <div>
+                                    <label htmlFor="tipo_restaurante" className="block text-sm font-medium text-gray-700 mb-1">
+                                        Tipo de restaurante <span className="text-red-500">*</span>
+                                    </label>
+                                    <select
+                                        id="tipo_restaurante"
+                                        name="tipo_restaurante"
+                                        required
+                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                                    >
+                                        <option value="">Selecciona una opción</option>
+                                        <option value="Comida rapida">Comida rápida</option>
+                                        <option value="Restaurante">Restaurante</option>
+                                        <option value="Cafetería">Cafetería</option>
+                                        <option value="Pizzería">Pizzería</option>
+                                        <option value="Otro">Otro (especificar abajo)</option>
+                                    </select>
+                                </div>
+
+                                <div className="flex items-start">
+                                    <div className="flex items-center h-5">
+                                        <input
+                                            id="terminos"
+                                            name="terminos"
+                                            type="checkbox"
+                                            required
+                                            className="h-4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300 rounded"
+                                        />
+                                    </div>
+                                    <div className="ml-3 text-sm">
+                                        <label htmlFor="terminos" className="font-medium text-gray-700">
+                                            Acepto los términos y condiciones <span className="text-red-500">*</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <button
+                                    type="submit"
+                                    className="w-full flex justify-center items-center px-6 py-4 border border-transparent rounded-xl text-base font-medium text-white bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 transition-all duration-200 transform hover:scale-[1.02] shadow-lg"
+                                >
+                                    <span>RESERVAR MI LUGAR</span>
+                                    <ArrowRight className="ml-2 h-5 w-5" />
+                                </button>
+
+                                <p className="text-xs text-gray-500 text-center">
+                                    Al hacer clic, te contactaremos en 24h para confirmar detalles y método de pago.
+                                    <br />
+                                    No se cobra hasta que confirmes.
+                                </p>
+                            </form>
+                        </div>
                     </div>
-                    <a
-                        href="https://wa.me/593963410409?text=Hola%2C%20le%C3%AD%20toda%20la%20landing%20y%20quiero%20activar%20Menú%20Objetivo%20para%20mi%20restaurante.%20%C2%BFCu%C3%A1ndo%20podemos%20empezar%3F"
-                        className="mt-12 inline-block bg-[#FF6B00] text-white font-bold py-5 px-12 rounded-lg shadow-lg hover:bg-[#E66000] transition-colors text-xl"
-                    >
-                        🔥 Quiero Empezar Ahora
-                    </a>
-                    <p className="mt-4 text-sm text-gray-400">🔒 Prueba sin compromiso. Sin ataduras. Sin letra chica.</p>
                 </div>
             </section>
         </div>
