@@ -8,6 +8,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { ExpandableText } from "@/components/ui/expandable-text";
 import { CardSlider } from "@/components/ui/card-slider";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import DemoFacade from '@/components/DemoFacade';
 
 const CompactCard = ({ title, shortDesc, fullDesc, justification, icon: Icon }: { title: string, shortDesc: string, fullDesc: string, justification: string, icon: any }) => {
     const [isExpanded, setIsExpanded] = useState(false);
@@ -166,14 +167,15 @@ const MenuObjetivoClient = () => {
                     <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 font-montserrat">
                         Mira cómo funciona <span className="text-[#FF6B00]">MenúObjetivo</span>
                     </h2>
-                    <div className="relative w-full pb-[56.25%] h-0 rounded-2xl overflow-hidden shadow-2xl border-4 border-[#FF6B00]/30">
-                        <iframe
-                            src="https://www.youtube.com/embed/4hot82GQezI"
-                            title="MenúObjetivo Demo"
-                            className="absolute top-0 left-0 w-full h-full"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                        ></iframe>
+                    <div className="relative w-full pb-[56.25%] h-0 rounded-2xl overflow-hidden shadow-2xl border-4 border-[#FF6B00]/30 bg-black">
+                        <div className="absolute top-0 left-0 w-full h-full">
+                            <DemoFacade
+                                src="https://www.youtube.com/embed/4hot82GQezI"
+                                title="MenúObjetivo Demo"
+                                previewImage="https://img.youtube.com/vi/4hot82GQezI/maxresdefault.jpg"
+                                buttonText="Ver Video"
+                            />
+                        </div>
                     </div>
                     <div className="mt-8">
                         <a
@@ -426,7 +428,14 @@ const MenuObjetivoClient = () => {
                                 </div>
                                 <p className="text-sm text-gray-500 mx-auto font-medium">Panel de Control</p>
                             </div>
-                            <iframe src="https://los-almuerzos.vercel.app/admin" className="w-full h-[70vh]" title="Panel de Control"></iframe>
+                            <div className="w-full h-[70vh]">
+                                <DemoFacade
+                                    src="https://los-almuerzos.vercel.app/admin"
+                                    title="Panel de Control"
+                                    buttonText="Probar Panel Admin"
+                                    className="bg-gray-50"
+                                />
+                            </div>
                         </div>
                         <div className="rounded-2xl shadow-2xl overflow-hidden border-4 border-gray-200">
                             <div className="bg-gray-100 p-3 flex items-center border-b border-gray-200">
@@ -437,7 +446,14 @@ const MenuObjetivoClient = () => {
                                 </div>
                                 <p className="text-sm text-gray-500 mx-auto font-medium">Menú Público</p>
                             </div>
-                            <iframe src="https://los-almuerzos.vercel.app/" className="w-full h-[70vh]" title="Menú Público"></iframe>
+                            <div className="w-full h-[70vh]">
+                                <DemoFacade
+                                    src="https://los-almuerzos.vercel.app/"
+                                    title="Menú Público"
+                                    buttonText="Ver Menú en Vivo"
+                                    className="bg-white"
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
