@@ -1,57 +1,57 @@
 {
-  "totalVisitas": 1046,
-  "visitasHoy": 1046,
+  "totalVisitas": 1090,
+  "visitasHoy": 1090,
   "articulosPublicados": 0,
   "suscriptoresNewsletter": 0,
   "ultimasVisitas": [
     {
-      "fecha": "2025-12-02",
+      "fecha": "2025-12-03",
       "pagina": "/MenuObjetivo",
       "visitas": 1
     },
     {
-      "fecha": "2025-12-02",
-      "pagina": "/blog",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-12-02",
-      "pagina": "/blog",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-12-02",
-      "pagina": "/",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-12-02",
+      "fecha": "2025-12-03",
       "pagina": "/MenuObjetivo",
       "visitas": 1
     },
     {
-      "fecha": "2025-12-02",
-      "pagina": "/blog",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-12-02",
-      "pagina": "/",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-12-02",
+      "fecha": "2025-12-03",
       "pagina": "/MenuObjetivo",
       "visitas": 1
     },
     {
-      "fecha": "2025-12-02",
+      "fecha": "2025-12-03",
       "pagina": "/MenuObjetivo",
       "visitas": 1
     },
     {
-      "fecha": "2025-12-02",
-      "pagina": "/",
+      "fecha": "2025-12-03",
+      "pagina": "/MenuObjetivo",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-12-03",
+      "pagina": "/MenuObjetivo",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-12-03",
+      "pagina": "/MenuObjetivo",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-12-03",
+      "pagina": "/MenuObjetivo",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-12-03",
+      "pagina": "/servicios/promo-restaurantes-artes-vivas",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-12-03",
+      "pagina": "/MenuObjetivo",
       "visitas": 1
     }
   ],
@@ -67,6 +67,7 @@
     "2025-11-27": 33,
     "2025-11-28": 5,
     "2025-12-01": 11,
-    "2025-12-02": 14
+    "2025-12-02": 14,
+    "2025-12-03": 44
   }
 }
