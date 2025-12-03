@@ -139,6 +139,21 @@ export const pageContent = {
           q: "No tengo tiempo para esto",
           a: "La falta de tiempo justifica automatización. Una vez listo: SEO atrae 24/7, chatbots responden, forms capturan. Inversión inicial: 10 horas. Ahorrado anualmente casi $2000 dólares o 40+ horas mensuales.",
           cta: "Optimicemos tu tiempo de trabajo (enlaza a agenda)."
+        },
+        {
+          q: "¿Cuáles son sus servicios principales?",
+          a: "Nos especializamos en Consultoría Estratégica, Desarrollo Web Optimizado para Ventas, Posicionamiento SEO Local y Automatización de Procesos para microempresas en Ecuador.",
+          cta: "Ver todos los servicios"
+        },
+        {
+          q: "¿Con qué tipo de clientes trabajan?",
+          a: "Trabajamos principalmente con microempresas, profesionales independientes y negocios locales en Loja, Quito, Guayaquil y Cuenca que buscan crecimiento medible.",
+          cta: "Ver casos de éxito"
+        },
+        {
+          q: "¿Qué experiencia tienen?",
+          a: "César Reyes Jaramillo es Ingeniero Comercial con 25 años de experiencia asesorando a negocios en todo el Ecuador, combinando estrategia tradicional con herramientas digitales.",
+          cta: "Conoce más sobre mí"
         }
       ]
     },
@@ -289,6 +304,21 @@ export const pageContent = {
           q: "No tengo tiempo para esto",
           a: "Exactamente por eso necesitas una estrategia digital que funcione automáticamente. Mientras tú te enfocas en atender a tus clientes actuales, tu sistema digital debe estar atrayendo clientes nuevos. ¿Sabes cuánto tiempo pierdes contestando la misma pregunta por WhatsApp 20 veces al día? Con automatización, ese tiempo lo recuperas para hacer crecer tu negocio.",
           cta: "Recupera tu tiempo - Automatiza ya"
+        },
+        {
+          q: "¿Qué servicios ofrecen para ayudarme?",
+          a: "Te ofrecemos un acompañamiento integral que incluye Consultoría de Negocios, Diseño Web Estratégico y Posicionamiento en Google para que tu negocio deje de ser invisible.",
+          cta: "Descubre cómo podemos ayudarte"
+        },
+        {
+          q: "¿Es esto para mi tipo de negocio?",
+          a: "Si tienes una microempresa o eres un profesional en Ecuador y sientes que podrías estar vendiendo más pero no sabes cómo, esto es para ti. Ayudamos a quienes quieren crecer de verdad.",
+          cta: "Hablemos de tu negocio"
+        },
+        {
+          q: "¿Quién me va a asesorar?",
+          a: "Trabajarás directamente con César Reyes Jaramillo, Ingeniero Comercial con 25 años de experiencia ayudando a emprendedores ecuatorianos a cumplir sus sueños de negocio.",
+          cta: "Conoce a tu consultor"
         }
       ]
     },
@@ -308,4 +338,4 @@ export const pageContent = {
       secondary_cta: "Ver nuestros casos de éxito"
     }
   }
-};;
+};

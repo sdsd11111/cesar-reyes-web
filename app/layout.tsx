@@ -12,6 +12,7 @@ import Script from 'next/script'
 import ClarityAnalytics from '@/components/ClarityAnalytics'
 import FloatingPromoCardWrapper from '@/components/FloatingPromoCardWrapper';
 import PersonSchema from '@/components/schema/PersonSchema';
+import OrganizationSchema from '@/components/schema/OrganizationSchema';
 
 declare global {
   interface Window {
@@ -187,6 +188,7 @@ export default function RootLayout({
         }}
       >
         <PersonSchema />
+        <OrganizationSchema />
         {/* Google Tag Manager */}
         <Script id="google-tag-manager" strategy="lazyOnload">
           {`

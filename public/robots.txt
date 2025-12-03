@@ -1,12 +1,19 @@
-# *
+# https://www.robotstxt.org/robotstxt.html
 User-agent: *
 Allow: /
-Disallow: /admin
-Disallow: /api
 
-# Host
-Host: https://cesarreyesjaramillo.com
+# OpenAI bots
+User-agent: GPTBot
+Allow: /
 
-# Sitemaps
-Sitemap: https://cesarreyesjaramillo.com/sitemap.xml
-Sitemap: https://cesarreyesjaramillo.com/server-sitemap.xml
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Common Crawl (used by many LLMs)
+User-agent: CCBot
+Allow: /
+
+Sitemap: https://www.cesarreyesjaramillo.com/sitemap.xml

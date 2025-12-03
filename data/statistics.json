@@ -1,9 +1,19 @@
 {
-  "totalVisitas": 1105,
-  "visitasHoy": 1105,
+  "totalVisitas": 1107,
+  "visitasHoy": 1107,
   "articulosPublicados": 0,
   "suscriptoresNewsletter": 0,
   "ultimasVisitas": [
+    {
+      "fecha": "2025-12-03",
+      "pagina": "/",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-12-03",
+      "pagina": "/",
+      "visitas": 1
+    },
     {
       "fecha": "2025-12-03",
       "pagina": "/",
@@ -43,16 +53,6 @@
       "fecha": "2025-12-03",
       "pagina": "/",
       "visitas": 1
-    },
-    {
-      "fecha": "2025-12-03",
-      "pagina": "/blog",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-12-03",
-      "pagina": "/servicios/desarrollo-web",
-      "visitas": 1
     }
   ],
   "visitasPorDia": {
@@ -68,6 +68,6 @@
     "2025-11-28": 5,
     "2025-12-01": 11,
     "2025-12-02": 14,
-    "2025-12-03": 59
+    "2025-12-03": 61
   }
 }
