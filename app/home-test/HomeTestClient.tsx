@@ -32,12 +32,12 @@ const VideoModal = dynamic(() => import('@/components/VideoModal'), { ssr: false
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardFooter, CardTitle } from "@/components/ui/card";
-import { 
-  Carousel, 
-  CarouselContent, 
-  CarouselItem, 
-  CarouselNext, 
-  CarouselPrevious 
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious
 } from "@/components/ui/carousel";
 
 // Importación de hooks personalizados
@@ -57,32 +57,47 @@ const iconMap: { [key: string]: React.ElementType } = {
 };
 
 function CardItem({ card }: { card: any }) {
+  // Helper to determine if the card has an image (like the google.webp case)
+  const isImageCard = card.icon === 'Image';
+
   return (
     <div className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-100 h-full">
-      <div className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 ${
-        card.icon === 'AlertTriangle' ? 'bg-red-50 text-red-500' : 
-        card.icon === 'ShoppingCart' ? 'bg-blue-50 text-blue-500' : 
-        'bg-amber-50 text-amber-500'
-      }`}>
-        {card.icon === 'Search' && (
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-        )}
-        {card.icon === 'ShoppingCart' && (
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
-            <circle cx="8" cy="21" r="1"></circle>
-            <circle cx="19" cy="21" r="1"></circle>
-            <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
-          </svg>
-        )}
-        {card.icon === 'AlertTriangle' && (
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
-            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
-            <line x1="12" y1="9" x2="12" y2="13"></line>
-            <line x1="12" y1="17" x2="12.01" y2="17"></line>
-          </svg>
+      <div className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 ${isImageCard ? 'overflow-hidden' :
+        card.icon === 'AlertTriangle' ? 'bg-red-50 text-red-500' :
+          card.icon === 'ShoppingCart' ? 'bg-blue-50 text-blue-500' :
+            'bg-amber-50 text-amber-500'
+        }`}>
+        {isImageCard ? (
+          <Image
+            src={card.imageSrc || "/images/google.webp"}
+            alt={card.title}
+            width={48}
+            height={48}
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          <>
+            {card.icon === 'Search' && (
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            )}
+            {card.icon === 'ShoppingCart' && (
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+                <circle cx="8" cy="21" r="1"></circle>
+                <circle cx="19" cy="21" r="1"></circle>
+                <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
+              </svg>
+            )}
+            {card.icon === 'AlertTriangle' && (
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                <line x1="12" y1="9" x2="12" y2="13"></line>
+                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+              </svg>
+            )}
+          </>
         )}
       </div>
       <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">{card.title}</h3>
@@ -123,7 +138,7 @@ export default function HomeTestClient({ content, isEmotionalView, initialShowCo
   const primaryActionClasses = isEmotionalView
     ? "bg-orange-600 hover:bg-orange-700 text-white"
     : "bg-blue-600 hover:bg-blue-700 text-white";
-  
+
   const activeTabClasses = isEmotionalView
     ? "data-[state=active]:bg-orange-100 data-[state=active]:text-orange-700"
     : "data-[state=active]:bg-blue-100 data-[state=active]:text-blue-700";
@@ -133,94 +148,99 @@ export default function HomeTestClient({ content, isEmotionalView, initialShowCo
       {/* Hero Section */}
       <section className="relative w-full h-screen min-h-[600px] flex items-center justify-center text-center overflow-hidden bg-black">
         {/* Video Background - Client Only for Performance but Poster is SSR */}
-        <div className={`absolute inset-0 transition-opacity duration-1000 ${isClient && isVideoLoaded ? 'opacity-100' : 'opacity-100'}`}>
-             {/* Use img as fallback/poster always visible */}
-             <img 
-                src="/images/portada_cesarbn.webp" 
-                alt="Fondo de portada" 
-                className={`w-full h-full object-cover absolute inset-0 ${isClient && isVideoLoaded ? 'hidden' : 'block'}`}
-              />
-             {isClient && (
-                <video 
-                  autoPlay 
-                  loop 
-                  muted 
-                  playsInline 
-                  className="w-full h-full object-cover object-center absolute inset-0"
-                  poster="/images/portada_cesarbn.webp"
-                  onLoadedData={() => setIsVideoLoaded(true)}
-                >
-                  <source src="/images/Videos/Promo Artes Vivas 2025 Objetivo.mp4" type="video/mp4" />
-                </video>
-             )}
+        <div className="absolute inset-0 transition-opacity duration-1000">
+          {/* Use next/image for optimized LCP */}
+          <div className={`absolute inset-0 ${isVideoLoaded ? 'hidden' : 'block'}`}>
+            <Image
+              src="/images/portada_cesarbn.webp"
+              alt="Fondo de portada"
+              fill
+              priority
+              className="object-cover"
+              sizes="100vw"
+            />
+          </div>
+          {isClient && (
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className={`w-full h-full object-cover object-center absolute inset-0 transition-opacity duration-1000 ${isVideoLoaded ? 'opacity-100' : 'opacity-0'}`}
+              poster="/images/portada_cesarbn.webp"
+              onLoadedData={() => setIsVideoLoaded(true)}
+            >
+              <source src="/images/Videos/Promo Artes Vivas 2025 Objetivo.mp4" type="video/mp4" />
+            </video>
+          )}
         </div>
         <div className="absolute inset-0 bg-black/60 z-10"></div>
         <div className="relative z-20 container mx-auto px-4 flex flex-col items-center justify-center h-full">
-            {/* Versión Desktop */}
-            <div className="hidden md:block">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white drop-shadow-lg mb-4" style={{ fontFamily: 'var(--font-poiret-one)' }}>Consultor para Microempresas en Ecuador</h1>
-              <h2 className="text-xl md:text-2xl font-medium text-white/90 mb-6 drop-shadow-md" style={{ fontFamily: 'var(--font-montserrat)' }}>Crece Más del 4% Anual con Datos Reales y Estrategias Probadas</h2>
-              <div className="max-w-2xl mx-auto text-lg leading-relaxed mb-8">
-                <p className="text-white/90">
-                  {showFullText ? (
-                    <>
-                      {fullText}
-                      <button 
-                        onClick={() => setShowFullText(false)}
-                        className="text-white/90 font-medium hover:underline ml-1 focus:outline-none inline-flex items-center"
-                      >
-                        <ChevronUp className="w-4 h-4 ml-1" />
-                      </button>
-                    </>
-                  ) : (
-                    <>
-                      {shortText}
-                      <button 
-                        onClick={() => setShowFullText(true)}
-                        className="text-white/90 font-medium hover:underline ml-1 focus:outline-none"
-                      >
-                        ...seguir leyendo
-                      </button>
-                    </>
-                  )}
-                </p>
-              </div>
-              <Button 
-                size="lg" 
-                className="bg-white/90 text-black font-bold hover:bg-white transition-transform hover:scale-105 px-8 py-6 text-lg"
-                asChild
-              >
-                <a 
-                  href="https://api.whatsapp.com/send/?phone=593963410409&text=Hola+C%C3%A9sar%2C+estoy+interesado+en+tus+servicios&type=phone_number&app_absent=0" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                >
-                  Agenda una Llamada Ahora
-                </a>
-              </Button>
-            </div>
-            
-            {/* Versión Móvil */}
-            <div className="md:hidden px-4">
-              <h2 className="text-2xl font-bold text-white drop-shadow-lg mb-2">Consultor para Microempresas en Ecuador</h2>
-              <h2 className="text-lg font-medium text-white/90 mb-4 drop-shadow-md">Crece Más del 4% Anual con Datos Reales</h2>
-              <p className="text-white/90 text-sm mb-6">
-                Estudios de mercado, diseño web y SEO local. César Reyes Jaramillo – Tu experto en Ecuador.
+          {/* Versión Desktop */}
+          <div className="hidden md:block">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white drop-shadow-lg mb-4" style={{ fontFamily: 'var(--font-poiret-one)' }}>Consultor para Microempresas en Ecuador</h1>
+            <h2 className="text-xl md:text-2xl font-medium text-white/90 mb-6 drop-shadow-md" style={{ fontFamily: 'var(--font-montserrat)' }}>Crece Más del 4% Anual con Datos Reales y Estrategias Probadas</h2>
+            <div className="max-w-2xl mx-auto text-lg leading-relaxed mb-8">
+              <p className="text-white/90">
+                {showFullText ? (
+                  <>
+                    {fullText}
+                    <button
+                      onClick={() => setShowFullText(false)}
+                      className="text-white/90 font-medium hover:underline ml-1 focus:outline-none inline-flex items-center"
+                    >
+                      <ChevronUp className="w-4 h-4 ml-1" />
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    {shortText}
+                    <button
+                      onClick={() => setShowFullText(true)}
+                      className="text-white/90 font-medium hover:underline ml-1 focus:outline-none"
+                    >
+                      ...seguir leyendo
+                    </button>
+                  </>
+                )}
               </p>
-              <Button 
-                size="lg" 
-                className="w-full bg-white/90 text-black font-bold hover:bg-white transition-transform hover:scale-105 px-6 py-4 text-base"
-                asChild
-              >
-                <a 
-                  href="https://api.whatsapp.com/send/?phone=593963410409&text=Hola+C%C3%A9sar%2C+estoy+interesado+en+tus+servicios&type=phone_number&app_absent=0" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                >
-                  Agenda una Llamada Ahora
-                </a>
-              </Button>
             </div>
+            <Button
+              size="lg"
+              className="bg-white/90 text-black font-bold hover:bg-white transition-transform hover:scale-105 px-8 py-6 text-lg"
+              asChild
+            >
+              <a
+                href="https://api.whatsapp.com/send/?phone=593963410409&text=Hola+C%C3%A9sar%2C+estoy+interesado+en+tus+servicios&type=phone_number&app_absent=0"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Agenda una Llamada Ahora
+              </a>
+            </Button>
+          </div>
+
+          {/* Versión Móvil */}
+          <div className="md:hidden px-4">
+            <h2 className="text-2xl font-bold text-white drop-shadow-lg mb-2">Consultor para Microempresas en Ecuador</h2>
+            <h2 className="text-lg font-medium text-white/90 mb-4 drop-shadow-md">Crece Más del 4% Anual con Datos Reales</h2>
+            <p className="text-white/90 text-sm mb-6">
+              Estudios de mercado, diseño web y SEO local. César Reyes Jaramillo – Tu experto en Ecuador.
+            </p>
+            <Button
+              size="lg"
+              className="w-full bg-white/90 text-black font-bold hover:bg-white transition-transform hover:scale-105 px-6 py-4 text-base"
+              asChild
+            >
+              <a
+                href="https://api.whatsapp.com/send/?phone=593963410409&text=Hola+C%C3%A9sar%2C+estoy+interesado+en+tus+servicios&type=phone_number&app_absent=0"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Agenda una Llamada Ahora
+              </a>
+            </Button>
+          </div>
         </div>
       </section>
 
@@ -242,7 +262,7 @@ export default function HomeTestClient({ content, isEmotionalView, initialShowCo
 
       {/* Sección 2: Selección de Prioridad */}
       <section className="w-full py-20 md:py-28 bg-white">
-        <motion.div 
+        <motion.div
           className="container mx-auto px-4"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -253,7 +273,7 @@ export default function HomeTestClient({ content, isEmotionalView, initialShowCo
           <h3 className="text-xl md:text-2xl font-semibold text-center text-gray-700 mt-2 max-w-5xl mx-auto">{pageContent.shared.choiceSection.h3}</h3>
           <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 max-w-6xl mx-auto">
             {/* Opción Lógica */}
-            <Link 
+            <Link
               href="/?view=logico"
               onClick={() => handleChoice('logico')}
               className="group relative overflow-hidden rounded-2xl border border-gray-200 cursor-pointer transition-all duration-300 hover:shadow-xl bg-white flex flex-col h-96 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
@@ -285,7 +305,7 @@ export default function HomeTestClient({ content, isEmotionalView, initialShowCo
             </Link>
 
             {/* Opción Emocional */}
-            <Link 
+            <Link
               href="/?view=emocional"
               onClick={() => handleChoice('emocional')}
               className="group relative overflow-hidden rounded-2xl border border-gray-200 cursor-pointer transition-all duration-300 hover:shadow-xl bg-white flex flex-col h-96 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
@@ -329,16 +349,16 @@ export default function HomeTestClient({ content, isEmotionalView, initialShowCo
               <p className="text-xl text-center text-gray-300 mb-12 max-w-3xl mx-auto">{content.quiz.p}</p>
               <div className="max-w-4xl mx-auto">
                 {isEmotionalView
-                  ? <BusinessSuccessQuizEmocional 
-                      className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 shadow-2xl" 
-                      title=""
-                      submitButtonText="Enviar"
-                    />
-                  : <BusinessSuccessQuiz 
-                      className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 shadow-2xl" 
-                      title=""
-                      submitButtonText="Enviar"
-                    />
+                  ? <BusinessSuccessQuizEmocional
+                    className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 shadow-2xl"
+                    title=""
+                    submitButtonText="Enviar"
+                  />
+                  : <BusinessSuccessQuiz
+                    className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 shadow-2xl"
+                    title=""
+                    submitButtonText="Enviar"
+                  />
                 }
               </div>
             </div>
@@ -360,7 +380,7 @@ export default function HomeTestClient({ content, isEmotionalView, initialShowCo
                   </>
                 )}
               </div>
-              
+
               <div className="w-full max-w-6xl mx-auto">
                 <div className="flex flex-col md:flex-row gap-8">
                   {/* Navegación de pestañas */}
@@ -369,37 +389,36 @@ export default function HomeTestClient({ content, isEmotionalView, initialShowCo
                       <button
                         key={step}
                         onClick={() => setActiveStep(step)}
-                        className={`flex items-center px-6 py-5 rounded-xl transition-all duration-300 whitespace-nowrap min-h-[80px] ${
-                          activeStep === step
-                            ? 'bg-blue-600 text-white shadow-lg transform -translate-y-1'
-                            : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
-                        }`}
+                        className={`flex items-center px-6 py-5 rounded-xl transition-all duration-300 whitespace-nowrap min-h-[80px] ${activeStep === step
+                          ? 'bg-blue-600 text-white shadow-lg transform -translate-y-1'
+                          : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                          }`}
                       >
                         <span className="flex items-center justify-center w-8 h-8 rounded-full mr-3 text-sm font-bold bg-blue-500 text-white">
                           {step}
                         </span>
                         <span className="font-medium">
-                          {isEmotionalView 
-                            ? step === 1 ? 'Conociendo tu Sueño' 
-                              : step === 2 ? 'Tu Sitio Web' 
-                              : 'Sé el Mejor'
-                            : step === 1 ? 'Análisis Estratégico' 
-                              : step === 2 ? 'Desarrollo Web' 
-                              : 'Posicionamiento'}
+                          {isEmotionalView
+                            ? step === 1 ? 'Conociendo tu Sueño'
+                              : step === 2 ? 'Tu Sitio Web'
+                                : 'Sé el Mejor'
+                            : step === 1 ? 'Análisis Estratégico'
+                              : step === 2 ? 'Desarrollo Web'
+                                : 'Posicionamiento'}
                         </span>
                       </button>
                     ))}
                   </div>
-                  
+
                   {/* Contenido de las pestañas */}
                   <div className="md:w-3/4">
                     <div className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-gray-700 transition-all duration-300 hover:border-blue-500/30">
                       {activeStep === 1 && (
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                           <div className="relative w-full h-64 md:h-80 rounded-xl overflow-hidden border-2 border-gray-700 hover:border-blue-500/50 transition-colors">
-                            <Image 
-                              alt={isEmotionalView ? "Conociendo tu negocio" : "Análisis estratégico"} 
-                              src="/images/estudio_de_mercado.webp" 
+                            <Image
+                              alt={isEmotionalView ? "Conociendo tu negocio" : "Análisis estratégico"}
+                              src="/images/estudio_de_mercado.webp"
                               width={500}
                               height={400}
                               className="w-full h-full object-cover"
@@ -446,9 +465,9 @@ export default function HomeTestClient({ content, isEmotionalView, initialShowCo
                       {activeStep === 2 && (
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                           <div className="relative w-full h-64 md:h-80 rounded-xl overflow-hidden border-2 border-gray-700 hover:border-blue-500/50 transition-colors">
-                            <Image 
-                              alt={isEmotionalView ? "Estrategia digital personalizada" : "Plan estratégico digital"} 
-                              src="/images/Diseño Web.webp" 
+                            <Image
+                              alt={isEmotionalView ? "Estrategia digital personalizada" : "Plan estratégico digital"}
+                              src="/images/Diseño Web.webp"
                               width={500}
                               height={400}
                               className="w-full h-full object-cover"
@@ -495,9 +514,9 @@ export default function HomeTestClient({ content, isEmotionalView, initialShowCo
                       {activeStep === 3 && (
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                           <div className="relative w-full h-64 md:h-80 rounded-xl overflow-hidden border-2 border-gray-700 hover:border-blue-500/50 transition-colors">
-                            <Image 
-                              alt={isEmotionalView ? "Posicionamiento de marca" : "Estrategia de posicionamiento"} 
-                              src="/images/posicionamiento_slide_seo_objetivo.webp" 
+                            <Image
+                              alt={isEmotionalView ? "Posicionamiento de marca" : "Estrategia de posicionamiento"}
+                              src="/images/posicionamiento_slide_seo_objetivo.webp"
                               width={500}
                               height={400}
                               className="w-full h-full object-cover"
@@ -541,65 +560,62 @@ export default function HomeTestClient({ content, isEmotionalView, initialShowCo
                         </div>
                       )}
                     </div>
-                    
+
                     {/* Navegación inferior */}
                     <div className="flex justify-between mt-6">
                       <button
                         onClick={() => setActiveStep(prev => Math.max(1, prev - 1))}
                         disabled={activeStep === 1}
-                        className={`flex items-center px-4 py-2 rounded-lg transition-colors ${
-                          activeStep === 1 
-                            ? 'text-gray-500 cursor-not-allowed' 
-                            : 'text-blue-400 hover:text-white hover:bg-blue-500/20'
-                        }`}
+                        className={`flex items-center px-4 py-2 rounded-lg transition-colors ${activeStep === 1
+                          ? 'text-gray-500 cursor-not-allowed'
+                          : 'text-blue-400 hover:text-white hover:bg-blue-500/20'
+                          }`}
                       >
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2">
-                          <path d="m15 18-6-6 6-6"/>
+                          <path d="m15 18-6-6 6-6" />
                         </svg>
                         Anterior
                       </button>
-                      
+
                       <div className="flex space-x-2">
                         {[1, 2, 3].map((step) => (
                           <button
                             key={step}
                             onClick={() => setActiveStep(step)}
-                            className={`w-3 h-3 rounded-full transition-colors ${
-                              activeStep === step ? 'bg-blue-500 w-6' : 'bg-gray-600 hover:bg-gray-500'
-                            }`}
+                            className={`w-3 h-3 rounded-full transition-colors ${activeStep === step ? 'bg-blue-500 w-6' : 'bg-gray-600 hover:bg-gray-500'
+                              }`}
                             aria-label={`Ir al paso ${step}`}
                           />
                         ))}
                       </div>
-                      
+
                       <button
                         onClick={() => setActiveStep(prev => Math.min(3, prev + 1))}
                         disabled={activeStep === 3}
-                        className={`flex items-center px-4 py-2 rounded-lg transition-colors ${
-                          activeStep === 3 
-                            ? 'text-gray-500 cursor-not-allowed' 
-                            : 'text-blue-400 hover:text-white hover:bg-blue-500/20'
-                        }`}
+                        className={`flex items-center px-4 py-2 rounded-lg transition-colors ${activeStep === 3
+                          ? 'text-gray-500 cursor-not-allowed'
+                          : 'text-blue-400 hover:text-white hover:bg-blue-500/20'
+                          }`}
                       >
                         Siguiente
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-2">
-                          <path d="m9 18 6-6-6-6"/>
+                          <path d="m9 18 6-6-6-6" />
                         </svg>
                       </button>
                     </div>
                   </div>
                 </div>
               </div>
-              
+
               <div className="max-w-3xl mx-auto text-center mt-16">
                 <p className="text-xl italic text-gray-300">Imagina tu empresa creciendo según las proyecciones, combinando datos reales y proyecciones para monitorear el cumplimiento de metas</p>
-                <Button 
+                <Button
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 h-11 px-4 sm:px-8 mt-8 font-bold bg-blue-600 hover:bg-blue-700 text-white text-center"
                   asChild
                 >
-                  <a 
-                    href="https://api.whatsapp.com/send/?phone=593963410409&text=Hola+C%C3%A9sar%2C+estoy+interesado+en+tus+servicios&type=phone_number&app_absent=0" 
-                    target="_blank" 
+                  <a
+                    href="https://api.whatsapp.com/send/?phone=593963410409&text=Hola+C%C3%A9sar%2C+estoy+interesado+en+tus+servicios&type=phone_number&app_absent=0"
+                    target="_blank"
                     rel="noopener noreferrer"
                   >
                     Agenda una llamada - Haz clic aquí
@@ -620,7 +636,7 @@ export default function HomeTestClient({ content, isEmotionalView, initialShowCo
                 <StrategyTabs isEmotionalView={isEmotionalView} />
               </div>
               <div className="text-center mt-12 px-4">
-                <a 
+                <a
                   href="https://api.whatsapp.com/send/?phone=593963410409&text=Hola+C%C3%A9sar%2C+estoy+interesado+en+tus+servicios&type=phone_number&app_absent=0"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -651,7 +667,7 @@ export default function HomeTestClient({ content, isEmotionalView, initialShowCo
                     </div>
                     <h3 className="text-2xl font-bold text-white mb-3">Agendar una consultoría</h3>
                     <p className="text-gray-400 mb-6">Reserva una llamada personalizada para analizar las necesidades de tu negocio.</p>
-                    <a 
+                    <a
                       href="https://api.whatsapp.com/send/?phone=593963410409&text=Hola+C%C3%A9sar%2C+estoy+interesado+en+tus+servicios&type=phone_number&app_absent=0"
                       target="_blank"
                       rel="noopener noreferrer"
@@ -676,7 +692,7 @@ export default function HomeTestClient({ content, isEmotionalView, initialShowCo
                     </div>
                     <h3 className="text-2xl font-bold text-white mb-3">Ver Portafolio</h3>
                     <p className="text-gray-400 mb-6">Descubre los proyectos exitosos que hemos realizado para nuestros clientes.</p>
-                    <button 
+                    <button
                       onClick={() => setIsPortfolioModalOpen(true)}
                       className="inline-flex items-center text-blue-400 font-medium group-hover:text-blue-300 transition-colors cursor-pointer"
                     >
@@ -700,7 +716,7 @@ export default function HomeTestClient({ content, isEmotionalView, initialShowCo
                     </div>
                     <h3 className="text-2xl font-bold text-white mb-3">Ver Video</h3>
                     <p className="text-gray-400 mb-6">Conoce más sobre nuestro enfoque y metodología en este video explicativo.</p>
-                    <button 
+                    <button
                       onClick={() => setIsVideoModalOpen(true)}
                       className="inline-flex items-center text-blue-400 font-medium group-hover:text-blue-300 transition-colors cursor-pointer"
                     >
@@ -735,9 +751,16 @@ export default function HomeTestClient({ content, isEmotionalView, initialShowCo
               </div>
               <div className="max-w-4xl mx-auto aspect-video bg-black rounded-xl overflow-hidden shadow-xl relative">
                 {!isVideoPlaying ? (
-                  <div className="w-full h-full bg-cover bg-center" style={{ backgroundImage: 'url(/images/cesar_trabajando_h.webp)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
-                    <div className="w-full h-full flex items-center justify-center bg-black/30">
-                      <button 
+                  <div className="w-full h-full relative">
+                    <Image
+                      src="/images/cesar_trabajando_h.webp"
+                      alt="Vista previa del video"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 896px"
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                      <button
                         onClick={() => setIsVideoPlaying(true)}
                         className="w-16 h-16 md:w-20 md:h-20 bg-blue-600 hover:bg-blue-700 rounded-full flex items-center justify-center transition-all transform hover:scale-110"
                         aria-label="Reproducir video"
@@ -775,7 +798,7 @@ export default function HomeTestClient({ content, isEmotionalView, initialShowCo
                   {'description' in content.closing ? content.closing.description : ('p' in content.closing ? content.closing.p : '')}
                 </p>
               </div>
-              
+
               {/* Versión de escritorio - Grid */}
               <div className="hidden md:grid md:grid-cols-3 gap-6 max-w-6xl mx-auto mb-12">
                 {'cards' in content.closing ? (
@@ -784,10 +807,10 @@ export default function HomeTestClient({ content, isEmotionalView, initialShowCo
                   ))
                 ) : null}
               </div>
-              
+
               {/* Versión móvil - Carrusel */}
               <div className="md:hidden mb-12 px-2">
-                <Carousel 
+                <Carousel
                   opts={{
                     align: "start",
                     loop: true,
@@ -815,7 +838,7 @@ export default function HomeTestClient({ content, isEmotionalView, initialShowCo
           <section className="w-full py-12 bg-white">
             <div className="container mx-auto px-4">
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <a 
+                <a
                   href="https://api.whatsapp.com/send/?phone=593963410409&text=Hola+C%C3%A9sar%2C+estoy+interesado+en+tus+servicios&type=phone_number&app_absent=0"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -826,7 +849,7 @@ export default function HomeTestClient({ content, isEmotionalView, initialShowCo
                     <span className="hidden sm:inline">Agenda tu consulta gratuita – Solo 5 cupos este mes</span>
                   </span>
                 </a>
-                <a 
+                <a
                   href="#testimonios"
                   className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-11 rounded-md px-8 font-bold border border-black bg-white hover:bg-gray-100 text-black whitespace-normal h-auto min-h-[44px] py-2 px-4"
                 >
@@ -842,9 +865,9 @@ export default function HomeTestClient({ content, isEmotionalView, initialShowCo
           {/* Modales */}
           <ChatModal isOpen={isChatModalOpen} onClose={() => setIsChatModalOpen(false)} />
           <PortfolioModal isOpen={isPortfolioModalOpen} onClose={() => setIsPortfolioModalOpen(false)} />
-          <VideoModal 
-            isOpen={isVideoModalOpen} 
-            onClose={() => setIsVideoModalOpen(false)} 
+          <VideoModal
+            isOpen={isVideoModalOpen}
+            onClose={() => setIsVideoModalOpen(false)}
             videoUrl="https://www.youtube.com/shorts/0KzBIMvyccA"
           />
         </>

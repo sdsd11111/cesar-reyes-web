@@ -107,6 +107,13 @@ export default function RootLayout({
         type="font/woff2"
         crossOrigin="anonymous"
       />
+      {/* Preload Hero Image for LCP */}
+      <link
+        rel="preload"
+        as="image"
+        href="/images/portada_cesarbn.webp"
+        type="image/webp"
+      />
 
       {/* Contentsquare Analytics - Mapa de calor y análisis de comportamiento */}
       <Script
