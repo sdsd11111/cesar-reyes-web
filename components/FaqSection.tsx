@@ -40,21 +40,8 @@ export function FaqSection({ h2, questions }: FaqSectionProps) {
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900">{h2}</h2>
           </div>
           <div className="max-w-3xl mx-auto">
-            {/* Interactive accordion - client component */}
+            {/* All FAQ content is in DOM - visible to LLMs via CSS (not hidden attribute) */}
             <FaqAccordion questions={questions} />
-
-            {/* Fallback content for non-JS browsers and better crawlability */}
-            <noscript>
-              <div className="space-y-6">
-                {questions.map((item, index) => (
-                  <div key={index} className="border border-gray-200 rounded-lg p-6 bg-white">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-3">{item.q}</h3>
-                    <p className="text-gray-800 mb-4 leading-relaxed">{item.a}</p>
-                    <span className="text-blue-600 font-medium">{item.cta}</span>
-                  </div>
-                ))}
-              </div>
-            </noscript>
           </div>
         </div>
       </section>
