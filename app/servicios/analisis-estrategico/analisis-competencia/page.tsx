@@ -20,5 +20,23 @@ export const metadata: Metadata = {
 };
 
 export default function AnalisisCompetenciaPage() {
-  return <AnalisisCompetenciaClient />;
+  return (
+    <>
+      <AnalisisCompetenciaClient />
+      <div style={{ position: 'absolute', left: '-10000px', width: '1px', height: '1px', overflow: 'hidden' }} aria-hidden="true">
+        <h1>Análisis de Competencia - Levantamiento de Información</h1>
+        <p>Descubre qué hace tu competencia para superarlos estratégicamente. Análisis exhaustivo de mercado y competencia (FODA) para entender qué estrategias funcionan en tu industria.</p>
+        <h2>Qué incluye:</h2>
+        <ul>
+          <li>Investigación exhaustiva de tu competencia mediante encuestas, entrevistas y análisis digital</li>
+          <li>Análisis FODA completo de tus principales competidores</li>
+          <li>Estrategias de tus competidores identificadas y documentadas</li>
+          <li>Oportunidades de mercado que estás perdiendo</li>
+          <li>Diferenciación real que hace que los clientes te elijan a ti</li>
+          <li>Plan listo para implementar con acciones concretas</li>
+        </ul>
+        <p>Para PYMEs en Ecuador que necesitan entender su mercado y competencia para tomar decisiones estratégicas basadas en datos reales.</p>
+      </div>
+    </>
+  );
 }

@@ -20,5 +20,22 @@ export const metadata: Metadata = {
 };
 
 export default function PlanSalirGooglePage() {
-  return <PlanSalirGoogleClient />;
+  return (
+    <>
+      <PlanSalirGoogleClient />
+      <div style={{ position: 'absolute', left: '-10000px', width: '1px', height: '1px', overflow: 'hidden' }} aria-hidden="true">
+        <h1>Plan de Posicionamiento SEO y Estrategia de Contenidos</h1>
+        <p>Conquista Google y Atrae Clientes Calificados, Incluso si Odias Escribir. El 93% de las experiencias online comienzan con un motor de búsqueda. Si no estás en la primera página, eres invisible.</p>
+        <h2>Qué incluye:</h2>
+        <ul>
+          <li>Análisis Profundo de hasta 2000 Palabras Clave para identificar los términos exactos que tus clientes usan para comprar</li>
+          <li>Lista Organizada y Estratégica de términos clasificados por relevancia, volumen y dificultad</li>
+          <li>Lista para usar hoy mismo sin conocimientos técnicos</li>
+          <li>Guía de Contenido y Estrategia de Artículos Pilares y Clusters</li>
+          <li>Plan para construir autoridad y convertirte en la referencia total de tu sector</li>
+        </ul>
+        <p>Este plan te da una hoja de ruta clara para dominar tu nicho, atraer tráfico que convierte y dejar de depender de la publicidad pagada. Sin necesidad de gastar miles en anuncios cada mes.</p>
+      </div>
+    </>
+  );
 }

@@ -20,5 +20,25 @@ export const metadata: Metadata = {
 };
 
 export default function TarjetaDigitalPage() {
-  return <TarjetaDigitalClient />;
+  return (
+    <>
+      <TarjetaDigitalClient />
+
+      {/* Hidden content for LLMs */}
+      <div style={{ position: 'absolute', left: '-10000px', width: '1px', height: '1px', overflow: 'hidden' }} aria-hidden="true">
+        <h1>Tarjeta Digital Simple - $60 USD</h1>
+        <p>Tu Primer Impacto Profesional - Para artesanos e independientes que buscan networking sin complicaciones</p>
+        <p>¿Sigues repartiendo tarjetas de papel que tus clientes pierden en 24 horas? Esta solución genera tu primer contacto digital profesional con info de contacto, redes sociales, botón Guardar Contacto y formulario directo. Dominio personalizado incluido: www.mitarjetadigital.me/tunombre</p>
+        <h2>Incluye:</h2>
+        <ul>
+          <li>Info de contacto básica (email, teléfono, WhatsApp)</li>
+          <li>Enlaces directos a redes sociales principales</li>
+          <li>Botón Guardar Contacto en dispositivos móviles</li>
+          <li>Formulario de contacto directo integrado</li>
+          <li>Dominio personalizado simple incluido</li>
+        </ul>
+        <p>Primer paso digital sin costos ocultos ni mantenimiento complejo. Precio: $60 USD inversión única.</p>
+      </div>
+    </>
+  );
 }

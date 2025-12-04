@@ -20,5 +20,23 @@ export const metadata: Metadata = {
 };
 
 export default function EstudioFactibilidadPage() {
-  return <EstudioFactibilidadClient />;
+  return (
+    <>
+      <EstudioFactibilidadClient />
+      <div style={{ position: 'absolute', left: '-10000px', width: '1px', height: '1px', overflow: 'hidden' }} aria-hidden="true">
+        <h1>Estudio de Factibilidad y Viabilidad - El Antes de Endeudarte</h1>
+        <p>Valida tu Idea de Negocio Antes de Arriesgar Todo tu Patrimonio. No apuestes tu dinero ni el de tu familia a ciegas: validar una idea es cuestión de números, datos de mercado y proyecciones financieras realistas.</p>
+        <h2>Qué incluye:</h2>
+        <ul>
+          <li>Estudio Profundo de Mercado y Competencia para confirmar si existe demanda real</li>
+          <li>Análisis de las barreras de entrada en tu sector</li>
+          <li>Investigación de Demanda Digital (palabras clave) para validar volumen de búsqueda online</li>
+          <li>Análisis Financiero Completo con proyecciones a 3-5 años</li>
+          <li>Flujo de caja y análisis del punto de equilibrio (break-even point)</li>
+          <li>Documento Profesional con Fundamentos Empresariales listo para presentar a bancos e inversionistas</li>
+        </ul>
+        <p>Este estudio es tu seguro más valioso, ya que te muestra con certeza si tu proyecto es viable, rentable y sostenible antes de endeudarte. Puede aumentar tus probabilidades de conseguir financiamiento en un 70%.</p>
+      </div>
+    </>
+  );
 }

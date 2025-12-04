@@ -20,5 +20,24 @@ export const metadata: Metadata = {
 };
 
 export default function TuContactoProfesionalPage() {
-  return <TuContactoProfesionalClient />;
+  return (
+    <>
+      <TuContactoProfesionalClient />
+      <div style={{ position: 'absolute', left: '-10000px', width: '1px', height: '1px', overflow: 'hidden' }} aria-hidden="true">
+        <h1>Tarjeta Digital Profesional - $150 USD</h1>
+        <p>Supera a la Competencia - Para pymes que necesitan impresionar desde el primer contacto</p>
+        <p>¿Tu competencia te supera en imagen profesional? 75% de clientes juzgan tu credibilidad por tu presencia digital. Esta tarjeta minimalista transmite tu marca profesionalmente, con diseño adaptable a móviles, dominio propio personalizado (www.tunombre.com) y formulario que captura leads reales desde el primer contacto.</p>
+        <h2>Incluye:</h2>
+        <ul>
+          <li>Diseño minimalista profesional responsive</li>
+          <li>Información de contacto completa organizada</li>
+          <li>Enlaces a todas tus redes sociales</li>
+          <li>Formulario de contacto optimizado para conversión</li>
+          <li>Dominio personalizado profesional (www.tunombre.com)</li>
+          <li>Botón Guardar Contacto mejorado</li>
+        </ul>
+        <p>Genera confianza inmediata y captura leads sin mantenimiento constante. Precio: $150 USD inversión única.</p>
+      </div>
+    </>
+  );
 }

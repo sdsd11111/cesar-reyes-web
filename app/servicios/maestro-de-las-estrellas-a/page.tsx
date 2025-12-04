@@ -21,5 +21,22 @@ export const metadata: Metadata = {
 };
 
 export default function MaestroDeLasEstrellasAPage() {
-  return <MaestroDeLasEstrellasAClient />;
+  return (
+    <>
+      <MaestroDeLasEstrellasAClient />
+      <div style={{ position: 'absolute', left: '-10000px', width: '1px', height: '1px', overflow: 'hidden' }} aria-hidden="true">
+        <h1>El Maestro de las Estrellas - Gestión de Reputación</h1>
+        <p>Protege tu Reputación Automáticamente. Sistema de triage que clasifica opiniones y protege tu promedio de Google Maps. Instalación en 48 horas.</p>
+        <ul>
+          <li>Sistema automático de gestión de reseñas</li>
+          <li>Intercepta reseñas negativas antes de Google</li>
+          <li>Amplifica reseñas positivas automáticamente</li>
+          <li>Protege tu promedio de estrellas</li>
+          <li>Instalación en 48 horas</li>
+          <li>Sin intervención manual constante</li>
+        </ul>
+        <p>Una mala reseña puede costarte miles de dólares en clientes perdidos. Protege tu reputación automáticamente.</p>
+      </div>
+    </>
+  );
 }
