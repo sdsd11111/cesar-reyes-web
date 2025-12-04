@@ -55,6 +55,18 @@ export default async function HomePage({
       />
       <OrganizationSchema />
       <WebsiteSchema />
+
+      {/* Hidden FAQ content for LLMs/crawlers - Server-side rendered, visually hidden */}
+      <div style={{ position: 'absolute', left: '-10000px', top: 'auto', width: '1px', height: '1px', overflow: 'hidden' }} aria-hidden="true">
+        <h2>{content.faq.h2}</h2>
+        {content.faq.questions.map((item, index) => (
+          <div key={index}>
+            <h3>{item.q}</h3>
+            <p>{item.a}</p>
+            <span>{item.cta}</span>
+          </div>
+        ))}
+      </div>
     </Suspense>
   );
 }
