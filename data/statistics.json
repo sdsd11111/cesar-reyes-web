@@ -1,11 +1,41 @@
 {
-  "totalVisitas": 1119,
-  "visitasHoy": 1119,
+  "totalVisitas": 1125,
+  "visitasHoy": 1125,
   "articulosPublicados": 0,
   "suscriptoresNewsletter": 0,
   "ultimasVisitas": [
     {
       "fecha": "2025-12-04",
+      "pagina": "/",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-12-04",
+      "pagina": "/",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-12-04",
+      "pagina": "/",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-12-04",
+      "pagina": "/",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-12-04",
+      "pagina": "/",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-12-04",
+      "pagina": "/",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-12-04",
       "pagina": "/servicios/posicionamiento",
       "visitas": 1
     },
@@ -17,36 +47,6 @@
     {
       "fecha": "2025-12-04",
       "pagina": "/servicios/posicionamiento",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-12-04",
-      "pagina": "/",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-12-04",
-      "pagina": "/",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-12-04",
-      "pagina": "/",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-12-04",
-      "pagina": "/",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-12-04",
-      "pagina": "/",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-12-04",
-      "pagina": "/",
       "visitas": 1
     },
     {
@@ -69,6 +69,6 @@
     "2025-12-01": 11,
     "2025-12-02": 14,
     "2025-12-03": 61,
-    "2025-12-04": 12
+    "2025-12-04": 18
   }
 }

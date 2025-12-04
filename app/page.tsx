@@ -38,7 +38,7 @@ export default async function HomePage({
   const sp = await searchParams;
   const view = sp['view'];
   const isEmotionalView = view === 'emocional';
-  const initialShowContent = true;
+  const initialShowContent = !!view;
 
   const content = isEmotionalView ? pageContent.emocional : pageContent.logico;
 

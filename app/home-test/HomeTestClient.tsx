@@ -133,6 +133,9 @@ export default function HomeTestClient({ content, isEmotionalView, initialShowCo
       localStorage.setItem('userChoice', choice);
     }
     setChoiceMade(true);
+    // Navigate to the new view without scrolling to top
+    const url = choice === 'emocional' ? '/?view=emocional' : '/?view=logico';
+    router.push(url, { scroll: false });
   };
 
   const primaryActionClasses = isEmotionalView
@@ -275,7 +278,10 @@ export default function HomeTestClient({ content, isEmotionalView, initialShowCo
             {/* Opción Lógica */}
             <Link
               href="/?view=logico"
-              onClick={() => handleChoice('logico')}
+              onClick={(e) => {
+                e.preventDefault();
+                handleChoice('logico');
+              }}
               className="group relative overflow-hidden rounded-2xl border border-gray-200 cursor-pointer transition-all duration-300 hover:shadow-xl bg-white flex flex-col h-96 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
             >
               <div className="relative h-full w-full overflow-hidden">
@@ -307,7 +313,10 @@ export default function HomeTestClient({ content, isEmotionalView, initialShowCo
             {/* Opción Emocional */}
             <Link
               href="/?view=emocional"
-              onClick={() => handleChoice('emocional')}
+              onClick={(e) => {
+                e.preventDefault();
+                handleChoice('emocional');
+              }}
               className="group relative overflow-hidden rounded-2xl border border-gray-200 cursor-pointer transition-all duration-300 hover:shadow-xl bg-white flex flex-col h-96 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
             >
               <div className="relative h-full w-full overflow-hidden">
