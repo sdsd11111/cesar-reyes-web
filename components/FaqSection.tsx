@@ -1,12 +1,4 @@
-'use client';
-
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Button } from "@/components/ui/button";
+import { FaqAccordion } from './FaqAccordion';
 
 interface FaqItem {
   q: string;
@@ -20,33 +12,53 @@ interface FaqSectionProps {
 }
 
 export function FaqSection({ h2, questions }: FaqSectionProps) {
+  // Schema.org FAQPage structured data - visible to LLMs and search engines
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": questions.map(item => ({
+      "@type": "Question",
+      "name": item.q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": item.a
+      }
+    }))
+  };
+
   return (
-    <section className="w-full py-20 bg-white">
-      <div className="container mx-auto px-4">
-        <div className="max-w-3xl mx-auto text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900">{h2}</h2>
+    <>
+      {/* Schema.org structured data for LLMs and SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+
+      <section className="w-full py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900">{h2}</h2>
+          </div>
+          <div className="max-w-3xl mx-auto">
+            {/* Interactive accordion - client component */}
+            <FaqAccordion questions={questions} />
+
+            {/* Fallback content for non-JS browsers and better crawlability */}
+            <noscript>
+              <div className="space-y-6">
+                {questions.map((item, index) => (
+                  <div key={index} className="border border-gray-200 rounded-lg p-6 bg-white">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-3">{item.q}</h3>
+                    <p className="text-gray-800 mb-4 leading-relaxed">{item.a}</p>
+                    <span className="text-blue-600 font-medium">{item.cta}</span>
+                  </div>
+                ))}
+              </div>
+            </noscript>
+          </div>
         </div>
-        <div className="max-w-3xl mx-auto">
-          <Accordion type="single" collapsible className="w-full space-y-4">
-            {questions.map((item, index) => (
-              <AccordionItem 
-                key={index} 
-                value={`item-${index}`} 
-                className="border border-gray-200 rounded-lg bg-white overflow-hidden mb-4 shadow-sm hover:shadow-md transition-shadow"
-              >
-                <AccordionTrigger className="text-left text-lg font-semibold px-6 py-4 hover:no-underline text-gray-900">
-                  {item.q}
-                </AccordionTrigger>
-                <AccordionContent className="px-6 pb-6 pt-0 bg-white">
-                  <p className="text-gray-800 mb-6 leading-relaxed">{item.a}</p>
-                  <Button variant="outline">{item.cta}</Button>
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
 
