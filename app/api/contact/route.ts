@@ -14,19 +14,23 @@ export async function POST(request: Request) {
     }
 
     // Crear un transportador reutilizable usando el SMTP de Gmail
+    // Crear un transportador reutilizable usando la configuración del entorno
     const transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
-      port: 587,
-      secure: false, // true para el puerto 465, false para otros puertos
+      host: process.env.EMAIL_SERVER || 'smtp.gmail.com',
+      port: parseInt(process.env.EMAIL_PORT || '587'),
+      secure: process.env.EMAIL_PORT === '465', // true para puerto 465, false para otros
       auth: {
-        user: process.env.EMAIL_USER, // Tu correo de Gmail
-        pass: process.env.EMAIL_PASSWORD, // Tu contraseña de aplicación de Gmail
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASSWORD,
       },
+      tls: {
+        rejectUnauthorized: false // Para evitar errores con certificados auto-firmados si es necesario
+      }
     });
 
     // Configurar los datos del correo electrónico
     const mailOptions = {
-      from: `"${process.env.EMAIL_FROM_NAME || 'Sitio Web'}" <${process.env.EMAIL_USER}>`,
+      from: process.env.EMAIL_FROM || `"${process.env.EMAIL_FROM_NAME || 'Sitio Web'}" <${process.env.EMAIL_USER}>`,
       to,
       subject,
       html,

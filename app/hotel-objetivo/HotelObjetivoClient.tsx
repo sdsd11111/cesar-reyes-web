@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { supabaseReto } from '@/src/lib/supabaseRetoClient';
 import { PlayCircle, Clock, Smartphone, DollarSign, Zap, Search, Rocket, CheckCircle, MessageCircle, ArrowRight, Check, Plane, Users, Globe, BarChart, Briefcase, Mail, Heart } from 'lucide-react';
 import FAQSection from '@/components/FaqSection';
 import VideoModal from '@/components/VideoModal';
@@ -103,6 +104,100 @@ const HotelCard = ({ title, icon: Icon, shortDesc, children }: { title: string, 
 };
 
 const HotelObjetivoClient = () => {
+    // Estado del formulario
+    const [formData, setFormData] = useState({
+        nombre: '',
+        email: '',
+        telefono: '',
+        tipo_hotel: '',
+        plan_interes: '',
+        terminos: false
+    });
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+    const [errorMessage, setErrorMessage] = useState('');
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        const { name, value, type } = e.target;
+        const checked = (e.target as HTMLInputElement).checked;
+
+        setFormData(prev => ({
+            ...prev,
+            [name]: type === 'checkbox' ? checked : value
+        }));
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+        setSubmitStatus('idle');
+        setErrorMessage('');
+
+        try {
+            // Validaciones básicas
+            if (!formData.nombre || !formData.email || !formData.telefono || !formData.tipo_hotel || !formData.terminos) {
+                throw new Error('Por favor completa todos los campos requeridos.');
+            }
+
+            // Insertar en Supabase (Tabla: hotel_leads)
+            const { error } = await supabaseReto
+                .from('hotel_leads')
+                .insert([
+                    {
+                        nombre: formData.nombre,
+                        email: formData.email,
+                        telefono: formData.telefono,
+                        tipo_hotel: formData.tipo_hotel,
+                        plan_interes: formData.plan_interes || null,
+                        terminos_aceptados: formData.terminos
+                    }
+                ]);
+
+            if (error) throw error;
+
+            // Enviar correo de agradecimiento (sin bloquear el flujo principal si falla)
+            try {
+                await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        to: formData.email,
+                        subject: 'Confirmación de Solicitud - César Reyes',
+                        html: `
+                            <h2>Hola ${formData.nombre},</h2>
+                            <p>¡Gracias por tu interés en transformar tu hotel!</p>
+                            <p>Hemos recibido tus datos correctamente. Nuestro equipo analizará tu solicitud y te contactará en el transcurso del día para coordinar los siguientes pasos.</p>
+                            <br>
+                            <p>Atentamente,</p>
+                            <p><strong>El equipo de César Reyes</strong></p>
+                        `
+                    })
+                });
+            } catch (emailError) {
+                console.error('Error al enviar correo de confirmación:', emailError);
+                // No lanzamos error para no afectar el mensaje de éxito del formulario
+            }
+
+            setSubmitStatus('success');
+            // Limpiar formulario
+            setFormData({
+                nombre: '',
+                email: '',
+                telefono: '',
+                tipo_hotel: '',
+                plan_interes: '',
+                terminos: false
+            });
+
+        } catch (error: any) {
+            console.error('Error al enviar formulario:', error);
+            setSubmitStatus('error');
+            setErrorMessage(error.message || 'Ocurrió un error al enviar tus datos. Por favor intenta de nuevo.');
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
+
     const [videoUrl, setVideoUrl] = useState<string>(''); // Initialize with your video URL when available
 
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -482,7 +577,7 @@ const HotelObjetivoClient = () => {
                                 className="data-[state=active]:bg-[#FF6B00] data-[state=active]:text-white text-gray-400 font-bold text-xs md:text-base py-3 rounded-md transition-all"
                             >
                                 <span className="text-lg md:text-xl mr-1 md:mr-2">✅</span>
-                                <span className="hidden sm:inline">CON </span>TU SISTEMA
+                                <span className="hidden sm:inline">Con </span>tu Sistema
                             </TabsTrigger>
                         </TabsList>
 
@@ -748,7 +843,7 @@ const HotelObjetivoClient = () => {
                                             <AccordionContent>
                                                 <ul className="space-y-2 text-sm text-gray-600 pb-3">
                                                     <li className="flex items-start"><span className="mr-2">•</span> Hasta 10 páginas profesionales</li>
-                                                    <li className="flex items-start"><span className="mr-2">•</span> Sistema de reservas directo (cero comisiones)</li>
+                                                    <li className="flex items-start"><span className="mr-2">•</span> Sistema de Reservas directo a Whatsapp</li>
                                                     <li className="flex items-start"><span className="mr-2">•</span> Código QR dinámico permanente</li>
                                                     <li className="flex items-start"><span className="mr-2">•</span> Galería de fotos y servicios</li>
                                                 </ul>
@@ -829,6 +924,7 @@ const HotelObjetivoClient = () => {
                                             <AccordionContent>
                                                 <ul className="space-y-2 text-sm text-gray-600 pb-3">
                                                     <li className="flex items-start"><span className="mr-2">•</span> Hasta 20 páginas profesionales</li>
+                                                    <li className="flex items-start"><span className="mr-2">•</span> Sistema de reservas directo (cero comisiones, automatizado)</li>
                                                     <li className="flex items-start"><span className="mr-2">•</span> Secciones especiales: eventos, promociones</li>
                                                     <li className="flex items-start"><span className="mr-2">•</span> Integración avanzada con redes sociales</li>
                                                 </ul>
@@ -1011,7 +1107,7 @@ const HotelObjetivoClient = () => {
                                             </div>
                                             <div className="flex justify-between border-b border-gray-100 pb-2">
                                                 <span className="text-sm font-medium text-gray-700">Sistema reservas</span>
-                                                <span className="text-sm text-gray-900">✅</span>
+                                                <span className="text-sm text-gray-900">--</span>
                                             </div>
                                             <div className="flex justify-between border-b border-gray-100 pb-2">
                                                 <span className="text-sm font-medium text-gray-700">Código QR</span>
@@ -1200,7 +1296,7 @@ const HotelObjetivoClient = () => {
                                     </tr>
                                     <tr className="border-b border-gray-100 hover:bg-gray-50">
                                         <td className="p-2.5 md:p-3 font-medium text-gray-700">Sistema reservas</td>
-                                        <td className="p-2.5 md:p-3 text-center text-gray-900">✅</td>
+                                        <td className="p-2.5 md:p-3 text-center text-gray-900">--</td>
                                         <td className="p-2.5 md:p-3 text-center text-gray-900 bg-[#FF6B00]/5">✅</td>
                                         <td className="p-2.5 md:p-3 text-center text-gray-900 bg-gray-50">✅</td>
                                     </tr>
@@ -1508,117 +1604,165 @@ const HotelObjetivoClient = () => {
                                 Solicita Información
                             </h3>
 
-                            <form id="formulario-hotel-objetivo" className="space-y-5">
-                                <div>
-                                    <label htmlFor="nombre" className="block text-sm font-medium text-gray-700 mb-1">
-                                        Nombre completo <span className="text-red-500">*</span>
-                                    </label>
-                                    <input
-                                        type="text"
-                                        id="nombre"
-                                        name="nombre"
-                                        required
-                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FF6B00] focus:border-[#FF6B00] text-gray-900"
-                                        placeholder="Tu nombre completo"
-                                    />
-                                </div>
-
-                                <div>
-                                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                                        Correo electrónico <span className="text-red-500">*</span>
-                                    </label>
-                                    <input
-                                        type="email"
-                                        id="email"
-                                        name="email"
-                                        required
-                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FF6B00] focus:border-[#FF6B00] text-gray-900"
-                                        placeholder="tucorreo@ejemplo.com"
-                                    />
-                                </div>
-
-                                <div>
-                                    <label htmlFor="telefono" className="block text-sm font-medium text-gray-700 mb-1">
-                                        WhatsApp <span className="text-red-500">*</span>
-                                    </label>
-                                    <input
-                                        type="tel"
-                                        id="telefono"
-                                        name="telefono"
-                                        required
-                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FF6B00] focus:border-[#FF6B00] text-gray-900"
-                                        placeholder="Ejemplo: 593987654321"
-                                    />
-                                </div>
-
-                                <div>
-                                    <label htmlFor="tipo_hotel" className="block text-sm font-medium text-gray-700 mb-1">
-                                        Tipo de establecimiento <span className="text-red-500">*</span>
-                                    </label>
-                                    <select
-                                        id="tipo_hotel"
-                                        name="tipo_hotel"
-                                        required
-                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FF6B00] focus:border-[#FF6B00] text-gray-900"
+                            {submitStatus === 'success' ? (
+                                <div className="text-center py-10">
+                                    <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 mb-6">
+                                        <Check className="h-10 w-10 text-green-600" />
+                                    </div>
+                                    <h3 className="text-2xl font-bold text-gray-900 mb-2">¡Solicitud Recibida!</h3>
+                                    <p className="text-gray-600 mb-6">
+                                        Hemos recibido tus datos correctamente. Un especialista te contactará en menos de 24 horas laborables.
+                                    </p>
+                                    <button
+                                        onClick={() => setSubmitStatus('idle')}
+                                        className="text-[#FF6B00] font-bold hover:underline"
                                     >
-                                        <option value="">Selecciona una opción</option>
-                                        <option value="Hostal">Hostal</option>
-                                        <option value="Hotel pequeño (5-15 hab)">Hotel pequeño (5-15 hab)</option>
-                                        <option value="Hotel mediano (16-40 hab)">Hotel mediano (16-40 hab)</option>
-                                        <option value="Hotel grande (40+ hab)">Hotel grande (40+ hab)</option>
-                                        <option value="Hotel boutique">Hotel boutique</option>
-                                        <option value="Otro">Otro (especificar en comentarios)</option>
-                                    </select>
+                                        Enviar otra solicitud
+                                    </button>
                                 </div>
+                            ) : (
+                                <form id="formulario-hotel-objetivo" className="space-y-5" onSubmit={handleSubmit}>
+                                    {submitStatus === 'error' && (
+                                        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded relative" role="alert">
+                                            <strong className="font-bold">Error: </strong>
+                                            <span className="block sm:inline">{errorMessage}</span>
+                                        </div>
+                                    )}
 
-                                <div>
-                                    <label htmlFor="plan_interes" className="block text-sm font-medium text-gray-700 mb-1">
-                                        Plan de interés
-                                    </label>
-                                    <select
-                                        id="plan_interes"
-                                        name="plan_interes"
-                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FF6B00] focus:border-[#FF6B00] text-gray-900"
-                                    >
-                                        <option value="">Selecciona un plan (opcional)</option>
-                                        <option value="Plan Pro - $700">Plan Pro - $700</option>
-                                        <option value="Plan Dominancia - $1,800">Plan Élite - $1,800</option>
-                                        <option value="Plan Dominio Total - $2,800">Plan Imperio - $2,800</option>
-                                        <option value="Aún no estoy seguro">Aún no estoy seguro</option>
-                                    </select>
-                                </div>
-
-                                <div className="flex items-start">
-                                    <div className="flex items-center h-5">
+                                    <div>
+                                        <label htmlFor="nombre" className="block text-sm font-medium text-gray-700 mb-1">
+                                            Nombre completo <span className="text-red-500">*</span>
+                                        </label>
                                         <input
-                                            id="terminos"
-                                            name="terminos"
-                                            type="checkbox"
+                                            type="text"
+                                            id="nombre"
+                                            name="nombre"
                                             required
-                                            className="h-4 w-4 text-[#FF6B00] focus:ring-[#FF6B00] border-gray-300 rounded"
+                                            value={formData.nombre}
+                                            onChange={handleChange}
+                                            disabled={isSubmitting}
+                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FF6B00] focus:border-[#FF6B00] text-gray-900 disabled:bg-gray-100"
+                                            placeholder="Tu nombre completo"
                                         />
                                     </div>
-                                    <div className="ml-3 text-sm">
-                                        <label htmlFor="terminos" className="font-medium text-gray-700">
-                                            Acepto los términos y condiciones <span className="text-red-500">*</span>
+
+                                    <div>
+                                        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                                            Correo electrónico <span className="text-red-500">*</span>
                                         </label>
+                                        <input
+                                            type="email"
+                                            id="email"
+                                            name="email"
+                                            required
+                                            value={formData.email}
+                                            onChange={handleChange}
+                                            disabled={isSubmitting}
+                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FF6B00] focus:border-[#FF6B00] text-gray-900 disabled:bg-gray-100"
+                                            placeholder="tucorreo@ejemplo.com"
+                                        />
                                     </div>
-                                </div>
 
-                                <button
-                                    type="submit"
-                                    className="w-full flex justify-center items-center px-6 py-4 border border-transparent rounded-xl text-base font-medium text-white bg-gradient-to-r from-[#FF6B00] to-[#E66000] hover:from-[#E66000] hover:to-[#CC5500] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FF6B00] transition-all duration-200 transform hover:scale-[1.02] shadow-lg"
-                                >
-                                    <span>SOLICITAR INFORMACIÓN</span>
-                                    <ArrowRight className="ml-2 h-5 w-5" />
-                                </button>
+                                    <div>
+                                        <label htmlFor="telefono" className="block text-sm font-medium text-gray-700 mb-1">
+                                            WhatsApp <span className="text-red-500">*</span>
+                                        </label>
+                                        <input
+                                            type="tel"
+                                            id="telefono"
+                                            name="telefono"
+                                            required
+                                            value={formData.telefono}
+                                            onChange={handleChange}
+                                            disabled={isSubmitting}
+                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FF6B00] focus:border-[#FF6B00] text-gray-900 disabled:bg-gray-100"
+                                            placeholder="Ejemplo: 593987654321"
+                                        />
+                                    </div>
 
-                                <p className="text-xs text-gray-500 text-center">
-                                    Al hacer clic, te contactaremos en 24h para confirmar detalles.
-                                    <br />
-                                    No se requiere pago hasta que confirmes.
-                                </p>
-                            </form>
+                                    <div>
+                                        <label htmlFor="tipo_hotel" className="block text-sm font-medium text-gray-700 mb-1">
+                                            Tipo de establecimiento <span className="text-red-500">*</span>
+                                        </label>
+                                        <select
+                                            id="tipo_hotel"
+                                            name="tipo_hotel"
+                                            required
+                                            value={formData.tipo_hotel}
+                                            onChange={handleChange}
+                                            disabled={isSubmitting}
+                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FF6B00] focus:border-[#FF6B00] text-gray-900 disabled:bg-gray-100"
+                                        >
+                                            <option value="">Selecciona una opción</option>
+                                            <option value="Hostal">Hostal</option>
+                                            <option value="Hotel pequeño (5-15 hab)">Hotel pequeño (5-15 hab)</option>
+                                            <option value="Hotel mediano (16-40 hab)">Hotel mediano (16-40 hab)</option>
+                                            <option value="Hotel grande (40+ hab)">Hotel grande (40+ hab)</option>
+                                            <option value="Hotel boutique">Hotel boutique</option>
+                                            <option value="Otro">Otro (especificar en comentarios)</option>
+                                        </select>
+                                    </div>
+
+                                    <div>
+                                        <label htmlFor="plan_interes" className="block text-sm font-medium text-gray-700 mb-1">
+                                            Plan de interés
+                                        </label>
+                                        <select
+                                            id="plan_interes"
+                                            name="plan_interes"
+                                            value={formData.plan_interes}
+                                            onChange={handleChange}
+                                            disabled={isSubmitting}
+                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FF6B00] focus:border-[#FF6B00] text-gray-900 disabled:bg-gray-100"
+                                        >
+                                            <option value="">Selecciona un plan (opcional)</option>
+                                            <option value="Plan Pro - $700">Plan Pro - $700</option>
+                                            <option value="Plan Elite - $1,800">Plan Élite - $1,800</option>
+                                            <option value="Plan Imperio - $2,800">Plan Imperio - $2,800</option>
+                                            <option value="Aún no estoy seguro">Aún no estoy seguro</option>
+                                        </select>
+                                    </div>
+
+                                    <div className="flex items-start">
+                                        <div className="flex items-center h-5">
+                                            <input
+                                                id="terminos"
+                                                name="terminos"
+                                                type="checkbox"
+                                                required
+                                                checked={formData.terminos}
+                                                onChange={handleChange}
+                                                disabled={isSubmitting}
+                                                className="h-4 w-4 text-[#FF6B00] focus:ring-[#FF6B00] border-gray-300 rounded"
+                                            />
+                                        </div>
+                                        <div className="ml-3 text-sm">
+                                            <label htmlFor="terminos" className="font-medium text-gray-700">
+                                                Acepto los términos y condiciones <span className="text-red-500">*</span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <button
+                                        type="submit"
+                                        disabled={isSubmitting}
+                                        className={`w-full flex justify-center items-center px-6 py-4 border border-transparent rounded-xl text-base font-medium text-white bg-gradient-to-r from-[#FF6B00] to-[#E66000] hover:from-[#E66000] hover:to-[#CC5500] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FF6B00] transition-all duration-200 transform hover:scale-[1.02] shadow-lg ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
+                                    >
+                                        {isSubmitting ? 'Enviando...' : (
+                                            <>
+                                                <span>SOLICITAR INFORMACIÓN</span>
+                                                <ArrowRight className="ml-2 h-5 w-5" />
+                                            </>
+                                        )}
+                                    </button>
+
+                                    <p className="text-xs text-gray-500 text-center">
+                                        Al hacer clic, te contactaremos en 24h para confirmar detalles.
+                                        <br />
+                                        No se requiere pago hasta que confirmes.
+                                    </p>
+                                </form>
+                            )}
                         </div>
                     </div>
 
