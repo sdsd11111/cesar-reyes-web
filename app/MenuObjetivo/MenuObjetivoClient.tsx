@@ -64,6 +64,11 @@ const MenuObjetivoClient = () => {
     const [modalVideoUrl, setModalVideoUrl] = useState('');
     const [searchQuery, setSearchQuery] = useState('comprar lasaña en Loja');
 
+    // Form submission state
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitSuccess, setSubmitSuccess] = useState(false);
+    const [submitError, setSubmitError] = useState('');
+
     const openModal = (url: string) => {
         setModalVideoUrl(url);
         setIsModalOpen(true);
@@ -102,6 +107,60 @@ const MenuObjetivoClient = () => {
 
     const handleSearch = () => {
         window.open(`https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`, '_blank');
+    };
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        setIsSubmitting(true);
+        setSubmitError('');
+        setSubmitSuccess(false);
+
+        const formData = new FormData(e.currentTarget);
+        const data = {
+            nombre: formData.get('nombre') as string,
+            email: formData.get('email') as string,
+            telefono: formData.get('telefono') as string,
+            tipo_restaurante: formData.get('tipo_restaurante') as string,
+            terminos: formData.get('terminos') === 'on',
+        };
+
+        try {
+            const response = await fetch('/api/submit-menu-objetivo', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                throw new Error(result.error || 'Error al enviar el formulario');
+            }
+
+            setSubmitSuccess(true);
+
+            // Reset form - use getElementById for more reliability
+            const formElement = document.getElementById('formulario-reserva-restaurantes') as HTMLFormElement;
+            if (formElement) {
+                formElement.reset();
+            }
+
+            // Scroll to success message
+            setTimeout(() => {
+                const successElement = document.getElementById('form-success-message');
+                if (successElement) {
+                    successElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }, 100);
+        } catch (error: any) {
+            console.error('Error submitting form:', error);
+            setSubmitError(error.message || 'Error al enviar el formulario. Por favor, intenta nuevamente.');
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -856,7 +915,31 @@ const MenuObjetivoClient = () => {
                                 RESERVA TU CUPO AHORA
                             </h3>
 
-                            <form id="formulario-reserva-restaurantes" className="space-y-5">
+                            {submitSuccess && (
+                                <div id="form-success-message" className="mb-6 p-4 bg-green-50 border-l-4 border-green-500 rounded-lg">
+                                    <div className="flex items-start">
+                                        <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0" />
+                                        <div>
+                                            <h4 className="text-green-800 font-bold mb-1">¡Reserva confirmada!</h4>
+                                            <p className="text-green-700 text-sm">Gracias por tu interés. Hemos recibido tus datos y te contactaremos en las próximas 24 horas. Revisa tu correo electrónico para más información.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+
+                            {submitError && (
+                                <div className="mb-6 p-4 bg-red-50 border-l-4 border-red-500 rounded-lg">
+                                    <div className="flex items-start">
+                                        <span className="text-red-500 mt-0.5 mr-3 flex-shrink-0 text-xl">⚠️</span>
+                                        <div>
+                                            <h4 className="text-red-800 font-bold mb-1">Error al enviar</h4>
+                                            <p className="text-red-700 text-sm">{submitError}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+
+                            <form id="formulario-reserva-restaurantes" className="space-y-5" onSubmit={handleSubmit}>
                                 <div>
                                     <label htmlFor="nombre" className="block text-sm font-medium text-gray-700 mb-1">
                                         Nombre completo <span className="text-red-500">*</span>
@@ -937,10 +1020,23 @@ const MenuObjetivoClient = () => {
 
                                 <button
                                     type="submit"
-                                    className="w-full flex justify-center items-center px-6 py-4 border border-transparent rounded-xl text-base font-medium text-white bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 transition-all duration-200 transform hover:scale-[1.02] shadow-lg"
+                                    disabled={isSubmitting}
+                                    className="w-full flex justify-center items-center px-6 py-4 border border-transparent rounded-xl text-base font-medium text-white bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 transition-all duration-200 transform hover:scale-[1.02] shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                                 >
-                                    <span>RESERVAR MI LUGAR</span>
-                                    <ArrowRight className="ml-2 h-5 w-5" />
+                                    {isSubmitting ? (
+                                        <>
+                                            <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                            </svg>
+                                            <span>ENVIANDO...</span>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <span>RESERVAR MI LUGAR</span>
+                                            <ArrowRight className="ml-2 h-5 w-5" />
+                                        </>
+                                    )}
                                 </button>
 
                                 <p className="text-xs text-gray-500 text-center">
