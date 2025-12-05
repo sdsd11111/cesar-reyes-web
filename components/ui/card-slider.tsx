@@ -11,23 +11,26 @@ import 'swiper/css/pagination';
 interface CardSliderProps {
   children: ReactNode[];
   className?: string;
+  gridOnDesktop?: boolean;
 }
 
-export function CardSlider({ children, className = '' }: CardSliderProps) {
+export function CardSlider({ children, className = '', gridOnDesktop = false }: CardSliderProps) {
   const swiperRef = useRef<SwiperType | null>(null);
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
 
-  return (
-    <div className={`relative ${className}`}>
+  const sliderContent = (
+    <div className={`relative ${!gridOnDesktop ? className : ''}`}>
       <Swiper
         modules={[Navigation, Pagination, A11y]}
         spaceBetween={32}
-        slidesPerView={1.1}
+        slidesPerView={1}
+        centeredSlides={true}
         breakpoints={{
           768: {
             slidesPerView: 3,
             spaceBetween: 32,
+            centeredSlides: false,
           },
         }}
         pagination={{
@@ -77,4 +80,21 @@ export function CardSlider({ children, className = '' }: CardSliderProps) {
       <div className="swiper-pagination mt-6 flex justify-center md:hidden" />
     </div>
   );
+
+  if (gridOnDesktop) {
+    return (
+      <div className={className}>
+        {/* Desktop Grid */}
+        <div className="hidden md:grid grid-cols-3 gap-8 justify-items-center max-w-6xl mx-auto">
+          {children}
+        </div>
+        {/* Mobile Slider */}
+        <div className="md:hidden">
+          {sliderContent}
+        </div>
+      </div>
+    );
+  }
+
+  return sliderContent;
 }

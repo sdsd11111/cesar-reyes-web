@@ -1,57 +1,57 @@
 {
-  "totalVisitas": 1125,
-  "visitasHoy": 1125,
+  "totalVisitas": 1204,
+  "visitasHoy": 1204,
   "articulosPublicados": 0,
   "suscriptoresNewsletter": 0,
   "ultimasVisitas": [
     {
-      "fecha": "2025-12-04",
+      "fecha": "2025-12-05",
+      "pagina": "/hotel-objetivo",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-12-05",
+      "pagina": "/hotel-objetivo",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-12-05",
       "pagina": "/",
       "visitas": 1
     },
     {
-      "fecha": "2025-12-04",
-      "pagina": "/",
+      "fecha": "2025-12-05",
+      "pagina": "/hotel-objetivo",
       "visitas": 1
     },
     {
-      "fecha": "2025-12-04",
-      "pagina": "/",
+      "fecha": "2025-12-05",
+      "pagina": "/hotel-objetivo",
       "visitas": 1
     },
     {
-      "fecha": "2025-12-04",
-      "pagina": "/",
+      "fecha": "2025-12-05",
+      "pagina": "/hotel-objetivo",
       "visitas": 1
     },
     {
-      "fecha": "2025-12-04",
-      "pagina": "/",
+      "fecha": "2025-12-05",
+      "pagina": "/hotel-objetivo",
       "visitas": 1
     },
     {
-      "fecha": "2025-12-04",
-      "pagina": "/",
+      "fecha": "2025-12-05",
+      "pagina": "/hotel-objetivo",
       "visitas": 1
     },
     {
-      "fecha": "2025-12-04",
-      "pagina": "/servicios/posicionamiento",
+      "fecha": "2025-12-05",
+      "pagina": "/hotel-objetivo",
       "visitas": 1
     },
     {
-      "fecha": "2025-12-04",
-      "pagina": "/servicios/posicionamiento",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-12-04",
-      "pagina": "/servicios/posicionamiento",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-12-04",
-      "pagina": "/",
+      "fecha": "2025-12-05",
+      "pagina": "/hotel-objetivo",
       "visitas": 1
     }
   ],
@@ -69,6 +69,7 @@
     "2025-12-01": 11,
     "2025-12-02": 14,
     "2025-12-03": 61,
-    "2025-12-04": 18
+    "2025-12-04": 18,
+    "2025-12-05": 79
   }
 }
