@@ -577,7 +577,7 @@ const HotelObjetivoClient = () => {
                                 className="data-[state=active]:bg-[#FF6B00] data-[state=active]:text-white text-gray-400 font-bold text-xs md:text-base py-3 rounded-md transition-all"
                             >
                                 <span className="text-lg md:text-xl mr-1 md:mr-2">✅</span>
-                                <span className="hidden sm:inline">Con </span>tu Sistema
+                                <span className="hidden sm:inline">Con&nbsp;</span>tu Sistema
                             </TabsTrigger>
                         </TabsList>
 
