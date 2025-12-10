@@ -1,0 +1,105 @@
+/* AI SECTION REDESIGN - REPLACE LINES 522-564 in HomeTestClient.tsx */
+
+          {/* Sección de Autoridad: IA y ChatGPT - Redesigned */}
+          <section className="w-full py-20 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 relative overflow-hidden">
+            {/* Decorative background elements */}
+            <div className="absolute inset-0 opacity-10">
+              <div className="absolute top-0 left-0 w-96 h-96 bg-blue-500 rounded-full blur-3xl"></div>
+              <div className="absolute bottom-0 right-0 w-96 h-96 bg-cyan-500 rounded-full blur-3xl"></div>
+            </div>
+            
+            <div className="container mx-auto px-4 relative z-10">
+              <div className="max-w-6xl mx-auto">
+                {/* Header Section */}
+                <div className="text-center mb-16">
+                  <div className="inline-flex items-center gap-2 bg-blue-500/20 backdrop-blur-sm border border-blue-400/30 rounded-full px-6 py-2 mb-6">
+                    <svg className="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                    </svg>
+                    <span className="text-cyan-300 font-semibold text-sm uppercase tracking-wider">Nueva Era Digital</span>
+                  </div>
+                  
+                  <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+                    La IA Ya Decide
+                    <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400 mt-2">
+                      Dónde Se Hospedan Tus Clientes
+                    </span>
+                  </h2>
+                  
+                  <p className="text-xl md:text-2xl text-blue-200 max-w-3xl mx-auto">
+                    ChatGPT no es solo un asistente. Es el nuevo Booking para millones de viajeros.
+                  </p>
+                </div>
+
+                {/* Stats Grid */}
+                <div className="grid md:grid-cols-2 gap-6 mb-12">
+                  {/* Stat Card 1 */}
+                  <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 hover:bg-white/15 transition-all duration-300">
+                    <div className="flex items-start gap-4">
+                      <div className="flex-shrink-0">
+                        <div className="w-16 h-16 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-xl flex items-center justify-center">
+                          <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                          </svg>
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-5xl font-bold text-white mb-2">42%</div>
+                        <p className="text-blue-200 text-lg">de viajeros usan IA para planificar sus viajes</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Stat Card 2 */}
+                  <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 hover:bg-white/15 transition-all duration-300">
+                    <div className="flex items-start gap-4">
+                      <div className="flex-shrink-0">
+                        <div className="w-16 h-16 bg-gradient-to-br from-purple-400 to-pink-500 rounded-xl flex items-center justify-center">
+                          <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                          </svg>
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-5xl font-bold text-white mb-2">+36%</div>
+                        <p className="text-blue-200 text-lg">más tiempo en sitios recomendados por IA</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Warning Box */}
+                <div className="bg-gradient-to-r from-amber-500/20 to-orange-500/20 backdrop-blur-sm border-2 border-amber-400/50 rounded-2xl p-8 md:p-10 mb-8">
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0">
+                      <svg className="w-12 h-12 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold text-white mb-3">El Problema Real</h3>
+                      <p className="text-lg text-blue-100 leading-relaxed">
+                        La IA solo puede recomendarte <span className="text-amber-300 font-bold">si tu Motor de Reservas tiene la estructura de datos correcta</span>. Sin la configuración adecuada, tu hotel es invisible para estos algoritmos — y por lo tanto, para el viajero moderno.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* CTA Section */}
+                <div className="text-center">
+                  <a
+                    href="/hotel-objetivo"
+                    className="group inline-flex items-center justify-center gap-3 px-10 py-5 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold rounded-xl shadow-2xl hover:shadow-cyan-500/50 transition-all duration-300 transform hover:-translate-y-1 text-lg md:text-xl"
+                  >
+                    <span>Optimiza Tu Posicionamiento en IA</span>
+                    <svg className="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                  </a>
+                  <p className="text-blue-300 text-sm mt-4 italic">
+                    <sup>1</sup> Basado en estudios de comportamiento del viajero y adopción de IA generativa en turismo
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>

@@ -1,0 +1,107 @@
+{
+  "totalVisitas": 3555,
+  "visitasHoy": 3555,
+  "articulosPublicados": 0,
+  "suscriptoresNewsletter": 0,
+  "ultimasVisitas": [
+    {
+      "fecha": "2025-11-11",
+      "pagina": "/blog/posicionamiento-marca/estrategias-posicionar-restaurante-google",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-11-11",
+      "pagina": "/blog",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-11-11",
+      "pagina": "/admin",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-11-11",
+      "pagina": "/blog/posicionamiento-marca/estrategias-posicionar-restaurante-google",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-11-11",
+      "pagina": "/admin",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-11-11",
+      "pagina": "/blog/posicionamiento-marca/estrategias-posicionar-restaurante-google",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-11-11",
+      "pagina": "/blog/seo/estrategias-de-contenido-cmo-aumentar-la-interaccin-en-redes-sociales",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-11-11",
+      "pagina": "/blog",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-11-11",
+      "pagina": "/admin",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-11-11",
+      "pagina": "/admin",
+      "visitas": 1
+    }
+  ],
+  "visitasPorDia": {
+    "2025-05-27": 246,
+    "2025-05-28": 11,
+    "2025-05-29": 8,
+    "2025-05-30": 25,
+    "2025-05-31": 19,
+    "2025-06-01": 27,
+    "2025-06-02": 32,
+    "2025-06-03": 9,
+    "2025-06-04": 3,
+    "2025-06-05": 21,
+    "2025-06-08": 32,
+    "2025-06-09": 22,
+    "2025-06-11": 6,
+    "2025-06-12": 7,
+    "2025-06-15": 25,
+    "2025-06-25": 7,
+    "2025-06-27": 56,
+    "2025-08-10": 12,
+    "2025-08-11": 25,
+    "2025-08-12": 21,
+    "2025-08-13": 5,
+    "2025-09-10": 2,
+    "2025-09-11": 1,
+    "2025-09-25": 4,
+    "2025-09-26": 8,
+    "2025-09-28": 10,
+    "2025-09-29": 19,
+    "2025-10-03": 19,
+    "2025-10-04": 20,
+    "2025-10-05": 37,
+    "2025-10-06": 3,
+    "2025-10-07": 19,
+    "2025-10-22": 9,
+    "2025-10-23": 261,
+    "2025-10-24": 260,
+    "2025-10-25": 124,
+    "2025-10-27": 620,
+    "2025-10-28": 435,
+    "2025-10-29": 285,
+    "2025-10-30": 220,
+    "2025-10-31": 189,
+    "2025-11-01": 91,
+    "2025-11-02": 3,
+    "2025-11-03": 8,
+    "2025-11-10": 65,
+    "2025-11-11": 224
+  },
+  "aperturasEmail": {}
+}

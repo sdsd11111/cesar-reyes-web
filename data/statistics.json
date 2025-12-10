@@ -1,0 +1,79 @@
+{
+  "totalVisitas": 1354,
+  "visitasHoy": 1354,
+  "articulosPublicados": 0,
+  "suscriptoresNewsletter": 0,
+  "ultimasVisitas": [
+    {
+      "fecha": "2025-12-10",
+      "pagina": "/",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-12-10",
+      "pagina": "/",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-12-10",
+      "pagina": "/MenuObjetivo",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-12-10",
+      "pagina": "/",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-12-10",
+      "pagina": "/",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-12-10",
+      "pagina": "/",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-12-10",
+      "pagina": "/hotel-objetivo",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-12-10",
+      "pagina": "/MenuObjetivo",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-12-10",
+      "pagina": "/MenuObjetivo",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-12-10",
+      "pagina": "/hotel-objetivo",
+      "visitas": 1
+    }
+  ],
+  "visitasPorDia": {
+    "2025-11-11": 258,
+    "2025-11-12": 168,
+    "2025-11-13": 46,
+    "2025-11-14": 173,
+    "2025-11-15": 24,
+    "2025-11-18": 37,
+    "2025-11-25": 95,
+    "2025-11-26": 182,
+    "2025-11-27": 33,
+    "2025-11-28": 5,
+    "2025-12-01": 11,
+    "2025-12-02": 14,
+    "2025-12-03": 61,
+    "2025-12-04": 18,
+    "2025-12-05": 97,
+    "2025-12-07": 46,
+    "2025-12-08": 18,
+    "2025-12-09": 4,
+    "2025-12-10": 64
+  }
+}

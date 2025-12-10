@@ -1,0 +1,199 @@
+{
+  "categorias": [
+    {
+      "id": "cat3",
+      "titulo": "Análisis Estratégico",
+      "slug": "analisis-estrategico",
+      "descripcionCorta": "Toma decisiones con datos y asesoría experta",
+      "imagen": "/images/categorias/analisis-estrategico.webp",
+      "servicios": [
+        {
+          "id": "estrategia-ganar-clientes",
+          "titulo": "Estrategia para Ganar Clientes",
+          "descripcionCorta": "Plan de Marketing Digital para Microempresas",
+          "slug": "estrategia-ganar-clientes",
+          "imagen": "/images/negocio_resultados.webp"
+        },
+        {
+          "id": "plan-salir-google",
+          "titulo": "Plan para Salir en Google",
+          "descripcionCorta": "Posicionamiento SEO para tu negocio",
+          "slug": "plan-salir-google",
+          "imagen": "/images/posicionamiento_slide_seo_objetivo.webp"
+        },
+        {
+          "id": "analisis-competencia",
+          "titulo": "Análisis de la Competencia",
+          "descripcionCorta": "Levantamiento de información detallado de competidores",
+          "slug": "analisis-competencia"
+        },
+        {
+          "id": "consultoria-empresarial",
+          "titulo": "Consultoría Empresarial",
+          "descripcionCorta": "Mentoría para iniciar y consolidar tu proyecto",
+          "slug": "consultoria-empresarial"
+        },
+        {
+          "id": "estudio-factibilidad",
+          "titulo": "El Antes de Endeudarte",
+          "descripcionCorta": "Estudio de Factibilidad para decisiones de inversión",
+          "slug": "estudio-factibilidad"
+        },
+        {
+          "id": "reingenieria-procesos",
+          "titulo": "Procesos Lentos y Caros",
+          "descripcionCorta": "Reingeniería de Procesos para reducir costos y tiempos",
+          "slug": "reingenieria-procesos"
+        }
+      ]
+    },
+    {
+      "id": "cat2",
+      "titulo": "Desarrollo Web",
+      "slug": "desarrollo-web",
+      "descripcionCorta": "Sitios web profesionales y optimizados para tu negocio",
+      "imagen": "/images/categorias/desarrollo-web.webp",
+      "servicios": [
+        {
+          "id": "tarjeta-digital",
+          "titulo": "Tarjeta Digital",
+          "descripcionCorta": "Tu primer contacto profesional - $60",
+          "slug": "tarjeta-digital",
+          "imagen": "/images/web.webp"
+        },
+        {
+          "id": "tu-contacto-profesional",
+          "titulo": "Tu Contacto Profesional",
+          "descripcionCorta": "Presencia digital básica - $150",
+          "slug": "tu-contacto-profesional",
+          "imagen": "/images/web.webp"
+        },
+        {
+          "id": "go-2025",
+          "titulo": "Páginas web GO 2025",
+          "descripcionCorta": "Tu primera web profesional - $250",
+          "slug": "go-2025",
+          "imagen": "/images/web.webp"
+        },
+        {
+          "id": "tu-negocio-24-7",
+          "titulo": "Tu Negocio 24/7",
+          "descripcionCorta": "Web con catálogo de productos - $500",
+          "slug": "tu-negocio-24-7",
+          "imagen": "/images/web.webp"
+        },
+        {
+          "id": "tu-empresa-online",
+          "titulo": "Tu Empresa Online",
+          "descripcionCorta": "Sitio corporativo completo - $700",
+          "slug": "tu-empresa-online",
+          "imagen": "/images/web.webp"
+        },
+        {
+          "id": "tu-sucursal-online",
+          "titulo": "Tu Sucursal Online",
+          "descripcionCorta": "E-commerce profesional - $950",
+          "slug": "tu-sucursal-online",
+          "imagen": "/images/web.webp"
+        }
+      ]
+    },
+    {
+      "id": "cat1",
+      "titulo": "Posicionamiento de Marca",
+      "slug": "posicionamiento",
+      "descripcionCorta": "Estrategias para destacar tu marca en línea",
+      "imagen": "/images/categorias/posicionamiento.webp",
+      "servicios": [
+        {
+          "id": "alianza-exclusiva",
+          "titulo": "Alianza Exclusiva",
+          "descripcionCorta": "Crecimiento digital sin inversión inicial",
+          "slug": "alianza-exclusiva",
+          "imagen": "/images/web.webp"
+        },
+        {
+          "id": "auditoria-seo-rediseno",
+          "titulo": "Auditoría SEO y Rediseño",
+          "descripcionCorta": "Mejora el rendimiento y posicionamiento de tu sitio",
+          "slug": "auditoria-seo-rediseno",
+          "imagen": "/images/posicionamiento_slide_seo_objetivo.webp"
+        }
+      ]
+    },
+    {
+      "id": "cat4",
+      "titulo": "Restaurantes",
+      "slug": "restaurantes",
+      "descripcionCorta": "Soluciones digitales para restaurantes y negocios gastronómicos",
+      "imagen": "/images/categorias/restaurantes.webp",
+      "servicios": [
+        {
+          "id": "zona-gamer-personalizada",
+          "titulo": "Zona Gamer Personalizada",
+          "descripcionCorta": "Experiencia de juego personalizada para tu negocio",
+          "slug": "zona-gamer-personalizada",
+          "directPath": true
+        },
+        {
+          "id": "viralidad-estrategica",
+          "titulo": "Viralidad Estratégica",
+          "descripcionCorta": "Estrategias para aumentar la visibilidad de tu restaurante",
+          "slug": "viralidad-estrategica",
+          "directPath": true
+        },
+        {
+          "id": "trafico-tibio-caliente",
+          "titulo": "Maestro de las Estrellas A",
+          "descripcionCorta": "Atrae clientes más comprometidos con tu oferta",
+          "slug": "maestro-de-las-estrellas-a",
+          "directPath": true
+        },
+        {
+          "id": "tv-premium",
+          "titulo": "TV Premium",
+          "descripcionCorta": "Contenido audiovisual de alta calidad para tu negocio",
+          "slug": "tv-premium",
+          "directPath": true
+        },
+        {
+          "id": "trafico-frio",
+          "titulo": "Maestro de las Estrellas B",
+          "descripcionCorta": "Estrategias para atraer nuevos clientes a tu restaurante",
+          "slug": "maestro-de-las-estrellas-b",
+          "directPath": true
+        },
+        {
+          "id": "spot-corporativo",
+          "titulo": "Spot Corporativo",
+          "descripcionCorta": "Videos profesionales para promocionar tu restaurante",
+          "slug": "spot-corporativo",
+          "directPath": true
+        },
+        {
+          "id": "promo-restaurantes-artes-vivas",
+          "titulo": "Promo Restaurantes Artes Vivas",
+          "descripcionCorta": "Promociones especiales para restaurantes",
+          "slug": "promo-restaurantes-artes-vivas",
+          "directPath": true
+        }
+      ]
+    },
+    {
+      "id": "cat5",
+      "titulo": "Artes Vivas",
+      "slug": "artes-vivas",
+      "descripcionCorta": "Soluciones digitales para artistas y espacios culturales",
+      "imagen": "/images/categorias/artes-vivas.webp",
+      "servicios": [
+        {
+          "id": "promo-artes-vivas",
+          "titulo": "Promoción Artes Vivas",
+          "descripcionCorta": "Estrategias de promoción para artistas y espacios culturales",
+          "slug": "promo-artes-vivas",
+          "directPath": true
+        }
+      ]
+    }
+  ]
+}
