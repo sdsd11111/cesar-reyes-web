@@ -14,24 +14,24 @@ const HomeClient = dynamic(() => import('@/app/components/HomeClient'), {
   ssr: false
 });
 
-export default function HomeClientWrapper({ 
+export default function HomeClientWrapper({
   searchParams,
-  content 
-}: { 
+  content
+}: {
   searchParams: { [key: string]: string | string[] | undefined },
-  content: typeof pageContent 
+  content: typeof pageContent
 }) {
   const searchParamsHook = useSearchParams();
-  
+
   // Usamos searchParams del hook o de las props según corresponda
   const view = searchParamsHook?.get('view') || searchParams?.view;
   const isEmotionalView = view === 'emocional';
-  const currentContent = isEmotionalView ? content.emocional : content.logico;
+  const currentContent = isEmotionalView ? content.restaurantes : content.hoteles;
 
   return (
-    <HomeClient 
-      content={currentContent} 
-      isEmotionalView={isEmotionalView} 
+    <HomeClient
+      content={currentContent}
+      isEmotionalView={isEmotionalView}
     />
   );
 }

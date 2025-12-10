@@ -1,6 +1,6 @@
 'use client';
 
-import TestimonialSlider from '@/components/TestimonialSlider';
+import TestimonialSlider from '@/components/testimonial-slider';
 
 export default function TestimonialsSection() {
     return (

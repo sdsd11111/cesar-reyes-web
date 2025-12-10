@@ -1,6 +1,6 @@
 {
-  "totalVisitas": 1354,
-  "visitasHoy": 1354,
+  "totalVisitas": 1356,
+  "visitasHoy": 1356,
   "articulosPublicados": 0,
   "suscriptoresNewsletter": 0,
   "ultimasVisitas": [
@@ -16,6 +16,16 @@
     },
     {
       "fecha": "2025-12-10",
+      "pagina": "/",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-12-10",
+      "pagina": "/",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-12-10",
       "pagina": "/MenuObjetivo",
       "visitas": 1
     },
@@ -42,16 +52,6 @@
     {
       "fecha": "2025-12-10",
       "pagina": "/MenuObjetivo",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-12-10",
-      "pagina": "/MenuObjetivo",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-12-10",
-      "pagina": "/hotel-objetivo",
       "visitas": 1
     }
   ],
@@ -74,6 +74,6 @@
     "2025-12-07": 46,
     "2025-12-08": 18,
     "2025-12-09": 4,
-    "2025-12-10": 64
+    "2025-12-10": 66
   }
 }

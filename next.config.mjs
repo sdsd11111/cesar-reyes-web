@@ -35,11 +35,20 @@ const nextConfig = {
     return ext;
   }),
   webpack: (config, { isServer }) => {
-    // Ignorar archivos backup durante la compilación
+    // Excluir completamente el directorio backups y archivos backup
+    config.module.rules.push({
+      test: /backups\/.*\.(tsx?|jsx?|js|ts)$/,
+      use: 'null-loader',
+    });
     config.module.rules.push({
       test: /\.backup.*\.(tsx?|jsx?)$/,
-      loader: 'ignore-loader',
+      use: 'null-loader',
     });
+    // Ignorar importaciones desde backups
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '/backups': false,
+    };
     return config;
   },
   typescript: {
