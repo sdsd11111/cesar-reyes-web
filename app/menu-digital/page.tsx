@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     type: "website",
   },
   alternates: {
-    canonical: 'https://www.cesarreyesjaramillo.com/MenuObjetivo'
+    canonical: 'https://www.cesarreyesjaramillo.com/menu-digital'
   }
 };
 
@@ -50,7 +50,7 @@ export default function MenuObjetivoPage() {
     <>
       <BreadcrumbSchema items={[
         { name: "Inicio", url: "/" },
-        { name: "MenúObjetivo", url: "/MenuObjetivo" }
+        { name: "MenúObjetivo", url: "/menu-digital" }
       ]} />
       <FAQSchema questions={faqData} />
       <ServiceSchema

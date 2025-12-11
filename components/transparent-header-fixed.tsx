@@ -64,7 +64,7 @@ const TransparentHeaderFixed = () => {
               <MegaMenu categorias={categorias} />
             </div>
             <Link href="/blog" className="text-gray-700 hover:text-gray-900">Blog</Link>
-            <Link href="/menuobjetivo" className="bg-[#FF6B00] text-white px-3 py-2 rounded-md text-sm font-semibold hover:bg-[#E66000] transition-colors">Menú Objetivo</Link>
+            <Link href="/menu-digital" className="bg-[#FF6B00] text-white px-3 py-2 rounded-md text-sm font-semibold hover:bg-[#E66000] transition-colors">Menú Objetivo</Link>
           </div>
 
           {/* Botón de menú móvil */}
@@ -127,7 +127,7 @@ const TransparentHeaderFixed = () => {
                             }
                             // Logic for MenuObjetivo items
                             else if (['zona-gamer-personalizada', 'viralidad-estrategica', 'maestro-de-las-estrellas-a', 'tv-premium', 'spot-corporativo'].includes(servicio.slug)) {
-                              href = `/MenuObjetivo/${servicio.slug}`;
+                              href = `/menu-digital/${servicio.slug}`;
                             }
 
                             return (
@@ -169,7 +169,7 @@ const TransparentHeaderFixed = () => {
               Blog
             </Link>
             <Link
-              href="/menuobjetivo"
+              href="/menu-digital"
               className="block py-2 text-gray-800 hover:bg-gray-100 px-4 rounded"
               onClick={() => setIsMenuOpen(false)}
             >

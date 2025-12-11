@@ -22,7 +22,7 @@ export const metadata: Metadata = {
         type: "website",
     },
     alternates: {
-        canonical: 'https://www.cesarreyesjaramillo.com/hotel-objetivo'
+        canonical: 'https://www.cesarreyesjaramillo.com/motor-reservas-hotel'
     }
 };
 
@@ -50,7 +50,7 @@ export default function HotelObjetivoPage() {
         <>
             <BreadcrumbSchema items={[
                 { name: "Inicio", url: "/" },
-                { name: "Hotel Objetivo", url: "/hotel-objetivo" }
+                { name: "Hotel Objetivo", url: "/motor-reservas-hotel" }
             ]} />
             <FAQSchema questions={faqData} />
             <ServiceSchema

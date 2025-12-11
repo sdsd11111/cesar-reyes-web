@@ -15,7 +15,7 @@ export const pageContent = {
         image: "/images/logico-card.webp",
         tags: [{ text: "Crecimiento Estable" }],
         overlay: { icon: "TrendingUp", text: "Hoteles" },
-        cta: { text: "Ver Plan Hotelero", url: "https://www.cesarreyesjaramillo.com/hotel-objetivo" }
+        cta: { text: "Ver Plan Hotelero", url: "https://www.cesarreyesjaramillo.com/motor-reservas-hotel" }
       },
       restaurantes: {
         title: "Restaurantes: Un Menú Digital Moderno que Impulsa Ventas",
@@ -23,7 +23,7 @@ export const pageContent = {
         image: "/images/emocional-card.webp",
         tags: [{ text: "Nuevos Clientes" }],
         overlay: { icon: "Users", text: "Restaurantes" },
-        cta: { text: "Ver Plan Restaurantero", url: "https://www.cesarreyesjaramillo.com/MenuObjetivo" }
+        cta: { text: "Ver Plan Restaurantero", url: "https://www.cesarreyesjaramillo.com/menu-digital" }
       }
     }
   },

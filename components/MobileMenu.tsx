@@ -192,8 +192,8 @@ export default function MobileMenu({
                     <button
                       onClick={() => handleCategoryInteraction(categoria.id, categoria.slug)}
                       className={`flex items-center justify-between w-full py-4 px-6 text-left font-medium transition-colors touch-manipulation ${expandedMenus[categoria.id]
-                          ? 'bg-blue-50 text-blue-600'
-                          : 'text-gray-700 active:bg-gray-50'
+                        ? 'bg-blue-50 text-blue-600'
+                        : 'text-gray-700 active:bg-gray-50'
                         }`}
                       style={{
                         minHeight: '48px',
@@ -241,7 +241,7 @@ export default function MobileMenu({
                         }
                         // Logic for MenuObjetivo items
                         else if (['zona-gamer-personalizada', 'viralidad-estrategica', 'maestro-de-las-estrellas-a', 'tv-premium', 'spot-corporativo'].includes(servicio.slug)) {
-                          href = `/MenuObjetivo/${servicio.slug}`;
+                          href = `/menu-digital/${servicio.slug}`;
                         }
 
                         return (
@@ -281,7 +281,7 @@ export default function MobileMenu({
           </Link>
 
           <Link
-            href="/MenuObjetivo"
+            href="/menu-digital"
             className="block py-4 px-4 bg-[#FF6B00] text-white font-bold active:bg-[#E66000] rounded-lg text-center transition-colors touch-manipulation"
             onClick={onClose}
             style={{

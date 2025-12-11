@@ -8,13 +8,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const routes = [
         '',
         '/mensajeria',
+        '/motor-reservas-hotel',
         '/servicios',
         '/servicios/analisis-estrategico',
         '/servicios/desarrollo-web',
         '/servicios/posicionamiento',
         '/blog',
         '/contacto',
-        '/MenuObjetivo',
+        '/menu-digital',
     ].map((route) => ({
         url: `${baseUrl}${route}`,
         lastModified: new Date(),

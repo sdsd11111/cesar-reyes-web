@@ -297,7 +297,7 @@ const HotelObjetivoClient = () => {
                                 <p className="font-bold text-[#FF6B00] mb-2">🔴 LA VERDAD QUE NO VES:</p>
                                 <p className="text-gray-300">Ese 18% NO sale de tus ingresos... Sale de TU UTILIDAD NETA.</p>
                                 <p className="text-gray-300 mt-2">Si tu margen de ganancia es 30%, ese 18% representa el <span className="font-bold text-white">60% de lo que realmente te queda.</span></p>
-                                <p className="font-bold mt-2 text-white">Booking no se lleva el 18%. Se lleva el 60% de tu ganancia real.</p>
+                                <p className="font-bold mt-2 text-white">La plataforma no se lleva el 18%. Se lleva el 60% de tu ganancia real.</p>
                             </div>
                         </HotelCard>
 
@@ -311,7 +311,7 @@ const HotelObjetivoClient = () => {
                                 <p className="font-bold text-center mb-2 text-[#FF6B00]">📊 HOTEL 3★ PROMEDIO</p>
                                 <div className="space-y-1 text-gray-300 text-sm">
                                     <p>Ingresos anuales: $700,000</p>
-                                    <p>Reservas vía Booking (70%): $490,000</p>
+                                    <p>Reservas vía Agencias (70%): $490,000</p>
                                     <p className="font-bold text-[#FF6B00]">Comisión pagada (18%): $88,200</p>
                                 </div>
                             </div>
@@ -320,7 +320,7 @@ const HotelObjetivoClient = () => {
                                 <p className="text-gray-300">Costos operativos (65%): $455,000</p>
                                 <p className="font-bold text-green-400">Utilidad neta real: $245,000</p>
                                 <div className="bg-red-900/30 p-3 rounded mt-2 border border-red-900/50">
-                                    <p className="font-bold text-red-400 text-center text-sm">🚨 BOOKING SE LLEVA EL 36% DE TU GANANCIA REAL</p>
+                                    <p className="font-bold text-red-400 text-center text-sm">🚨 LA AGENCIA SE LLEVA EL 36% DE TU GANANCIA REAL</p>
                                 </div>
                                 <div className="mt-2 text-xs text-gray-400">
                                     <p>❌ El cliente que no puedes fidelizar</p>
@@ -340,7 +340,7 @@ const HotelObjetivoClient = () => {
                                 <p className="font-bold text-center mb-2 text-[#FF6B00]">⏳ MIENTRAS PIENSAS...</p>
                                 <p className="text-center text-gray-300 text-sm mb-2">Tu negocio sigue generando, pero no para ti:</p>
                                 <ul className="list-disc list-inside text-gray-300 mt-1 text-sm">
-                                    <li>Booking sigue cobrando su 'impuesto' diario</li>
+                                    <li>La plataforma sigue cobrando su 'impuesto' diario</li>
                                     <li>Tu base de datos sigue vacía</li>
                                     <li>Tu marca se debilita frente a las OTAs</li>
                                 </ul>
@@ -352,7 +352,7 @@ const HotelObjetivoClient = () => {
                                     <li>~540 oportunidades de fidelización</li>
                                 </ul>
                                 <div className="bg-orange-900/30 p-3 rounded mt-2 border border-orange-900/50">
-                                    <p className="font-bold text-orange-400 text-center text-sm">🚨 EN UN AÑO HABRÁS REGALADO UN DEPARTAMENTO ($88k) A BOOKING</p>
+                                    <p className="font-bold text-orange-400 text-center text-sm">🚨 EN UN AÑO HABRÁS REGALADO UN DEPARTAMENTO ($88k) EN COMISIONES</p>
                                 </div>
                             </div>
                         </HotelCard>
@@ -418,7 +418,7 @@ const HotelObjetivoClient = () => {
                                         <div className="bg-white/10 p-4 rounded-lg">
                                             <p className="font-bold text-center mb-2 text-[#FF6B00]">🧳 PRIMER CONTACTO</p>
                                             <ul className="list-disc list-inside text-gray-300 mt-1 text-sm">
-                                                <li>Booking te trae el huésped.</li>
+                                                <li>La agencia te trae el huésped.</li>
                                                 <li>Pagas comisión (normal).</li>
                                                 <li>Capturas su email o lo ingresas a tu plataforma.</li>
                                             </ul>
@@ -500,7 +500,7 @@ const HotelObjetivoClient = () => {
                                         <div className="bg-white/10 p-4 rounded-lg">
                                             <p className="font-bold text-center mb-2 text-[#FF6B00]">🧳 PRIMER CONTACTO</p>
                                             <ul className="list-disc list-inside text-gray-300 mt-1 text-sm">
-                                                <li>Booking te trae el huésped.</li>
+                                                <li>La agencia te trae el huésped.</li>
                                                 <li>Pagas comisión (normal).</li>
                                                 <li>Capturas su email o lo ingresas a tu plataforma.</li>
                                             </ul>
@@ -570,7 +570,7 @@ const HotelObjetivoClient = () => {
                                 className="data-[state=active]:bg-gray-900 data-[state=active]:text-white text-gray-400 font-bold text-xs md:text-base py-3 rounded-md transition-all"
                             >
                                 <span className="text-lg md:text-xl mr-1 md:mr-2">❌</span>
-                                <span className="hidden sm:inline">CLIENTE POR </span>BOOKING
+                                <span className="hidden sm:inline">CLIENTE POR </span>AGENCIA
                             </TabsTrigger>
                             <TabsTrigger
                                 value="sistema"
@@ -619,7 +619,7 @@ const HotelObjetivoClient = () => {
                                 <div className="absolute top-0 right-0 bg-[#FF6B00] text-white text-xs font-bold px-3 py-1 rounded-bl-lg">RECOMENDADO</div>
                                 <div className="space-y-4 text-gray-400 mt-8 md:mt-0">
                                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center border-b border-gray-800 pb-2 gap-1">
-                                        <span className="text-sm md:text-base">Año 1: Reserva 1 (Booking)</span>
+                                        <span className="text-sm md:text-base">Año 1: Reserva 1 (Agencia)</span>
                                         <span className="font-medium text-gray-200 text-sm md:text-base">$500 <span className="text-red-500 text-xs md:text-sm">(-$90)</span></span>
                                     </div>
                                     <div className="text-xs md:text-sm text-[#FF6B00] italic">✨ Capturas su email al check-in</div>
@@ -712,7 +712,7 @@ const HotelObjetivoClient = () => {
                                             </div>
                                             <h3 className="text-xl font-bold text-white">Búsquedas Internacionales</h3>
                                         </div>
-                                        <p className="text-blue-400 font-bold text-xs uppercase tracking-wider mb-4">DOMINIO DE OTAS (BOOKING)</p>
+                                        <p className="text-blue-400 font-bold text-xs uppercase tracking-wider mb-4">DOMINIO DE OTAS (BOOKING, EXPEDIA, ETC)</p>
 
                                         <div className="space-y-3">
                                             <div className="bg-gray-800 p-3 rounded-xl border border-gray-700 flex items-center opacity-75">
@@ -779,7 +779,7 @@ const HotelObjetivoClient = () => {
                                     </div>
                                     <h3 className="text-2xl font-bold text-white">Búsquedas Internacionales</h3>
                                 </div>
-                                <p className="text-blue-400 font-bold text-sm uppercase tracking-wider mb-6">DOMINIO DE OTAS (BOOKING)</p>
+                                <p className="text-blue-400 font-bold text-sm uppercase tracking-wider mb-6">DOMINIO DE OTAS (BOOKING, EXPEDIA, DESPEGAR)</p>
 
                                 <div className="space-y-4">
                                     <div className="bg-gray-800 p-4 rounded-xl border border-gray-700 flex items-center opacity-75">

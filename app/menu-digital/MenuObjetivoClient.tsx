@@ -819,9 +819,7 @@ const MenuObjetivoClient = () => {
 
                     <div className="mt-8 text-center">
                         <a
-                            href="https://wa.me/593963410409?text=Hola%2C%20vi%20la%20demo%20en%20la%20landing%20y%20me%20interesa%20ver%20c%C3%B3mo%20funciona%20para%20mi%20restaurante.%20%C2%BFPueden%20agendar%20una%20demo%20personalizada%3F"
-                            target="_blank"
-                            rel="noopener noreferrer"
+                            href="#formulario"
                             className="inline-flex items-center justify-center bg-[#25D366] hover:bg-[#128C7E] text-white font-bold py-3 px-8 rounded-full text-lg transition-colors duration-300 shadow-lg"
                         >
                             <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -1060,7 +1058,7 @@ const MenuObjetivoClient = () => {
                         Sistema de reservas directas sin comisiones. Gestiona habitaciones, check-in y reservas desde tu celular.
                     </p>
                     <a
-                        href="/hotel-objetivo"
+                        href="/motor-reservas-hotel"
                         className="inline-flex items-center bg-[#FF6B00] hover:bg-[#E66000] text-white font-bold py-4 px-8 rounded-xl shadow-lg transition-all transform hover:scale-105 text-lg"
                     >
                         Conoce Hotel Objetivo

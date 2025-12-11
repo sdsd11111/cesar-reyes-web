@@ -120,7 +120,6 @@ export default function HomeTestClient({ content, isEmotionalView: initialIsEmot
   const [isPortfolioModalOpen, setIsPortfolioModalOpen] = useState(false);
   const [showFullText, setShowFullText] = useState(false);
   const [showFullQuote, setShowFullQuote] = useState(false);
-  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
   const [isClient, setIsClient] = useState(false);
 
   const shortText = <>Somos la única consultora en Ecuador enfocada en <strong>reingeniería digital para el sector turístico</strong>...</>;
@@ -159,32 +158,14 @@ export default function HomeTestClient({ content, isEmotionalView: initialIsEmot
       {/* Hero Section */}
       <section className="relative w-full h-screen min-h-[600px] flex items-center justify-center text-center overflow-hidden bg-black">
         {/* Video Background - Client Only for Performance but Poster is SSR */}
-        <div className="absolute inset-0 transition-opacity duration-1000">
-          {/* Use next/image for optimized LCP */}
-          <div className={`absolute inset-0 ${isVideoLoaded ? 'hidden' : 'block'}`}>
-            <Image
-              src="/images/portada_cesarbn.webp"
-              alt="Motor de Reservas y Menú Digital para Hoteles y Restaurantes en Ecuador - Consultoría César Reyes"
-              fill
-              priority
-              className="object-cover"
-              sizes="100vw"
-            />
-          </div>
-          {isClient && (
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              className={`w-full h-full object-cover object-center absolute inset-0 transition-opacity duration-1000 ${isVideoLoaded ? 'opacity-100' : 'opacity-0'}`}
-              poster="/images/portada_cesarbn.webp"
-              onLoadedData={() => setIsVideoLoaded(true)}
-            >
-              <source src="/images/Videos/Promo Artes Vivas 2025 Objetivo.mp4" type="video/mp4" />
-            </video>
-          )}
-        </div>
+        <Image
+          src="/images/hero-home.webp"
+          alt="Motor de Reservas y Menú Digital para Hoteles y Restaurantes en Ecuador - Consultoría César Reyes"
+          fill
+          priority
+          className="object-cover object-center"
+          sizes="100vw"
+        />
         <div className="absolute inset-0 bg-black/60 z-10"></div>
         <div className="relative z-20 container mx-auto px-4 flex flex-col items-center justify-center h-full">
           {/* Versión Desktop */}
@@ -610,7 +591,7 @@ export default function HomeTestClient({ content, isEmotionalView: initialIsEmot
 
                   {/* Botón Secundario */}
                   <a
-                    href={selectedSector === 'restaurantes' ? "/MenuObjetivo" : "/hotel-objetivo"}
+                    href={selectedSector === 'restaurantes' ? "/menu-digital" : "/motor-reservas-hotel"}
                     className="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#1A1A1A] hover:bg-[#252525] text-blue-400 font-bold rounded-lg border border-blue-900/50 hover:border-blue-700 shadow-lg transition-all duration-300 hover:-translate-y-1 text-lg w-full sm:w-auto"
                   >
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

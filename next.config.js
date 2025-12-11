@@ -139,6 +139,17 @@ const nextConfig = {
         destination: '/servicios/posicionamiento', // Mantener lógica anterior o cambiar si se define otra
         permanent: true,
       },
+      // Redirección de MenuObjetivo a menu-digital
+      {
+        source: '/MenuObjetivo',
+        destination: '/menu-digital',
+        permanent: true,
+      },
+      {
+        source: '/hotel-objetivo',
+        destination: '/motor-reservas-hotel',
+        permanent: true,
+      },
       // Pilares Principales
       {
         source: '/servicios/analisis-estrategico/:path*',
@@ -158,27 +169,27 @@ const nextConfig = {
       // Items movidos a MenuObjetivo
       {
         source: '/servicios/zona-gamer-personalizada',
-        destination: '/MenuObjetivo/zona-gamer-personalizada',
+        destination: '/menu-digital/zona-gamer-personalizada',
         permanent: true,
       },
       {
         source: '/servicios/viralidad-estrategica',
-        destination: '/MenuObjetivo/viralidad-estrategica',
+        destination: '/menu-digital/viralidad-estrategica',
         permanent: true,
       },
       {
         source: '/servicios/maestro-de-las-estrellas-a',
-        destination: '/MenuObjetivo/maestro-de-las-estrellas-a',
+        destination: '/menu-digital/maestro-de-las-estrellas-a',
         permanent: true,
       },
       {
         source: '/servicios/tv-premium',
-        destination: '/MenuObjetivo/tv-premium',
+        destination: '/menu-digital/tv-premium',
         permanent: true,
       },
       {
         source: '/servicios/spot-corporativo',
-        destination: '/MenuObjetivo/spot-corporativo',
+        destination: '/menu-digital/spot-corporativo',
         permanent: true,
       },
     ];

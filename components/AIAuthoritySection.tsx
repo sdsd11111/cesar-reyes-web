@@ -24,36 +24,43 @@ export default function AIAuthoritySection({ sector = 'hoteles' }: AIAuthoritySe
     const currentTabs = sector === 'restaurantes' ? restaurantTabs : hotelTabs;
 
     return (
-        <section className="w-full py-20 bg-gray-50 border-t border-b border-gray-200">
-            <div className="container mx-auto px-4">
+        <section className="w-full py-20 border-t border-b border-gray-800 relative overflow-hidden">
+            {/* Background Image */}
+            <div className="absolute inset-0 z-0">
+                <div
+                    className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-[url('/images/ia-image-movil.webp')] md:bg-[url('/images/ia-image.webp')]"
+                ></div>
+            </div>
+
+            <div className="container mx-auto px-4 relative z-10">
                 <div className="max-w-6xl mx-auto">
                     {/* Header */}
                     <div className="text-center mb-16">
-                        <div className="inline-flex items-center gap-2 bg-white border border-gray-200 rounded-full px-5 py-2 mb-8 shadow-sm">
-                            <span className="text-gray-600 font-semibold text-xs uppercase tracking-wider">
+                        <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-5 py-2 mb-8 shadow-sm">
+                            <span className="text-blue-200 font-semibold text-xs uppercase tracking-wider">
                                 {sector === 'restaurantes' ? 'Nueva Frecuencia de Pedidos (PEEC)' : 'Nueva Era Digital'}
                             </span>
                         </div>
 
                         {sector === 'restaurantes' ? (
                             <>
-                                <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-                                    La Nueva Ruta: Usar IA para Aumentar el <span className="text-blue-700">25% la Frecuencia</span>
+                                <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
+                                    La Nueva Ruta: Usar IA para Aumentar el <span className="text-blue-400">25% la Frecuencia</span>
                                 </h2>
-                                <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                                <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
                                     Sin depender del Delivery, tus clientes deben ser tuyos.
                                 </p>
                             </>
                         ) : (
                             <>
-                                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+                                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)]">
                                     La IA Ya Decide{' '}
-                                    <span className="text-blue-700 block sm:inline">
+                                    <span className="text-blue-400 block sm:inline drop-shadow-none">
                                         Dónde Se Hospedan Tus Clientes
                                     </span>
                                 </h2>
-                                <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                                    ChatGPT no es solo un asistente. Es el <strong className="text-blue-700">nuevo Booking</strong> para millones de viajeros.
+                                <p className="text-xl md:text-2xl text-white max-w-3xl mx-auto leading-relaxed drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
+                                    ChatGPT no es solo un asistente. Es el <strong className="text-blue-400">nuevo Booking</strong> para millones de viajeros.
                                 </p>
                             </>
                         )}
@@ -301,7 +308,7 @@ export default function AIAuthoritySection({ sector = 'hoteles' }: AIAuthoritySe
                                         {/* CTA */}
                                         <div className="text-center">
                                             <a
-                                                href="/hotel-objetivo"
+                                                href="/motor-reservas-hotel"
                                                 className="group inline-flex items-center justify-center gap-3 px-10 py-4 bg-blue-700 hover:bg-blue-800 text-white font-bold rounded-lg shadow-xl shadow-blue-900/20 transition-all duration-300 transform hover:-translate-y-1"
                                             >
                                                 <span>Auditar Mi Visibilidad IA</span>

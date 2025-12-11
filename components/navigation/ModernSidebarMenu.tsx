@@ -59,20 +59,20 @@ const menuItems = [
     },
     {
         title: "Menú Objetivo",
-        href: "/MenuObjetivo",
+        href: "/menu-digital",
         image: "/images/spot-corporativo.webp",
         subtitle: "Servicios especializados",
         subitems: [
-            { title: "Zona Gamer", href: "/MenuObjetivo/zona-gamer-personalizada" },
-            { title: "Viralidad Estratégica", href: "/MenuObjetivo/viralidad-estrategica" },
-            { title: "Maestro Estrellas A", href: "/MenuObjetivo/maestro-de-las-estrellas-a" },
-            { title: "TV Premium", href: "/MenuObjetivo/tv-premium" },
-            { title: "Spot Corporativo", href: "/MenuObjetivo/spot-corporativo" },
+            { title: "Zona Gamer", href: "/menu-digital/zona-gamer-personalizada" },
+            { title: "Viralidad Estratégica", href: "/menu-digital/viralidad-estrategica" },
+            { title: "Maestro Estrellas A", href: "/menu-digital/maestro-de-las-estrellas-a" },
+            { title: "TV Premium", href: "/menu-digital/tv-premium" },
+            { title: "Spot Corporativo", href: "/menu-digital/spot-corporativo" },
         ]
     },
     {
         title: "Hotel Objetivo",
-        href: "/hotel-objetivo",
+        href: "/motor-reservas-hotel",
         image: "/images/hotel-objetivo/hero.png",
         subtitle: "Soluciones para hoteles"
     },

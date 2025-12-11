@@ -22,8 +22,9 @@ const callbackCookieName = 'authjs.callback-url';
 const publicPaths = [
   '/',
   '/blog',
-  '/MenuObjetivo',
+  '/menu-digital',
   '/mensajeria',
+  '/motor-reservas-hotel',
   '/auth/signin',
   '/auth/error',
   '/api/auth',
@@ -34,7 +35,7 @@ const publicPaths = [
 export async function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
   const { pathname } = url;
-  
+
   // Skip middleware for public paths
   if (publicPaths.some(path => pathname.startsWith(path))) {
     logDebug(`Skipping auth check for public path: ${pathname}`);
@@ -56,7 +57,7 @@ export async function middleware(request: NextRequest) {
   });
 
   // Get the session token
-  const token = await getToken({ 
+  const token = await getToken({
     req: request,
     secret: process.env.NEXTAUTH_SECRET,
     secureCookie: useSecureCookies,
@@ -64,7 +65,7 @@ export async function middleware(request: NextRequest) {
     cookieName: sessionCookieName
   });
 
-  logDebug('Session token check', { 
+  logDebug('Session token check', {
     hasToken: !!token,
     token: token ? {
       name: token.name,
@@ -79,7 +80,7 @@ export async function middleware(request: NextRequest) {
       logDebug('No session token found, redirecting to login');
       const signInUrl = new URL('/auth/signin', request.url);
       signInUrl.searchParams.set('callbackUrl', '/admin');
-      
+
       const response = NextResponse.redirect(signInUrl);
       response.headers.set('x-middleware-cache', 'no-cache');
       return response;
