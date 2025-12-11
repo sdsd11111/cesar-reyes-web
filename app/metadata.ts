@@ -19,11 +19,11 @@ export const preloadConfig = {
 
 export const metadata: Metadata = {
   title: {
-    default: "César Reyes Jaramillo - Consultor Estratégico y Experto en Automatización",
+    default: "Motor Reservas Hotel & Menú Digital | 0% Comisión Ecuador",
     template: "%s | César Reyes Jaramillo"
   },
-  description: "Transforma tu negocio con estrategias de automatización, marketing digital y consultoría empresarial. Soluciones personalizadas para hacer crecer tu empresa en el entorno digital.",
-  keywords: ["consultor empresarial", "automatización de negocios", "marketing digital", "estrategia de crecimiento", "asesoría empresarial", "transformación digital"],
+  description: "Solución todo en uno para hoteles y restaurantes en Ecuador. Motor de reservas y menú digital con 0% de comisión. Aumenta tus reservas y ventas sin pagar comisiones altas.",
+  keywords: ["motor reservas hotel", "menú digital restaurante", "sistema de reservas sin comisión", "restaurantes Ecuador", "hoteles Ecuador", "reservas en línea"],
   authors: [{ name: "César Reyes Jaramillo" }],
   creator: "César Reyes Jaramillo",
   publisher: "César Reyes Jaramillo",
@@ -33,8 +33,8 @@ export const metadata: Metadata = {
     telephone: true,
   },
   openGraph: {
-    title: "César Reyes Jaramillo - Consultor Estratégico y Experto en Automatización",
-    description: "Transforma tu negocio con estrategias de automatización, marketing digital y consultoría empresarial. Soluciones personalizadas para hacer crecer tu empresa.",
+    title: "Motor Reservas Hotel & Menú Digital | 0% Comisión Ecuador",
+    description: "Solución todo en uno para hoteles y restaurantes en Ecuador. Motor de reservas y menú digital con 0% de comisión. Aumenta tus reservas y ventas sin pagar comisiones altas.",
     url: SITE_URL,
     siteName: "César Reyes Jaramillo",
     images: [

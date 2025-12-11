@@ -1,7 +1,7 @@
 export const pageContent = {
   shared: {
     hero: {
-      h1: "Motor de Reservas y Menú Digital para Hoteles y Restaurantes: Más Reservas Directas, Cero Comisiones en Ecuador",
+      h1: "Motor de Reservas y Menú Digital para Hoteles y Restaurantes en Ecuador | Cero Comisiones",
       h2: "Con Foco en Quito, Guayaquil, Cuenca y Loja para Resultados Locales Probados",
       p: "Somos la única consultora en Ecuador enfocada en **reingeniería digital para el sector turístico**. Deje de pagar hasta un 20% en comisiones por sus propios clientes. Nuestro método, que incluye un potente **Motor de Reservas** propio y el sistema **Menú Digital** con mayor retención de clientes, garantiza **Reservas Directas** y crecimiento medible.",
       cta: "Agenda una Llamada Ahora",

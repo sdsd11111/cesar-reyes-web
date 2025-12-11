@@ -1,6 +1,6 @@
 {
-  "totalVisitas": 1400,
-  "visitasHoy": 1400,
+  "totalVisitas": 1403,
+  "visitasHoy": 1403,
   "articulosPublicados": 0,
   "suscriptoresNewsletter": 0,
   "ultimasVisitas": [
@@ -11,7 +11,12 @@
     },
     {
       "fecha": "2025-12-11",
-      "pagina": "/",
+      "pagina": "/precios",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-12-11",
+      "pagina": "/precios",
       "visitas": 1
     },
     {
@@ -47,11 +52,6 @@
     {
       "fecha": "2025-12-11",
       "pagina": "/",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-12-11",
-      "pagina": "/motor-reservas-hotel",
       "visitas": 1
     }
   ],
@@ -75,6 +75,6 @@
     "2025-12-08": 18,
     "2025-12-09": 4,
     "2025-12-10": 66,
-    "2025-12-11": 44
+    "2025-12-11": 47
   }
 }
