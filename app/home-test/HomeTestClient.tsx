@@ -12,7 +12,7 @@ import { useState, useEffect } from "react"
 
 // Importaciones de librerías externas
 import { motion } from "framer-motion";
-import { Check, Stethoscope, ShoppingCart, BookOpen, Briefcase, AreaChart, TrendingUp, Users, MapPin, ChevronDown, ChevronUp } from "lucide-react";
+import { Check, Stethoscope, ShoppingCart, BookOpen, Briefcase, AreaChart, TrendingUp, Users, MapPin, ChevronDown, ChevronUp, MousePointerClick } from "lucide-react";
 
 // Importaciones de componentes locales
 import StrategyTabs from "@/components/StrategyTabs";
@@ -278,6 +278,16 @@ export default function HomeTestClient({ content, isEmotionalView: initialIsEmot
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 max-w-5xl mx-auto">{pageContent.shared.choiceSection.h2}</h2>
+
+          {/* Instructional Indicator */}
+          <div className="flex justify-center mt-8 mb-4">
+            <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-blue-50 border border-blue-100/50 shadow-sm animate-pulse cursor-default">
+              <MousePointerClick className="w-5 h-5 text-blue-600" />
+              <span className="text-sm md:text-base font-semibold text-blue-800 tracking-wide uppercase">
+                Selecciona tu Sector 👇
+              </span>
+            </div>
+          </div>
 
           <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 max-w-6xl mx-auto">
             {/* Opción Hoteles (Antes Lógico) */}

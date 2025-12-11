@@ -5,11 +5,11 @@ import ServiceSchema from "@/components/schema/ServiceSchema";
 import BreadcrumbSchema from "@/components/schema/BreadcrumbSchema";
 
 export const metadata: Metadata = {
-    title: "Hotel Objetivo | Gestión Digital para Hoteles en Ecuador",
-    description: "Gestiona tu hotel de forma digital. Ideal para hoteles en Quito, Guayaquil y todo Ecuador. Reservas, check-in y posicionamiento Google incluido.",
+    title: "Motor de Reservas para Hoteles | 0% Comisión Ecuador",
+    description: "Sistema de reservas directas sin comisiones para hoteles en Ecuador. Aumenta tus reservas directas y reduce costos. Servicio en Quito, Guayaquil, Cuenca y Loja.",
     openGraph: {
-        title: "Hotel Objetivo | Tu Hotel Digital que Vende por Ti",
-        description: "Deja de perder huéspedes. Pásate a la gestión digital interactiva que posiciona tu hotel en Google.",
+        title: "Motor de Reservas para Hoteles | 0% Comisión Ecuador",
+        description: "Deja de pagar 15-20% en comisiones. Sistema propio de reservas directas para hoteles en Ecuador.",
         images: [
             {
                 url: "/images/portada_cesarbn.webp",

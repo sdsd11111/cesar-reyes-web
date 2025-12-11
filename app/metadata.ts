@@ -23,7 +23,22 @@ export const metadata: Metadata = {
     template: "%s | César Reyes Jaramillo"
   },
   description: "Solución todo en uno para hoteles y restaurantes en Ecuador. Motor de reservas y menú digital con 0% de comisión. Aumenta tus reservas y ventas sin pagar comisiones altas.",
-  keywords: ["motor reservas hotel", "menú digital restaurante", "sistema de reservas sin comisión", "restaurantes Ecuador", "hoteles Ecuador", "reservas en línea"],
+  keywords: [
+    "motor reservas hotel",
+    "menú digital restaurante",
+    "sistema de reservas sin comisión",
+    "restaurantes Ecuador",
+    "hoteles Ecuador",
+    "reservas en línea",
+    "sistema reservas hotel Ecuador",
+    "software restaurante Ecuador",
+    "booking sin comisiones",
+    "menú QR restaurantes",
+    "motor de reservas para hoteles",
+    "menú digital para restaurantes",
+    "app para restaurantes ecuador",
+    "carta digital qr"
+  ],
   authors: [{ name: "César Reyes Jaramillo" }],
   creator: "César Reyes Jaramillo",
   publisher: "César Reyes Jaramillo",

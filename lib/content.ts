@@ -10,16 +10,16 @@ export const pageContent = {
       h2: "¿Tienes un Hotel o Restaurante? Elige tu Camino hacia Más Clientes y Ventas",
       h3: "",
       hoteles: {
-        title: "Hoteles: Consigue tu Propio Sistema de Reservas Directas",
-        description: "Las plataformas te traen clientes de todo el mundo, pero <strong>tú los pierdes en el camino</strong>. Deja de pagar el 15-20% en comisiones por huéspedes que ya te conocen. Creamos la estrategia para que <strong>el turismo nacional y los clientes recurrentes</strong> reserven 100% directo.",
+        title: "Sistema de Reservas Hotel Ecuador: Ahorra Comisiones",
+        description: "Deja de perder el 20-30% en OTAs. Implementa un motor de reservas directo y eficiente.",
         image: "/images/logico-card.webp",
-        tags: [{ text: "Crecimiento Estable" }],
-        overlay: { icon: "TrendingUp", text: "Hoteles" },
+        tags: [{ text: "Más Rentabilidad" }],
+        overlay: { icon: "Building2", text: "Hoteles" },
         cta: { text: "Ver Plan Hotelero", url: "https://www.cesarreyesjaramillo.com/motor-reservas-hotel" }
       },
       restaurantes: {
-        title: "Restaurantes: Un Menú Digital Moderno que Impulsa Ventas",
-        description: "El cliente quiere ver tu menú dinámico y profesional en internet (no un PDF). Convierte visitantes ocasionales en clientes frecuentes. Te proporcionamos un <strong>menú digital</strong> que atrae, aumenta tu sazón digital y construye tu propia base de datos de lealtad.",
+        title: "Menú Digital QR y Software Restaurante Ecuador",
+        description: "Transforma comensales en clientes fieles. Carta digital y automatización de procesos.",
         image: "/images/emocional-card.webp",
         tags: [{ text: "Nuevos Clientes" }],
         overlay: { icon: "Users", text: "Restaurantes" },

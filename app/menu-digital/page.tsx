@@ -5,11 +5,11 @@ import ServiceSchema from "@/components/schema/ServiceSchema";
 import BreadcrumbSchema from "@/components/schema/BreadcrumbSchema";
 
 export const metadata: Metadata = {
-  title: "MenúObjetivo | Menú Digital para Restaurantes en Ecuador",
-  description: "Crea tu menú digital en minutos. Ideal para restaurantes en Quito, Guayaquil y todo Ecuador. Código QR, pedidos por WhatsApp y posicionamiento Google incluido.",
+  title: "Menú Digital para Restaurantes | 0% Comisión Ecuador",
+  description: "Menú digital interactivo con código QR para restaurantes en Ecuador. Aumenta ventas y mejora experiencia del cliente. Servicio en Quito, Guayaquil, Cuenca y Loja.",
   openGraph: {
-    title: "MenúObjetivo | Tu Menú Digital que Vende por Ti",
-    description: "Deja de perder clientes con fotos en PDF. Pásate al menú digital interactivo que posiciona tu restaurante en Google.",
+    title: "Menú Digital para Restaurantes | 0% Comisión Ecuador",
+    description: "Deja de usar PDFs. Menú digital interactivo con QR que posiciona tu restaurante en Google.",
     images: [
       {
         url: "/images/menu-objetivo/menu-digital-restaurantes-hero.webp",
