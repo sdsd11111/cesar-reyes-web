@@ -809,7 +809,7 @@ const HotelObjetivoClient = () => {
                 </div>
             </section>
             {/* SECCIÓN 7: PLANES SIMPLIFICADOS */}
-            <section className="py-20 px-4 bg-gradient-to-b from-gray-50 to-white">
+            <section id="elige-tu-nivel-de-independencia" className="py-20 px-4 bg-gradient-to-b from-gray-50 to-white">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center max-w-4xl mx-auto mb-12">
                         <h2 className="text-3xl md:text-4xl font-bold font-montserrat text-gray-900 mb-6">

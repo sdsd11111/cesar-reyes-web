@@ -519,7 +519,7 @@ const MenuObjetivoClient = () => {
             </section>
 
             {/* Pricing Section */}
-            <section className="py-20 px-4 bg-gradient-to-b from-gray-50 to-white">
+            <section id="cuanto-cuesta-tener-un-menu-digital-que-aparezca-en-google" className="py-20 px-4 bg-gradient-to-b from-gray-50 to-white">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center max-w-4xl mx-auto mb-6">
                         <h2 className="text-3xl md:text-4xl font-bold font-montserrat text-gray-900 mb-4">

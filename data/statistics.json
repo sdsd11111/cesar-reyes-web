@@ -1,57 +1,57 @@
 {
-  "totalVisitas": 1410,
-  "visitasHoy": 1410,
+  "totalVisitas": 1434,
+  "visitasHoy": 1434,
   "articulosPublicados": 0,
   "suscriptoresNewsletter": 0,
   "ultimasVisitas": [
     {
-      "fecha": "2025-12-11",
-      "pagina": "/admin",
+      "fecha": "2025-12-12",
+      "pagina": "/motor-reservas-hotel",
       "visitas": 1
     },
     {
-      "fecha": "2025-12-11",
+      "fecha": "2025-12-12",
       "pagina": "/",
       "visitas": 1
     },
     {
-      "fecha": "2025-12-11",
+      "fecha": "2025-12-12",
+      "pagina": "/menu-digital",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-12-12",
       "pagina": "/",
       "visitas": 1
     },
     {
-      "fecha": "2025-12-11",
-      "pagina": "/admin",
+      "fecha": "2025-12-12",
+      "pagina": "/motor-reservas-hotel",
       "visitas": 1
     },
     {
-      "fecha": "2025-12-11",
+      "fecha": "2025-12-12",
       "pagina": "/",
       "visitas": 1
     },
     {
-      "fecha": "2025-12-11",
-      "pagina": "/admin",
+      "fecha": "2025-12-12",
+      "pagina": "/motor-reservas-hotel",
       "visitas": 1
     },
     {
-      "fecha": "2025-12-11",
+      "fecha": "2025-12-12",
       "pagina": "/",
       "visitas": 1
     },
     {
-      "fecha": "2025-12-11",
+      "fecha": "2025-12-12",
+      "pagina": "/menu-digital",
+      "visitas": 1
+    },
+    {
+      "fecha": "2025-12-12",
       "pagina": "/",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-12-11",
-      "pagina": "/precios",
-      "visitas": 1
-    },
-    {
-      "fecha": "2025-12-11",
-      "pagina": "/precios",
       "visitas": 1
     }
   ],
@@ -75,6 +75,7 @@
     "2025-12-08": 18,
     "2025-12-09": 4,
     "2025-12-10": 66,
-    "2025-12-11": 54
+    "2025-12-11": 54,
+    "2025-12-12": 24
   }
 }
