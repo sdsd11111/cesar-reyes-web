@@ -21,9 +21,9 @@ export default function Footer() {
           <nav className="flex flex-wrap justify-center md:justify-start gap-x-6 gap-y-2 text-sm mb-4 md:mb-0">
             <Link href="/" className="hover:underline text-gray-300" target="_blank" rel="noopener noreferrer">Inicio</Link>
             <Link href="/blog" className="hover:underline text-gray-300" target="_blank" rel="noopener noreferrer">Blog</Link>
-            <Link href="/servicios" className="hover:underline text-gray-300" target="_blank" rel="noopener noreferrer">Servicios</Link>
+            <Link href="/menu-digital" className="hover:underline text-gray-300" target="_blank" rel="noopener noreferrer">Menu Digital</Link>
             <Link href="/sobre-mi" className="hover:underline text-gray-300" target="_blank" rel="noopener noreferrer">Sobre mí</Link>
-            <Link href="/contacto" className="hover:underline text-gray-300" target="_blank" rel="noopener noreferrer">Contacto</Link>
+            <Link href="/motor-reservas-hotel" className="hover:underline text-gray-300" target="_blank" rel="noopener noreferrer">Reservas Hotel</Link>
           </nav>
 
           {/* Sección de Menciones de Ubicación para SEO Local */}
