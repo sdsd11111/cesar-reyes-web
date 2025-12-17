@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { promises as fs } from "fs";
-import path from "path";
+import { supabaseRetoClient } from "@/lib/supabaseRetoClient";
 
 export async function POST(req: NextRequest) {
   try {
@@ -22,28 +21,21 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Guardar el email en un archivo JSON
-    const subscribersPath = path.join(process.cwd(), "data", "subscribers.json");
-    let subscribers = [];
+    // Guardar el email en Supabase
+    const { error } = await supabaseRetoClient
+      .from("newsletter_subscribers")
+      .insert([{ email }]);
 
-    try {
-      const fileContent = await fs.readFile(subscribersPath, "utf-8");
-      subscribers = JSON.parse(fileContent);
-    } catch (error) {
-      // Si el archivo no existe, se creará con el primer suscriptor
+    if (error) {
+      // Si el error es por duplicado (código 23505 en Postgres/Supabase), lo manejamos gracefuly
+      if (error.code === '23505') {
+        return NextResponse.json(
+          { error: "Este email ya está suscrito" },
+          { status: 400 }
+        );
+      }
+      throw error;
     }
-
-    // Verificar si el email ya está suscrito
-    if (subscribers.includes(email)) {
-      return NextResponse.json(
-        { error: "Este email ya está suscrito" },
-        { status: 400 }
-      );
-    }
-
-    // Añadir el nuevo suscriptor
-    subscribers.push(email);
-    await fs.writeFile(subscribersPath, JSON.stringify(subscribers, null, 2));
 
     return NextResponse.json({
       message: "¡Gracias por suscribirte a nuestro newsletter!",
@@ -55,4 +47,4 @@ export async function POST(req: NextRequest) {
       { status: 500 }
     );
   }
-} 
+}

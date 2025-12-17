@@ -141,7 +141,7 @@ function ImageSearch() {
     if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(markdown);
       setCopiedUrl(img.url);
-      setTimeout(() => setCopiedUrl("") , 2000);
+      setTimeout(() => setCopiedUrl(""), 2000);
     }
   };
 
@@ -243,14 +243,14 @@ function ArticleEditor({ articleToEdit, onSave }: ArticleEditorProps) {
   // Función para formatear correctamente los tags
   const formatTags = (tagsStr: string): string => {
     if (!tagsStr) return '[]';
-    
+
     // Convertir a array, limpiar y asegurar que sean strings válidos
     const tagsArray = tagsStr
       .split(',')
       .map(tag => tag.trim())
       .filter(tag => tag.length > 0)
       .map(tag => `"${escapeYAMLString(tag)}"`);
-      
+
     return `[${tagsArray.join(', ')}]`;
   };
 
@@ -262,11 +262,11 @@ function ArticleEditor({ articleToEdit, onSave }: ArticleEditorProps) {
     const safeKeyword = escapeYAMLString(keyword || '');
     const safeCategory = escapeYAMLString(category || '');
     const safeSlug = slug?.trim() || '';
-    
+
     // Construir el frontmatter como objeto para validación
     const frontmatter: Record<string, any> = {
-      title: safeTitle,
-      description: safeExcerpt,
+      title: `"${safeTitle}"`,
+      description: `"${safeExcerpt}"`,
       date: `"${date || new Date().toISOString().split('T')[0]}"`,
       category: `"${safeCategory}"`,
       meta_description: `"${safeMetaDesc}"`,
@@ -279,7 +279,7 @@ function ArticleEditor({ articleToEdit, onSave }: ArticleEditorProps) {
       frontmatter.slug = `"${safeSlug}"`;
       console.log('Incluyendo slug personalizado en el frontmatter:', safeSlug);
     }
-    
+
     if (image?.trim()) {
       frontmatter.image = `"${image.trim()}"`;
     }
@@ -421,19 +421,19 @@ function ArticleEditor({ articleToEdit, onSave }: ArticleEditorProps) {
       if (!content?.trim()) {
         throw new Error('El contenido del artículo no puede estar vacío');
       }
-      
+
       // Verificar si estamos editando
       const isEditing = !!articleToEdit?.id;
-      
+
       if (isEditing && !articleToEdit?.id) {
         console.error('Error: Intento de edición sin ID válido');
         throw new Error('No se pudo identificar el artículo a actualizar. Por favor, recarga la página e inténtalo de nuevo.');
       }
-      
+
       // Asegurar que la fecha tenga un valor por defecto
       const articleDate = date || articleToEdit?.published_at || new Date().toISOString().split('T')[0];
       setDate(articleDate); // Actualizar el estado de la fecha
-      
+
       // Asegurarse de que la categoría sea válida
       const safeCategory = category.toLowerCase().replace(/[^a-z0-9-]/g, '');
       if (!safeCategory) {
@@ -442,7 +442,7 @@ function ArticleEditor({ articleToEdit, onSave }: ArticleEditorProps) {
 
       // Construir el markdown con validaciones incluidas
       const markdownContent = `${buildYAML()}\n\n${content}`;
-      
+
       // Generar un slug consistente
       const articleSlug = slug.trim() ? generateSlug(slug) : generateSlug(title);
 
@@ -454,13 +454,13 @@ function ArticleEditor({ articleToEdit, onSave }: ArticleEditorProps) {
       try {
         const url = "/api/save-article";
         const isUpdate = !!articleToEdit?.id;
-        
+
         // Construir el markdown con los datos actuales
         const markdownContent = buildYAML() + '\n\n' + content;
-        
+
         // Generar el slug final (usar el personalizado si existe, si no, generarlo del título)
         const finalSlug = slug.trim() || generateSlug(title);
-        
+
         const requestBody: any = {
           markdown: markdownContent,
           id: articleToEdit?.id,
@@ -475,14 +475,14 @@ function ArticleEditor({ articleToEdit, onSave }: ArticleEditorProps) {
           image: image.trim(),
           date: articleDate
         };
-        
+
         console.log('Slug que se está enviando:', finalSlug);
-        
+
         console.log('Enviando solicitud de ' + (isUpdate ? 'actualización' : 'creación') + ':', {
           ...requestBody,
           markdown: markdownContent.substring(0, 100) + '...' // Mostrar solo el inicio para no saturar la consola
         });
-        
+
         console.log('Enviando solicitud a:', url);
         console.log('Método:', isUpdate ? 'PUT' : 'POST');
         console.log('Datos de la solicitud:', {
@@ -515,26 +515,26 @@ function ArticleEditor({ articleToEdit, onSave }: ArticleEditorProps) {
         if (!response.ok) {
           // Si hay un mensaje de error en la respuesta, mostrarlo
           const errorMessage = data?.error || data?.message || 'Error al guardar el artículo';
-          
+
           // Manejar específicamente el error de slug duplicado
           if (errorMessage.includes('slug') && errorMessage.includes('ya está en uso')) {
             // Extraer el slug del mensaje de error
             const slugMatch = errorMessage.match(/'([^']+)'/);
             const problemSlug = slugMatch ? slugMatch[1] : 'el especificado';
-            
+
             // Sugerir un slug alternativo
             const newSlug = `${problemSlug}-${Date.now().toString(36).slice(-4)}`;
-            
+
             throw new Error(
               `${errorMessage}\n\n` +
               `Sugerencia: Intenta con un slug diferente como "${newSlug}"\n` +
               `O modifica el título para generar un slug único.`
             );
           }
-          
+
           throw new Error(errorMessage);
         }
-        
+
         // Verificar si la respuesta tiene un mensaje de éxito
         if (!data.success && !data.article) {
           throw new Error('La respuesta del servidor no es válida');
@@ -544,15 +544,15 @@ function ArticleEditor({ articleToEdit, onSave }: ArticleEditorProps) {
         if (data.success) {
           setSaved(true);
           setSuccessUrl(data.article?.url || '');
-          
+
           // Si hay un callback de guardado, ejecutarlo
           if (onSave) {
             onSave();
           }
-          
+
           // Mostrar mensaje de éxito
           alert(`Artículo ${isUpdate ? 'actualizado' : 'guardado'} correctamente`);
-          
+
           // Limpiar el formulario solo si es un artículo nuevo
           if (!isUpdate) {
             setTitle('');
@@ -582,7 +582,7 @@ function ArticleEditor({ articleToEdit, onSave }: ArticleEditorProps) {
 
     } catch (err: unknown) {
       let errorMessage = 'Error desconocido al guardar el artículo';
-      
+
       if (err instanceof Error) {
         // Mostrar el mensaje de error completo en la consola
         console.error('Error detallado al guardar el artículo:', {
@@ -590,10 +590,10 @@ function ArticleEditor({ articleToEdit, onSave }: ArticleEditorProps) {
           stack: err.stack,
           name: err.name
         });
-        
+
         // Formatear el mensaje de error para el usuario
         errorMessage = err.message;
-        
+
         // Si el error es de validación, mostrarlo de manera más amigable
         if (errorMessage.includes('slug') && errorMessage.includes('ya está en uso')) {
           // Ya lo manejamos arriba con sugerencia
@@ -602,7 +602,7 @@ function ArticleEditor({ articleToEdit, onSave }: ArticleEditorProps) {
           errorMessage = `Error al guardar el artículo: ${errorMessage}`;
         }
       }
-      
+
       setError(errorMessage);
     } finally {
       setLoading(false);
@@ -739,8 +739,8 @@ function ArticleEditor({ articleToEdit, onSave }: ArticleEditorProps) {
           <button onClick={handleCopy} className="bg-[#111111] px-3 py-1 rounded text-white font-semibold hover:bg-black">
             {copied ? "Copiado" : "Copiar Markdown"}
           </button>
-          <button 
-            onClick={handleSave} 
+          <button
+            onClick={handleSave}
             className="bg-blue-600 text-white font-bold py-2 px-6 rounded-full hover:bg-blue-700 transition-colors disabled:opacity-50"
             disabled={loading}
           >
@@ -755,7 +755,7 @@ function ArticleEditor({ articleToEdit, onSave }: ArticleEditorProps) {
             <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white"></div>
           </div>
         )}
-        
+
         {/* Mostrar mensajes de éxito/error */}
         {error && (
           <div className="mb-4 p-4 bg-red-100 border-l-4 border-red-500 text-red-700">
@@ -763,14 +763,14 @@ function ArticleEditor({ articleToEdit, onSave }: ArticleEditorProps) {
             <p>{error}</p>
           </div>
         )}
-        
+
         {saved && successUrl && (
           <div className="mb-4 p-4 bg-green-100 border-l-4 border-green-500 text-green-700">
             <p className="font-bold">¡Éxito!</p>
             <p>Artículo guardado correctamente.</p>
-            <a 
-              href={successUrl} 
-              target="_blank" 
+            <a
+              href={successUrl}
+              target="_blank"
               rel="noopener noreferrer"
               className="text-blue-600 hover:underline mt-2 inline-block"
             >
@@ -778,7 +778,7 @@ function ArticleEditor({ articleToEdit, onSave }: ArticleEditorProps) {
             </a>
           </div>
         )}
-        
+
         <h3 className="text-lg font-bold mb-2">Previsualización</h3>
         <div className="prose prose-invert max-w-none text-lg">
           <ReactMarkdown remarkPlugins={[remarkGfm]}>{`${buildYAML()}\n\n${content}`}</ReactMarkdown>
@@ -820,11 +820,11 @@ function ArticleManager() {
     try {
       setLoading(true);
       setError("");
-      
-      const url = forceRefresh 
+
+      const url = forceRefresh
         ? `/api/admin-articles?refresh=true&includeHidden=${showHidden}`
         : `/api/admin-articles?includeHidden=${showHidden}`;
-        
+
       const res = await fetch(url, {
         headers: {
           'Cache-Control': 'no-cache, no-store, must-revalidate',
@@ -832,9 +832,9 @@ function ArticleManager() {
           'Expires': '0'
         }
       });
-      
+
       if (!res.ok) throw new Error("Error al cargar los artículos");
-      
+
       const data = await res.json();
       setArticles(data);
     } catch (e) {
@@ -861,35 +861,35 @@ function ArticleManager() {
 
   const handleDelete = async (category: string, slug: string) => {
     if (!window.confirm("¿Seguro que deseas eliminar este artículo? Esta acción no se puede deshacer.")) return;
-    
+
     try {
       setLoading(true);
       setError("");
-      
+
       // 1. Eliminar de la base de datos
       const res = await fetch("/api/delete-article", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ category, slug })
       });
-      
+
       const data = await res.json();
-      
+
       if (!res.ok || !data.success) {
         throw new Error(data.error || "No se pudo eliminar el artículo");
       }
-      
+
       // 2. Actualizar el estado local
-      setArticles(prevArticles => 
+      setArticles(prevArticles =>
         prevArticles.filter(a => !(a.category === category && a.slug === slug))
       );
-      
+
       // 3. Forzar recarga de la caché
       await fetchArticles(true);
-      
+
       // 4. Mostrar confirmación
       alert("Artículo eliminado correctamente");
-      
+
     } catch (error) {
       console.error("Error al eliminar el artículo:", error);
       setError(error instanceof Error ? error.message : "Error al eliminar el artículo");
@@ -906,8 +906,9 @@ function ArticleManager() {
         excerpt: art.excerpt,
         category: art.category,
         slug: art.slug,
+        image: art.image || art.cover_image,
       };
-      
+
       const response = await fetch("/api/send-newsletter", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -928,23 +929,23 @@ function ArticleManager() {
   const toggleArticleVisibility = async (article: any) => {
     try {
       setLoading(true);
-      
+
       // Determinar el nuevo estado de visibilidad
       const currentVisibility = article.is_visible === true || article.is_visible === 'true';
       const newVisibility = !currentVisibility;
-      
+
       console.log('Cambiando visibilidad de', article.slug, 'de', currentVisibility, 'a', newVisibility);
-      
+
       // Actualizar el estado local inmediatamente para una mejor experiencia de usuario
-      setArticles(prevArticles => 
-        prevArticles.map(a => 
-          a.slug === article.slug ? { 
-            ...a, 
-            is_visible: newVisibility 
+      setArticles(prevArticles =>
+        prevArticles.map(a =>
+          a.slug === article.slug ? {
+            ...a,
+            is_visible: newVisibility
           } : a
         )
       );
-      
+
       // Llamar a la API para actualizar la visibilidad
       const res = await fetch('/api/admin-articles/visibility', {
         method: 'PUT',
@@ -954,28 +955,28 @@ function ArticleManager() {
           isVisible: newVisibility
         })
       });
-      
+
       if (!res.ok) {
         const errorData = await res.json().catch(() => ({}));
         console.error('Error en la respuesta de la API:', errorData);
         throw new Error(errorData.error || 'Error al actualizar la visibilidad');
       }
-      
+
       // Recargar la lista para asegurar que todo esté sincronizado
       await fetchArticles(true);
-      
+
     } catch (error) {
       console.error('Error al cambiar visibilidad:', error);
       // Revertir el cambio en caso de error
-      setArticles(prevArticles => 
-        prevArticles.map(a => 
-          a.slug === article.slug ? { 
-            ...a, 
+      setArticles(prevArticles =>
+        prevArticles.map(a =>
+          a.slug === article.slug ? {
+            ...a,
             is_visible: article.is_visible // Volver al valor original
           } : a
         )
       );
-      
+
       alert(`Error al actualizar la visibilidad: ${error instanceof Error ? error.message : 'Error desconocido'}`);
     } finally {
       setLoading(false);
@@ -984,13 +985,13 @@ function ArticleManager() {
 
   const extractMetadata = (content: string) => {
     if (!content) return {};
-    
+
     const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
     if (!frontmatterMatch) return {};
-    
+
     const frontmatter = frontmatterMatch[1];
     const metadata: Record<string, string> = {};
-    
+
     frontmatter.split('\n').forEach(line => {
       const match = line.match(/^([^:]+):\s*(.*)$/);
       if (match) {
@@ -999,16 +1000,16 @@ function ArticleManager() {
         metadata[key] = value;
       }
     });
-    
+
     return metadata;
   };
 
   const handleEditArticle = (article: any) => {
     console.log('Editando artículo:', article);
-    
+
     // Extraer metadatos del contenido
     const metadata = article.content ? extractMetadata(article.content) : {};
-    
+
     // Cargar el artículo en el editor
     const articleData = {
       id: article.id,
@@ -1023,10 +1024,10 @@ function ArticleManager() {
       image: metadata.image || article.image || article.cover_image || "",
       date: metadata.date || article.published_at || article.date || new Date().toISOString().split('T')[0]
     };
-    
+
     console.log('Datos del artículo a editar:', articleData);
     setEditingArticle(articleData);
-    
+
     // Desplazarse al editor
     document.getElementById('article-editor')?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -1063,8 +1064,8 @@ function ArticleManager() {
             ← Volver a la lista
           </button>
         </div>
-        <ArticleEditor 
-          articleToEdit={editingArticle} 
+        <ArticleEditor
+          articleToEdit={editingArticle}
           onSave={handleSaveComplete}
         />
       </div>
@@ -1091,8 +1092,8 @@ function ArticleManager() {
           </div>
         </div>
       </div>
-      
-      {newsletterStatus && <div className="mb-4 text-center font-bold text-lg" style={{color: newsletterStatus.startsWith("✅") ? '#27ae60' : '#e74c3c'}}>{newsletterStatus}</div>}
+
+      {newsletterStatus && <div className="mb-4 text-center font-bold text-lg" style={{ color: newsletterStatus.startsWith("✅") ? '#27ae60' : '#e74c3c' }}>{newsletterStatus}</div>}
       <table className="min-w-full text-sm">
         <thead>
           <tr className="bg-[#111111]">
@@ -1110,9 +1111,8 @@ function ArticleManager() {
               <td className="p-2">{art.category}</td>
               <td className="p-2">{art.date}</td>
               <td className="p-2">
-                <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                  art.is_visible === false ? 'bg-yellow-100 text-yellow-800' : 'bg-green-100 text-green-800'
-                }`}>
+                <span className={`px-2 py-1 rounded-full text-xs font-medium ${art.is_visible === false ? 'bg-yellow-100 text-yellow-800' : 'bg-green-100 text-green-800'
+                  }`}>
                   {art.is_visible === false ? 'Oculto' : 'Visible'}
                 </span>
               </td>
@@ -1120,33 +1120,32 @@ function ArticleManager() {
                 <a href={`/blog/${art.category}/${art.slug}`} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 transition-colors">
                   Ver
                 </a>
-                <button 
+                <button
                   onClick={() => handleEditArticle(art)}
                   className="text-purple-400 hover:text-purple-300 transition-colors"
                   disabled={loading}
                 >
                   Editar
                 </button>
-                <button 
+                <button
                   onClick={() => toggleArticleVisibility(art)}
-                  className={`${
-                    art.is_visible === false 
-                      ? 'text-green-400 hover:text-green-300' 
-                      : 'text-yellow-400 hover:text-yellow-300'
-                  } transition-colors`}
+                  className={`${art.is_visible === false
+                    ? 'text-green-400 hover:text-green-300'
+                    : 'text-yellow-400 hover:text-yellow-300'
+                    } transition-colors`}
                   disabled={loading}
                 >
                   {art.is_visible === false ? 'Hacer visible' : 'Ocultar'}
                 </button>
-                <button 
-                  onClick={() => handleDelete(art.category, art.slug)} 
+                <button
+                  onClick={() => handleDelete(art.category, art.slug)}
                   className="text-red-400 hover:text-red-300 transition-colors"
                   disabled={loading}
                 >
                   Eliminar
                 </button>
-                <button 
-                  onClick={() => handleSendNewsletter(art)} 
+                <button
+                  onClick={() => handleSendNewsletter(art)}
                   className="text-green-400 hover:text-green-300 font-bold transition-colors"
                   disabled={loading}
                 >
@@ -1215,10 +1214,10 @@ function StatisticsPanel() {
   const calcularTasaApertura = () => {
     const aperturas = Object.values(stats.aperturasEmail || {});
     if (aperturas.length === 0) return 0;
-    
+
     const totalAperturas = aperturas.reduce((acc: number, curr: any) => acc + curr.aperturas, 0);
     const totalEmails = aperturas.length;
-    
+
     return ((totalAperturas / totalEmails) * 100).toFixed(1);
   };
 
@@ -1348,7 +1347,7 @@ function AdminPanelContentWrapper() {
 
     checkAuth();
   }, [status, session, router, searchParams]);
-  
+
   // Si estamos cargando o verificando la autenticación, mostrar un spinner
   if (isLoading || !authChecked) {
     return (
@@ -1360,7 +1359,7 @@ function AdminPanelContentWrapper() {
       </div>
     );
   }
-  
+
   return <AdminPanelContent activeTab={activeTab} setActiveTab={setActiveTab} />;
 }
 
@@ -1388,30 +1387,29 @@ function AdminPanelContent({ activeTab, setActiveTab }: { activeTab: string, set
       <div className="w-full max-w-[1920px] rounded-lg shadow-lg bg-[#3a2f29] p-8">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold font-serif">Panel de Administración</h1>
-          <button 
+          <button
             onClick={() => signOut({ callbackUrl: '/' })}
             className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-full text-sm font-medium transition-colors"
           >
             Cerrar sesión
           </button>
         </div>
-        
+
         <div className="flex justify-center mb-8 gap-4 flex-wrap">
           {tabs.map((tab) => (
             <button
               key={tab.id}
-              className={`px-4 py-2 rounded-full font-semibold transition-colors duration-200 ${
-                activeTab === tab.id 
-                  ? "bg-white text-[#111111]" 
-                  : "bg-[#2d2420] text-white hover:bg-[#4a3b33]"
-              }`}
+              className={`px-4 py-2 rounded-full font-semibold transition-colors duration-200 ${activeTab === tab.id
+                ? "bg-white text-[#111111]"
+                : "bg-[#2d2420] text-white hover:bg-[#4a3b33]"
+                }`}
               onClick={() => setActiveTab(tab.id)}
             >
               {tab.label}
             </button>
           ))}
         </div>
-        
+
         <div className="bg-[#111111] rounded-lg p-6 min-h-[300px]">
           {activeTab === "imagenes" && (
             <div>
@@ -1422,7 +1420,7 @@ function AdminPanelContent({ activeTab, setActiveTab }: { activeTab: string, set
               <ImagenUploader />
             </div>
           )}
-          
+
           {activeTab === "videos" && (
             <div>
               <h2 className="text-2xl font-bold mb-4">Gestión de Videos</h2>
@@ -1437,7 +1435,7 @@ function AdminPanelContent({ activeTab, setActiveTab }: { activeTab: string, set
               </div>
             </div>
           )}
-          
+
           {activeTab === "articulos" && (
             <div>
               <h2 className="text-2xl font-bold mb-4">Crear Artículo</h2>
@@ -1447,7 +1445,7 @@ function AdminPanelContent({ activeTab, setActiveTab }: { activeTab: string, set
               <ArticleEditor />
             </div>
           )}
-          
+
           {activeTab === "gestion" && (
             <div>
               <h2 className="text-2xl font-bold mb-4">Editar o Eliminar Artículos</h2>
@@ -1457,7 +1455,7 @@ function AdminPanelContent({ activeTab, setActiveTab }: { activeTab: string, set
               <ArticleManager />
             </div>
           )}
-          
+
           {activeTab === "estadisticas" && (
             <div>
               <h2 className="text-2xl font-bold mb-4">Estadísticas del Sitio</h2>

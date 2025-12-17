@@ -70,6 +70,7 @@ export default function RootLayout({
     <html
       lang="es"
       className={`${inter.variable} ${poiretOne.variable} ${montserrat.variable} ${poppins.variable} ${playfairDisplay.variable}`}
+      suppressHydrationWarning
       style={{
         // Prevenir zoom en iOS al hacer doble toque
         touchAction: 'manipulation',

@@ -1,8 +1,10 @@
+
 import { NextRequest, NextResponse } from "next/server";
 import path from "path";
 import { promises as fs } from "fs";
 import { createClient } from "@supabase/supabase-js";
 import { revalidatePath, revalidateTag } from "next/cache";
+import { sendNewsletterForArticle } from "@/lib/newsletterService";
 
 // Inicializar el cliente de Supabase
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -52,7 +54,7 @@ function extractFrontmatter(markdown: string): Frontmatter | null {
 
 function slugify(text: string): string {
   if (!text) return '';
-  
+
   return text
     .toString()
     .normalize('NFD') // Normalize diacritics
@@ -81,18 +83,18 @@ function validateFrontmatter(frontmatter: Frontmatter): { isValid: boolean; erro
   if (!frontmatter.category) {
     return { isValid: false, error: "El campo 'category' es obligatorio" };
   }
-  
+
   if (!frontmatter.title) {
     return { isValid: false, error: "El campo 'title' es obligatorio" };
   }
-  
+
   if (!ALLOWED_CATEGORIES.includes(frontmatter.category)) {
-    return { 
-      isValid: false, 
-      error: `Categoría no permitida. Categorías permitidas: ${ALLOWED_CATEGORIES.join(', ')}` 
+    return {
+      isValid: false,
+      error: `Categoría no permitida.Categorías permitidas: ${ALLOWED_CATEGORIES.join(', ')} `
     };
   }
-  
+
   return { isValid: true };
 }
 
@@ -107,17 +109,17 @@ export async function PUT(req: NextRequest) {
 
 async function handleArticleRequest(req: NextRequest, isUpdate: boolean) {
   console.log('Iniciando manejo de solicitud de artículo...');
-  
+
   try {
     // Validar cuerpo de la solicitud
     if (!req.body) {
       console.error('Error: Cuerpo de la solicitud vacío');
       return NextResponse.json(
-        { error: "Cuerpo de la solicitud vacío" }, 
+        { error: "Cuerpo de la solicitud vacío" },
         { status: 400 }
       );
     }
-    
+
     console.log('Solicitud recibida. Método:', isUpdate ? 'PUT' : 'POST');
 
     console.log('Parseando JSON de la solicitud...');
@@ -133,21 +135,21 @@ async function handleArticleRequest(req: NextRequest, isUpdate: boolean) {
     } catch (jsonError) {
       console.error('Error al analizar el JSON de la solicitud:', jsonError);
       return NextResponse.json(
-        { error: "Formato de solicitud JSON inválido" }, 
+        { error: "Formato de solicitud JSON inválido" },
         { status: 400 }
       );
     }
-    
+
     const { markdown, id, originalSlug } = requestData;
-    
+
     if (!markdown || typeof markdown !== 'string') {
       console.error('Error: El campo markdown es requerido y debe ser una cadena');
       return NextResponse.json(
-        { error: "El campo 'markdown' es requerido y debe ser una cadena de texto" }, 
+        { error: "El campo 'markdown' es requerido y debe ser una cadena de texto" },
         { status: 400 }
       );
     }
-    
+
     // For updates, we need an ID
     if (isUpdate && !id) {
       return NextResponse.json(
@@ -162,11 +164,11 @@ async function handleArticleRequest(req: NextRequest, isUpdate: boolean) {
       console.error('Error: Formato de frontmatter inválido');
       console.log('Primeras 200 caracteres del markdown:', markdown.substring(0, 200));
       return NextResponse.json(
-        { error: "Formato de frontmatter inválido. Asegúrate de incluir un bloque YAML válido entre ---" }, 
+        { error: "Formato de frontmatter inválido. Asegúrate de incluir un bloque YAML válido entre ---" },
         { status: 400 }
       );
     }
-    
+
     console.log('Frontmatter extraído:', JSON.stringify(frontmatter, null, 2));
 
     console.log('Validando frontmatter...');
@@ -174,16 +176,16 @@ async function handleArticleRequest(req: NextRequest, isUpdate: boolean) {
     if (!validation.isValid) {
       console.error('Error de validación del frontmatter:', validation.error);
       return NextResponse.json(
-        { error: validation.error || "Error de validación" }, 
+        { error: validation.error || "Error de validación" },
         { status: 400 }
       );
     }
 
     const category = frontmatter.category as string; // Safe to assert after validation
-    
+
     // Generar o validar slug
     let slug = '';
-    
+
     // Si se proporciona un slug personalizado, usarlo
     if (frontmatter.slug && frontmatter.slug.trim() !== '') {
       slug = slugify(frontmatter.slug.trim());
@@ -193,14 +195,14 @@ async function handleArticleRequest(req: NextRequest, isUpdate: boolean) {
       slug = slugify(frontmatter.title || '');
       console.log('Generando slug desde el título:', slug);
     }
-    
+
     if (!slug) {
       return NextResponse.json(
-        { error: "No se pudo generar un slug válido. Por favor, proporcione un slug manual o verifique el título." }, 
+        { error: "No se pudo generar un slug válido. Por favor, proporcione un slug manual o verifique el título." },
         { status: 400 }
       );
     }
-    
+
     // Si es una actualización y el slug no ha cambiado, mantener el slug original
     if (isUpdate && id && slug === originalSlug) {
       console.log('El slug no ha cambiado, omitiendo verificación de duplicados');
@@ -220,25 +222,25 @@ async function handleArticleRequest(req: NextRequest, isUpdate: boolean) {
           { status: 500 }
         );
       }
-      
+
       if (existingArticle) {
         // Si es una actualización y el slug existe pero pertenece a un artículo diferente
         if (isUpdate && id && existingArticle.id !== id) {
           console.log(`El slug '${slug}' ya está en uso por otro artículo`);
           return NextResponse.json(
-            { 
-              error: `El slug '${slug}' ya está en uso por otro artículo. Por favor, elige otro.` 
+            {
+              error: `El slug '${slug}' ya está en uso por otro artículo.Por favor, elige otro.`
             },
             { status: 400 }
           );
         }
-        
+
         // Si es un artículo nuevo y el slug existe, forzar un error
         if (!isUpdate) {
           console.log(`Error: El slug '${slug}' ya está en uso`);
           return NextResponse.json(
-            { 
-              error: `El slug '${slug}' ya está en uso. Por favor, elige un slug único.` 
+            {
+              error: `El slug '${slug}' ya está en uso.Por favor, elige un slug único.`
             },
             { status: 400 }
           );
@@ -247,12 +249,12 @@ async function handleArticleRequest(req: NextRequest, isUpdate: boolean) {
         console.log('El slug está disponible:', slug);
       }
     }
-    
+
     // Security: Limit slug length and prevent directory traversal
     slug = slug.slice(0, 100);
     if (slug.includes('..') || slug.includes('/') || slug.includes('\\')) {
       return NextResponse.json(
-        { error: "Slug inválido" }, 
+        { error: "Slug inválido" },
         { status: 400 }
       );
     }
@@ -261,9 +263,9 @@ async function handleArticleRequest(req: NextRequest, isUpdate: boolean) {
     console.log('Procesando categoría...');
     const safeCategory = category.replace(/[^a-z0-9-]/gi, '').toLowerCase();
     const dir = path.join(process.cwd(), "content", "blog", safeCategory);
-    
+
     console.log('Ruta del directorio del artículo:', dir);
-    
+
     try {
       // Verificar si el directorio existe, si no, crearlo
       await fs.mkdir(dir, { recursive: true });
@@ -271,15 +273,15 @@ async function handleArticleRequest(req: NextRequest, isUpdate: boolean) {
     } catch (dirError) {
       console.error('Error al acceder/crear el directorio:', dirError);
       return NextResponse.json(
-        { error: `Error al acceder al directorio de la categoría: ${dirError}` },
+        { error: `Error al acceder al directorio de la categoría: ${dirError} ` },
         { status: 500 }
       );
     }
-    
+
     try {
       // Create directory if it doesn't exist
       await fs.mkdir(dir, { recursive: true });
-      
+
       // Guardar en Supabase
       const { data: categoryData, error: categoryError } = await supabase
         .from('categories')
@@ -310,10 +312,10 @@ async function handleArticleRequest(req: NextRequest, isUpdate: boolean) {
 
       let article;
       let error;
-      
+
       if (isUpdate && id) {
         console.log('Actualizando artículo existente con ID:', id, 'con slug:', slug);
-        
+
         // Construir los datos de actualización
         const updateData: any = {
           title: articleData.title,
@@ -327,7 +329,7 @@ async function handleArticleRequest(req: NextRequest, isUpdate: boolean) {
           meta_description: articleData.meta_description,
           updated_at: new Date().toISOString()
         };
-        
+
         // Actualizar artículo existente
         const { data: updatedArticle, error: updateError } = await supabase
           .from('articles')
@@ -335,19 +337,19 @@ async function handleArticleRequest(req: NextRequest, isUpdate: boolean) {
           .eq('id', id)
           .select()
           .single();
-          
+
         if (updateError) {
           console.error('Error al actualizar el artículo:', updateError);
           throw updateError;
         }
-        
+
         article = updatedArticle;
-        
+
         // Actualizar el archivo Markdown si el slug ha cambiado
         if (originalSlug && slug !== originalSlug) {
           const oldPath = path.join(process.cwd(), "content", "blog", safeCategory, `${originalSlug}.md`);
           const newPath = path.join(process.cwd(), "content", "blog", safeCategory, `${slug}.md`);
-          
+
           try {
             await fs.rename(oldPath, newPath);
           } catch (renameError) {
@@ -362,16 +364,16 @@ async function handleArticleRequest(req: NextRequest, isUpdate: boolean) {
           .insert(articleData)
           .select()
           .single();
-          
+
         if (createError) throw createError;
-        
+
         article = newArticle;
       }
-      
+
       // Guardar en el sistema de archivos local
       try {
         const filePath = path.join(dir, `${slug}.md`);
-        
+
         // Si es una actualización y el slug cambió, eliminar el archivo antiguo
         if (isUpdate && originalSlug && slug !== originalSlug) {
           const oldPath = path.join(dir, `${originalSlug}.md`);
@@ -381,23 +383,53 @@ async function handleArticleRequest(req: NextRequest, isUpdate: boolean) {
             console.warn('No se pudo eliminar el archivo antiguo:', unlinkError);
           }
         }
-        
+
         // Escribir el archivo nuevo o actualizado
         await fs.writeFile(filePath, markdown, 'utf8');
-        
+
         // Invalidar la caché de las rutas relevantes
-        revalidatePath(`/blog/${safeCategory}/${slug}`);
+        revalidatePath(`/ blog / ${safeCategory}/${slug}`);
         revalidatePath('/blog');
         revalidatePath('/');
         revalidateTag('articles');
-        
+
+
+
         // Si el slug cambió, invalidar también la ruta antigua
         if (isUpdate && originalSlug && slug !== originalSlug) {
           revalidatePath(`/blog/${safeCategory}/${originalSlug}`);
         }
-        
-        return NextResponse.json({ 
-          success: true, 
+
+        // AUTO-SEND NEWSLETTER: Solo si es un artículo nuevo
+        if (!isUpdate) {
+          console.log("Artículo nuevo detectado. Intentando enviar newsletter...");
+          try {
+            // Usamos variables disponibles en el ámbito superior por seguridad
+            const newsTitle = frontmatter.title || articleData.title || '';
+            const newsExcerpt = frontmatter.meta_description || frontmatter.excerpt || articleData.meta_description || '';
+            const newsImage = frontmatter.image || articleData.cover_image || '';
+
+            // Ejecutamos en segundo plano para no bloquear
+            const newsletterResult = await sendNewsletterForArticle({
+              title: newsTitle,
+              excerpt: newsExcerpt,
+              category: safeCategory,
+              slug: slug,
+              image: newsImage
+            });
+
+            if (newsletterResult.success) {
+              console.log(`Newsletter enviado exitosamente a ${newsletterResult.count} suscriptores.`);
+            } else {
+              console.error("Error al enviar newsletter:", newsletterResult.error || newsletterResult.message);
+            }
+          } catch (newsError) {
+            console.error("Excepción al intentar enviar el newsletter:", newsError);
+          }
+        }
+
+        return NextResponse.json({
+          success: true,
           message: isUpdate ? 'Artículo actualizado correctamente' : 'Artículo creado correctamente',
           article: {
             ...article,
@@ -407,8 +439,8 @@ async function handleArticleRequest(req: NextRequest, isUpdate: boolean) {
       } catch (fileError) {
         console.error('Error al guardar en el sistema de archivos:', fileError);
         // Continuamos aunque falle el guardado en archivo, ya que lo importante es Supabase
-        return NextResponse.json({ 
-          success: true, 
+        return NextResponse.json({
+          success: true,
           message: isUpdate ? 'Artículo actualizado correctamente' : 'Artículo creado correctamente',
           article: {
             ...article,
@@ -420,21 +452,21 @@ async function handleArticleRequest(req: NextRequest, isUpdate: boolean) {
     } catch (error: any) {
       console.error("Error al guardar el archivo:", error);
       return NextResponse.json(
-        { 
+        {
           error: "Error al guardar el artículo",
           details: process.env.NODE_ENV === 'development' ? error.message : undefined
-        }, 
+        },
         { status: 500 }
       );
     }
-    
+
   } catch (error: any) {
     console.error("Error en el servidor:", error);
     return NextResponse.json(
-      { 
+      {
         error: "Error inesperado en el servidor",
         details: process.env.NODE_ENV === 'development' ? error.message : undefined
-      }, 
+      },
       { status: 500 }
     );
   }

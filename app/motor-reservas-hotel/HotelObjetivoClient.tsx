@@ -843,7 +843,7 @@ const HotelObjetivoClient = () => {
                                             <AccordionContent>
                                                 <ul className="space-y-2 text-sm text-gray-600 pb-3">
                                                     <li className="flex items-start"><span className="mr-2">•</span> Hasta 10 páginas profesionales</li>
-                                                    <li className="flex items-start"><span className="mr-2">•</span> Sistema de Reservas directo a Whatsapp</li>
+                                                    <li className="flex items-start"><span className="mr-2">•</span> Sistema de reservas directo (cero comisiones, automatizado)</li>
                                                     <li className="flex items-start"><span className="mr-2">•</span> Código QR dinámico permanente</li>
                                                     <li className="flex items-start"><span className="mr-2">•</span> Galería de fotos y servicios</li>
                                                 </ul>
@@ -910,7 +910,7 @@ const HotelObjetivoClient = () => {
                                     <span className="text-5xl font-bold text-[#FF6B00]">$1,800</span>
                                     <span className="text-gray-500 font-medium">USD</span>
                                 </div>
-                                <p className="text-sm text-gray-600 font-medium bg-white inline-block px-3 py-1 rounded-full border border-gray-200">Para dominancia en tu ciudad ⭐</p>
+                                <p className="text-sm text-gray-600 font-medium bg-white inline-block px-3 py-1 rounded-full border border-gray-200">🚀 Más BLOG de Posicionamiento ⭐</p>
                             </div>
                             <div className="p-8 flex-grow space-y-8">
                                 <div>
@@ -988,7 +988,7 @@ const HotelObjetivoClient = () => {
                                     <span className="text-5xl font-bold text-[#FFD700]">$2,800</span>
                                     <span className="text-gray-400 font-medium">USD</span>
                                 </div>
-                                <p className="text-sm text-gray-300 font-medium bg-gray-800 inline-block px-3 py-1 rounded-full">Para ser LA referencia 👑</p>
+                                <p className="text-sm text-gray-300 font-medium bg-gray-800 inline-block px-3 py-1 rounded-full">👑 Más Contenido para ser La Referencia (+Páginas, +Artículos)</p>
                             </div>
                             <div className="p-8 flex-grow space-y-8">
                                 <div>
@@ -1157,7 +1157,7 @@ const HotelObjetivoClient = () => {
                                         <div className="bg-[#FF6B00] text-white p-4 text-center">
                                             <h4 className="text-xl font-bold">PLAN ÉLITE</h4>
                                             <p className="text-3xl font-bold text-white mt-2">$1,800</p>
-                                            <p className="text-sm text-orange-100 mt-1">Para dominancia en tu ciudad (10-40 hab)</p>
+                                            <p className="text-sm text-orange-100 mt-1">🚀 Más BLOG de Posicionamiento (Domina tu Ciudad)</p>
                                         </div>
                                         <div className="p-4 space-y-3">
                                             <div className="flex justify-between border-b border-gray-100 pb-2">
@@ -1216,7 +1216,7 @@ const HotelObjetivoClient = () => {
                                         <div className="bg-gradient-to-r from-gray-800 to-gray-900 text-white p-4 text-center">
                                             <h4 className="text-xl font-bold">PLAN IMPERIO</h4>
                                             <p className="text-3xl font-bold text-[#FFD700] mt-2">$2,800</p>
-                                            <p className="text-sm text-gray-300 mt-1">Para ser LA referencia (20-80 hab)</p>
+                                            <p className="text-sm text-gray-300 mt-1">👑 Más Contenido para ser La Referencia (+Páginas, +Artículos)</p>
                                         </div>
                                         <div className="p-4 space-y-3 bg-gray-900 text-white">
                                             <div className="flex justify-between border-b border-gray-700 pb-2">
