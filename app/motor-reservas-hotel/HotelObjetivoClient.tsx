@@ -364,7 +364,7 @@ const HotelObjetivoClient = () => {
             </section>
 
             {/* Video Section */}
-            <section className="py-20 px-4 bg-black">
+            <section id="demo-video" className="py-20 px-4 bg-black">
                 <div className="max-w-5xl mx-auto text-center">
                     <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 font-montserrat">
                         Mira cómo funciona <span className="text-[#FF6B00]">tu plataforma digital</span>
