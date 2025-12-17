@@ -194,7 +194,7 @@ const MenuObjetivoClient = () => {
             {/* New Section: 3 Cards */}
             <section className="py-16 px-4 bg-gray-50">
                 <div className="max-w-6xl mx-auto">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <CardSlider gridOnDesktop={true}>
                         <CompactCard
                             title="59% de tus nuevos clientes te buscan primero en Google."
                             shortDesc="Si tu menú es una"
@@ -216,7 +216,7 @@ const MenuObjetivoClient = () => {
                             justification="Los viajeros revisan reseñas, disponibilidad, fotos y, sobre todo, menus actualizados. Un PDF o una foto no aparece en Google, pero un menú indexado sí. Si quieres captar turistas, tu presencia digital debe estar optimizada desde adentro."
                             icon={Globe}
                         />
-                    </div>
+                    </CardSlider>
                 </div>
             </section>
 
