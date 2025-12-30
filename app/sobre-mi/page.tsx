@@ -1,5 +1,4 @@
 import { Metadata } from 'next';
-import TransparentHeader from '@/components/transparent-header';
 import HeroSection from './components/HeroSection';
 import Section from './components/Section';
 import { Rocket, Briefcase, Store, Search } from 'lucide-react';
@@ -195,8 +194,6 @@ const pageContent = {
 export default function SobremiPage() {
   return (
     <>
-      <TransparentHeader />
-
       <main>
         <HeroSection
           title={pageContent.hero.title}

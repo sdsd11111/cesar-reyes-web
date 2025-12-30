@@ -193,7 +193,7 @@ export default function ModernSidebarMenu() {
                                             {/* Link Principal */}
                                             <Link
                                                 href={item.href}
-                                                className="text-3xl md:text-5xl lg:text-7xl font-bold tracking-tight hover:text-outline-white text-transparent bg-clip-text bg-white transition-all duration-500 group-hover:pl-4"
+                                                className="text-3xl md:text-5xl lg:text-5xl font-bold tracking-tight hover:text-outline-white text-transparent bg-clip-text bg-white transition-all duration-500 group-hover:pl-4"
                                                 style={{
                                                     WebkitTextStroke: "1px transparent",
                                                     fontFamily: "var(--font-poiret-one)"

@@ -28,6 +28,7 @@ import LearnMoreButton from "@/components/LearnMoreButton";
 const ChatModal = dynamic(() => import('@/components/ChatModal'), { ssr: false });
 const PortfolioModal = dynamic(() => import('@/components/PortfolioModal'), { ssr: false });
 const VideoModal = dynamic(() => import('@/components/VideoModal'), { ssr: false });
+const CalendarModal = dynamic(() => import('@/components/CalendarModal'), { ssr: false });
 
 // Importaciones de componentes de UI
 import { Button } from "@/components/ui/button";
@@ -118,6 +119,7 @@ export default function HomeTestClient({ content, isEmotionalView: initialIsEmot
   const [isChatModalOpen, setIsChatModalOpen] = useState(false);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [isPortfolioModalOpen, setIsPortfolioModalOpen] = useState(false);
+  const [isCalendarModalOpen, setIsCalendarModalOpen] = useState(false);
   const [showFullText, setShowFullText] = useState(false);
   const [showFullQuote, setShowFullQuote] = useState(false);
   const [isClient, setIsClient] = useState(false);
@@ -199,16 +201,10 @@ export default function HomeTestClient({ content, isEmotionalView: initialIsEmot
             </div>
             <Button
               size="lg"
-              className="bg-white/90 text-black font-bold hover:bg-white transition-transform hover:scale-105 px-8 py-6 text-lg"
-              asChild
+              className="bg-white/90 text-black font-bold hover:bg-white transition-transform hover:scale-105 px-8 py-6 text-lg cursor-pointer"
+              onClick={() => setIsCalendarModalOpen(true)}
             >
-              <a
-                href="https://api.whatsapp.com/send/?phone=593963410409&text=Hola+C%C3%A9sar%2C+estoy+interesado+en+tus+servicios&type=phone_number&app_absent=0"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Agenda una Llamada Ahora
-              </a>
+              Agenda una Llamada Ahora
             </Button>
           </div>
 
@@ -221,16 +217,10 @@ export default function HomeTestClient({ content, isEmotionalView: initialIsEmot
             </p>
             <Button
               size="lg"
-              className="w-full bg-white/90 text-black font-bold hover:bg-white transition-transform hover:scale-105 px-6 py-4 text-base"
-              asChild
+              className="w-full bg-white/90 text-black font-bold hover:bg-white transition-transform hover:scale-105 px-6 py-4 text-base cursor-pointer"
+              onClick={() => setIsCalendarModalOpen(true)}
             >
-              <a
-                href="https://api.whatsapp.com/send/?phone=593963410409&text=Hola+C%C3%A9sar%2C+estoy+interesado+en+tus+servicios&type=phone_number&app_absent=0"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Agenda una Llamada Ahora
-              </a>
+              Agenda una Llamada Ahora
             </Button>
           </div>
         </div>
@@ -649,11 +639,9 @@ export default function HomeTestClient({ content, isEmotionalView: initialIsEmot
 
                 <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
                   {/* Botón Principal */}
-                  <a
-                    href="https://api.whatsapp.com/send/?phone=593963410409&text=Hola+César%2C+quiero+agendar+una+llamada+estratégica&type=phone_number&app_absent=0"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg shadow-lg shadow-blue-900/40 transition-all duration-300 hover:-translate-y-1 text-lg w-full sm:w-auto"
+                  <button
+                    onClick={() => setIsCalendarModalOpen(true)}
+                    className="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg shadow-lg shadow-blue-900/40 transition-all duration-300 hover:-translate-y-1 text-lg w-full sm:w-auto cursor-pointer"
                   >
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
@@ -662,7 +650,7 @@ export default function HomeTestClient({ content, isEmotionalView: initialIsEmot
                     <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
                     </svg>
-                  </a>
+                  </button>
 
                   {/* Botón Secundario */}
                   <a
@@ -718,6 +706,10 @@ export default function HomeTestClient({ content, isEmotionalView: initialIsEmot
             isOpen={isVideoModalOpen}
             onClose={() => setIsVideoModalOpen(false)}
             videoUrl="https://www.youtube.com/shorts/0KzBIMvyccA"
+          />
+          <CalendarModal
+            isOpen={isCalendarModalOpen}
+            onClose={() => setIsCalendarModalOpen(false)}
           />
         </>
       )
