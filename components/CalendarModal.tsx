@@ -57,11 +57,10 @@ export default function CalendarModal({ isOpen, onClose }: CalendarModalProps) {
                 {/* Contenedor del Iframe */}
                 <div className="relative w-full aspect-[4/3] sm:aspect-video bg-white">
                     <iframe
-                        src="https://calendar.google.com/calendar/embed?src=objetivo.cesar%40gmail.com&ctz=America%2FGuayaquil"
+                        src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ26I1xUXME05ewbX_aF1rah4KP__6M_4ggFuYF9PRDFS-QbZdI_ufh8igfJAKUopDDJ8iOl6W0b?gv=true"
                         className="absolute inset-0 w-full h-full"
                         style={{ border: 0 }}
                         frameBorder="0"
-                        scrolling="no"
                     />
                 </div>
 
