@@ -32,43 +32,58 @@ export default function CalendarModal({ isOpen, onClose }: CalendarModalProps) {
 
     return (
         <div
-            className="fixed inset-0 z-[9999] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto"
+            className="fixed inset-0 z-[9999] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 overflow-hidden"
             onClick={onClose}
         >
+            <style jsx global>{`
+                .scrollbar-hide::-webkit-scrollbar {
+                    display: none;
+                }
+                .scrollbar-hide {
+                    -ms-overflow-style: none;
+                    scrollbar-width: none;
+                }
+            `}</style>
+
+            {/* 
+                AJUSTE TIGHT (Recorte Lateral):
+                - max-w-[820px]: Ancho calculado para "abrazar" el contenido real (scale 0.75) sin dejar franjas blancas sobrantes a los lados.
+                - mx-auto: Centrado horizontal.
+                - h-[95vh]: Altura máxima.
+            */}
             <div
-                className="w-full max-w-4xl bg-gray-900 rounded-2xl shadow-2xl overflow-hidden relative"
+                className="w-full max-w-[820px] h-[95vh] bg-white rounded-xl shadow-2xl relative overflow-hidden flex flex-col mx-auto"
                 onClick={(e) => e.stopPropagation()}
             >
-                {/* Cabecera del Modal */}
-                <div className="p-6 border-b border-gray-800 flex items-center justify-between">
-                    <div>
-                        <h2 className="text-2xl font-bold text-white">Agenda tu Llamada Estratégica</h2>
-                        <p className="text-gray-400 text-sm mt-1">Selecciona el día y la hora que mejor te convenga</p>
-                    </div>
-                    <button
-                        onClick={onClose}
-                        className="p-2 text-gray-400 hover:text-white hover:bg-white/10 rounded-full transition-all"
-                        aria-label="Cerrar modal"
-                    >
-                        <X className="w-6 h-6" />
-                    </button>
-                </div>
+                {/* Botón de cierre flotante */}
+                <button
+                    onClick={onClose}
+                    className="absolute top-3 right-3 z-50 p-2 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-full transition-all shadow-sm border border-gray-200"
+                    aria-label="Cerrar modal"
+                >
+                    <X className="w-5 h-5" />
+                </button>
 
-                {/* Contenedor del Iframe */}
-                <div className="relative w-full aspect-[4/3] sm:aspect-video bg-white">
+                {/* Wrapper extra para forzar overflow hidden */}
+                <div className="flex-1 w-full h-full relative overflow-hidden bg-white scrollbar-hide">
+                    {/* 
+                        Centrado Perfecto + Escala 0.75:
+                        - left: 50% + translateX(-50%): Centra el iframe pase lo que pase.
+                        - scale(0.75): Tamaño grande/legible.
+                        - width: 133.33%: Compensación para llenar el contenedor de 820px.
+                    */}
                     <iframe
                         src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ26I1xUXME05ewbX_aF1rah4KP__6M_4ggFuYF9PRDFS-QbZdI_ufh8igfJAKUopDDJ8iOl6W0b?gv=true"
-                        className="absolute inset-0 w-full h-full"
-                        style={{ border: 0 }}
+                        className="absolute top-0 left-1/2 scrollbar-hide"
+                        style={{
+                            border: 0,
+                            width: '133.33%',
+                            height: '133.33%',
+                            transform: 'translateX(-50%) scale(0.75)',
+                            transformOrigin: 'top center'
+                        }}
                         frameBorder="0"
                     />
-                </div>
-
-                {/* Footer del Modal (Opcional) */}
-                <div className="p-4 bg-gray-900 border-t border-gray-800 text-center">
-                    <p className="text-xs text-gray-500">
-                        Sincronizado directamente con Google Calendar
-                    </p>
                 </div>
             </div>
         </div>
