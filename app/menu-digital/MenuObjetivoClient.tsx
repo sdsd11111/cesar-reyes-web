@@ -572,7 +572,7 @@ const MenuObjetivoClient = () => {
                             </div>
                             <div className="p-6 pt-0">
                                 <Link
-                                    href={`/pago?amount=350&description=${encodeURIComponent("Plan Emprendedor - Menu Digital")}`}
+                                    href={`/pago?amount=250&description=${encodeURIComponent("Plan Emprendedor - Menú Digital")}`}
                                     className="block w-full bg-gray-900 text-white text-center font-bold py-3 px-6 rounded-lg hover:bg-[#FF6B00] transition-colors"
                                 >
                                     Elegir Plan
@@ -627,7 +627,7 @@ const MenuObjetivoClient = () => {
                             </div>
                             <div className="p-6 pt-0">
                                 <Link
-                                    href={`/pago?amount=600&description=${encodeURIComponent("Plan Profesional - Menu Digital")}`}
+                                    href={`/pago?amount=500&description=${encodeURIComponent("Plan Crecimiento - Menú Digital")}`}
                                     className="block w-full bg-[#FF6B00] text-white text-center font-bold py-3 px-6 rounded-lg hover:bg-[#E66000] transition-colors shadow-lg"
                                 >
                                     Elegir Plan
@@ -683,7 +683,7 @@ const MenuObjetivoClient = () => {
                             </div>
                             <div className="p-6 pt-0">
                                 <Link
-                                    href={`/pago?amount=1000&description=${encodeURIComponent("Plan Personalizado - Menu Digital")}`}
+                                    href={`/pago?amount=700&description=${encodeURIComponent("Plan Pro - Menú Digital")}`}
                                     className="block w-full bg-gray-900 text-white text-center font-bold py-3 px-6 rounded-lg hover:bg-[#FF6B00] transition-colors"
                                 >
                                     Elegir Plan
@@ -743,7 +743,7 @@ const MenuObjetivoClient = () => {
                             </div>
                             <div className="p-6 pt-0">
                                 <Link
-                                    href={`/pago?amount=2500&description=${encodeURIComponent("Plan Personalizado - Menu Digital")}`}
+                                    href={`/pago?amount=1000&description=${encodeURIComponent("Plan Posicionamiento - Menú Digital")}`}
                                     className="block w-full bg-gray-900 text-white text-center font-bold py-3 px-6 rounded-lg hover:bg-[#FF6B00] transition-colors"
                                 >
                                     Elegir Plan

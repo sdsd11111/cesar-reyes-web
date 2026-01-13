@@ -979,10 +979,10 @@ const HotelObjetivoClient = () => {
                             </div>
                             <div className="p-8 pt-0">
                                 <Link
-                                    href={`/pago?amount=1200&description=${encodeURIComponent("Plan Business - Hotel Objetivo")}`}
+                                    href={`/pago?amount=1800&description=${encodeURIComponent("Plan Élite - Hotel Objetivo")}`}
                                     className="block w-full bg-[#FF6B00] text-white text-center font-bold py-4 px-6 rounded-xl hover:bg-[#E66000] transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                                 >
-                                    Seleccionar Plan Business
+                                    Seleccionar Plan Élite
                                 </Link>
                             </div>
                         </div>
@@ -1062,10 +1062,10 @@ const HotelObjetivoClient = () => {
                             </div>
                             <div className="p-8 pt-0">
                                 <Link
-                                    href={`/pago?amount=2500&description=${encodeURIComponent("Plan Enterprise - Hotel Objetivo")}`}
+                                    href={`/pago?amount=2800&description=${encodeURIComponent("Plan Imperio - Hotel Objetivo")}`}
                                     className="block w-full bg-[#FFD700] text-gray-900 text-center font-bold py-4 px-6 rounded-xl hover:bg-[#F4C430] transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                                 >
-                                    Seleccionar Plan Enterprise
+                                    Seleccionar Plan Imperio
                                 </Link>
                             </div>
                         </div>

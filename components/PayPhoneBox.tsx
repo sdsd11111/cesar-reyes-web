@@ -17,47 +17,68 @@ declare global {
 
 export default function PayPhoneBox({ amount, description, className }: PayPhoneBoxProps) {
     const [isLoaded, setIsLoaded] = useState(false);
-    const containerId = "pp-button"; // Unified ID as per docs
+    const containerId = "pp-button";
 
     useEffect(() => {
-        if (isLoaded && window.PPaymentButtonBox) {
-            const amountInCents = Math.floor(amount * 100);
-            const transactionId = `tx${Date.now().toString().slice(-13)}`;
-
-            try {
-                // Using the exact structure from the provided docs
-                const ppb = new window.PPaymentButtonBox({
-                    token: process.env.NEXT_PUBLIC_PAYPHONE_TOKEN,
-                    clientTransactionId: transactionId,
-                    amount: amountInCents,
-                    amountWithoutTax: amountInCents,
-                    amountWithTax: 0,
-                    tax: 0,
-                    service: 0,
-                    tip: 0,
-                    currency: "USD",
-                    storeId: process.env.NEXT_PUBLIC_PAYPHONE_STORE_ID,
-                    reference: description.substring(0, 50), // Safe length
-                    lang: "es",
-                    defaultMethod: "card"
-                });
-
-                const container = document.getElementById(containerId);
-                if (container) {
-                    container.innerHTML = ""; // Clear
-                    ppb.render(containerId);
-                }
-            } catch (error) {
-                console.error("PayPhone Initialization Error:", error);
-            }
+        // Proactive check: If the script is already there and global object exists
+        if (window.PPaymentButtonBox) {
+            setIsLoaded(true);
         }
+
+        let timeoutId: NodeJS.Timeout;
+
+        const initPayPhone = (retryCount = 0) => {
+            if (window.PPaymentButtonBox) {
+                const amountInCents = Math.round(amount * 100);
+                const transactionId = `tx${Date.now().toString().slice(-13)}`;
+
+                try {
+                    console.log("PayPhone Rendering:", { amountInCents, transactionId });
+
+                    const ppb = new window.PPaymentButtonBox({
+                        token: process.env.NEXT_PUBLIC_PAYPHONE_TOKEN,
+                        clientTransactionId: transactionId,
+                        amount: amountInCents,
+                        amountWithoutTax: amountInCents,
+                        amountWithTax: 0,
+                        tax: 0,
+                        service: 0,
+                        tip: 0,
+                        currency: "USD",
+                        storeId: process.env.NEXT_PUBLIC_PAYPHONE_STORE_ID,
+                        reference: description.substring(0, 50),
+                        lang: "es",
+                        defaultMethod: "card"
+                    });
+
+                    const container = document.getElementById(containerId);
+                    if (container) {
+                        container.innerHTML = "";
+                        ppb.render(containerId);
+                    }
+                } catch (error) {
+                    console.error("PayPhone Render Error:", error);
+                }
+            } else if (retryCount < 20) {
+                // Retry every 250ms for up to 5 seconds
+                timeoutId = setTimeout(() => initPayPhone(retryCount + 1), 250);
+            } else {
+                console.error("PayPhone SDK: window.PPaymentButtonBox not found after retries.");
+            }
+        };
+
+        if (isLoaded) {
+            initPayPhone();
+        }
+
+        return () => {
+            if (timeoutId) clearTimeout(timeoutId);
+        };
     }, [isLoaded, amount, description]);
 
     return (
         <div className={className}>
-            {/* Referrer-Policy fix mentioned in docs to allow domain verification */}
             <meta name="referrer" content="origin" />
-
             <link
                 rel="stylesheet"
                 href="https://cdn.payphonetodoesposible.com/box/v1.1/payphone-payment-box.css"
@@ -65,9 +86,13 @@ export default function PayPhoneBox({ amount, description, className }: PayPhone
             <Script
                 src="https://cdn.payphonetodoesposible.com/box/v1.1/payphone-payment-box.js"
                 type="module"
-                onLoad={() => setIsLoaded(true)}
+                crossOrigin="anonymous"
+                onLoad={() => {
+                    console.log("PayPhone Script Loaded");
+                    setIsLoaded(true);
+                }}
             />
-            <div id={containerId} className="flex justify-center min-h-[60px]">
+            <div id={containerId} className="flex justify-center min-h-[60px] w-full">
                 {!isLoaded && (
                     <div className="animate-pulse bg-gray-100 h-14 w-full rounded-xl flex items-center justify-center text-gray-400 text-sm italic">
                         Preparando pasarela segura...
