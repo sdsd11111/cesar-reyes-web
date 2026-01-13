@@ -1,7 +1,8 @@
-import Link from 'next/link';
-import { Suspense } from 'react';
+"use client";
 
-export const dynamic = 'force-dynamic';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 
 // This page receives the parameters from PayPhone upon redirection
 // https://cesarreyesjaramillo.com/pago-resultado?id=XXX&clientTransactionId=YYY
@@ -110,21 +111,37 @@ async function verifyPayment(id: string, clientTransactionId: string): Promise<P
     }
 }
 
-export default async function PaymentResultPage(props: {
-    searchParams: Promise<{ [key: string]: string | string[] | undefined }>
-}) {
-    const searchParams = await props.searchParams;
-    const id = searchParams.id as string;
-    const clientTransactionId = searchParams.clientTransactionId as string;
+export default function PaymentResultPage() {
+    const searchParams = useSearchParams();
+    const [result, setResult] = useState<PaymentResult | null>(null);
+    const [loading, setLoading] = useState(true);
 
-    let result: PaymentResult | null = null;
-    if (id && clientTransactionId) {
-        result = await verifyPayment(id, clientTransactionId);
-    }
+    const id = searchParams.get('id');
+    const clientTransactionId = searchParams.get('clientTransactionId');
+    const status = searchParams.get('status');
+
+    useEffect(() => {
+        if (id && clientTransactionId) {
+            verifyPayment(id, clientTransactionId).then((data) => {
+                setResult(data);
+                setLoading(false);
+            });
+        } else {
+            setLoading(false);
+        }
+    }, [id, clientTransactionId]);
 
     // Status 3 is Approved in PayPhone Business
     const isApproved = result?.statusCode === 3 || result?.transactionStatus === "Approved";
-    const isCancelled = result?.statusCode === 2 || searchParams.status === "cancelled";
+    const isCancelled = result?.statusCode === 2 || status === "cancelled";
+
+    if (loading) {
+        return (
+            <div className="min-h-screen bg-white flex items-center justify-center p-4">
+                <div className="text-gray-600">Cargando...</div>
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen bg-white flex items-center justify-center p-4">
@@ -180,7 +197,15 @@ export default async function PaymentResultPage(props: {
 
                         <div className="pt-4">
                             <button
-                                onClick={() => typeof window !== 'undefined' && window.location.reload()}
+                                onClick={() => {
+                                    setLoading(true);
+                                    if (id && clientTransactionId) {
+                                        verifyPayment(id, clientTransactionId).then((data) => {
+                                            setResult(data);
+                                            setLoading(false);
+                                        });
+                                    }
+                                }}
                                 className="flex items-center justify-center space-x-2 w-full bg-[#FF6B00] text-white font-bold py-3 rounded-xl hover:bg-[#e56000] transition-all shadow-md"
                             >
                                 <RefreshCw className="w-5 h-5" />
