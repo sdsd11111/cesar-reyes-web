@@ -19,13 +19,47 @@ async function verifyPayment(id: string, clientTransactionId: string): Promise<P
     const token = process.env.PAYPHONE_TOKEN;
     if (!token) {
         console.error("PAYPHONE_TOKEN not found in environment variables");
-        return null;
+        return { message: "Error de configuración: TOKEN no encontrado en el servidor." };
     }
 
+    // Try Step 6: GET Sale status (more reliable in some regions)
     try {
-        console.log(`Verifying PayPhone transaction: id=${id}, clientTransactionId=${clientTransactionId}`);
+        console.log(`Verifying Sale Status: id=${id}`);
+        const saleRes = await fetch(`https://pay.payphonetodoesposible.com/api/Sale/${id}`, {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/json",
+            }
+        });
 
-        const res = await fetch("https://pay.payphonetodoesposible.com/api/button/V2/Confirm", {
+        const saleText = await saleRes.text();
+        console.log("PayPhone Sale Raw Response:", saleText);
+
+        if (saleRes.ok) {
+            try {
+                const saleData = JSON.parse(saleText);
+                if (saleData.transactionStatus === "Approved") {
+                    return {
+                        statusCode: 3, // Approved
+                        transactionStatus: "Approved",
+                        amount: saleData.amount,
+                        transactionId: saleData.transactionId,
+                        clientTransactionId: clientTransactionId
+                    };
+                }
+            } catch (e) {
+                console.error("Failed to parse Sale JSON");
+            }
+        }
+    } catch (e) {
+        console.error("Error checking Sale status:", e);
+    }
+
+    // Fallback or secondary confirmation: POST Confirm
+    try {
+        console.log(`Attempting POST Confirm: id=${id}`);
+        const confirmRes = await fetch("https://pay.payphonetodoesposible.com/api/button/V2/Confirm", {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${token}`,
@@ -33,25 +67,25 @@ async function verifyPayment(id: string, clientTransactionId: string): Promise<P
             },
             body: JSON.stringify({
                 id: parseInt(id),
-                clientTransactionId: clientTransactionId // Fixed field name
+                clientTransactionId: clientTransactionId
             })
         });
 
-        const responseData = await res.json();
+        const confirmText = await confirmRes.text();
+        console.log("PayPhone Confirm Raw Response:", confirmText);
 
-        if (!res.ok) {
-            console.error("PayPhone Confirm API Error Details:", responseData);
+        try {
+            const confirmData = JSON.parse(confirmText);
+            return confirmData;
+        } catch (e) {
+            console.error("Confirm response is not JSON:", confirmText.substring(0, 100));
             return {
-                statusCode: res.status,
-                message: responseData.message || "Error en la confirmación de PayPhone"
+                message: `Respuesta inesperada: ${confirmText.substring(0, 50)}...`
             };
         }
-
-        return responseData;
     } catch (error: any) {
-        console.error("Error verifying payment:", error);
+        console.error("Error in confirmation flow:", error);
         return {
-            statusCode: 500,
             message: error.message || "Error interno al verificar el pago"
         };
     }
@@ -69,7 +103,8 @@ export default async function PaymentResultPage(props: {
         result = await verifyPayment(id, clientTransactionId);
     }
 
-    const isApproved = result?.statusCode === 3;
+    // Status 3 is Approved in PayPhone Business
+    const isApproved = result?.statusCode === 3 || result?.transactionStatus === "Approved";
     const isCancelled = result?.statusCode === 2 || searchParams.status === "cancelled";
 
     return (
