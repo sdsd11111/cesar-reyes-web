@@ -16,47 +16,52 @@ interface PaymentResult {
 }
 
 async function verifyPayment(id: string, clientTransactionId: string): Promise<PaymentResult | null> {
-    const token = process.env.PAYPHONE_TOKEN;
-    if (!token) {
+    const rawToken = process.env.PAYPHONE_TOKEN;
+    if (!rawToken) {
         console.error("PAYPHONE_TOKEN not found in environment variables");
-        return { message: "Error de configuración: TOKEN no encontrado en el servidor." };
+        return { message: "Error de configuración: TOKEN no encontrado en el servidor (Vercel)." };
     }
 
-    // Try Step 6: GET Sale status (more reliable in some regions)
+    const token = rawToken.trim();
+
+    // 1. Try Step 6: GET Sale status (The official recommendation)
     try {
         console.log(`Verifying Sale Status: id=${id}`);
+        // We try the standard endpoint
         const saleRes = await fetch(`https://pay.payphonetodoesposible.com/api/Sale/${id}`, {
             method: "GET",
             headers: {
                 "Authorization": `Bearer ${token}`,
                 "Content-Type": "application/json",
+                "Accept": "application/json",
+                "User-Agent": "Vercel-PayPhone-Integration"
             }
         });
 
         const saleText = await saleRes.text();
-        console.log("PayPhone Sale Raw Response:", saleText);
+        console.log(`PayPhone Sale [${saleRes.status}] Response:`, saleText.substring(0, 100));
 
         if (saleRes.ok) {
             try {
                 const saleData = JSON.parse(saleText);
-                if (saleData.transactionStatus === "Approved") {
-                    return {
-                        statusCode: 3, // Approved
-                        transactionStatus: "Approved",
-                        amount: saleData.amount,
-                        transactionId: saleData.transactionId,
-                        clientTransactionId: clientTransactionId
-                    };
-                }
+                return {
+                    statusCode: saleData.statusCode || 3,
+                    transactionStatus: saleData.transactionStatus,
+                    amount: saleData.amount,
+                    transactionId: saleData.transactionId,
+                    clientTransactionId: clientTransactionId
+                };
             } catch (e) {
                 console.error("Failed to parse Sale JSON");
             }
+        } else if (saleRes.status === 403 || saleRes.status === 401) {
+            return { message: `Error de Autenticación (${saleRes.status}): Revisa el TOKEN en Vercel.` };
         }
     } catch (e) {
         console.error("Error checking Sale status:", e);
     }
 
-    // Fallback or secondary confirmation: POST Confirm
+    // 2. Fallback: POST Confirm (Step 5 logic)
     try {
         console.log(`Attempting POST Confirm: id=${id}`);
         const confirmRes = await fetch("https://pay.payphonetodoesposible.com/api/button/V2/Confirm", {
@@ -64,6 +69,8 @@ async function verifyPayment(id: string, clientTransactionId: string): Promise<P
             headers: {
                 "Authorization": `Bearer ${token}`,
                 "Content-Type": "application/json",
+                "Accept": "application/json",
+                "User-Agent": "Vercel-PayPhone-Integration"
             },
             body: JSON.stringify({
                 id: parseInt(id),
@@ -72,21 +79,20 @@ async function verifyPayment(id: string, clientTransactionId: string): Promise<P
         });
 
         const confirmText = await confirmRes.text();
-        console.log("PayPhone Confirm Raw Response:", confirmText);
+        console.log(`PayPhone Confirm [${confirmRes.status}] Response:`, confirmText.substring(0, 100));
 
         try {
             const confirmData = JSON.parse(confirmText);
             return confirmData;
         } catch (e) {
-            console.error("Confirm response is not JSON:", confirmText.substring(0, 100));
             return {
-                message: `Respuesta inesperada: ${confirmText.substring(0, 50)}...`
+                message: `Respuesta [${confirmRes.status}]: ${confirmText.includes('<!DOCTYPE') ? 'HTML Error (Posible bloqueo de PayPhone)' : confirmText.substring(0, 50)}`
             };
         }
     } catch (error: any) {
         console.error("Error in confirmation flow:", error);
         return {
-            message: error.message || "Error interno al verificar el pago"
+            message: `Error de conexión: ${error.message}`
         };
     }
 }
