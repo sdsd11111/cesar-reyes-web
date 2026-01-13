@@ -17,9 +17,14 @@ interface PaymentResult {
 
 async function verifyPayment(id: string, clientTransactionId: string): Promise<PaymentResult | null> {
     const token = process.env.PAYPHONE_TOKEN;
-    if (!token) return null;
+    if (!token) {
+        console.error("PAYPHONE_TOKEN not found in environment variables");
+        return null;
+    }
 
     try {
+        console.log(`Verifying PayPhone transaction: id=${id}, clientTransactionId=${clientTransactionId}`);
+
         const res = await fetch("https://pay.payphonetodoesposible.com/api/button/V2/Confirm", {
             method: "POST",
             headers: {
@@ -28,19 +33,27 @@ async function verifyPayment(id: string, clientTransactionId: string): Promise<P
             },
             body: JSON.stringify({
                 id: parseInt(id),
-                clientTxId: clientTransactionId
+                clientTransactionId: clientTransactionId // Fixed field name
             })
         });
 
+        const responseData = await res.json();
+
         if (!res.ok) {
-            console.error("PayPhone Confirm API Error:", await res.text());
-            return null;
+            console.error("PayPhone Confirm API Error Details:", responseData);
+            return {
+                statusCode: res.status,
+                message: responseData.message || "Error en la confirmación de PayPhone"
+            };
         }
 
-        return await res.json();
-    } catch (error) {
+        return responseData;
+    } catch (error: any) {
         console.error("Error verifying payment:", error);
-        return null;
+        return {
+            statusCode: 500,
+            message: error.message || "Error interno al verificar el pago"
+        };
     }
 }
 
