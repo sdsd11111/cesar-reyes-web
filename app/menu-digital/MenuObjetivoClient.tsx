@@ -9,6 +9,7 @@ import { ExpandableText } from "@/components/ui/expandable-text";
 import { CardSlider } from "@/components/ui/card-slider";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import DemoFacade from '@/components/DemoFacade';
+import PayPhoneButton from '@/components/PayPhoneButton';
 
 const CompactCard = ({ title, shortDesc, fullDesc, justification, icon: Icon }: { title: string, shortDesc: string, fullDesc: string, justification: string, icon: any }) => {
     const [isExpanded, setIsExpanded] = useState(false);
@@ -570,9 +571,11 @@ const MenuObjetivoClient = () => {
                                 </div>
                             </div>
                             <div className="p-6 pt-0">
-                                <a href="#formulario" className="block w-full bg-gray-900 text-white text-center font-bold py-3 px-6 rounded-lg hover:bg-[#FF6B00] transition-colors">
-                                    Elegir Plan Emprendedor
-                                </a>
+                                <PayPhoneButton
+                                    amount={250}
+                                    description="Plan Emprendedor - Menú Digital"
+                                    className="block w-full bg-gray-900 text-white text-center font-bold py-3 px-6 rounded-lg hover:bg-[#FF6B00] transition-colors"
+                                />
                             </div>
                         </div>
 
@@ -622,9 +625,11 @@ const MenuObjetivoClient = () => {
                                 </div>
                             </div>
                             <div className="p-6 pt-0">
-                                <a href="#formulario" className="block w-full bg-[#FF6B00] text-white text-center font-bold py-3 px-6 rounded-lg hover:bg-[#E66000] transition-colors shadow-lg">
-                                    Elegir Plan Crecimiento
-                                </a>
+                                <PayPhoneButton
+                                    amount={500}
+                                    description="Plan Crecimiento - Menú Digital"
+                                    className="block w-full bg-[#FF6B00] text-white text-center font-bold py-3 px-6 rounded-lg hover:bg-[#E66000] transition-colors shadow-lg"
+                                />
                             </div>
                         </div>
 
@@ -675,9 +680,11 @@ const MenuObjetivoClient = () => {
                                 </div>
                             </div>
                             <div className="p-6 pt-0">
-                                <a href="#formulario" className="block w-full bg-gray-900 text-white text-center font-bold py-3 px-6 rounded-lg hover:bg-[#FF6B00] transition-colors">
-                                    Elegir Plan Pro
-                                </a>
+                                <PayPhoneButton
+                                    amount={700}
+                                    description="Plan Pro - Menú Digital"
+                                    className="block w-full bg-gray-900 text-white text-center font-bold py-3 px-6 rounded-lg hover:bg-[#FF6B00] transition-colors"
+                                />
                             </div>
                         </div>
 
@@ -732,9 +739,11 @@ const MenuObjetivoClient = () => {
                                 </div>
                             </div>
                             <div className="p-6 pt-0">
-                                <a href="#formulario" className="block w-full bg-gray-900 text-white text-center font-bold py-3 px-6 rounded-lg hover:bg-[#FF6B00] transition-colors">
-                                    Elegir Plan Posicionamiento
-                                </a>
+                                <PayPhoneButton
+                                    amount={1000}
+                                    description="Plan Posicionamiento - Menú Digital"
+                                    className="block w-full bg-gray-900 text-white text-center font-bold py-3 px-6 rounded-lg hover:bg-[#FF6B00] transition-colors"
+                                />
                             </div>
                         </div>
                     </div>
