@@ -1,12 +1,8 @@
 "use client";
 
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-
-// This page receives the parameters from PayPhone upon redirection
-// https://cesarreyesjaramillo.com/pago-resultado?id=XXX&clientTransactionId=YYY
-
 import { CheckCircle2, XCircle, Home, RefreshCw } from "lucide-react";
 
 interface PaymentResult {
@@ -62,7 +58,6 @@ async function verifyPayment(id: string, clientTransactionId: string): Promise<P
             if (saleRes.ok) {
                 try {
                     const saleData = JSON.parse(saleText);
-                    // Convert statusCode to number if it's a string, or default to 3 if transactionStatus is Approved
                     const statusCode = saleData.statusCode ? parseInt(saleData.statusCode.toString()) : (saleData.transactionStatus === "Approved" ? 3 : 0);
                     return {
                         statusCode,
@@ -111,7 +106,7 @@ async function verifyPayment(id: string, clientTransactionId: string): Promise<P
     }
 }
 
-export default function PaymentResultPage() {
+function PaymentResultContent() {
     const searchParams = useSearchParams();
     const [result, setResult] = useState<PaymentResult | null>(null);
     const [loading, setLoading] = useState(true);
@@ -131,7 +126,6 @@ export default function PaymentResultPage() {
         }
     }, [id, clientTransactionId]);
 
-    // Status 3 is Approved in PayPhone Business
     const isApproved = result?.statusCode === 3 || result?.transactionStatus === "Approved";
     const isCancelled = result?.statusCode === 2 || status === "cancelled";
 
@@ -226,5 +220,17 @@ export default function PaymentResultPage() {
                 </div>
             </div>
         </div>
+    );
+}
+
+export default function PaymentResultPage() {
+    return (
+        <Suspense fallback={
+            <div className="min-h-screen bg-white flex items-center justify-center p-4">
+                <div className="text-gray-600">Cargando...</div>
+            </div>
+        }>
+            <PaymentResultContent />
+        </Suspense>
     );
 }
