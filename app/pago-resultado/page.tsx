@@ -4,12 +4,12 @@ import { Suspense } from 'react';
 // This page receives the parameters from PayPhone upon redirection
 // https://cesarreyesjaramillo.com/pago-resultado?id=XXX&clientTransactionId=YYY
 
-export default function PaymentResultPage({
+export default async function PaymentResultPage({
     searchParams,
 }: {
-    searchParams: { [key: string]: string | string[] | undefined };
+    searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-    const { id, clientTransactionId } = searchParams;
+    const { id, clientTransactionId } = await searchParams;
 
     const isSuccess = Boolean(id); // If 'id' is present, we assume the payment flow was completed/attempted.
     // Ideally, we should verify the status with the backend using this ID.
