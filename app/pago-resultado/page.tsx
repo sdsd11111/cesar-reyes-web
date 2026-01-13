@@ -15,93 +15,24 @@ interface PaymentResult {
 }
 
 async function verifyPayment(id: string, clientTransactionId: string): Promise<PaymentResult | null> {
-    const rawToken = process.env.PAYPHONE_TOKEN;
-    if (!rawToken) {
-        console.error("PAYPHONE_TOKEN not found in environment variables");
-        return { message: "Error: TOKEN no configurado en Vercel." };
-    }
-
-    // Wait 2 seconds to allow PayPhone to finish processing
-    await new Promise(resolve => setTimeout(resolve, 2000));
-
-    let token = rawToken.trim();
-    if (token.toLowerCase().startsWith("bearer ")) {
-        token = token.substring(7).trim();
-    }
-
-    const headers = {
-        "Authorization": `Bearer ${token}`,
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-        "User-Agent": "Vercel-PayPhone-Integration",
-        "Referer": "https://cesarreyesjaramillo.com/"
-    };
-
-    // 1. Try Step 6: GET Sale status
-    const endpoints = [
-        `https://pay.payphonetodoesposible.com/api/Sale/${id}`,
-        `https://pay.payphonetodoesposible.com/api/v2/Sale/${id}`
-    ];
-
-    for (const url of endpoints) {
-        try {
-            console.log(`Verifying Sale Status: ${url}`);
-            const saleRes = await fetch(url, {
-                method: "GET",
-                headers,
-                cache: 'no-store'
-            });
-
-            const saleText = await saleRes.text();
-            console.log(`PayPhone Sale [${saleRes.status}] Response:`, saleText.substring(0, 150));
-
-            if (saleRes.ok) {
-                try {
-                    const saleData = JSON.parse(saleText);
-                    const statusCode = saleData.statusCode ? parseInt(saleData.statusCode.toString()) : (saleData.transactionStatus === "Approved" ? 3 : 0);
-                    return {
-                        statusCode,
-                        transactionStatus: saleData.transactionStatus,
-                        amount: saleData.amount,
-                        transactionId: saleData.transactionId,
-                        clientTransactionId: clientTransactionId
-                    };
-                } catch (e) {
-                    console.error("Failed to parse Sale JSON");
-                }
-            }
-        } catch (e) {
-            console.error(`Error checking Sale status at ${url}:`, e);
-        }
-    }
-
-    // 2. Fallback: POST Confirm
     try {
-        console.log(`Attempting POST Confirm: id=${id}`);
-        const confirmRes = await fetch("https://pay.payphonetodoesposible.com/api/button/V2/Confirm", {
-            method: "POST",
-            headers,
-            body: JSON.stringify({
-                id: parseInt(id),
-                clientTransactionId: clientTransactionId
-            }),
+        const response = await fetch('/api/payphone/verify', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id, clientTransactionId }),
             cache: 'no-store'
         });
 
-        const confirmText = await confirmRes.text();
-        console.log(`PayPhone Confirm [${confirmRes.status}] Response:`, confirmText.substring(0, 150));
-
-        try {
-            const confirmData = JSON.parse(confirmText);
-            const statusCode = confirmData.statusCode ? parseInt(confirmData.statusCode.toString()) : (confirmData.transactionStatus === "Approved" ? 3 : 0);
-            return { ...confirmData, statusCode };
-        } catch (e) {
-            return {
-                message: `Respuesta [${confirmRes.status}]: ${confirmText.includes('<!DOCTYPE') ? confirmText.substring(0, 300).replace(/<[^>]*>?/gm, '') : confirmText.substring(0, 100)}`
-            };
+        if (!response.ok) {
+            const errorData = await response.json();
+            return { message: errorData.message || `Error ${response.status}` };
         }
+
+        return await response.json();
     } catch (error: any) {
-        console.error("Error in confirmation flow:", error);
+        console.error("Error calling verify API:", error);
         return { message: `Error de conexión: ${error.message}` };
     }
 }
@@ -181,7 +112,7 @@ function PaymentResultContent() {
                             No pudimos confirmar el estado del pago automáticamente.
                         </p>
                         <p className="text-sm text-gray-500 italic">
-                            A veces PayPhone tarda unos segundos en procesar. Por favor, intenta reincidir la verificación o contáctanos si el cargo ya se hizo.
+                            A veces PayPhone tarda unos segundos en procesar. Por favor, intenta reiniciar la verificación o contáctanos si el cargo ya se hizo.
                         </p>
                         {result?.message && (
                             <div className="bg-red-50 p-4 rounded-xl border border-red-100 mt-4">
