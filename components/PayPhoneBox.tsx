@@ -37,6 +37,7 @@ export default function PayPhoneBox({ amount, description, className }: PayPhone
 
                     const ppb = new window.PPaymentButtonBox({
                         token: process.env.NEXT_PUBLIC_PAYPHONE_TOKEN,
+                        integrationType: "api",
                         clientTransactionId: transactionId,
                         amount: amountInCents,
                         amountWithoutTax: amountInCents,
