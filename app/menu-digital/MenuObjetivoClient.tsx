@@ -9,7 +9,7 @@ import { ExpandableText } from "@/components/ui/expandable-text";
 import { CardSlider } from "@/components/ui/card-slider";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import DemoFacade from '@/components/DemoFacade';
-import PayPhoneButton from '@/components/PayPhoneButton';
+import Link from "next/link";
 
 const CompactCard = ({ title, shortDesc, fullDesc, justification, icon: Icon }: { title: string, shortDesc: string, fullDesc: string, justification: string, icon: any }) => {
     const [isExpanded, setIsExpanded] = useState(false);
@@ -571,11 +571,12 @@ const MenuObjetivoClient = () => {
                                 </div>
                             </div>
                             <div className="p-6 pt-0">
-                                <PayPhoneButton
-                                    amount={250}
-                                    description="Plan Emprendedor - Menú Digital"
+                                <Link
+                                    href={`/pago?amount=350&description=${encodeURIComponent("Plan Emprendedor - Menu Digital")}`}
                                     className="block w-full bg-gray-900 text-white text-center font-bold py-3 px-6 rounded-lg hover:bg-[#FF6B00] transition-colors"
-                                />
+                                >
+                                    Elegir Plan
+                                </Link>
                             </div>
                         </div>
 
@@ -625,11 +626,12 @@ const MenuObjetivoClient = () => {
                                 </div>
                             </div>
                             <div className="p-6 pt-0">
-                                <PayPhoneButton
-                                    amount={500}
-                                    description="Plan Crecimiento - Menú Digital"
+                                <Link
+                                    href={`/pago?amount=600&description=${encodeURIComponent("Plan Profesional - Menu Digital")}`}
                                     className="block w-full bg-[#FF6B00] text-white text-center font-bold py-3 px-6 rounded-lg hover:bg-[#E66000] transition-colors shadow-lg"
-                                />
+                                >
+                                    Elegir Plan
+                                </Link>
                             </div>
                         </div>
 
@@ -680,11 +682,12 @@ const MenuObjetivoClient = () => {
                                 </div>
                             </div>
                             <div className="p-6 pt-0">
-                                <PayPhoneButton
-                                    amount={700}
-                                    description="Plan Pro - Menú Digital"
+                                <Link
+                                    href={`/pago?amount=1000&description=${encodeURIComponent("Plan Personalizado - Menu Digital")}`}
                                     className="block w-full bg-gray-900 text-white text-center font-bold py-3 px-6 rounded-lg hover:bg-[#FF6B00] transition-colors"
-                                />
+                                >
+                                    Elegir Plan
+                                </Link>
                             </div>
                         </div>
 
@@ -739,11 +742,12 @@ const MenuObjetivoClient = () => {
                                 </div>
                             </div>
                             <div className="p-6 pt-0">
-                                <PayPhoneButton
-                                    amount={1000}
-                                    description="Plan Posicionamiento - Menú Digital"
+                                <Link
+                                    href={`/pago?amount=2500&description=${encodeURIComponent("Plan Personalizado - Menu Digital")}`}
                                     className="block w-full bg-gray-900 text-white text-center font-bold py-3 px-6 rounded-lg hover:bg-[#FF6B00] transition-colors"
-                                />
+                                >
+                                    Elegir Plan
+                                </Link>
                             </div>
                         </div>
                     </div>

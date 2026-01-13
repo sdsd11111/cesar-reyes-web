@@ -10,7 +10,7 @@ import { ExpandableText } from "@/components/ui/expandable-text";
 import { CardSlider } from "@/components/ui/card-slider";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import DemoFacade from '@/components/DemoFacade';
-import PayPhoneButton from '@/components/PayPhoneButton';
+import Link from "next/link";
 
 const CompactCard = ({ title, shortDesc, fullDesc, justification, icon: Icon }: { title: string, shortDesc: string, fullDesc: string, justification: string, icon: any }) => {
     const [isExpanded, setIsExpanded] = useState(false);
@@ -894,11 +894,12 @@ const HotelObjetivoClient = () => {
                                 </div>
                             </div>
                             <div className="p-8 pt-0">
-                                <PayPhoneButton
-                                    amount={700}
-                                    description="Plan Pro - Hotel Objetivo"
+                                <Link
+                                    href={`/pago?amount=700&description=${encodeURIComponent("Plan Pro - Hotel Objetivo")}`}
                                     className="block w-full bg-gray-900 text-white text-center font-bold py-4 px-6 rounded-xl hover:bg-gray-800 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-                                />
+                                >
+                                    Seleccionar Plan Pro
+                                </Link>
                             </div>
                         </div>
 
@@ -977,11 +978,12 @@ const HotelObjetivoClient = () => {
                                 </div>
                             </div>
                             <div className="p-8 pt-0">
-                                <PayPhoneButton
-                                    amount={1800}
-                                    description="Plan Élite - Hotel Objetivo"
+                                <Link
+                                    href={`/pago?amount=1200&description=${encodeURIComponent("Plan Business - Hotel Objetivo")}`}
                                     className="block w-full bg-[#FF6B00] text-white text-center font-bold py-4 px-6 rounded-xl hover:bg-[#E66000] transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-                                />
+                                >
+                                    Seleccionar Plan Business
+                                </Link>
                             </div>
                         </div>
 
@@ -1059,11 +1061,12 @@ const HotelObjetivoClient = () => {
                                 </div>
                             </div>
                             <div className="p-8 pt-0">
-                                <PayPhoneButton
-                                    amount={2800}
-                                    description="Plan Imperio - Hotel Objetivo"
+                                <Link
+                                    href={`/pago?amount=2500&description=${encodeURIComponent("Plan Enterprise - Hotel Objetivo")}`}
                                     className="block w-full bg-[#FFD700] text-gray-900 text-center font-bold py-4 px-6 rounded-xl hover:bg-[#F4C430] transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-                                />
+                                >
+                                    Seleccionar Plan Enterprise
+                                </Link>
                             </div>
                         </div>
                     </div>

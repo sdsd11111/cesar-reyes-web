@@ -4,53 +4,120 @@ import { Suspense } from 'react';
 // This page receives the parameters from PayPhone upon redirection
 // https://cesarreyesjaramillo.com/pago-resultado?id=XXX&clientTransactionId=YYY
 
-export default async function PaymentResultPage({
-    searchParams,
-}: {
-    searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-}) {
-    const { id, clientTransactionId } = await searchParams;
+import { CheckCircle2, XCircle, Home, RefreshCw } from "lucide-react";
 
-    const isSuccess = Boolean(id); // If 'id' is present, we assume the payment flow was completed/attempted.
-    // Ideally, we should verify the status with the backend using this ID.
+interface PaymentResult {
+    transactionStatus?: string;
+    statusCode?: number;
+    message?: string;
+    amount?: number;
+    transactionId?: number;
+    clientTransactionId?: string;
+}
+
+async function verifyPayment(id: string, clientTransactionId: string): Promise<PaymentResult | null> {
+    const token = process.env.PAYPHONE_TOKEN;
+    if (!token) return null;
+
+    try {
+        const res = await fetch("https://pay.payphonetodoesposible.com/api/button/V2/Confirm", {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                id: parseInt(id),
+                clientTxId: clientTransactionId
+            })
+        });
+
+        if (!res.ok) {
+            console.error("PayPhone Confirm API Error:", await res.text());
+            return null;
+        }
+
+        return await res.json();
+    } catch (error) {
+        console.error("Error verifying payment:", error);
+        return null;
+    }
+}
+
+export default async function PaymentResultPage(props: {
+    searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}) {
+    const searchParams = await props.searchParams;
+    const id = searchParams.id as string;
+    const clientTransactionId = searchParams.clientTransactionId as string;
+
+    let result: PaymentResult | null = null;
+    if (id && clientTransactionId) {
+        result = await verifyPayment(id, clientTransactionId);
+    }
+
+    const isApproved = result?.statusCode === 3;
+    const isCancelled = result?.statusCode === 2 || searchParams.status === "cancelled";
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 text-gray-900 p-4">
-            <div className="bg-white p-8 rounded-2xl shadow-xl max-w-md w-full text-center animate-in fade-in zoom-in duration-500">
-                {isSuccess ? (
-                    <>
-                        <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                            <svg className="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                            </svg>
+        <div className="min-h-screen bg-white flex items-center justify-center p-4">
+            <div className="max-w-md w-full text-center">
+                {isApproved ? (
+                    <div className="space-y-6">
+                        <div className="flex justify-center">
+                            <div className="bg-green-100 p-4 rounded-full">
+                                <CheckCircle2 className="w-16 h-16 text-green-600" />
+                            </div>
                         </div>
-                        <h1 className="text-3xl font-bold mb-2 text-gray-900">¡Pago Exitoso!</h1>
-                        <p className="text-gray-600 mb-6">
-                            Tu transacción se ha procesado correctamente.
-                            <br />
-                            <span className="text-xs text-gray-400 mt-2 block font-mono">ID Transacción: {id}</span>
+                        <h1 className="text-3xl font-bold text-gray-900 italic">¡Pago Exitoso!</h1>
+                        <p className="text-gray-600">
+                            Tu transacción ha sido procesada correctamente. Hemos recibido tu pago por
+                            <span className="font-bold text-[#FF6B00]"> ${(result?.amount || 0) / 100}</span>.
                         </p>
-                    </>
+                        <div className="bg-gray-50 p-4 rounded-2xl text-left space-y-2 text-sm text-gray-500">
+                            <p>ID Transacción: <span className="text-gray-900 font-mono">{result?.transactionId}</span></p>
+                            <p>Referencia: <span className="text-gray-900">{clientTransactionId}</span></p>
+                        </div>
+                    </div>
+                ) : isCancelled ? (
+                    <div className="space-y-6">
+                        <div className="flex justify-center">
+                            <div className="bg-orange-100 p-4 rounded-full">
+                                <XCircle className="w-16 h-16 text-orange-600" />
+                            </div>
+                        </div>
+                        <h1 className="text-3xl font-bold text-gray-900 italic">Pago Cancelado</h1>
+                        <p className="text-gray-600">
+                            Has cancelado el proceso de pago. No se ha realizado ningún cargo a tu tarjeta.
+                        </p>
+                    </div>
                 ) : (
-                    <>
-                        <div className="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                            <svg className="w-10 h-10 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M6 18L18 6M6 6l12 12" />
-                            </svg>
+                    <div className="space-y-6">
+                        <div className="flex justify-center">
+                            <div className="bg-red-100 p-4 rounded-full animate-pulse">
+                                <RefreshCw className="w-16 h-16 text-red-600" />
+                            </div>
                         </div>
-                        <h1 className="text-3xl font-bold mb-2 text-gray-900">Pago No Completado</h1>
-                        <p className="text-gray-600 mb-6">
-                            Hubo un problema o cancelaste la operación. Inténtalo de nuevo.
+                        <h1 className="text-3xl font-bold text-gray-900 italic">Verificando...</h1>
+                        <p className="text-gray-600">
+                            No pudimos confirmar el estado del pago automáticamente.
+                            Si realizaste el pago, por favor contáctanos.
                         </p>
-                    </>
+                        {result?.message && (
+                            <p className="text-red-500 text-sm italic">{result.message}</p>
+                        )}
+                    </div>
                 )}
 
-                <Link
-                    href="/"
-                    className="inline-block bg-orange-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-orange-700 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
-                >
-                    Volver al Inicio
-                </Link>
+                <div className="mt-12 space-y-4">
+                    <Link
+                        href="/"
+                        className="flex items-center justify-center space-x-2 w-full bg-gray-900 text-white font-bold py-4 rounded-xl hover:bg-gray-800 transition-all shadow-lg"
+                    >
+                        <Home className="w-5 h-5" />
+                        <span>Volver al Inicio</span>
+                    </Link>
+                </div>
             </div>
         </div>
     );

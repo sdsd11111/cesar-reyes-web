@@ -20,9 +20,9 @@ export async function createPaymentLink(
     amount: number, // In dollars (e.g., 10.50)
     description: string = "Cobro de Servicios Profesionales"
 ): Promise<string> { // Returns the URL
-    const token = process.env.PAYPHONE_TOKEN;
-    const storeId = process.env.PAYPHONE_STORE_ID;
-    const responseUrl = process.env.PAYPHONE_RESPONSE_URL;
+    const token = process.env.PAYPHONE_TOKEN?.trim();
+    const storeId = process.env.PAYPHONE_STORE_ID?.trim();
+    const responseUrl = process.env.PAYPHONE_RESPONSE_URL?.trim();
 
     if (!token || !storeId) {
         throw new Error("PayPhone configuration missing (TOKEN or STORE_ID)");
@@ -36,20 +36,35 @@ export async function createPaymentLink(
     // We will put everything in 'amountWithoutTax' (0% VAT) for now, or split if needed.
     // Let's assume 0% VAT for services to start, or configurable.
 
-    const amountInCents = Math.round(amount * 100);
-    // Example: 100% is taxable base 0%?
+    const amountInCents = Math.floor(amount * 100);
+    // CRITICAL: PayPhone documentation says max 15 characters for clientTransactionId
+    const transactionId = `tx${Date.now().toString().slice(-13)}`; // 2 + 13 = 15 characters
 
     const payload = {
         amount: amountInCents,
         amountWithoutTax: amountInCents,
         amountWithTax: 0,
         tax: 0,
+        service: 0,
+        tip: 0,
         currency: "USD",
-        clientTransactionId: uuidv4(),
+        clientTransactionId: transactionId,
         responseUrl: responseUrl || undefined,
         cancellationUrl: responseUrl || undefined,
-        reference: description,
+        reference: description.substring(0, 100), // Max 100 chars
+        additionalData: description.substring(0, 250), // Max 250 chars
+        storeId: storeId,
+        oneTime: true,
+        expireIn: 0,
+        isAmountEditable: false
     };
+
+    console.log("PayPhone Request Payload:", JSON.stringify(payload, null, 2));
+    console.log("PayPhone Request Headers:", {
+        "Authorization": `Bearer ${token?.substring(0, 10)}...`,
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+    });
 
     try {
         const res = await fetch("https://pay.payphonetodoesposible.com/api/Links", {
@@ -57,14 +72,23 @@ export async function createPaymentLink(
             headers: {
                 "Authorization": `Bearer ${token}`,
                 "Content-Type": "application/json",
+                "Accept": "application/json"
             },
             body: JSON.stringify(payload),
         });
 
         if (!res.ok) {
-            const errorData = await res.json();
-            console.error("PayPhone API Error:", errorData);
-            throw new Error(`PayPhone Error: ${res.statusText}`);
+            const errorText = await res.text();
+            console.error(`PayPhone API Error [${res.status}]:`, errorText);
+
+            try {
+                const errorData = JSON.parse(errorText);
+                console.error("Parsed Error Data:", errorData);
+            } catch (e) {
+                console.error("Could not parse error response as JSON");
+            }
+
+            throw new Error(`PayPhone Error: ${res.status} ${res.statusText} - ${errorText.substring(0, 100)}...`);
         }
 
         const data: PayPhoneResponse = await res.json();
