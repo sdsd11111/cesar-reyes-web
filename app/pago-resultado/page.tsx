@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { Suspense } from 'react';
 
+export const dynamic = 'force-dynamic';
+
 // This page receives the parameters from PayPhone upon redirection
 // https://cesarreyesjaramillo.com/pago-resultado?id=XXX&clientTransactionId=YYY
 
@@ -19,81 +21,92 @@ async function verifyPayment(id: string, clientTransactionId: string): Promise<P
     const rawToken = process.env.PAYPHONE_TOKEN;
     if (!rawToken) {
         console.error("PAYPHONE_TOKEN not found in environment variables");
-        return { message: "Error de configuración: TOKEN no encontrado en el servidor (Vercel)." };
+        return { message: "Error: TOKEN no configurado en Vercel." };
     }
 
-    const token = rawToken.trim();
+    // Wait 2 seconds to allow PayPhone to finish processing
+    await new Promise(resolve => setTimeout(resolve, 2000));
 
-    // 1. Try Step 6: GET Sale status (The official recommendation)
-    try {
-        console.log(`Verifying Sale Status: id=${id}`);
-        // We try the standard endpoint
-        const saleRes = await fetch(`https://pay.payphonetodoesposible.com/api/Sale/${id}`, {
-            method: "GET",
-            headers: {
-                "Authorization": `Bearer ${token}`,
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-                "User-Agent": "Vercel-PayPhone-Integration"
+    let token = rawToken.trim();
+    if (token.toLowerCase().startsWith("bearer ")) {
+        token = token.substring(7).trim();
+    }
+
+    const headers = {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "User-Agent": "Vercel-PayPhone-Integration",
+        "Referer": "https://cesarreyesjaramillo.com/"
+    };
+
+    // 1. Try Step 6: GET Sale status
+    const endpoints = [
+        `https://pay.payphonetodoesposible.com/api/Sale/${id}`,
+        `https://pay.payphonetodoesposible.com/api/v2/Sale/${id}`
+    ];
+
+    for (const url of endpoints) {
+        try {
+            console.log(`Verifying Sale Status: ${url}`);
+            const saleRes = await fetch(url, {
+                method: "GET",
+                headers,
+                cache: 'no-store'
+            });
+
+            const saleText = await saleRes.text();
+            console.log(`PayPhone Sale [${saleRes.status}] Response:`, saleText.substring(0, 150));
+
+            if (saleRes.ok) {
+                try {
+                    const saleData = JSON.parse(saleText);
+                    // Convert statusCode to number if it's a string, or default to 3 if transactionStatus is Approved
+                    const statusCode = saleData.statusCode ? parseInt(saleData.statusCode.toString()) : (saleData.transactionStatus === "Approved" ? 3 : 0);
+                    return {
+                        statusCode,
+                        transactionStatus: saleData.transactionStatus,
+                        amount: saleData.amount,
+                        transactionId: saleData.transactionId,
+                        clientTransactionId: clientTransactionId
+                    };
+                } catch (e) {
+                    console.error("Failed to parse Sale JSON");
+                }
             }
-        });
-
-        const saleText = await saleRes.text();
-        console.log(`PayPhone Sale [${saleRes.status}] Response:`, saleText.substring(0, 100));
-
-        if (saleRes.ok) {
-            try {
-                const saleData = JSON.parse(saleText);
-                return {
-                    statusCode: saleData.statusCode || 3,
-                    transactionStatus: saleData.transactionStatus,
-                    amount: saleData.amount,
-                    transactionId: saleData.transactionId,
-                    clientTransactionId: clientTransactionId
-                };
-            } catch (e) {
-                console.error("Failed to parse Sale JSON");
-            }
-        } else if (saleRes.status === 403 || saleRes.status === 401) {
-            return { message: `Error de Autenticación (${saleRes.status}): Revisa el TOKEN en Vercel.` };
+        } catch (e) {
+            console.error(`Error checking Sale status at ${url}:`, e);
         }
-    } catch (e) {
-        console.error("Error checking Sale status:", e);
     }
 
-    // 2. Fallback: POST Confirm (Step 5 logic)
+    // 2. Fallback: POST Confirm
     try {
         console.log(`Attempting POST Confirm: id=${id}`);
         const confirmRes = await fetch("https://pay.payphonetodoesposible.com/api/button/V2/Confirm", {
             method: "POST",
-            headers: {
-                "Authorization": `Bearer ${token}`,
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-                "User-Agent": "Vercel-PayPhone-Integration"
-            },
+            headers,
             body: JSON.stringify({
                 id: parseInt(id),
                 clientTransactionId: clientTransactionId
-            })
+            }),
+            cache: 'no-store'
         });
 
         const confirmText = await confirmRes.text();
-        console.log(`PayPhone Confirm [${confirmRes.status}] Response:`, confirmText.substring(0, 100));
+        console.log(`PayPhone Confirm [${confirmRes.status}] Response:`, confirmText.substring(0, 150));
 
         try {
             const confirmData = JSON.parse(confirmText);
-            return confirmData;
+            const statusCode = confirmData.statusCode ? parseInt(confirmData.statusCode.toString()) : (confirmData.transactionStatus === "Approved" ? 3 : 0);
+            return { ...confirmData, statusCode };
         } catch (e) {
             return {
-                message: `Respuesta [${confirmRes.status}]: ${confirmText.includes('<!DOCTYPE') ? 'HTML Error (Posible bloqueo de PayPhone)' : confirmText.substring(0, 50)}`
+                message: `Respuesta [${confirmRes.status}]: ${confirmText.includes('<!DOCTYPE') ? confirmText.substring(0, 300).replace(/<[^>]*>?/gm, '') : confirmText.substring(0, 100)}`
             };
         }
     } catch (error: any) {
         console.error("Error in confirmation flow:", error);
-        return {
-            message: `Error de conexión: ${error.message}`
-        };
+        return { message: `Error de conexión: ${error.message}` };
     }
 }
 
@@ -153,17 +166,31 @@ export default async function PaymentResultPage(props: {
                             </div>
                         </div>
                         <h1 className="text-3xl font-bold text-gray-900 italic">Verificando...</h1>
-                        <p className="text-gray-600">
+                        <p className="text-gray-600 font-medium">
                             No pudimos confirmar el estado del pago automáticamente.
-                            Si realizaste el pago, por favor contáctanos.
+                        </p>
+                        <p className="text-sm text-gray-500 italic">
+                            A veces PayPhone tarda unos segundos en procesar. Por favor, intenta reincidir la verificación o contáctanos si el cargo ya se hizo.
                         </p>
                         {result?.message && (
-                            <p className="text-red-500 text-sm italic">{result.message}</p>
+                            <div className="bg-red-50 p-4 rounded-xl border border-red-100 mt-4">
+                                <p className="text-red-600 text-xs font-mono break-words">{result.message}</p>
+                            </div>
                         )}
+
+                        <div className="pt-4">
+                            <button
+                                onClick={() => typeof window !== 'undefined' && window.location.reload()}
+                                className="flex items-center justify-center space-x-2 w-full bg-[#FF6B00] text-white font-bold py-3 rounded-xl hover:bg-[#e56000] transition-all shadow-md"
+                            >
+                                <RefreshCw className="w-5 h-5" />
+                                <span>Reintentar Verificación</span>
+                            </button>
+                        </div>
                     </div>
                 )}
 
-                <div className="mt-12 space-y-4">
+                <div className="mt-8 space-y-4">
                     <Link
                         href="/"
                         className="flex items-center justify-center space-x-2 w-full bg-gray-900 text-white font-bold py-4 rounded-xl hover:bg-gray-800 transition-all shadow-lg"
