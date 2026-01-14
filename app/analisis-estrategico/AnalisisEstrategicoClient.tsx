@@ -389,19 +389,7 @@ export default function AnalisisEstrategicoPage() {
         </div>
       </section>
 
-      {/* TEST BUTTON FOR PRODUCTION */}
-      <section className="py-20 bg-white border-t border-gray-100">
-        <div className="container mx-auto px-4 text-center">
-          <h3 className="text-xl font-bold text-gray-900 mb-6">Prueba de Seguridad PayPhone</h3>
-          <Link
-            href={`/pago?amount=1&description=${encodeURIComponent("Prueba de Pago de 1 Dólar - Producción")}`}
-            className="inline-block bg-[#FF6B00] hover:bg-[#E66000] text-white font-bold py-4 px-10 rounded-xl shadow-xl transition-all transform hover:scale-105"
-          >
-            Pagar $1.00 (Prueba)
-          </Link>
-          <p className="mt-4 text-gray-500 text-sm">Este botón es solo para validación técnica en el servidor real.</p>
-        </div>
-      </section>
+
 
       <CalendarModal
         isOpen={isCalendarModalOpen}
