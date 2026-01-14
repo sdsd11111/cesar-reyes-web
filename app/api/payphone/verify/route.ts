@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import axios from 'axios';
 
 export const dynamic = 'force-dynamic';
 
@@ -47,77 +48,66 @@ export async function POST(request: NextRequest) {
             "Referer": "https://cesarreyesjaramillo.com/"
         };
 
-        // 1. Try Step 6: GET Sale status
-        const endpoints = [
-            `https://pay.payphonetodoesposible.com/api/Sale/${id}`,
-            `https://pay.payphonetodoesposible.com/api/v2/Sale/${id}`
-        ];
-
-        for (const url of endpoints) {
-            try {
-                console.log(`Verifying Sale Status: ${url}`);
-                const saleRes = await fetch(url, {
-                    method: "GET",
-                    headers,
-                    cache: 'no-store'
-                });
-
-                const saleText = await saleRes.text();
-                console.log(`PayPhone Sale [${saleRes.status}] Response:`, saleText.substring(0, 150));
-
-                if (saleRes.ok) {
-                    try {
-                        const saleData = JSON.parse(saleText);
-                        const statusCode = saleData.statusCode ? parseInt(saleData.statusCode.toString()) : (saleData.transactionStatus === "Approved" ? 3 : 0);
-                        const result: PaymentResult = {
-                            statusCode,
-                            transactionStatus: saleData.transactionStatus,
-                            amount: saleData.amount,
-                            transactionId: saleData.transactionId,
-                            clientTransactionId: clientTransactionId
-                        };
-                        return NextResponse.json(result);
-                    } catch (e) {
-                        console.error("Failed to parse Sale JSON");
-                    }
-                }
-            } catch (e) {
-                console.error(`Error checking Sale status at ${url}:`, e);
-            }
-        }
-
-        // 2. Fallback: POST Confirm
+        // Use ONLY POST /api/button/V2/Confirm as recommended by PayPhone support
         try {
-            console.log(`Attempting POST Confirm: id=${id}`);
-            const confirmRes = await fetch("https://pay.payphonetodoesposible.com/api/button/V2/Confirm", {
-                method: "POST",
-                headers,
-                body: JSON.stringify({
+            console.log(`Attempting POST Confirm with axios: id=${id}`);
+
+            const response = await axios.post(
+                "https://pay.payphonetodoesposible.com/api/button/V2/Confirm",
+                {
                     id: parseInt(id),
                     clientTransactionId: clientTransactionId
-                }),
-                cache: 'no-store'
-            });
+                },
+                {
+                    headers,
+                    timeout: 30000, // 30 second timeout
+                    validateStatus: () => true // Don't throw on any status
+                }
+            );
 
-            const confirmText = await confirmRes.text();
-            console.log(`PayPhone Confirm [${confirmRes.status}] Response:`, confirmText.substring(0, 150));
+            console.log(`PayPhone Confirm [${response.status}] Response:`, JSON.stringify(response.data).substring(0, 200));
 
-            try {
-                const confirmData = JSON.parse(confirmText);
-                const statusCode = confirmData.statusCode ? parseInt(confirmData.statusCode.toString()) : (confirmData.transactionStatus === "Approved" ? 3 : 0);
-                return NextResponse.json({ ...confirmData, statusCode });
-            } catch (e) {
+            // Check if response is successful
+            if (response.status >= 200 && response.status < 300 && response.data) {
+                const confirmData = response.data;
+                const statusCode = confirmData.statusCode
+                    ? parseInt(confirmData.statusCode.toString())
+                    : (confirmData.transactionStatus === "Approved" ? 3 : 0);
+
                 return NextResponse.json({
-                    message: `Respuesta [${confirmRes.status}]: ${confirmText.includes('<!DOCTYPE') ? confirmText.substring(0, 300).replace(/<[^>]*>?/gm, '') : confirmText.substring(0, 100)}`
+                    ...confirmData,
+                    statusCode
                 });
             }
+
+            // Handle error responses
+            if (typeof response.data === 'string' && response.data.includes('<!DOCTYPE')) {
+                // HTML error page
+                return NextResponse.json({
+                    message: `Error ${response.status}: PayPhone devolvió una página HTML. Verifica configuración de cuenta.`
+                }, { status: response.status });
+            }
+
+            return NextResponse.json({
+                message: response.data?.message || `Error ${response.status} de PayPhone`
+            }, { status: response.status });
+
         } catch (error: any) {
-            console.error("Error in confirmation flow:", error);
+            console.error("Error in axios confirmation:", error);
+
+            if (error.code === 'ECONNABORTED') {
+                return NextResponse.json(
+                    { message: "Timeout: PayPhone no respondió a tiempo" },
+                    { status: 504 }
+                );
+            }
+
             return NextResponse.json(
                 { message: `Error de conexión: ${error.message}` },
                 { status: 500 }
             );
         }
+
     } catch (error: any) {
         console.error("Error in verify endpoint:", error);
         return NextResponse.json(
