@@ -56,7 +56,8 @@ export async function POST(request: NextRequest) {
                 "https://pay.payphonetodoesposible.com/api/button/V2/Confirm",
                 {
                     id: parseInt(id),
-                    clientTransactionId: clientTransactionId
+                    clientTransactionId: clientTransactionId,
+                    clientTxId: clientTransactionId // Add this to match PayPhone support screenshot
                 },
                 {
                     headers,
