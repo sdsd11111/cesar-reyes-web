@@ -898,7 +898,12 @@ const HotelObjetivoClient = () => {
                                     href={`/pago?amount=700&description=${encodeURIComponent("Plan Pro - Hotel Objetivo")}`}
                                     className="block w-full bg-gray-900 text-white text-center font-bold py-4 px-6 rounded-xl hover:bg-gray-800 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                                 >
-                                    Seleccionar Plan Pro
+                                    <span className="flex flex-col items-center justify-center space-y-1">
+                                        <span className="text-lg">Seleccionar Plan Pro</span>
+                                        <span className="text-xs font-normal opacity-90 max-w-xs leading-tight">
+                                            Adquiere tu paquete, paga de contado o difiere a 3, 6, 9 y 12 meses*
+                                        </span>
+                                    </span>
                                 </Link>
                             </div>
                         </div>
@@ -982,7 +987,12 @@ const HotelObjetivoClient = () => {
                                     href={`/pago?amount=1800&description=${encodeURIComponent("Plan Élite - Hotel Objetivo")}`}
                                     className="block w-full bg-[#FF6B00] text-white text-center font-bold py-4 px-6 rounded-xl hover:bg-[#E66000] transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                                 >
-                                    Seleccionar Plan Élite
+                                    <span className="flex flex-col items-center justify-center space-y-1">
+                                        <span className="text-lg">Seleccionar Plan Élite</span>
+                                        <span className="text-xs font-normal opacity-90 max-w-xs leading-tight">
+                                            Adquiere tu paquete, paga de contado o difiere a 3, 6, 9 y 12 meses*
+                                        </span>
+                                    </span>
                                 </Link>
                             </div>
                         </div>
@@ -1065,14 +1075,19 @@ const HotelObjetivoClient = () => {
                                     href={`/pago?amount=2800&description=${encodeURIComponent("Plan Imperio - Hotel Objetivo")}`}
                                     className="block w-full bg-[#FFD700] text-gray-900 text-center font-bold py-4 px-6 rounded-xl hover:bg-[#F4C430] transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                                 >
-                                    Seleccionar Plan Imperio
+                                    <span className="flex flex-col items-center justify-center space-y-1">
+                                        <span className="text-lg">Seleccionar Plan Imperio</span>
+                                        <span className="text-xs font-normal opacity-90 max-w-xs leading-tight">
+                                            Adquiere tu paquete, paga de contado o difiere a 3, 6, 9 y 12 meses*
+                                        </span>
+                                    </span>
                                 </Link>
                             </div>
                         </div>
-                    </div>
+                    </div >
 
                     {/* TABLA COMPARATIVA */}
-                    <div className="mt-16 max-w-5xl mx-auto">
+                    < div className="mt-16 max-w-5xl mx-auto" >
                         <div className="text-center mb-6">
                             <h3 className="text-xl md:text-2xl font-bold text-gray-900">📊 COMPARACIÓN RÁPIDA</h3>
                         </div>
@@ -1384,13 +1399,13 @@ const HotelObjetivoClient = () => {
                         <p className="text-center text-gray-600 mt-4 text-xs md:text-sm">
                             Todos los planes incluyen: Capacitación personalizada, código fuente 100% tuyo, cero dependencia de nosotros después de la entrega, actualizaciones ilimitadas desde tu celular, sistema de reservas sin comisiones.
                         </p>
-                    </div>
-                </div>
-            </section>
+                    </div >
+                </div >
+            </section >
 
 
             {/* BONUS BOMBAZO */}
-            <section className="py-12 md:py-20 px-4 bg-white">
+            < section className="py-12 md:py-20 px-4 bg-white" >
                 <div className="max-w-5xl mx-auto">
                     <div className="bg-gray-900 text-white rounded-2xl md:rounded-3xl p-5 md:p-12 shadow-2xl relative overflow-hidden">
                         <div className="absolute top-0 right-0 bg-[#FFD700] text-gray-900 font-bold px-2 md:px-6 py-1 md:py-2 rounded-bl-xl shadow-lg text-[9px] md:text-sm">
@@ -1428,12 +1443,12 @@ const HotelObjetivoClient = () => {
                         </p>
                     </div>
                 </div>
-            </section>
+            </section >
 
 
 
             {/* SECCIÓN 10: PREGUNTAS FRECUENTES (OBJECIONES) */}
-            <section className="py-20 px-4 bg-gray-50">
+            < section className="py-20 px-4 bg-gray-50" >
                 <div className="max-w-4xl mx-auto">
                     <div className="text-center mb-12">
                         <h2 className="text-3xl md:text-4xl font-bold font-montserrat text-gray-900 mb-4">
@@ -1512,10 +1527,10 @@ const HotelObjetivoClient = () => {
                         </AccordionItem>
                     </Accordion>
                 </div>
-            </section>
+            </section >
 
             {/* CTA FINAL */}
-            <section id="formulario" className="py-20 px-4 bg-gradient-to-r from-gray-900 to-black text-white">
+            < section id="formulario" className="py-20 px-4 bg-gradient-to-r from-gray-900 to-black text-white" >
                 <div className="max-w-6xl mx-auto">
                     <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">Comienza Tu Transformación Digital Hoy</h2>
 
@@ -1779,10 +1794,10 @@ const HotelObjetivoClient = () => {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section >
 
             {/* Cross-link to MenuObjetivo */}
-            <section className="py-16 px-4 bg-gradient-to-br from-orange-50 to-white border-t border-gray-200">
+            < section className="py-16 px-4 bg-gradient-to-br from-orange-50 to-white border-t border-gray-200" >
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-montserrat">
                         ¿También tienes un <span className="text-[#FF6B00]">Restaurante</span>?
@@ -1799,8 +1814,8 @@ const HotelObjetivoClient = () => {
                     </a>
                     <p className="text-sm text-gray-500 mt-4">Sin comisiones por pedido · Actualizable desde tu celular</p>
                 </div>
-            </section>
-        </div>
+            </section >
+        </div >
     );
 };
 

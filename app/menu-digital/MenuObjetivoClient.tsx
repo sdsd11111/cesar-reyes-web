@@ -575,7 +575,12 @@ const MenuObjetivoClient = () => {
                                     href={`/pago?amount=250&description=${encodeURIComponent("Plan Emprendedor - Menú Digital")}`}
                                     className="block w-full bg-gray-900 text-white text-center font-bold py-3 px-6 rounded-lg hover:bg-[#FF6B00] transition-colors"
                                 >
-                                    Elegir Plan
+                                    <span className="flex flex-col items-center justify-center space-y-1">
+                                        <span className="text-lg">Elegir Plan</span>
+                                        <span className="text-xs font-normal opacity-90 max-w-xs leading-tight">
+                                            Adquiere tu paquete, paga de contado o difiere a 3, 6, 9 y 12 meses*
+                                        </span>
+                                    </span>
                                 </Link>
                             </div>
                         </div>
@@ -630,7 +635,12 @@ const MenuObjetivoClient = () => {
                                     href={`/pago?amount=500&description=${encodeURIComponent("Plan Crecimiento - Menú Digital")}`}
                                     className="block w-full bg-[#FF6B00] text-white text-center font-bold py-3 px-6 rounded-lg hover:bg-[#E66000] transition-colors shadow-lg"
                                 >
-                                    Elegir Plan
+                                    <span className="flex flex-col items-center justify-center space-y-1">
+                                        <span className="text-lg">Elegir Plan</span>
+                                        <span className="text-xs font-normal opacity-90 max-w-xs leading-tight">
+                                            Adquiere tu paquete, paga de contado o difiere a 3, 6, 9 y 12 meses*
+                                        </span>
+                                    </span>
                                 </Link>
                             </div>
                         </div>
@@ -686,7 +696,12 @@ const MenuObjetivoClient = () => {
                                     href={`/pago?amount=700&description=${encodeURIComponent("Plan Pro - Menú Digital")}`}
                                     className="block w-full bg-gray-900 text-white text-center font-bold py-3 px-6 rounded-lg hover:bg-[#FF6B00] transition-colors"
                                 >
-                                    Elegir Plan
+                                    <span className="flex flex-col items-center justify-center space-y-1">
+                                        <span className="text-lg">Elegir Plan</span>
+                                        <span className="text-xs font-normal opacity-90 max-w-xs leading-tight">
+                                            Adquiere tu paquete, paga de contado o difiere a 3, 6, 9 y 12 meses*
+                                        </span>
+                                    </span>
                                 </Link>
                             </div>
                         </div>
@@ -746,11 +761,16 @@ const MenuObjetivoClient = () => {
                                     href={`/pago?amount=1000&description=${encodeURIComponent("Plan Posicionamiento - Menú Digital")}`}
                                     className="block w-full bg-gray-900 text-white text-center font-bold py-3 px-6 rounded-lg hover:bg-[#FF6B00] transition-colors"
                                 >
-                                    Elegir Plan
+                                    <span className="flex flex-col items-center justify-center space-y-1">
+                                        <span className="text-lg">Elegir Plan</span>
+                                        <span className="text-xs font-normal opacity-90 max-w-xs leading-tight">
+                                            Adquiere tu paquete, paga de contado o difiere a 3, 6, 9 y 12 meses*
+                                        </span>
+                                    </span>
                                 </Link>
                             </div>
-                        </div>
-                    </div>
+                        </div >
+                    </div >
                 </div>
             </section>
 
@@ -842,29 +862,29 @@ const MenuObjetivoClient = () => {
                         </a>
                     </div>
                 </div>
-            </section>
+            </section >
 
             {/* Section 5: Transformation + Social Proof */}
-            <section className="py-20 px-4 bg-[#F9F9F9]">
+            < section className="py-20 px-4 bg-[#F9F9F9]" >
                 <div className="text-center max-w-4xl mx-auto">
                     <h2 className="text-3xl md:text-4xl font-bold text-[#2B2B2B] font-montserrat">
                         No es magia, son <span className="text-[#00C4A7]">resultados.</span>
                     </h2>
                 </div>
-            </section>
+            </section >
 
             {/* Section 6: FAQs */}
-            <section className="py-20 px-4 bg-gray-50">
+            < section className="py-20 px-4 bg-gray-50" >
                 <div className="max-w-6xl mx-auto">
                     <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-[#2B2B2B] font-montserrat">
                         {faqData.h2}
                     </h2>
                     <FAQSection h2={faqData.h2} questions={faqData.questions} />
                 </div>
-            </section>
+            </section >
 
             {/* Section 7: Final Close - Reservation Form */}
-            <section id="formulario" className="py-16 bg-gradient-to-r from-orange-500 to-orange-600 text-white">
+            < section id="formulario" className="py-16 bg-gradient-to-r from-orange-500 to-orange-600 text-white" >
                 <div className="container mx-auto px-4">
                     <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">No seas el último en modernizarte</h2>
 
