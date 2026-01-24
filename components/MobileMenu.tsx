@@ -190,6 +190,19 @@ export default function MobileMenu({
             Blog
           </Link>
 
+          <Link
+            href="/sistema-de-contabilidad"
+            className="block py-4 px-4 text-gray-800 active:bg-gray-50 rounded-lg font-medium border border-gray-100 transition-colors touch-manipulation"
+            onClick={onClose}
+            style={{
+              minHeight: '48px',
+              display: 'flex',
+              alignItems: 'center'
+            }}
+          >
+            Control Financiero
+          </Link>
+
           <div className="border border-gray-100 rounded-lg overflow-hidden">
             <button
               onClick={toggleServicesMenu}

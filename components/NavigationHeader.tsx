@@ -241,6 +241,18 @@ export default function NavigationHeader({ currentPath }: NavigationHeaderProps)
             >
               Blog
             </Link>
+            <Link
+              href="/sistema-de-contabilidad"
+              className={`font-medium px-3 py-2 rounded-md hover:opacity-80 transition-opacity ${textColor}`}
+              style={{
+                minHeight: '40px',
+                display: 'flex',
+                alignItems: 'center',
+                textShadow: textShadow,
+              }}
+            >
+              Control Financiero
+            </Link>
             <MegaMenu
               categorias={categorias.filter(cat => ["cat1", "cat2", "cat3"].includes(cat.id))}
               isBlogArticle={isBlogPage}
