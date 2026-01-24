@@ -284,6 +284,10 @@ export default function CarnavalesClient() {
                     <div className="w-2 h-2 rounded-full bg-white"></div>
                     <p className="text-lg">Paga con tarjeta o transferencia</p>
                   </div>
+                  <div className="flex items-center gap-3 mt-4 bg-white px-4 py-2 rounded-xl shadow-lg w-fit transform -rotate-1">
+                    <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
+                    <p className="text-lg font-bold text-orange-600">Entrega en 2 o 3 días</p>
+                  </div>
                 </div>
               </div>
 
