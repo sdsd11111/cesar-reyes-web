@@ -1,0 +1,76 @@
+﻿'use client';
+
+import { useState, useEffect } from 'react';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination, Navigation } from 'swiper/modules';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import { Check, ArrowRight, ChevronRight, ChevronDown, CalendarDays } from 'lucide-react';
+
+export default function ViralidadEstrategica() {
+  const [activeTab, setActiveTab] = useState('google-maps');
+  const [faqOpen, setFaqOpen] = useState<Record<number, boolean>>({ 0: false, 1: false, 2: false });
+  const [showMore, setShowMore] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [showFullText, setShowFullText] = useState(false);
+
+  // Ensure Google Maps tab is always shown by default on mount
+  useEffect(() => {
+    setActiveTab('google-maps');
+  }, []);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
+
+  // Smooth scroll for anchor links
+  useEffect(() => {
+    const handleSmoothScroll = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.matches('a[href^="#"]')) {
+        e.preventDefault();
+        const targetId = target.getAttribute('href');
+        if (!targetId || targetId === '#') return;
+
+        // Aseguramos que targetId es string
+        const selector = targetId as string;
+
+        try {
+          const targetElement = document.querySelector(selector);
+          if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth' });
+          }
+        } catch (error) {
+          console.error('Error al hacer scroll:', error);
+        }
+      }
+    };
+
+    document.addEventListener('click', handleSmoothScroll);
+    return () => document.removeEventListener('click', handleSmoothScroll);
+  }, []);
+
+  const toggleFaq = (id: number) => {
+    setFaqOpen(prev => ({
+      ...prev,
+      [id]: !prev[id]
+    }));
+  };
+
+  return (
+    <div className="min-h-screen flex flex-col">
+      {/* PLACEHOLDER - User needs to paste the full code here */}
+      <section className="py-20 text-center">
+        <h1 className="text-4xl font-bold">Viralidad Estratégica</h1>
+        <p className="mt-4">Por favor, pega el código completo que te proporcioné en este archivo.</p>
+      </section>
+    </div>
+  );
+}
