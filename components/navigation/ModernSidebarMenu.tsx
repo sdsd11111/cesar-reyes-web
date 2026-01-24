@@ -9,6 +9,8 @@ import {
     Instagram, Linkedin, Facebook, ArrowUpRight, Youtube
 } from "lucide-react";
 import React from "react";
+import serviciosData from "@/data/servicios.json";
+
 
 // Mapeo de imágenes para cada sección
 const menuItems = [
@@ -47,11 +49,20 @@ const menuItems = [
         href: "/servicios",
         image: "/images/estrategia_objetivo.webp",
         subtitle: "Consultoría y desarrollo",
-        subitems: [
-            { title: "Análisis Estratégico", href: "/analisis-estrategico" },
-            { title: "Desarrollo Web", href: "/desarrollo-web" },
-            { title: "Posicionamiento", href: "/posicionamiento" },
-        ]
+        subitems: serviciosData.categorias
+            .filter(cat => ["posicionamiento", "desarrollo-web", "analisis-estrategico"].includes(cat.slug))
+            .sort((a, b) => {
+                const order = ["analisis-estrategico", "desarrollo-web", "posicionamiento"];
+                return order.indexOf(a.slug) - order.indexOf(b.slug);
+            })
+            .map(cat => ({
+                title: cat.titulo,
+                href: `/${cat.slug}`,
+                subitems: cat.servicios.map(serv => ({
+                    title: serv.titulo,
+                    href: `/${cat.slug}/${serv.slug}`
+                }))
+            }))
     },
     {
         title: "+ Páginas",
@@ -198,14 +209,31 @@ export default function ModernSidebarMenu() {
                                                 ${expandedItems.includes(item.title) ? 'h-auto opacity-100' : 'h-0 opacity-0 group-hover:h-auto group-hover:opacity-100'}
                                             `}>
                                                 <ul className="pl-4 md:pl-12 mt-4 space-y-2 mb-6 border-l border-white/10 ml-5">
-                                                    {item.subitems.map((sub) => (
-                                                        <li key={sub.title}>
+                                                    {item.subitems.map((sub: any) => (
+                                                        <li key={sub.title} className="group/sub relative">
                                                             <Link
                                                                 href={sub.href}
                                                                 className="text-gray-400 hover:text-[#FF6B00] text-sm md:text-base font-light tracking-wide transition-colors block py-0.5 hover:translate-x-1 duration-300"
                                                             >
                                                                 {sub.title}
                                                             </Link>
+                                                            {/* Nivel 3: Servicios Específicos */}
+                                                            {sub.subitems && (
+                                                                <div className="h-0 opacity-0 group-hover/sub:h-auto group-hover/sub:opacity-100 overflow-hidden transition-all duration-300 ml-4">
+                                                                    <ul className="border-l border-white/10 pl-4 mt-2 space-y-1">
+                                                                        {sub.subitems.map((subSub: any) => (
+                                                                            <li key={subSub.title}>
+                                                                                <Link
+                                                                                    href={subSub.href}
+                                                                                    className="text-gray-500 hover:text-[#FF6B00] text-xs font-light tracking-wide transition-colors block py-0.5"
+                                                                                >
+                                                                                    {subSub.title}
+                                                                                </Link>
+                                                                            </li>
+                                                                        ))}
+                                                                    </ul>
+                                                                </div>
+                                                            )}
                                                         </li>
                                                     ))}
                                                 </ul>
