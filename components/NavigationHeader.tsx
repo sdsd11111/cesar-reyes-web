@@ -181,23 +181,8 @@ export default function NavigationHeader({ currentPath }: NavigationHeaderProps)
         {/* Navegación de escritorio */}
         <div className="hidden md:flex items-center space-x-6">
           <nav className="flex items-center space-x-6">
-            {pathname !== '/' && (
-              <Link
-                key="inicio"
-                href="/"
-                className={`font-medium px-3 py-2 rounded-md hover:bg-opacity-20 hover:bg-gray-300 transition-colors ${textColor}`}
-                style={{
-                  minHeight: '40px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  textShadow: textShadow,
-                }}
-              >
-                Inicio
-              </Link>
-            )}
             <Link
-              href="/sobre-mi"
+              href="/"
               className={`font-medium px-3 py-2 rounded-md hover:opacity-80 transition-opacity ${textColor}`}
               style={{
                 minHeight: '40px',
@@ -206,14 +191,44 @@ export default function NavigationHeader({ currentPath }: NavigationHeaderProps)
                 textShadow: textShadow,
               }}
             >
-              Sobre Mí
+              Inicio
             </Link>
-            <MegaMenu
-              categorias={categorias}
-              isBlogArticle={isBlogPage}
-              textColor={textColor}
-              textShadow={textShadow}
-            />
+            <Link
+              href="/menu-digital"
+              className={`font-medium px-3 py-2 rounded-md hover:opacity-80 transition-opacity ${textColor}`}
+              style={{
+                minHeight: '40px',
+                display: 'flex',
+                alignItems: 'center',
+                textShadow: textShadow,
+              }}
+            >
+              Menú Digital
+            </Link>
+            <Link
+              href="/motor-reservas-hotel"
+              className={`font-medium px-3 py-2 rounded-md hover:opacity-80 transition-opacity ${textColor}`}
+              style={{
+                minHeight: '40px',
+                display: 'flex',
+                alignItems: 'center',
+                textShadow: textShadow,
+              }}
+            >
+              Motor de Reservas
+            </Link>
+            <Link
+              href="/carnavales-2026"
+              className={`font-medium px-3 py-2 rounded-md hover:opacity-80 transition-opacity ${textColor}`}
+              style={{
+                minHeight: '40px',
+                display: 'flex',
+                alignItems: 'center',
+                textShadow: textShadow,
+              }}
+            >
+              Promo Carnavales 2026
+            </Link>
             <Link
               href="/blog"
               className={`font-medium px-3 py-2 rounded-md hover:opacity-80 transition-opacity ${textColor}`}
@@ -226,16 +241,24 @@ export default function NavigationHeader({ currentPath }: NavigationHeaderProps)
             >
               Blog
             </Link>
+            <MegaMenu
+              categorias={categorias.filter(cat => ["cat1", "cat2", "cat3"].includes(cat.id))}
+              isBlogArticle={isBlogPage}
+              textColor={textColor}
+              textShadow={textShadow}
+              label="Servicios"
+            />
             <Link
-              href="/menu-digital"
-              className="bg-[#FF6B00] text-white px-4 py-2.5 rounded-md text-sm font-semibold hover:bg-[#E66000] transition-colors shadow-md"
+              href="#"
+              className={`font-medium px-3 py-2 rounded-md hover:opacity-80 transition-opacity ${textColor}`}
               style={{
                 minHeight: '40px',
                 display: 'flex',
                 alignItems: 'center',
+                textShadow: textShadow,
               }}
             >
-              Menú Objetivo
+              + Páginas
             </Link>
           </nav>
         </div>

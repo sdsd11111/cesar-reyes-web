@@ -80,10 +80,78 @@ export async function POST(request: Request) {
       console.log('=== ATTEMPTING TO SEND EMAIL ===');
       console.log('Campaign:', campaign);
 
-      let mailOptions;
+      let mailOptions: any = {
+        from: process.env.EMAIL_FROM || 'negocios@cesarreyesjaramillo.com',
+        to: email,
+        subject: 'Confirmación de Solicitud - César Reyes',
+        html: `<p>Hola ${nombre}, hemos recibido tu solicitud.</p>`
+      };
 
       // === CAMPAIGN LOGIC ===
-      if (campaign === 'Carnavales 2026') {
+      if (campaign === 'sistema-de-contabilidad') {
+        // Plantilla SISTEMA DE CONTABILIDAD
+        mailOptions = {
+          from: process.env.EMAIL_FROM || 'negocios@cesarreyesjaramillo.com',
+          to: email,
+          subject: '📊 Solicitud Recibida — Control Financiero para Hosterías',
+          html: `
+              <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #333; line-height: 1.6;">
+                
+                <!-- Header Image -->
+                <div style="text-align: center; margin-bottom: 20px;">
+                   <img src="https://www.cesarreyesjaramillo.com/images/sistema-contabilidad/hero-dashboard.jpeg" alt="Control Financiero" style="max-width: 100%; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                </div>
+
+                <h1 style="text-align: center; color: #e78c23; font-size: 24px; border-bottom: 2px solid #e78c23; padding-bottom: 15px; text-transform: uppercase;">
+                  CONTROL FINANCIERO - REINGENIERÍA
+                </h1>
+                
+                <p>Hola <strong>${nombre}</strong>,</p>
+                
+                <p>¡Gracias por tu interés en profesionalizar el control de tu hostería! 📈</p>
+                
+                <p>Hemos recibido correctamente tu solicitud para el <strong>Módulo de Control Financiero Local</strong>.</p>
+                
+                <div style="background-color: #FFF9F2; padding: 15px; border-left: 4px solid #e78c23; margin: 25px 0;">
+                  <h3 style="color: #e78c23; margin-top: 0;">🚀 Siguientes pasos</h3>
+                  <p>César o alguien de su equipo se pondrá en contacto contigo en las próximas <strong>24 horas</strong> para:</p>
+                  <ul style="padding-left: 20px;">
+                    <li>✅ Realizar un breve diagnóstico de tus necesidades.</li>
+                    <li>✅ Mostrarte una demo en vivo del Dashboard para Hosterías.</li>
+                    <li>✅ Explicarte el proceso de instalación local y capacitación.</li>
+                  </ul>
+                </div>
+                
+                <div style="background-color: #f8fafc; border-radius: 8px; padding: 20px; margin: 25px 0; border: 1px solid #e2e8f0;">
+                  <h3 style="margin-top: 0; color: #1e293b;">📋 Resumen de tu contacto:</h3>
+                  <ul style="list-style: none; padding: 0; line-height: 1.8;">
+                    <li><strong>Nombre:</strong> ${nombre}</li>
+                    <li><strong>Email:</strong> ${email}</li>
+                    <li><strong>WhatsApp:</strong> ${telefono}</li>
+                    <li><strong>Servicio:</strong> Módulo de Control Financiero</li>
+                  </ul>
+                </div>
+                
+                <div style="text-align: center; margin: 30px 0;">
+                  <h3>❓ ¿Quieres agilizar el proceso?</h3>
+                  <p>Puedes escribirnos directamente indicando tu nombre:</p>
+                  <a href="https://wa.me/593963410409?text=Hola%20C%C3%A9sar,%20acabo%20de%20solicitar%20info%20sobre%20el%20sistema%20de%20contabilidad" 
+                     style="background-color: #25D366; color: white; padding: 12px 25px; text-decoration: none; border-radius: 50px; font-weight: bold; font-size: 16px;">
+                    Chatear por WhatsApp
+                  </a>
+                </div>
+                
+                <hr style="border: 0; border-top: 1px solid #eee; margin: 30px 0;">
+                
+                <div style="text-align: center; color: #666; font-size: 14px;">
+                  <p style="font-weight: bold; color: #333;">César Reyes</p>
+                  <p style="color: #e78c23;">Reingeniería Digital | Hotel Objetivo</p>
+                  <p><a href="https://www.cesarreyesjaramillo.com" style="color: #666;">www.cesarreyesjaramillo.com</a></p>
+                </div>
+              </div>
+            `
+        };
+      } else if (campaign === 'Carnavales 2026') {
         // Plantilla CARNAVALES 2026
         const websiteLink = (data: any) => data.website ? `<li><strong>Sitio Web:</strong> ${data.website}</li>` : '';
         const datosCaptura = (data: any) => data.datos_captura ? `<li><strong>Datos a capturar:</strong> ${data.datos_captura}</li>` : '';
@@ -230,7 +298,9 @@ export async function POST(request: Request) {
       console.log('Sending email with nodemailer...');
       const info = await transporter.sendMail(mailOptions);
       console.log('✅ Email sent successfully!');
-      console.log('Message ID:', info.messageId);
+      if (info && typeof info === 'object' && 'messageId' in info) {
+        console.log('Message ID:', info.messageId);
+      }
 
     } catch (emailError: any) {
       console.error('=== EMAIL ERROR ===');

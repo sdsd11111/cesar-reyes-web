@@ -19,62 +19,22 @@ const menuItems = [
         subtitle: "Volver al inicio"
     },
     {
-        title: "Análisis Estratégico",
-        href: "/analisis-estrategico",
-        image: "/images/estrategia_objetivo.webp",
-        subtitle: "Consultoría y estudios de mercado",
-        subitems: [
-            { title: "Análisis de Competencia", href: "/analisis-estrategico/analisis-competencia" },
-            { title: "Consultoría Empresarial", href: "/analisis-estrategico/consultoria-empresarial" },
-            { title: "Estrategia Ganar Clientes", href: "/analisis-estrategico/estrategia-ganar-clientes" },
-            { title: "Estudio de Factibilidad", href: "/analisis-estrategico/estudio-factibilidad" },
-            { title: "Plan Salir en Google", href: "/analisis-estrategico/plan-salir-google" },
-            { title: "Reingeniería de Procesos", href: "/analisis-estrategico/reingenieria-procesos" },
-        ]
-    },
-    {
-        title: "Desarrollo Web",
-        href: "/desarrollo-web",
-        image: "/images/Diseño Web.webp",
-        subtitle: "Sitios web de alto impacto",
-        subitems: [
-            { title: "Go 2025", href: "/desarrollo-web/go-2025" },
-            { title: "Tarjeta Digital", href: "/desarrollo-web/tarjeta-digital" },
-            { title: "Tu Contacto Profesional", href: "/desarrollo-web/tu-contacto-profesional" },
-            { title: "Tu Empresa Online", href: "/desarrollo-web/tu-empresa-online" },
-            { title: "Tu Negocio 24/7", href: "/desarrollo-web/tu-negocio-24-7" },
-            { title: "Tu Sucursal Online", href: "/desarrollo-web/tu-sucursal-online" },
-        ]
-    },
-    {
-        title: "Posicionamiento",
-        href: "/posicionamiento",
-        image: "/images/posicionamiento_slide_seo_objetivo.webp",
-        subtitle: "SEO y Estrategia Digital",
-        subitems: [
-            { title: "Alianza Exclusiva", href: "/posicionamiento/alianza-exclusiva" },
-            { title: "Auditoría SEO", href: "/posicionamiento/auditoria-seo-rediseno" },
-            { title: "Plan Salir en Google", href: "/posicionamiento/plan-salir-google" },
-        ]
-    },
-    {
-        title: "Menú Objetivo",
+        title: "Menú Digital",
         href: "/menu-digital",
         image: "/images/spot-corporativo.webp",
-        subtitle: "Servicios especializados",
-        subitems: [
-            { title: "Zona Gamer", href: "/menu-digital/zona-gamer-personalizada" },
-            { title: "Viralidad Estratégica", href: "/menu-digital/viralidad-estrategica" },
-            { title: "Maestro Estrellas A", href: "/menu-digital/maestro-de-las-estrellas-a" },
-            { title: "TV Premium", href: "/menu-digital/tv-premium" },
-            { title: "Spot Corporativo", href: "/menu-digital/spot-corporativo" },
-        ]
+        subtitle: "Servicios especializados"
     },
     {
-        title: "Hotel Objetivo",
+        title: "Motor de Reservas",
         href: "/motor-reservas-hotel",
         image: "/images/hotel-objetivo/hero.png",
         subtitle: "Soluciones para hoteles"
+    },
+    {
+        title: "Promo Carnavales 2026",
+        href: "/carnavales-2026",
+        image: "/images/portada_cesarbn.webp", // Sugerencia de imagen por defecto
+        subtitle: "Vive el carnaval con nosotros"
     },
     {
         title: "Blog",
@@ -83,12 +43,24 @@ const menuItems = [
         subtitle: "Noticias y artículos recientes"
     },
     {
+        title: "Servicios",
+        href: "/servicios",
+        image: "/images/estrategia_objetivo.webp",
+        subtitle: "Consultoría y desarrollo",
+        subitems: [
+            { title: "Análisis Estratégico", href: "/analisis-estrategico" },
+            { title: "Desarrollo Web", href: "/desarrollo-web" },
+            { title: "Posicionamiento", href: "/posicionamiento" },
+        ]
+    },
+    {
         title: "+ Páginas",
         href: "#",
         image: "/images/portada_cesarbn.webp",
         subtitle: "Más información",
         subitems: [
             { title: "Sobre Mí", href: "/sobre-mi" },
+            { title: "Control Financiero", href: "/sistema-de-contabilidad" },
             { title: "Mensajería", href: "/mensajeria" },
             { title: "Mensajería Objetivo", href: "/mensajeria-objetivo" },
             { title: "Reto de 7 Días", href: "/reto-de-7-dias" },

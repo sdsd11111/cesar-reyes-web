@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control Financiero para Hosterías | César Reyes Jaramillo</title>
+    <meta name="description" content="Recupera 12 horas de tu mes y olvida las facturas perdidas. Sistema financiero local para pequeñas hosterías y hoteles en Ecuador.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="bg-white text-slate-900 font-['Plus_Jakarta_Sans'] antialiased">
+
+    <!-- Navigation -->
+    <header class="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b border-slate-100">
+        <nav class="container mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-[#1A365D] rounded-lg flex items-center justify-center text-white font-bold text-xl">C</div>
+                <div class="flex flex-col">
+                    <span class="font-bold text-[#1A365D] leading-none tracking-tight text-lg">César Reyes Jaramillo</span>
+                    <span class="text-[10px] uppercase tracking-widest text-[#2B6CB0] font-bold">Reingeniería Digital</span>
+                </div>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#beneficios" class="text-sm font-semibold text-slate-600 hover:text-[#2B6CB0] transition-colors">Beneficios</a>
+                <a href="#dashboard" class="text-sm font-semibold text-slate-600 hover:text-[#2B6CB0] transition-colors">Mando</a>
+                <a href="#roi" class="text-sm font-semibold text-slate-600 hover:text-[#2B6CB0] transition-colors">ROI</a>
+                <a href="#precio" class="text-sm font-semibold text-slate-600 hover:text-[#2B6CB0] transition-colors">Inversión</a>
+                <a href="https://wa.me/593963410409" target="_blank" class="bg-[#2B6CB0] text-white px-6 py-3 rounded-full text-sm font-bold hover:bg-[#1A365D] transition-all shadow-lg active:scale-95">
+                    Cotizar por WhatsApp
+                </a>
+            </div>
+
+            <button class="md:hidden text-[#1A365D]" id="menuToggle">
+                <i data-lucide="menu"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-gradient-to-b from-blue-50/50 to-white">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="lg:w-1/2 space-y-8 reveal">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-100 text-[#2B6CB0] text-xs font-extrabold uppercase tracking-widest">
+                        <i data-lucide="shield-check" class="w-4 h-4"></i> Especializado en Hotelería
+                    </div>
+                    <h1 class="text-5xl lg:text-7xl font-extrabold text-[#1A365D] leading-[1.05] tracking-tight">
+                        Vas a olvidarte de las <span class="text-[#2B6CB0]">facturas perdidas</span> en el celular
+                    </h1>
+                    <p class="text-xl text-slate-600 leading-relaxed max-w-xl">
+                        Recupera <span class="font-bold text-slate-900">12 horas de tu mes</span>. Un sistema diseñado para <span class="underline decoration-[#2B6CB0] underline-offset-4">Hosterías, Hostales y Pequeños Hoteles</span> que buscan control total sin mensualidades.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                        <a href="https://wa.me/593963410409" class="flex items-center justify-center gap-3 bg-[#2B6CB0] text-white px-8 py-5 rounded-2xl text-lg font-bold hover:bg-[#1A365D] transition-all shadow-2xl hover:-translate-y-1">
+                            <i data-lucide="message-circle" class="w-6 h-6"></i>
+                            Cotizar por WhatsApp
+                        </a>
+                        <div class="flex items-center gap-4 px-4">
+                            <div class="flex -space-x-3">
+                                <img src="https://cesarreyesjaramillo.com/_next/image?url=%2Fimages%2Flogos%2Fenloja.webp&w=128&q=75" class="w-10 h-10 rounded-full border-2 border-white bg-white object-contain" alt="Ref 1">
+                                <img src="https://cesarreyesjaramillo.com/_next/image?url=%2Fimages%2Flogos%2Flossartenes.webp&w=128&q=75" class="w-10 h-10 rounded-full border-2 border-white bg-white object-contain" alt="Ref 2">
+                                <div class="w-10 h-10 rounded-full bg-[#1A365D] border-2 border-white flex items-center justify-center text-[10px] text-white font-bold">+15</div>
+                            </div>
+                            <span class="text-sm font-medium text-slate-500">Confían en nuestra reingeniería</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-1/2 relative reveal">
+                    <div class="absolute -top-12 -right-12 w-72 h-72 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+                    <div class="relative z-10 rounded-3xl shadow-[0_32px_64px_-16px_rgba(26,54,93,0.2)] border border-slate-100 overflow-hidden bg-white">
+                        <img src="https://r2-bucket.flowith.net/f/77d6ca4352cbd9b8/financial_dashboard_hero_image_index_0%402752x1536.jpeg" alt="Dashboard Hero" class="w-full h-auto transform transition hover:scale-105 duration-1000">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Center of Command Section -->
+    <section id="dashboard" class="py-24 bg-[#1A365D] overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20 reveal">
+                <h2 class="text-3xl lg:text-5xl font-bold text-white mb-6 tracking-tight">Tu centro de mando financiero</h2>
+                <p class="text-blue-200 text-lg max-w-2xl mx-auto">Toda la rentabilidad de tu hostería en una sola pantalla. Local, rápido y privado.</p>
+            </div>
+            
+            <div class="relative reveal-parallax">
+                <div class="relative z-10 max-w-5xl mx-auto rounded-2xl shadow-2xl border border-white/10 overflow-hidden">
+                    <img src="https://r2-bucket.flowith.net/f/14b37cd55d895237/financial_control_dashboard_mockup_index_0%404096x2286.jpeg" alt="Mando Financiero Dashboard" class="w-full h-auto">
+                </div>
+                <!-- Decorative background light -->
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-blue-600/20 blur-[120px] rounded-full -z-0"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROI Section -->
+    <section id="roi" class="py-32 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-center gap-20">
+                <div class="lg:w-1/2 reveal">
+                    <h2 class="text-4xl lg:text-5xl font-bold text-[#1A365D] mb-8 leading-tight">El sistema se paga solo en <span class="text-[#2B6CB0]">4 meses</span></h2>
+                    <p class="text-lg text-slate-600 mb-10 leading-relaxed">
+                        No es un gasto, es una inversión en tu tiempo. Mientras otros pierden horas en cuadernos, tú tienes el control en un clic.
+                    </p>
+                    
+                    <div class="space-y-6" id="roi-visual">
+                        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 flex items-center justify-between">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-blue-100 text-[#2B6CB0] rounded-xl flex items-center justify-center">
+                                    <i data-lucide="clock" class="w-6 h-6"></i>
+                                </div>
+                                <span class="font-bold text-slate-700">Tiempo ahorrado/mes</span>
+                            </div>
+                            <span class="text-2xl font-black text-[#1A365D]">12 Horas</span>
+                        </div>
+                        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 flex items-center justify-between">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center">
+                                    <i data-lucide="trending-up" class="w-6 h-6"></i>
+                                </div>
+                                <span class="font-bold text-slate-700">Ahorro mensual est.</span>
+                            </div>
+                            <span class="text-2xl font-black text-emerald-600">~$180</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2 reveal">
+                    <div class="p-8 lg:p-12 rounded-[2.5rem] bg-[#f8fafc] border border-slate-200 relative overflow-hidden">
+                        <div class="relative z-10">
+                            <h3 class="text-xl font-bold text-[#1A365D] mb-6">Comparativa de Inversión</h3>
+                            <div class="space-y-8">
+                                <div>
+                                    <div class="flex justify-between text-sm font-bold mb-2">
+                                        <span class="text-slate-500">Inversión Única</span>
+                                        <span class="text-[#1A365D]">$800</span>
+                                    </div>
+                                    <div class="w-full bg-slate-200 h-3 rounded-full">
+                                        <div class="bg-[#2B6CB0] h-3 rounded-full w-full"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm font-bold mb-2">
+                                        <span class="text-slate-500">Software Genérico (18 meses)</span>
+                                        <span class="text-red-500">+$1,200</span>
+                                    </div>
+                                    <div class="w-full bg-slate-200 h-3 rounded-full">
+                                        <div class="bg-red-400 h-3 rounded-full w-[80%]"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-10 pt-8 border-t border-slate-200 text-center">
+                                <p class="text-[#2B6CB0] font-bold text-lg italic">"A partir del mes 5, todo es ganancia neta para tu hostería"</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Transparency Section -->
+    <section class="py-24 bg-slate-50/80">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <div class="text-center mb-12 reveal">
+                <h2 class="text-3xl font-bold text-[#1A365D] mb-4">¿Es esto para ti?</h2>
+                <p class="text-slate-500">Queremos trabajar con clientes que realmente se beneficien de nuestra solución.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 reveal">
+                <div class="space-y-6">
+                    <h4 class="text-emerald-600 font-bold flex items-center gap-2">
+                        <i data-lucide="check-circle-2"></i> ES PARA TI SI:
+                    </h4>
+                    <ul class="space-y-4 text-slate-600 text-sm font-medium">
+                        <li class="flex gap-3"><span>•</span> Tienes hasta 20 habitaciones.</li>
+                        <li class="flex gap-3"><span>•</span> Buscas simplicidad ante todo.</li>
+                        <li class="flex gap-3"><span>•</span> Quieres ser dueño de tus datos (local).</li>
+                        <li class="flex gap-3"><span>•</span> El internet en tu zona no es 100% fiable.</li>
+                    </ul>
+                </div>
+                <div class="space-y-6 p-8 bg-white rounded-3xl border border-slate-100 shadow-sm">
+                    <h4 class="text-red-500 font-bold flex items-center gap-2">
+                        <i data-lucide="alert-triangle"></i> NO ES PARA TI SI:
+                    </h4>
+                    <ul class="space-y-4 text-slate-400 text-sm font-medium">
+                        <li class="flex gap-3"><span>•</span> Necesitas facturación electrónica SRI integrada.</li>
+                        <li class="flex gap-3"><span>•</span> Requieres contabilidad profesional multisucursal.</li>
+                        <li class="flex gap-3"><span>•</span> Buscas un ERP corporativo complejo.</li>
+                        <li class="flex gap-3"><span>•</span> Necesitas apps móviles nativas.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing & Bonuses -->
+    <section id="precio" class="py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-6xl mx-auto">
+                <div class="bg-white rounded-[3rem] border border-slate-200 shadow-2xl overflow-hidden reveal">
+                    <div class="flex flex-col lg:flex-row">
+                        <div class="lg:w-[60%] p-8 lg:p-16">
+                            <h2 class="text-4xl font-extrabold text-[#1A365D] mb-8 leading-tight">Módulo de Control Financiero</h2>
+                            <div class="grid sm:grid-cols-2 gap-6 mb-12">
+                                <div class="flex items-start gap-3">
+                                    <i data-lucide="monitor" class="text-[#2B6CB0] w-5 h-5 mt-1"></i>
+                                    <p class="text-slate-600 font-medium">Instalación local (PC/Mac/Linux)</p>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <i data-lucide="cloud-off" class="text-[#2B6CB0] w-5 h-5 mt-1"></i>
+                                    <p class="text-slate-600 font-medium">Funciona 100% sin internet</p>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <i data-lucide="file-code" class="text-[#2B6CB0] w-5 h-5 mt-1"></i>
+                                    <p class="text-slate-600 font-medium">Incluye Código Fuente</p>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <i data-lucide="users" class="text-[#2B6CB0] w-5 h-5 mt-1"></i>
+                                    <p class="text-slate-600 font-medium">Capacitación incluida (1.5h)</p>
+                                </div>
+                            </div>
+                            
+                            <h5 class="text-xs font-black text-slate-400 uppercase tracking-[0.2em] mb-6">BONOS EXCLUSIVOS ESTE MES</h5>
+                            <div class="grid gap-4">
+                                <div class="p-4 rounded-2xl bg-blue-50 border border-blue-100 flex gap-4 items-center group hover:bg-blue-100 transition-colors">
+                                    <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-[#2B6CB0] shadow-sm">
+                                        <i data-lucide="banknote" class="w-6 h-6"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-[#1A365D]">Bono 1: Descuento Anticipado</p>
+                                        <p class="text-xs text-slate-500">Paga $760 total si liquidas al inicio (ahorras $40)</p>
+                                    </div>
+                                </div>
+                                <div class="p-4 rounded-2xl bg-blue-50 border border-blue-100 flex gap-4 items-center group hover:bg-blue-100 transition-colors">
+                                    <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-[#2B6CB0] shadow-sm">
+                                        <i data-lucide="headphones" class="w-6 h-6"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-[#1A365D]">Bono 2: Soporte Prioritario</p>
+                                        <p class="text-xs text-slate-500">2 horas de soporte directo el primer mes (valor $30)</p>
+                                    </div>
+                                </div>
+                                <div class="p-4 rounded-2xl bg-blue-50 border border-blue-100 flex gap-4 items-center group hover:bg-blue-100 transition-colors">
+                                    <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-[#2B6CB0] shadow-sm">
+                                        <i data-lucide="file-spreadsheet" class="w-6 h-6"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-[#1A365D]">Bono 3: Plantilla de Migración</p>
+                                        <p class="text-xs text-slate-500">Guía Excel para cargar tus datos actuales rápido</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="lg:w-[40%] bg-slate-50 p-8 lg:p-16 flex flex-col items-center justify-center text-center border-l border-slate-200 relative">
+                            <div class="absolute top-0 right-0 p-8">
+                                <span class="bg-amber-400 text-[#1A365D] text-[10px] font-black px-3 py-1 rounded-full">SOLO 3 CUPOS/MES</span>
+                            </div>
+                            <span class="text-slate-400 text-sm font-bold uppercase tracking-widest mb-4">Inversión Única</span>
+                            <div class="flex items-start">
+                                <span class="text-3xl font-black text-[#1A365D] mt-2 leading-none">$</span>
+                                <span class="text-9xl font-black text-[#1A365D] tracking-tighter leading-none">800</span>
+                            </div>
+                            <p class="text-slate-500 text-sm mt-6 font-medium">Implementación en 4 semanas. Sin mensualidades.</p>
+                            
+                            <a href="https://wa.me/593963410409" class="mt-12 w-full bg-[#2B6CB0] text-white py-6 rounded-2xl text-xl font-bold hover:bg-[#1A365D] transition-all shadow-2xl active:scale-95 group">
+                                Cotizar por WhatsApp
+                                <i data-lucide="arrow-right" class="inline-block ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white pt-24 pb-12">
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-4 gap-16 mb-20">
+                <div class="lg:col-span-2 space-y-8">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-[#2B6CB0] rounded-xl flex items-center justify-center font-black text-xl">C</div>
+                        <span class="text-2xl font-bold tracking-tight">César Reyes Jaramillo</span>
+                    </div>
+                    <p class="text-slate-400 max-w-md leading-relaxed">
+                        Consultoría especializada en reingeniería digital para el sector hotelero en Ecuador. Ayudamos a hosterías a recuperar su rentabilidad a través de la tecnología simple.
+                    </p>
+                </div>
+                <div>
+                    <h6 class="font-bold mb-6 text-white uppercase tracking-widest text-xs">Contacto Directo</h6>
+                    <ul class="space-y-4">
+                        <li>
+                            <a href="https://wa.me/593963410409" class="text-slate-400 hover:text-white transition-colors flex items-center gap-3">
+                                <i data-lucide="phone" class="w-4 h-4"></i> +593 96 341 0409
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mailto:negocios@cesarreyesjaramillo.com" class="text-slate-400 hover:text-white transition-colors flex items-center gap-3">
+                                <i data-lucide="mail" class="w-4 h-4"></i> negocios@cesarreyesjaramillo.com
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h6 class="font-bold mb-6 text-white uppercase tracking-widest text-xs">Ubicación</h6>
+                    <p class="text-slate-400 text-sm">Quito | Guayaquil | Cuenca | Loja | Manta | Todo Ecuador</p>
+                </div>
+            </div>
+            
+            <div class="pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-slate-500">
+                <p>© 2026 César Reyes Jaramillo. Todos los derechos reservados.</p>
+                <div class="flex gap-8">
+                    <a href="#" class="hover:text-white">Privacidad</a>
+                    <a href="#" class="hover:text-white">Términos</a>
+                    <a href="https://cesarreyesjaramillo.com" target="_blank" class="hover:text-white font-bold text-[#2B6CB0]">Sitio Web Oficial</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/593963410409" target="_blank" class="fixed bottom-8 right-8 w-16 h-16 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-[0_20px_40px_-10px_rgba(37,211,102,0.5)] hover:scale-110 active:scale-95 transition-all z-40 group">
+        <i data-lucide="message-circle" class="w-8 h-8"></i>
+        <span class="absolute right-20 bg-white text-slate-800 px-4 py-2 rounded-xl text-sm font-bold opacity-0 group-hover:opacity-100 pointer-events-none transition-all whitespace-nowrap shadow-xl">¿Tienes dudas? ¡Escríbeme!</span>
+    </a>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>

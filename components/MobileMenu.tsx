@@ -139,7 +139,7 @@ export default function MobileMenu({
           </Link>
 
           <Link
-            href="/sobre-mi"
+            href="/menu-digital"
             className="block py-4 px-4 text-gray-800 active:bg-gray-50 rounded-lg font-medium border border-gray-100 transition-colors touch-manipulation"
             onClick={onClose}
             style={{
@@ -148,11 +148,11 @@ export default function MobileMenu({
               alignItems: 'center'
             }}
           >
-            Sobre Mí
+            Menú Digital
           </Link>
 
           <Link
-            href="/servicios/promo-artes-vivas"
+            href="/motor-reservas-hotel"
             className="block py-4 px-4 text-gray-800 active:bg-gray-50 rounded-lg font-medium border border-gray-100 transition-colors touch-manipulation"
             onClick={onClose}
             style={{
@@ -161,7 +161,33 @@ export default function MobileMenu({
               alignItems: 'center'
             }}
           >
-            Artes Vivas
+            Motor de Reservas
+          </Link>
+
+          <Link
+            href="/carnavales-2026"
+            className="block py-4 px-4 text-gray-800 active:bg-gray-50 rounded-lg font-medium border border-gray-100 transition-colors touch-manipulation"
+            onClick={onClose}
+            style={{
+              minHeight: '48px',
+              display: 'flex',
+              alignItems: 'center'
+            }}
+          >
+            Promo Carnavales 2026
+          </Link>
+
+          <Link
+            href="/blog"
+            className="block py-4 px-4 text-gray-800 active:bg-gray-50 rounded-lg font-medium border border-gray-100 transition-colors touch-manipulation"
+            onClick={onClose}
+            style={{
+              minHeight: '48px',
+              display: 'flex',
+              alignItems: 'center'
+            }}
+          >
+            Blog
           </Link>
 
           <div className="border border-gray-100 rounded-lg overflow-hidden">
@@ -186,7 +212,7 @@ export default function MobileMenu({
               className={`bg-gray-50 border-t border-gray-100 transition-all duration-200 overflow-hidden ${expandedMenus['servicios'] ? 'max-h-[2000px]' : 'max-h-0'
                 }`}
             >
-              {categorias.map((categoria) => (
+              {categorias.filter(cat => ["cat1", "cat2", "cat3"].includes(cat.id)).map((categoria) => (
                 <div key={categoria.id} className="border-b border-gray-100 last:border-b-0">
                   <div>
                     <button
@@ -268,7 +294,7 @@ export default function MobileMenu({
           </div>
 
           <Link
-            href="/blog"
+            href="#"
             className="block py-4 px-4 text-gray-800 active:bg-gray-50 rounded-lg font-medium border border-gray-100 transition-colors touch-manipulation"
             onClick={onClose}
             style={{
@@ -277,21 +303,7 @@ export default function MobileMenu({
               alignItems: 'center'
             }}
           >
-            Blog
-          </Link>
-
-          <Link
-            href="/menu-digital"
-            className="block py-4 px-4 bg-[#FF6B00] text-white font-bold active:bg-[#E66000] rounded-lg text-center transition-colors touch-manipulation"
-            onClick={onClose}
-            style={{
-              minHeight: '48px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}
-          >
-            Menú Objetivo
+            + Páginas
           </Link>
         </div>
       </div>

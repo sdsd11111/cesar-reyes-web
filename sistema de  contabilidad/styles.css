@@ -1,0 +1,92 @@
+:root {
+    --brand-dark: #1A365D;
+    --brand-action: #2B6CB0;
+}
+
+/* Typography & Base */
+body {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+/* Jony Ive Reveal Animation Enhancements */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px) scale(0.98);
+    transition: 
+        opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
+        transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Parallax Scroll Effect for Mockups */
+.reveal-parallax {
+    opacity: 0;
+    transform: translateY(80px);
+    transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.5s ease-out;
+}
+
+.reveal-parallax.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Header States */
+header {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+header.scrolled {
+    height: 72px;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+}
+
+/* Blob Animation */
+@keyframes blob {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(40px, -40px) scale(1.15); }
+    66% { transform: translate(-20px, 20px) scale(0.9); }
+}
+
+.animate-blob {
+    animation: blob 10s infinite alternate cubic-bezier(0.45, 0, 0.55, 1);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #1A365D;
+}
+
+/* Interactive ROI Hover */
+#roi-visual > div {
+    transition: all 0.4s ease;
+}
+
+#roi-visual > div:hover {
+    transform: translateX(10px);
+    background-color: white;
+    box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+}
+
+/* Smooth Links */
+a {
+    transition: all 0.2s ease-in-out;
+}

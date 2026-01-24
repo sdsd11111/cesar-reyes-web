@@ -1,0 +1,37 @@
+{
+  "project": "Módulo de Control Financiero para Hosterías",
+  "author": "César Reyes Jaramillo",
+  "target": "Hosterías, Hostales y Pequeños Hoteles (hasta 20 habitaciones)",
+  "pricing": {
+    "base": 800,
+    "currency": "USD",
+    "payment_type": "Pago único",
+    "bonuses": [
+      {
+        "title": "Bono 1: Descuento Anticipado",
+        "description": "Paga solo $760 (ahorra $40) al liquidar al inicio.",
+        "icon": "banknote"
+      },
+      {
+        "title": "Bono 2: Soporte Prioritario",
+        "description": "2 horas de soporte técnico gratis el primer mes.",
+        "icon": "headphones"
+      },
+      {
+        "title": "Bono 3: Plantilla de Migración",
+        "description": "Importa tus datos de Excel sin complicaciones.",
+        "icon": "file-spreadsheet"
+      }
+    ]
+  },
+  "roi": {
+    "monthly_saving": 180,
+    "investment": 800,
+    "payback_months": 4.4
+  },
+  "contact": {
+    "whatsapp": "593963410409",
+    "email": "negocios@cesarreyesjaramillo.com",
+    "website": "https://cesarreyesjaramillo.com"
+  }
+}

@@ -24,9 +24,16 @@ interface MegaMenuProps {
   isBlogArticle?: boolean;
   textColor?: string;
   textShadow?: string;
+  label?: string;
 }
 
-export default function MegaMenu({ categorias = [], isBlogArticle = false, textColor = 'text-white', textShadow = '0 1px 3px rgba(0,0,0,0.7)' }: MegaMenuProps) {
+export default function MegaMenu({
+  categorias = [],
+  isBlogArticle = false,
+  textColor = 'text-white',
+  textShadow = '0 1px 3px rgba(0,0,0,0.7)',
+  label = "Servicios"
+}: MegaMenuProps) {
   const [activeCategory, setActiveCategory] = useState<Categoria | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -41,7 +48,7 @@ export default function MegaMenu({ categorias = [], isBlogArticle = false, textC
       setActiveCategory(null);
       return;
     }
-    
+
     // Check if the related target is a Node and not within our menu
     if (menuRef.current && e.relatedTarget instanceof Node && !menuRef.current.contains(e.relatedTarget)) {
       setIsOpen(false);
@@ -56,7 +63,7 @@ export default function MegaMenu({ categorias = [], isBlogArticle = false, textC
       setActiveCategory(null);
       return;
     }
-    
+
     // Check if the related target is a Node and not within our menu
     if (menuRef.current && e.relatedTarget instanceof Node && !menuRef.current.contains(e.relatedTarget)) {
       setIsOpen(false);
@@ -76,7 +83,7 @@ export default function MegaMenu({ categorias = [], isBlogArticle = false, textC
           style={{ textShadow }}
           tabIndex={0}
         >
-          Servicios
+          {label}
         </button>
       </div>
 
@@ -92,7 +99,7 @@ export default function MegaMenu({ categorias = [], isBlogArticle = false, textC
             timeoutRef.current = setTimeout(() => setIsOpen(false), 300);
           }}
         >
-          <div 
+          <div
             className="bg-white rounded-xl shadow-2xl overflow-hidden grid border border-gray-200"
             style={{
               gridTemplateColumns: '1fr 1fr 1.5fr',
@@ -113,11 +120,10 @@ export default function MegaMenu({ categorias = [], isBlogArticle = false, textC
                 {safeCategorias.map((categoria) => (
                   <button
                     key={categoria.id}
-                    className={`w-full text-left px-4 py-2 rounded-md transition-colors ${
-                      activeCategory?.id === categoria.id
+                    className={`w-full text-left px-4 py-2 rounded-md transition-colors ${activeCategory?.id === categoria.id
                         ? 'bg-blue-100 text-blue-700'
                         : 'text-gray-700 hover:bg-gray-100'
-                    }`}
+                      }`}
                     onMouseEnter={() => setActiveCategory(categoria)}
                     onClick={() => {
                       window.location.href = `/servicios/${categoria.slug}`;
