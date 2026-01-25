@@ -128,11 +128,14 @@ export default function CarnavalesClient() {
           </div>
           <div className="relative h-[500px] bg-gray-900 rounded-3xl overflow-hidden flex items-center justify-center group border border-gray-800 shadow-2xl">
             <div className="absolute inset-0 bg-gradient-to-tr from-orange-900/20 to-gray-900/20 z-10 transition-colors group-hover:from-orange-900/10 group-hover:to-gray-900/10"></div>
-            <div className="text-center z-20 p-6">
-              <Smartphone className="w-24 h-24 mx-auto text-gray-600 mb-6" />
-              <p className="text-gray-400 font-medium text-xl">Video Principal o Imagen Potente</p>
-              <p className="text-sm text-gray-600 mt-2">(Gente, QR, Celular, WhatsApp)</p>
-            </div>
+            <iframe
+              className="absolute inset-0 w-full h-full rounded-2xl"
+              src="https://www.youtube.com/embed/X2sMafM-kPw"
+              title="Carnavales 2026"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            ></iframe>
           </div>
         </div>
       </section>
