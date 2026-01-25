@@ -127,7 +127,7 @@ export default function CarnavalesClient() {
             </div>
           </div>
           <div className="relative h-[500px] bg-gray-900 rounded-3xl overflow-hidden flex items-center justify-center group border border-gray-800 shadow-2xl">
-            <div className="absolute inset-0 bg-gradient-to-tr from-orange-900/20 to-gray-900/20 z-10 transition-colors group-hover:from-orange-900/10 group-hover:to-gray-900/10"></div>
+            <div className="absolute inset-0 bg-gradient-to-tr from-orange-900/20 to-gray-900/20 z-10 transition-colors group-hover:from-orange-900/10 group-hover:to-gray-900/10 pointer-events-none"></div>
             <iframe
               className="absolute inset-0 w-full h-full rounded-2xl"
               src="https://www.youtube.com/embed/X2sMafM-kPw"
