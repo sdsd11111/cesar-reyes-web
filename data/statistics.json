@@ -1,6 +1,6 @@
 {
-  "totalVisitas": 1635,
-  "visitasHoy": 1635,
+  "totalVisitas": 1640,
+  "visitasHoy": 1640,
   "articulosPublicados": 0,
   "suscriptoresNewsletter": 0,
   "ultimasVisitas": [
@@ -20,6 +20,31 @@
       "visitas": 1
     },
     {
+      "fecha": "2026-01-26",
+      "pagina": "/carnavales-2026",
+      "visitas": 1
+    },
+    {
+      "fecha": "2026-01-26",
+      "pagina": "/carnavales-2026",
+      "visitas": 1
+    },
+    {
+      "fecha": "2026-01-26",
+      "pagina": "/carnavales-2026",
+      "visitas": 1
+    },
+    {
+      "fecha": "2026-01-26",
+      "pagina": "/carnavales-2026",
+      "visitas": 1
+    },
+    {
+      "fecha": "2026-01-26",
+      "pagina": "/carnavales-2026",
+      "visitas": 1
+    },
+    {
       "fecha": "2026-01-24",
       "pagina": "/carnavales-2026",
       "visitas": 1
@@ -27,31 +52,6 @@
     {
       "fecha": "2026-01-24",
       "pagina": "/",
-      "visitas": 1
-    },
-    {
-      "fecha": "2026-01-24",
-      "pagina": "/carnavales-2026",
-      "visitas": 1
-    },
-    {
-      "fecha": "2026-01-24",
-      "pagina": "/sistema-de-contabilidad",
-      "visitas": 1
-    },
-    {
-      "fecha": "2026-01-24",
-      "pagina": "/",
-      "visitas": 1
-    },
-    {
-      "fecha": "2026-01-24",
-      "pagina": "/posicionamiento",
-      "visitas": 1
-    },
-    {
-      "fecha": "2026-01-24",
-      "pagina": "/posicionamiento/plan-salir-google",
       "visitas": 1
     }
   ],
@@ -86,6 +86,6 @@
     "2026-01-22": 2,
     "2026-01-23": 16,
     "2026-01-24": 12,
-    "2026-01-26": 3
+    "2026-01-26": 8
   }
 }

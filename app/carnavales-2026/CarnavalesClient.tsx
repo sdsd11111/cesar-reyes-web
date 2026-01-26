@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Check, Smartphone, Database, Star, MessageCircle, QrCode } from 'lucide-react';
 import Link from 'next/link';
@@ -20,6 +20,12 @@ export default function CarnavalesClient() {
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState('');
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
 
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -84,14 +90,26 @@ export default function CarnavalesClient() {
       {/* YouTube Background Video Section (Top) */}
       <section className="relative h-screen w-full overflow-hidden">
         <div className="absolute inset-0 w-full h-full">
+          {/* Desktop Video (Horizontal) */}
           <iframe
-            className="absolute inset-x-0 top-1/2 -translate-y-1/2 w-[100vw] h-[56.25vw] min-h-[100vh] min-w-[177.77vh] pointer-events-none"
+            className="hidden md:block absolute inset-x-0 top-1/2 -translate-y-1/2 w-[100vw] h-[56.25vw] min-h-[100vh] min-w-[177.77vh] pointer-events-none"
             src="https://www.youtube.com/embed/Z9BftcOyZVs?autoplay=1&mute=1&loop=1&playlist=Z9BftcOyZVs&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1"
             title="Carnavales Background"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           ></iframe>
+          {/* Mobile Video (Vertical Shorts) */}
+          {mounted && (
+            <iframe
+              className="block md:hidden absolute inset-x-0 top-1/2 -translate-y-1/2 w-[100vw] h-[177.77vw] min-h-[100vh] min-w-[56.25vh] pointer-events-none"
+              src="https://www.youtube.com/embed/JvGywgAQQLo?autoplay=1&mute=1&loop=1&playlist=JvGywgAQQLo&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1"
+              title="Carnavales Mobile Background"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            ></iframe>
+          )}
         </div>
+
         {/* 80% Opacity Overlay */}
         <div className="absolute inset-0 bg-black/80 z-10"></div>
 
@@ -135,12 +153,19 @@ export default function CarnavalesClient() {
 
         <div className="container mx-auto px-4 relative z-20 text-center max-w-5xl">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-normal mb-8 leading-[1.1] animate-fadeIn font-poiret-one drop-shadow-[0_4px_4px_rgba(0,0,0,0.9)] text-white">
-            Convierte a los Turistas Que Llegan <br className="hidden md:block" />
-            a Tu Negocio en <span style={{ color: BRAND_ORANGE }} className="font-bold">Clientes Que <br className="hidden md:block" />
-              Regresan Todo el Año</span>
+            Pon tu negocio en Internet y <br className="hidden md:block" />
+            <span
+              style={{
+                color: BRAND_ORANGE,
+                textShadow: '2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000'
+              }}
+              className="font-black"
+            >
+              Captura cientos de clientes
+            </span> este carnaval
           </h1>
           <p className="text-lg md:text-xl mb-12 text-gray-200 font-light tracking-wide drop-shadow-md max-w-3xl mx-auto leading-relaxed">
-            Sistema automático con código QR que captura los datos de cada persona que te visita este Carnaval. Sin complicaciones, sin tecnología rara. Solo resultados.
+            Incluye: Dominio tunegocio.com + Landing page profesional + Sistema de captura con código QR + Conexión directa a tu WhatsApp. Instalado en 48 horas.
           </p>
 
           <Button
@@ -297,16 +322,23 @@ export default function CarnavalesClient() {
       </section>
 
       {/* Parallax Image Section */}
-      <section className="relative h-[300px] md:h-[500px] w-full overflow-hidden border-y border-gray-800">
+      <section className="relative h-[400px] md:h-[600px] w-full overflow-hidden border-y border-gray-800 text-center">
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
           style={{ backgroundImage: "url('/images/carnavales-2026.webp')" }}
         ></div>
-        <div className="absolute inset-0 bg-black/40"></div>
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center px-4">
-            <h2 className="text-3xl md:text-5xl font-bold font-poiret-one text-white drop-shadow-2xl">
-              Prepara tu negocio para el mejor Carnaval
+        <div className="absolute inset-0 bg-black/60"></div>
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div className="px-4 w-full">
+            <h2
+              className="text-white font-poiret-one uppercase tracking-[0.1em] md:tracking-[0.2em] font-black italic"
+              style={{
+                fontSize: 'clamp(3rem, 12vw, 12rem)',
+                lineHeight: '0.9',
+                textShadow: '0 0 20px rgba(0,0,0,0.9), 4px 4px 0 #000, -4px -4px 0 #000, 4px -4px 0 #000, -4px 4px 0 #000',
+              }}
+            >
+              www.tunegocio.com
             </h2>
           </div>
         </div>
