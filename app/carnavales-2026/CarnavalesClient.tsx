@@ -146,7 +146,7 @@ export default function CarnavalesClient() {
         {/* Background Image */}
         <div
           className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat bg-fixed"
-          style={{ backgroundImage: "url('/images/carnavales%20-%202026%20.%20hero.jpeg')" }}
+          style={{ backgroundImage: "url('/images/carnavales%20-%202026%20.%20hero.webp')" }}
         ></div>
         {/* Overlay */}
         <div className="absolute inset-0 bg-black/80 z-10"></div>

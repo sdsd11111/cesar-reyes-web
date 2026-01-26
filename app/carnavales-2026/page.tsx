@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     description: 'Te instalamos un sistema simple para que cada persona que te visite en carnaval deje sus datos y te califique en Google.',
     images: [
       {
-        url: '/images/promo-artes-vivas/promo-hero.webp',
+        url: '/images/carnavales - 2026 . hero.webp',
         width: 1200,
         height: 630,
         alt: 'Plan Carnaval Digital',
