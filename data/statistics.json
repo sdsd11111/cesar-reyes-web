@@ -1,9 +1,24 @@
 {
-  "totalVisitas": 1632,
-  "visitasHoy": 1632,
+  "totalVisitas": 1635,
+  "visitasHoy": 1635,
   "articulosPublicados": 0,
   "suscriptoresNewsletter": 0,
   "ultimasVisitas": [
+    {
+      "fecha": "2026-01-26",
+      "pagina": "/carnavales-2026",
+      "visitas": 1
+    },
+    {
+      "fecha": "2026-01-26",
+      "pagina": "/carnavales-2026",
+      "visitas": 1
+    },
+    {
+      "fecha": "2026-01-26",
+      "pagina": "/carnavales-2026",
+      "visitas": 1
+    },
     {
       "fecha": "2026-01-24",
       "pagina": "/carnavales-2026",
@@ -38,21 +53,6 @@
       "fecha": "2026-01-24",
       "pagina": "/posicionamiento/plan-salir-google",
       "visitas": 1
-    },
-    {
-      "fecha": "2026-01-24",
-      "pagina": "/mensajeria",
-      "visitas": 1
-    },
-    {
-      "fecha": "2026-01-24",
-      "pagina": "/mensajeria-objetivo",
-      "visitas": 1
-    },
-    {
-      "fecha": "2026-01-24",
-      "pagina": "/menu-digital",
-      "visitas": 1
     }
   ],
   "visitasPorDia": {
@@ -85,6 +85,7 @@
     "2026-01-16": 9,
     "2026-01-22": 2,
     "2026-01-23": 16,
-    "2026-01-24": 12
+    "2026-01-24": 12,
+    "2026-01-26": 3
   }
 }

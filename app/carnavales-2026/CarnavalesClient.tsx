@@ -4,6 +4,13 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Check, Smartphone, Database, Star, MessageCircle, QrCode } from 'lucide-react';
 import Link from 'next/link';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination, Autoplay } from 'swiper/modules';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/autoplay';
 
 // Custom brand accent color constant for reference
 const BRAND_ORANGE = '#e78c23';
@@ -12,6 +19,8 @@ export default function CarnavalesClient() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState('');
+  const [activeFaq, setActiveFaq] = useState<number | null>(null);
+
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -72,30 +81,77 @@ export default function CarnavalesClient() {
 
   return (
     <div className="min-h-screen bg-[#1a1a1a] text-white font-montserrat">
+      {/* YouTube Background Video Section (Top) */}
+      <section className="relative h-screen w-full overflow-hidden">
+        <div className="absolute inset-0 w-full h-full">
+          <iframe
+            className="absolute inset-x-0 top-1/2 -translate-y-1/2 w-[100vw] h-[56.25vw] min-h-[100vh] min-w-[177.77vh] pointer-events-none"
+            src="https://www.youtube.com/embed/Z9BftcOyZVs?autoplay=1&mute=1&loop=1&playlist=Z9BftcOyZVs&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1"
+            title="Carnavales Background"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          ></iframe>
+        </div>
+        {/* 80% Opacity Overlay */}
+        <div className="absolute inset-0 bg-black/80 z-10"></div>
+
+        {/* Content on top of video */}
+        <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-4">
+          <h2 className="text-3xl md:text-5xl font-bold font-poiret-one text-white drop-shadow-2xl animate-pulse">
+            CARNAVAL 2026
+          </h2>
+          <p className="mt-4 text-xl text-gray-200 font-light tracking-widest uppercase">
+            Prepárate para vender más
+          </p>
+          <div className="mt-12 animate-bounce">
+            <ArrowRight className="rotate-90 text-white w-10 h-10" />
+          </div>
+        </div>
+      </section>
+
+      {/* Floating WhatsApp Button */}
+      <a
+        href="https://wa.me/593963410409?text=Hola%20C%C3%A9sar%2C%20quiero%20activar%20el%20Plan%20Carnaval%20Digital%202026%20en%20mi%20negocio."
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-8 right-8 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-[0_5px_15px_rgba(37,211,102,0.4)] hover:scale-110 transition-transform duration-300 flex items-center justify-center group"
+        aria-label="WhatsApp"
+      >
+        <MessageCircle className="w-8 h-8 fill-current" />
+        <span className="max-w-0 overflow-hidden group-hover:max-w-[200px] transition-all duration-500 ease-out whitespace-nowrap font-bold px-0 group-hover:pl-2 group-hover:pr-1">
+          WhatsApp Rápido
+        </span>
+      </a>
+
       {/* Hero Section */}
       <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden">
         {/* Background Image */}
         <div
           className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat bg-fixed"
-          style={{ backgroundImage: "url('/images/carnavales-2026.webp')" }}
+          style={{ backgroundImage: "url('/images/carnavales%20-%202026%20.%20hero.jpeg')" }}
         ></div>
         {/* Overlay */}
-        <div className="absolute inset-0 bg-black/40 z-10"></div>
+        <div className="absolute inset-0 bg-black/80 z-10"></div>
 
         <div className="container mx-auto px-4 relative z-20 text-center max-w-5xl">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight animate-fadeIn font-poiret-one drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
-            Convierte este feriado de carnaval en <span className="text-orange-500">clientes para todo el año</span>
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-normal mb-8 leading-[1.1] animate-fadeIn font-poiret-one drop-shadow-[0_4px_4px_rgba(0,0,0,0.9)] text-white">
+            Convierte a los Turistas Que Llegan <br className="hidden md:block" />
+            a Tu Negocio en <span style={{ color: BRAND_ORANGE }} className="font-bold">Clientes Que <br className="hidden md:block" />
+              Regresan Todo el Año</span>
           </h1>
-          <p className="text-xl md:text-2xl mb-12 text-gray-200 font-light tracking-wide shadow-black drop-shadow-md">
-            Te instalamos un sistema simple para que cada persona que te visite en carnaval deje sus datos, te califique en Google y tu negocio quede guardado en su celular.
+          <p className="text-lg md:text-xl mb-12 text-gray-200 font-light tracking-wide drop-shadow-md max-w-3xl mx-auto leading-relaxed">
+            Sistema automático con código QR que captura los datos de cada persona que te visita este Carnaval. Sin complicaciones, sin tecnología rara. Solo resultados.
           </p>
+
           <Button
             onClick={scrollToForm}
             size="lg"
-            className="bg-orange-600 hover:bg-orange-700 text-white text-xl px-10 py-8 rounded-full font-bold shadow-lg shadow-orange-900/20 transform transition hover:scale-105 border-2 border-transparent hover:border-orange-400"
+            className="bg-orange-600 hover:bg-orange-700 text-white text-lg md:text-xl px-6 md:px-10 py-5 md:py-8 rounded-full font-bold shadow-lg shadow-orange-900/20 transform transition hover:scale-105 border-2 border-transparent hover:border-orange-400 w-full md:w-auto whitespace-normal leading-tight"
           >
-            👉 Quiero activarlo en mi negocio
+            👉 Quiero activarlo <br className="block md:hidden" /> en mi negocio
           </Button>
+
+
         </div>
 
         {/* Scroll Indicator */}
@@ -109,21 +165,28 @@ export default function CarnavalesClient() {
         <div className="container mx-auto px-4 grid md:grid-cols-2 gap-16 items-center">
           <div className="bg-[#1a1a1a] p-10 rounded-3xl shadow-2xl border-l-4 border-orange-500">
             <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white font-poiret-one">
-              ¿Cómo capturar clientes en carnaval sin dejar de atender tu negocio?
+              Cada Carnaval Es Lo Mismo...
             </h2>
-            <div className="space-y-6 text-xl text-gray-300">
-              <p>Cada carnaval entran cientos de personas a tu balneario o negocio.</p>
-              <p className="font-semibold text-orange-400">La mayoría se va… y nunca más vuelve.</p>
-            </div>
-            <div className="mt-10 pt-6 border-t border-gray-800">
-              <div className="flex items-center gap-4">
-                <div className="p-3 bg-gray-800 rounded-full border border-gray-700">
-                  <Check className="w-8 h-8 text-orange-500" />
-                </div>
-                <p className="font-bold text-2xl text-white font-poiret-one">
-                  Nosotros te ayudamos a CAPTURAR CLIENTES de forma automática.
+            <div className="space-y-4 text-xl text-gray-300">
+              <p>Este feriado tu restaurante, hostería o balneario se llena de gente.</p>
+              <p>Venden. Atienden. Se cansan.</p>
+              <p>Y cuando termina el feriado... todos esos clientes desaparecen.</p>
+
+              <div className="space-y-2 bg-black/30 p-6 rounded-2xl border border-gray-800 mt-6">
+                <p className="flex items-center gap-3 text-red-400/80">
+                  <span className="text-lg">❌</span> No tienes su WhatsApp.
+                </p>
+                <p className="flex items-center gap-3 text-red-400/80">
+                  <span className="text-lg">❌</span> No tienes su nombre.
+                </p>
+                <p className="flex items-center gap-3 text-red-400/80">
+                  <span className="text-lg">❌</span> No puedes invitarlos a regresar.
                 </p>
               </div>
+
+              <p className="font-bold text-2xl text-orange-500 pt-4 font-poiret-one">
+                Perdiste cientos de clientes potenciales para siempre.
+              </p>
             </div>
           </div>
           <div className="relative h-[500px] bg-gray-900 rounded-3xl overflow-hidden flex items-center justify-center group border border-gray-800 shadow-2xl">
@@ -147,88 +210,110 @@ export default function CarnavalesClient() {
 
         <div className="container mx-auto px-4 max-w-6xl relative z-20">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-20 font-poiret-one text-white">
-            Demostración simple <span className="text-gray-500 text-3xl block mt-2 font-montserrat font-normal">(así funciona)</span>
+            Así de Simple Es
           </h2>
 
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
-            {/* 1. Escanean */}
+          {/* Desktop Grid */}
+          <div className="hidden md:grid md:grid-cols-3 gap-8 mb-16">
+            {/* 1. QR */}
             <div className="flex flex-col items-center text-center p-8 rounded-2xl bg-[#232323] hover:bg-[#2a2a2a] transition border border-gray-800 hover:border-orange-500/30 group">
               <div className="p-4 bg-gray-800 text-orange-500 rounded-full mb-6 group-hover:scale-110 transition-transform duration-300">
                 <QrCode className="w-10 h-10" />
               </div>
-              <h3 className="font-bold text-2xl mb-3 text-white font-poiret-one">1. Escanean</h3>
-              <p className="text-gray-400 text-lg leading-relaxed">Un código QR en tu mesa o entrada</p>
+              <h3 className="font-bold text-2xl mb-3 text-white font-poiret-one">1. Pones el código QR en tus mesas</h3>
+              <p className="text-gray-400 text-lg leading-relaxed">(Nosotros te lo enviamos listo para imprimir)</p>
             </div>
 
-            {/* 2. Entran */}
+            {/* 2. Escanean */}
             <div className="flex flex-col items-center text-center p-8 rounded-2xl bg-[#232323] hover:bg-[#2a2a2a] transition border border-gray-800 hover:border-orange-500/30 group">
               <div className="p-4 bg-gray-800 text-orange-500 rounded-full mb-6 group-hover:scale-110 transition-transform duration-300">
                 <Smartphone className="w-10 h-10" />
               </div>
-              <h3 className="font-bold text-2xl mb-3 text-white font-poiret-one">2. Entran</h3>
-              <p className="text-gray-400 text-lg leading-relaxed">A tu página web personalizada</p>
+              <h3 className="font-bold text-2xl mb-3 text-white font-poiret-one">2. Tus clientes lo escanean</h3>
+              <p className="text-gray-400 text-lg leading-relaxed">(Dejan su nombre y WhatsApp en 10 segundos)</p>
             </div>
 
-            {/* 3. Dejan datos */}
+            {/* 3. Datos */}
             <div className="flex flex-col items-center text-center p-8 rounded-2xl bg-[#232323] hover:bg-[#2a2a2a] transition border border-gray-800 hover:border-orange-500/30 group">
               <div className="p-4 bg-gray-800 text-orange-500 rounded-full mb-6 group-hover:scale-110 transition-transform duration-300">
                 <Database className="w-10 h-10" />
               </div>
-              <h3 className="font-bold text-2xl mb-3 text-white font-poiret-one">3. Dejan datos</h3>
-              <p className="text-gray-400 text-lg leading-relaxed">Nombre y WhatsApp para registrarse</p>
-            </div>
-
-            {/* 4. Califican */}
-            <div className="flex flex-col items-center text-center p-8 rounded-2xl bg-[#232323] hover:bg-[#2a2a2a] transition border border-gray-800 hover:border-orange-500/30 group">
-              <div className="p-4 bg-gray-800 text-orange-500 rounded-full mb-6 group-hover:scale-110 transition-transform duration-300">
-                <Star className="w-10 h-10" />
-              </div>
-              <h3 className="font-bold text-2xl mb-3 text-white font-poiret-one">4. Califican</h3>
-              <p className="text-gray-400 text-lg leading-relaxed">Te dejan 5 estrellas en Google</p>
-            </div>
-
-            {/* 5. Te escriben */}
-            <div className="flex flex-col items-center text-center p-8 rounded-2xl bg-[#232323] hover:bg-[#2a2a2a] transition border border-gray-800 hover:border-orange-500/30 group">
-              <div className="p-4 bg-gray-800 text-orange-500 rounded-full mb-6 group-hover:scale-110 transition-transform duration-300">
-                <MessageCircle className="w-10 h-10" />
-              </div>
-              <h3 className="font-bold text-2xl mb-3 text-white font-poiret-one">5. Te escriben</h3>
-              <p className="text-gray-400 text-lg leading-relaxed">Directo a tu WhatsApp</p>
-            </div>
-
-            {/* 6. Capturas */}
-            <div className="flex flex-col items-center text-center p-8 rounded-2xl bg-[#232323] hover:bg-[#2a2a2a] transition border border-gray-800 hover:border-orange-500/30 group">
-              <div className="p-4 bg-gray-800 text-orange-500 rounded-full mb-6 group-hover:scale-110 transition-transform duration-300">
-                <Check className="w-10 h-10" />
-              </div>
-              <h3 className="font-bold text-2xl mb-3 text-white font-poiret-one">6. Capturas</h3>
-              <p className="text-gray-400 text-lg leading-relaxed">Tu base de datos crece sola</p>
+              <h3 className="font-bold text-2xl mb-3 text-white font-poiret-one">3. Tienes sus datos para siempre</h3>
+              <p className="text-gray-400 text-lg leading-relaxed">(Los contactas cuando quieras: temporada baja, promociones, eventos)</p>
             </div>
           </div>
 
-          <div className="bg-gradient-to-r from-orange-900/20 to-orange-800/20 p-10 rounded-3xl text-center border border-orange-800/50 backdrop-blur-sm">
-            <h3 className="text-3xl font-bold text-orange-400 mb-8 font-poiret-one">Resultado:</h3>
-            <ul className="inline-block text-left space-y-4">
-              {[
-                "Se guardan tu número en su celular",
-                "Ven tus estados de WhatsApp",
-                "Reciben tus mensajes cuando tú quieras",
-                "Te dejan reseñas en Google",
-                "Puedes volver a invitarlos cuando haya promociones"
-              ].map((item, i) => (
-                <li key={i} className="flex items-center gap-4 text-xl text-gray-200">
-                  <div className="w-8 h-8 rounded-full bg-orange-600 flex items-center justify-center shrink-0 shadow-lg shadow-orange-900/50">
-                    <Check className="w-5 h-5 text-white" />
+          {/* Mobile Carousel */}
+          <div className="block md:hidden mb-12">
+            <Swiper
+              modules={[Pagination, Autoplay]}
+              spaceBetween={20}
+              slidesPerView={1}
+              pagination={{ clickable: true }}
+              autoplay={{ delay: 3000 }}
+              className="pb-12"
+            >
+              <SwiperSlide>
+                <div className="flex flex-col items-center text-center p-8 rounded-2xl bg-[#232323] border border-gray-800 h-[320px]">
+                  <div className="p-4 bg-gray-800 text-orange-500 rounded-full mb-6">
+                    <QrCode className="w-10 h-10" />
                   </div>
-                  {item}
-                </li>
-              ))}
-            </ul>
+                  <h3 className="font-bold text-2xl mb-3 text-white font-poiret-one">1. Pones el código QR en tus mesas</h3>
+                  <p className="text-gray-400 text-lg leading-relaxed">(Listo para imprimir)</p>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className="flex flex-col items-center text-center p-8 rounded-2xl bg-[#232323] border border-gray-800 h-[320px]">
+                  <div className="p-4 bg-gray-800 text-orange-500 rounded-full mb-6">
+                    <Smartphone className="w-10 h-10" />
+                  </div>
+                  <h3 className="font-bold text-2xl mb-3 text-white font-poiret-one">2. Tus clientes lo escanean</h3>
+                  <p className="text-gray-400 text-lg leading-relaxed">(En solo 10 segundos)</p>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className="flex flex-col items-center text-center p-8 rounded-2xl bg-[#232323] border border-gray-800 h-[320px]">
+                  <div className="p-4 bg-gray-800 text-orange-500 rounded-full mb-6">
+                    <Database className="w-10 h-10" />
+                  </div>
+                  <h3 className="font-bold text-2xl mb-3 text-white font-poiret-one">3. Tienes sus datos para siempre</h3>
+                  <p className="text-gray-400 text-lg leading-relaxed">(Contacta cuando quieras)</p>
+                </div>
+              </SwiperSlide>
+            </Swiper>
+            <style jsx global>{`
+              .swiper-pagination-bullet { background: #444; }
+              .swiper-pagination-bullet-active { background: ${BRAND_ORANGE}; }
+            `}</style>
+          </div>
+
+
+          <div className="bg-gradient-to-r from-orange-900/20 to-orange-800/20 p-10 rounded-3xl text-center border border-orange-800/50 backdrop-blur-sm max-w-4xl mx-auto">
+            <p className="text-2xl md:text-3xl font-light italic text-gray-200 leading-relaxed">
+              "No necesitas saber de tecnología. No necesitas contratar a nadie más. <span className="text-orange-500 font-bold not-italic">Solo pones el código y funciona.</span>"
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Parallax Image Section */}
+      <section className="relative h-[300px] md:h-[500px] w-full overflow-hidden border-y border-gray-800">
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
+          style={{ backgroundImage: "url('/images/carnavales-2026.webp')" }}
+        ></div>
+        <div className="absolute inset-0 bg-black/40"></div>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="text-center px-4">
+            <h2 className="text-3xl md:text-5xl font-bold font-poiret-one text-white drop-shadow-2xl">
+              Prepara tu negocio para el mejor Carnaval
+            </h2>
           </div>
         </div>
       </section>
 
       {/* Value Proposition */}
+
       <section className="py-24 bg-black text-white text-center border-y border-gray-900">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl md:text-5xl font-bold mb-16 font-poiret-one">Lo que estás construyendo</h2>
@@ -252,7 +337,33 @@ export default function CarnavalesClient() {
         </div>
       </section>
 
+      {/* Results Section */}
+      <section className="py-24 bg-[#121212]">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <div className="bg-gradient-to-r from-orange-900/20 to-orange-800/20 p-10 rounded-3xl text-center border border-orange-800/50 backdrop-blur-sm">
+            <h3 className="text-3xl font-bold text-orange-400 mb-10 font-poiret-one">Con este sistema tú ganas:</h3>
+            <ul className="inline-block text-left space-y-6">
+              {[
+                "Se guardan tu número en su celular",
+                "Ven tus estados de WhatsApp",
+                "Reciben tus mensajes cuando tú quieras",
+                "Te dejan reseñas en Google",
+                "Puedes volver a invitarlos cuando haya promociones"
+              ].map((item, i) => (
+                <li key={i} className="flex items-center gap-5 text-xl md:text-2xl text-gray-200">
+                  <div className="w-10 h-10 rounded-full bg-orange-600 flex items-center justify-center shrink-0 shadow-lg shadow-orange-900/50">
+                    <Check className="w-6 h-6 text-white" />
+                  </div>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
       {/* Pricing & Form */}
+
       <section id="reserva" className="py-24 bg-gradient-to-r from-orange-500 to-orange-600 text-white">
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row gap-16 max-w-7xl mx-auto">
@@ -379,10 +490,17 @@ export default function CarnavalesClient() {
                     <Button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold py-5 text-xl rounded-xl mt-6 shadow-xl transform transition hover:-translate-y-1"
+                      className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold py-4 md:py-5 text-base md:text-xl rounded-xl mt-6 shadow-xl transform transition hover:-translate-y-1 whitespace-normal leading-tight"
                     >
-                      {isSubmitting ? 'Enviando...' : 'QUIERO APROVECHAR ESTE CARNAVAL'}
+                      {isSubmitting ? 'Enviando...' : (
+                        <>
+                          QUIERO APROVECHAR <br className="block md:hidden" /> ESTE CARNAVAL
+                        </>
+                      )}
                     </Button>
+
+
+
 
                     <p className="text-xs text-gray-500 text-center mt-6">
                       * Plazas limitadas para garantizar soporte.
@@ -395,16 +513,151 @@ export default function CarnavalesClient() {
         </div>
       </section>
 
+      {/* FAQ Section */}
+      <section className="py-24 bg-black border-t border-gray-900">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 font-poiret-one text-white">
+            Preguntas Frecuentes
+          </h2>
+
+          <div className="space-y-4">
+            {[
+              {
+                q: "¿Qué gano realmente con esto? ¿Solo una página web?",
+                a: (
+                  <div className="space-y-4">
+                    <p>No es "solo una página web". Es tu negocio en Internet con TODO lo que necesitas para Carnaval 2026:</p>
+                    <ul className="space-y-2">
+                      <li className="flex items-start gap-3"><Check className="w-5 h-5 text-green-500 shrink-0 mt-1" /> <span><strong>Dominio propio (tunegocio.com):</strong> La gente te encuentra profesionalmente</span></li>
+                      <li className="flex items-start gap-3"><Check className="w-5 h-5 text-green-500 shrink-0 mt-1" /> <span><strong>Sistema de sorteo automático:</strong> Haces una promoción sin trabajo manual</span></li>
+                      <li className="flex items-start gap-3"><Check className="w-5 h-5 text-green-500 shrink-0 mt-1" /> <span><strong>Captura de clientes vía WhatsApp:</strong> Cientos de contactos registrados automáticamente</span></li>
+                      <li className="flex items-start gap-3"><Check className="w-5 h-5 text-green-500 shrink-0 mt-1" /> <span><strong>Difusiones masivas:</strong> Les escribes a todos sin mandar mensajes uno por uno</span></li>
+                      <li className="flex items-start gap-3"><Check className="w-5 h-5 text-green-500 shrink-0 mt-1" /> <span><strong>Ubicación en Google Maps:</strong> Los turistas te encuentran fácilmente</span></li>
+                    </ul>
+                    <p className="pt-2 italic text-gray-300">Esto NO es una página decorativa. Es un sistema completo que captura clientes mientras tú atiendes tu negocio.</p>
+                  </div>
+                )
+              },
+              {
+                q: "¿Cómo funciona eso del sorteo? ¿Tengo que estar regalando cosas?",
+                a: (
+                  <div className="space-y-4">
+                    <p>El sorteo es EL GANCHO para que la gente escanee el código QR. Ejemplos que funcionan:</p>
+                    <ul className="list-disc pl-6 space-y-1">
+                      <li>"Escanea y participa por una noche gratis"</li>
+                      <li>"Regístrate y recibe 15% descuento en tu próxima visita"</li>
+                      <li>"Entra al sorteo de una cena para 2 personas"</li>
+                    </ul>
+                    <div className="bg-black/30 p-6 rounded-2xl border border-gray-800 mt-4">
+                      <p className="font-bold text-gray-200 mb-2">Cómo funciona:</p>
+                      <ol className="list-decimal pl-6 space-y-1">
+                        <li>Pones el código QR en tus mesas con el anuncio del sorteo</li>
+                        <li>Los clientes escanean porque quieren participar</li>
+                        <li>Dejan su nombre y WhatsApp (se registran solos)</li>
+                        <li>Tú avisas a los ganadores por difusión de WhatsApp</li>
+                      </ol>
+                    </div>
+                    <p>Lo que "regalas" en premio lo recuperas 10x con los clientes que regresan.</p>
+                  </div>
+                )
+              },
+              {
+                q: "¿Qué es eso de \"difusiones de WhatsApp\"?",
+                a: (
+                  <div className="space-y-4">
+                    <p className="font-bold text-orange-400 uppercase tracking-wider text-sm">NO es lo mismo que mandar mensajes normales</p>
+                    <div className="grid md:grid-cols-2 gap-6 pt-2">
+                      <div className="bg-black/20 p-4 rounded-xl border border-gray-900">
+                        <p className="font-bold text-red-400 mb-2">Mensajes normales:</p>
+                        <p className="text-sm italic">Escribir uno por uno a 200 personas = 3 horas perdidas.</p>
+                      </div>
+                      <div className="bg-black/20 p-4 rounded-xl border border-gray-900">
+                        <p className="font-bold text-green-400 mb-2">Difusiones:</p>
+                        <p className="text-sm italic">Escribes UN mensaje y se envía a TODOS automáticamente.</p>
+                      </div>
+                    </div>
+                    <p>Cuando los clientes se registran, quedan en tu lista. Luego puedes avisar promociones de Semana Santa, temporada baja o eventos con un solo clic. Es contacto masivo sin spam.</p>
+                  </div>
+                )
+              },
+              {
+                q: "¿Necesito saber de tecnología para manejar esto?",
+                a: (
+                  <div className="space-y-4">
+                    <p className="font-bold text-white">CERO tecnología necesaria. Te entregamos:</p>
+                    <ul className="space-y-2">
+                      <li className="flex items-center gap-3"><Smartphone className="w-5 h-5 text-orange-500 shrink-0" /> <span>Página web YA HECHA con tus fotos.</span></li>
+                      <li className="flex items-center gap-3"><Check className="w-5 h-5 text-orange-500 shrink-0" /> <span>Dominio tunegocio.com YA CONFIGURADO.</span></li>
+                      <li className="flex items-center gap-3"><QrCode className="w-5 h-5 text-orange-500 shrink-0" /> <span>Código QR LISTO PARA IMPRIMIR.</span></li>
+                    </ul>
+                    <p>Tú solo pones el código en tus mesas y escribes en WhatsApp como siempre. Todo es 100% automático.</p>
+                  </div>
+                )
+              },
+              {
+                q: "¿Por qué hacerlo ANTES de Carnaval?",
+                a: (
+                  <div className="space-y-4">
+                    <p>Porque después ya es tarde. Carnaval 2026 es el momento donde llegan los turistas en masa.</p>
+                    <div className="p-4 bg-orange-900/20 border-l-4 border-orange-500 text-orange-200">
+                      Si no tienes el sistema, no capturas sus datos y los pierdes para siempre. Cada cliente que no captures hoy es dinero que pierdes todo el año.
+                    </div>
+                    <p className="font-bold text-white">Instalar toma 48 horas. ¡No dejes que se te pase el tiempo!</p>
+                  </div>
+                )
+              },
+              {
+                q: "¿Y después de Carnaval qué?",
+                a: (
+                  <div className="space-y-4">
+                    <p>Te quedas con 3 activos valiosos:</p>
+                    <ol className="list-decimal pl-6 space-y-2">
+                      <li><strong>Tu página web:</strong> Los turistas te encuentran en Google todo el año.</li>
+                      <li><strong>Base de datos:</strong> Cientos de contactos para llenar tu negocio en temporada baja.</li>
+                      <li><strong>Posicionamiento:</strong> Reseñas positivas que atraen a más gente.</li>
+                    </ol>
+                    <p className="pt-2 font-bold text-orange-400">Próximo paso: Podrás habilitar tu propio sistema de reservas.</p>
+                  </div>
+                )
+              }
+            ].map((faq, index) => (
+              <div key={index} className="bg-[#1a1a1a] rounded-2xl border border-gray-800 overflow-hidden transition-all duration-300">
+                <button
+                  onClick={() => setActiveFaq(activeFaq === index ? null : index)}
+                  className="w-full p-6 text-left flex justify-between items-center transition-colors hover:bg-white/5"
+                >
+                  <h3 className="text-xl md:text-2xl font-bold text-white font-poiret-one flex gap-4">
+                    <span className="text-orange-500">Q:</span> {faq.q}
+                  </h3>
+                  <div className={`text-orange-500 transition-transform duration-300 ${activeFaq === index ? 'rotate-180' : ''}`}>
+                    <ArrowRight className="rotate-90" />
+                  </div>
+                </button>
+                <div className={`transition-all duration-500 ease-in-out ${activeFaq === index ? 'max-h-[1000px] opacity-100 p-8 pt-0' : 'max-h-0 opacity-0 overflow-hidden'}`}>
+                  <div className="text-gray-400 text-lg border-t border-gray-800 pt-6">
+                    {faq.a}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+
       {/* Footer CTA */}
+
       <section className="py-20 bg-[#121212] text-center border-t border-gray-900">
         <h2 className="text-3xl md:text-4xl font-bold mb-10 text-white font-poiret-one">Este carnaval puede ser distinto.</h2>
         <Button
           onClick={scrollToForm}
           size="lg"
-          className="bg-transparent hover:bg-white hover:text-black text-white border-2 border-white text-xl px-12 py-6 rounded-full font-bold transition-all duration-300"
+          className="bg-transparent hover:bg-white hover:text-black text-white border-2 border-white text-lg md:text-xl px-4 md:px-12 py-5 md:py-6 rounded-full font-bold transition-all duration-300 w-full md:w-auto whitespace-normal leading-tight"
         >
-          Quiero aprovechar este carnaval
+          Quiero aprovechar <br className="block md:hidden" /> este carnaval
         </Button>
+
+
       </section>
     </div>
   );
