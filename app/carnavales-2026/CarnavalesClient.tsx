@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Check, Smartphone, Database, Star, MessageCircle, QrCode } from 'lucide-react';
+import { ArrowRight, Check, Smartphone, Database, Star, MessageCircle, QrCode, FileDown } from 'lucide-react';
 import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay } from 'swiper/modules';
@@ -168,13 +168,24 @@ export default function CarnavalesClient() {
             Incluye: Dominio tunegocio.com + Landing page profesional + Sistema de captura con código QR + Conexión directa a tu WhatsApp. Instalado en 48 horas.
           </p>
 
-          <Button
-            onClick={scrollToForm}
-            size="lg"
-            className="bg-orange-600 hover:bg-orange-700 text-white text-lg md:text-xl px-6 md:px-10 py-5 md:py-8 rounded-full font-bold shadow-lg shadow-orange-900/20 transform transition hover:scale-105 border-2 border-transparent hover:border-orange-400 w-full md:w-auto whitespace-normal leading-tight"
-          >
-            👉 Quiero activarlo <br className="block md:hidden" /> en mi negocio
-          </Button>
+          <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
+            <Button
+              onClick={scrollToForm}
+              size="lg"
+              className="bg-orange-600 hover:bg-orange-700 text-white text-lg md:text-xl px-6 md:px-10 py-5 md:py-8 rounded-full font-bold shadow-lg shadow-orange-900/20 transform transition hover:scale-105 border-2 border-transparent hover:border-orange-400 w-full md:w-auto whitespace-normal leading-tight"
+            >
+              👉 Quiero activarlo <br className="block md:hidden" /> en mi negocio
+            </Button>
+
+            <Button
+              onClick={scrollToForm}
+              variant="outline"
+              size="lg"
+              className="bg-white/10 hover:bg-white/20 text-white text-lg md:text-xl px-6 md:px-10 py-5 md:py-8 rounded-full font-bold backdrop-blur-sm border-2 border-white/20 transition-all hover:scale-105 w-full md:w-auto"
+            >
+              Empezar Ahora
+            </Button>
+          </div>
 
 
         </div>
@@ -328,13 +339,13 @@ export default function CarnavalesClient() {
           style={{ backgroundImage: "url('/images/carnavales-2026.webp')" }}
         ></div>
         <div className="absolute inset-0 bg-black/60"></div>
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="px-4 w-full">
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none px-4">
+          <div className="max-w-full text-center">
             <h2
-              className="text-white font-poiret-one uppercase tracking-[0.1em] md:tracking-[0.2em] font-black italic"
+              className="text-white font-poiret-one uppercase tracking-[0.1em] md:tracking-[0.2em] font-black italic break-words"
               style={{
-                fontSize: 'clamp(3rem, 12vw, 12rem)',
-                lineHeight: '0.9',
+                fontSize: 'clamp(2rem, 10vw, 12rem)',
+                lineHeight: '1',
                 textShadow: '0 0 20px rgba(0,0,0,0.9), 4px 4px 0 #000, -4px -4px 0 #000, 4px -4px 0 #000, -4px 4px 0 #000',
               }}
             >
@@ -468,31 +479,56 @@ export default function CarnavalesClient() {
                   </div>
                 ) : (
                   <form id="formulario-carnaval" onSubmit={handleSubmit} className="space-y-6 relative z-10">
-                    <div>
-                      <label className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">Nombre Completo</label>
-                      <input required name="nombre" type="text" className="w-full px-5 py-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-orange-500 outline-none text-gray-900 bg-gray-50" placeholder="Tu nombre" />
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <label className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">Nombre Completo</label>
+                        <input required name="nombre" type="text" className="w-full px-5 py-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-orange-500 outline-none text-gray-900 bg-gray-50" placeholder="Tu nombre" />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">WhatsApp Contacto</label>
+                        <input required name="telefono" type="tel" className="w-full px-5 py-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-orange-500 outline-none text-gray-900 bg-gray-50" placeholder="099..." />
+                      </div>
                     </div>
-                    <div>
-                      <label className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">WhatsApp</label>
-                      <input required name="telefono" type="tel" className="w-full px-5 py-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-orange-500 outline-none text-gray-900 bg-gray-50" placeholder="099..." />
-                    </div>
+
                     <div>
                       <label className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">Correo Electrónico</label>
                       <input required name="email" type="email" className="w-full px-5 py-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-orange-500 outline-none text-gray-900 bg-gray-50" placeholder="tucorreo@empresa.com" />
                     </div>
-                    <div>
-                      <label className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">Tipo de Negocio</label>
-                      <select required name="tipo_negocio" className="w-full px-5 py-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-orange-500 outline-none bg-gray-50 text-gray-900">
-                        <option value="">Selecciona...</option>
-                        <option value="Balneario">Balneario / Hostería</option>
-                        <option value="Restaurante">Restaurante</option>
-                        <option value="Hotel">Hotel</option>
-                        <option value="Discoteca/Bar">Discoteca / Bar</option>
-                        <option value="Otro">Otro</option>
-                      </select>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <label className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">Tipo de Negocio</label>
+                        <select required name="tipo_negocio" className="w-full px-5 py-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-orange-500 outline-none bg-gray-50 text-gray-900">
+                          <option value="">Selecciona...</option>
+                          <option value="Balneario">Balneario / Hostería</option>
+                          <option value="Restaurante">Restaurante</option>
+                          <option value="Hotel">Hotel</option>
+                          <option value="Discoteca/Bar">Discoteca / Bar</option>
+                          <option value="Otro">Otro</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">Sitio Web (Opcional)</label>
+                        <input name="website" type="url" className="w-full px-5 py-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-orange-500 outline-none text-gray-900 bg-gray-50" placeholder="www.tunegocio.com" />
+                      </div>
                     </div>
 
-                    <div className="flex items-start">
+                    <div className="space-y-6 pt-4 border-t border-gray-100">
+                      <p className="text-sm font-bold text-orange-600 uppercase tracking-widest">Configuración del Sistema</p>
+
+                      <div>
+                        <label className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">WhatsApp para Clientes (Opcional)</label>
+                        <input name="whatsapp_atencion" type="tel" className="w-full px-5 py-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-orange-500 outline-none text-gray-900 bg-gray-50" placeholder="Donde los clientes escribirán" />
+                        <p className="text-xs text-gray-500 mt-1">Si es diferente al de contacto.</p>
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">¿Qué datos quieres capturar?</label>
+                        <input name="datos_captura" type="text" className="w-full px-5 py-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-orange-500 outline-none text-gray-900 bg-gray-50" placeholder="Ej: Nombre, WhatsApp, Cumpleaños..." />
+                      </div>
+                    </div>
+
+                    <div className="flex items-start pt-2">
                       <div className="flex items-center h-5">
                         <input
                           id="terminos"
@@ -680,16 +716,25 @@ export default function CarnavalesClient() {
       {/* Footer CTA */}
 
       <section className="py-20 bg-[#121212] text-center border-t border-gray-900">
-        <h2 className="text-3xl md:text-4xl font-bold mb-10 text-white font-poiret-one">Este carnaval puede ser distinto.</h2>
-        <Button
-          onClick={scrollToForm}
-          size="lg"
-          className="bg-transparent hover:bg-white hover:text-black text-white border-2 border-white text-lg md:text-xl px-4 md:px-12 py-5 md:py-6 rounded-full font-bold transition-all duration-300 w-full md:w-auto whitespace-normal leading-tight"
-        >
-          Quiero aprovechar <br className="block md:hidden" /> este carnaval
-        </Button>
+        <h2 className="text-3xl md:text-4xl font-bold mb-10 text-white font-poiret-one">¿Quieres hacerlo tu mismo?</h2>
+        <div className="flex flex-col md:flex-row gap-6 justify-center items-center max-w-4xl mx-auto px-4">
+          <a
+            href="/carnavales-2026/Registra-tus-clientes-de-Carnaval-2026.pdf"
+            download
+            className="bg-white/10 hover:bg-white/20 text-white text-lg md:text-xl px-6 md:px-12 py-5 md:py-6 rounded-full font-bold backdrop-blur-sm border-2 border-white/20 transition-all hover:scale-105 flex items-center justify-center gap-2 w-full md:w-auto"
+          >
+            <FileDown className="w-6 h-6" />
+            Descargar Guía PDF
+          </a>
 
-
+          <Button
+            onClick={scrollToForm}
+            size="lg"
+            className="bg-orange-600 hover:bg-orange-700 text-white text-lg md:text-xl px-4 md:px-12 py-5 md:py-6 rounded-full font-bold transition-all duration-300 w-full md:w-auto whitespace-normal leading-tight"
+          >
+            Quiero que tú lo hagas <br className="block md:hidden" /> por mí
+          </Button>
+        </div>
       </section>
     </div>
   );
