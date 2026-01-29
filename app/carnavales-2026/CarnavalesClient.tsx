@@ -168,20 +168,12 @@ export default function CarnavalesClient() {
             Incluye: Dominio tunegocio.com + Landing page profesional + Sistema de captura con código QR + Conexión directa a tu WhatsApp. Instalado en 48 horas.
           </p>
 
-          <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
-            <Button
-              onClick={scrollToForm}
-              size="lg"
-              className="bg-orange-600 hover:bg-orange-700 text-white text-lg md:text-xl px-6 md:px-10 py-5 md:py-8 rounded-full font-bold shadow-lg shadow-orange-900/20 transform transition hover:scale-105 border-2 border-transparent hover:border-orange-400 w-full md:w-auto whitespace-normal leading-tight"
-            >
-              👉 Quiero activarlo <br className="block md:hidden" /> en mi negocio
-            </Button>
-
+          <div className="flex justify-center items-center">
             <Button
               onClick={scrollToForm}
               variant="outline"
               size="lg"
-              className="bg-white/10 hover:bg-white/20 text-white text-lg md:text-xl px-6 md:px-10 py-5 md:py-8 rounded-full font-bold backdrop-blur-sm border-2 border-white/20 transition-all hover:scale-105 w-full md:w-auto"
+              className="bg-white/10 hover:bg-white/20 text-white text-lg md:text-xl px-6 md:px-10 py-5 md:py-8 rounded-full font-bold backdrop-blur-sm border-2 border-white/20 transition-all hover:scale-105 w-full md:w-auto px-12"
             >
               Empezar Ahora
             </Button>
