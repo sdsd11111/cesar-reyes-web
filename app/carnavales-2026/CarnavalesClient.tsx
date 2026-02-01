@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Check, Smartphone, Database, Star, MessageCircle, QrCode, FileDown } from 'lucide-react';
 import Link from 'next/link';
+import CountdownTimer from '@/components/CountdownTimer';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay } from 'swiper/modules';
 
@@ -115,11 +116,15 @@ export default function CarnavalesClient() {
 
         {/* Content on top of video */}
         <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-4">
-          <h2 className="text-3xl md:text-5xl font-bold font-poiret-one text-white drop-shadow-2xl animate-pulse">
-            CARNAVAL 2026
+          <h2 className="text-xl md:text-2xl font-light font-poiret-one text-orange-400 tracking-[0.3em] uppercase mb-2">
+            FALTAN SOLO...
           </h2>
-          <p className="mt-4 text-xl text-gray-200 font-light tracking-widest uppercase">
-            Prepárate para vender más
+          <CountdownTimer />
+          <h3 className="text-2xl md:text-4xl font-bold font-poiret-one text-white drop-shadow-2xl px-4 leading-tight">
+            PARA QUE CIENTOS DE CLIENTES <br className="hidden md:block" /> PASEN POR TU PUERTA
+          </h3>
+          <p className="mt-6 text-lg md:text-xl text-gray-300 font-medium tracking-wide italic">
+            ¿Vas a dejar que se vayan sin dejar sus datos... otra vez?
           </p>
           <div className="mt-12 animate-bounce">
             <ArrowRight className="rotate-90 text-white w-10 h-10" />

@@ -1,9 +1,19 @@
 {
-  "totalVisitas": 1644,
-  "visitasHoy": 1644,
+  "totalVisitas": 1646,
+  "visitasHoy": 1646,
   "articulosPublicados": 0,
   "suscriptoresNewsletter": 0,
   "ultimasVisitas": [
+    {
+      "fecha": "2026-02-01",
+      "pagina": "/carnavales-2026",
+      "visitas": 1
+    },
+    {
+      "fecha": "2026-02-01",
+      "pagina": "/",
+      "visitas": 1
+    },
     {
       "fecha": "2026-01-26",
       "pagina": "/carnavales-2026",
@@ -22,16 +32,6 @@
     {
       "fecha": "2026-01-26",
       "pagina": "/",
-      "visitas": 1
-    },
-    {
-      "fecha": "2026-01-26",
-      "pagina": "/carnavales-2026",
-      "visitas": 1
-    },
-    {
-      "fecha": "2026-01-26",
-      "pagina": "/carnavales-2026",
       "visitas": 1
     },
     {
@@ -86,6 +86,7 @@
     "2026-01-22": 2,
     "2026-01-23": 16,
     "2026-01-24": 12,
-    "2026-01-26": 12
+    "2026-01-26": 12,
+    "2026-02-01": 2
   }
 }
