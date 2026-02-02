@@ -192,43 +192,55 @@ export default function CarnavalesClient() {
 
       {/* Problem / Solution */}
       <section className="py-24 bg-[#121212]">
-        <div className="container mx-auto px-4 grid md:grid-cols-2 gap-16 items-center">
-          <div className="bg-[#1a1a1a] p-10 rounded-3xl shadow-2xl border-l-4 border-orange-500">
-            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white font-poiret-one">
-              Cada Carnaval Es Lo Mismo...
-            </h2>
-            <div className="space-y-4 text-xl text-gray-300">
-              <p>Este feriado tu restaurante, hostería o balneario se llena de gente.</p>
-              <p>Venden. Atienden. Se cansan.</p>
-              <p>Y cuando termina el feriado... todos esos clientes desaparecen.</p>
+        <div className="container mx-auto px-4 max-w-7xl">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-16 text-white font-poiret-one">
+            Cada Carnaval Es Lo Mismo...
+          </h2>
 
-              <div className="space-y-2 bg-black/30 p-6 rounded-2xl border border-gray-800 mt-6">
-                <p className="flex items-center gap-3 text-red-400/80">
-                  <span className="text-lg">❌</span> No tienes su WhatsApp.
-                </p>
-                <p className="flex items-center gap-3 text-red-400/80">
-                  <span className="text-lg">❌</span> No tienes su nombre.
-                </p>
-                <p className="flex items-center gap-3 text-red-400/80">
-                  <span className="text-lg">❌</span> No puedes invitarlos a regresar.
+          <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-stretch">
+            <div className="bg-[#1a1a1a] p-10 rounded-3xl shadow-2xl border-l-4 border-orange-500 flex flex-col justify-center">
+              <div className="space-y-6 text-xl text-gray-300">
+                <p>Este feriado tu restaurante, hostería o balneario se llena de gente.</p>
+                <p>Venden. Atienden. Se cansan.</p>
+                <p>Y cuando termina el feriado... todos esos clientes desaparecen.</p>
+
+                <div className="space-y-3 bg-black/30 p-8 rounded-2xl border border-gray-800 mt-6">
+                  <p className="flex items-center gap-3 text-red-400/80">
+                    <span className="text-xl">❌</span> No tienes su WhatsApp.
+                  </p>
+                  <p className="flex items-center gap-3 text-red-400/80">
+                    <span className="text-xl">❌</span> No tienes su nombre.
+                  </p>
+                  <p className="flex items-center gap-3 text-red-400/80">
+                    <span className="text-xl">❌</span> No puedes invitarlos a regresar.
+                  </p>
+                </div>
+
+                <p className="font-bold text-2xl lg:text-3xl text-orange-500 pt-6 font-poiret-one">
+                  Perdiste cientos de clientes potenciales para siempre.
                 </p>
               </div>
+            </div>
 
-              <p className="font-bold text-2xl text-orange-500 pt-4 font-poiret-one">
-                Perdiste cientos de clientes potenciales para siempre.
-              </p>
+            <div className="relative min-h-[400px] lg:h-auto bg-gray-900 rounded-3xl overflow-hidden flex items-center justify-center group border border-gray-800 shadow-2xl">
+              <div className="absolute inset-0 bg-gradient-to-tr from-orange-900/20 to-gray-900/20 z-10 transition-colors group-hover:from-orange-900/10 group-hover:to-gray-900/10 pointer-events-none"></div>
+              <iframe
+                className="absolute inset-0 w-full h-full rounded-2xl"
+                src="https://www.youtube.com/embed/X2sMafM-kPw?rel=0"
+                title="Carnavales 2026"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              ></iframe>
             </div>
           </div>
-          <div className="relative h-[500px] bg-gray-900 rounded-3xl overflow-hidden flex items-center justify-center group border border-gray-800 shadow-2xl">
-            <div className="absolute inset-0 bg-gradient-to-tr from-orange-900/20 to-gray-900/20 z-10 transition-colors group-hover:from-orange-900/10 group-hover:to-gray-900/10 pointer-events-none"></div>
-            <iframe
-              className="absolute inset-0 w-full h-full rounded-2xl"
-              src="https://www.youtube.com/embed/X2sMafM-kPw?rel=0"
-              title="Carnavales 2026"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-            ></iframe>
+
+          {/* LOPDP Value Proposition */}
+          <div className="mt-20 text-center max-w-4xl mx-auto">
+            <div className="h-px w-24 bg-orange-500/50 mx-auto mb-10"></div>
+            <p className="text-gray-400 text-lg md:text-xl leading-relaxed italic">
+              <strong>Privacidad y cumplimiento para tu negocio:</strong> Tu sistema está diseñado para recolectar información de forma legal y ética (LOPDP). Al construir <strong>tu base de datos</strong> bajo estos estándares, <strong>tu empresa</strong> se compromete a una gestión de datos responsable, protegiendo la privacidad de tus clientes mientras escalas tus ventas en este carnaval.
+            </p>
           </div>
         </div>
       </section>
@@ -540,12 +552,6 @@ export default function CarnavalesClient() {
                     </p>
                   </form>
                 )}
-              </div>
-              {/* LOPDP Info */}
-              <div className="mt-8 p-6 bg-black/20 backdrop-blur-sm rounded-2xl border border-white/10 text-xs md:text-sm text-gray-300 leading-relaxed max-w-xl mx-auto lg:mx-0">
-                <p>
-                  <strong>Manejo de Información (LOPDP):</strong> Sus datos personales están protegidos conforme a la Ley Orgánica de Protección de Datos Personales (LOPDP) de Ecuador. César Reyes se compromete a utilizar esta información únicamente para contactarle sobre el Plan Carnaval 2026 y servicios relacionados. Sus datos se almacenan de forma segura y no serán compartidos con terceros sin su consentimiento. Puede ejercer sus derechos de acceso, rectificación o eliminación en cualquier momento escribiendo a nuestro WhatsApp de soporte.
-                </p>
               </div>
             </div>
           </div>
