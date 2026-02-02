@@ -12,7 +12,7 @@ export const metadata: Metadata = {
         description: "Deja de pagar 15-20% en comisiones. Sistema propio de reservas directas para hoteles en Ecuador.",
         images: [
             {
-                url: "/images/portada_cesarbn.webp",
+                url: "/images/hotel-objetivo/hero.png",
                 width: 1200,
                 height: 630,
                 alt: "Hotel Objetivo - Gestión Digital para Hoteles",
@@ -20,6 +20,12 @@ export const metadata: Metadata = {
         ],
         locale: "es_EC",
         type: "website",
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Motor de Reservas para Hoteles | 0% Comisión Ecuador",
+        description: "Deja de pagar 15-20% en comisiones. Sistema propio de reservas directas para hoteles en Ecuador.",
+        images: ["/images/hotel-objetivo/hero.png"],
     },
     alternates: {
         canonical: 'https://www.cesarreyesjaramillo.com/motor-reservas-hotel'
