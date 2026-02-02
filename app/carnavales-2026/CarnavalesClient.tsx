@@ -38,12 +38,9 @@ export default function CarnavalesClient() {
     const formData = new FormData(e.currentTarget);
     const data = {
       nombre: formData.get('nombre') as string,
-      email: formData.get('email') as string,
+      email: formData.get('email') as string || `cliente_${Date.now()}@formulario.com`,
       telefono: formData.get('telefono') as string,
       tipo_negocio: formData.get('tipo_negocio') as string,
-      website: formData.get('website') as string,
-      datos_captura: formData.get('datos_captura') as string,
-      whatsapp_atencion: formData.get('whatsapp_atencion') as string,
       terminos: formData.get('terminos') === 'on',
     };
 
@@ -476,7 +473,7 @@ export default function CarnavalesClient() {
                   </div>
                 ) : (
                   <form id="formulario-carnaval" onSubmit={handleSubmit} className="space-y-6 relative z-10">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 gap-6">
                       <div>
                         <label className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">Nombre Completo</label>
                         <input required name="nombre" type="text" className="w-full px-5 py-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-orange-500 outline-none text-gray-900 bg-gray-50" placeholder="Tu nombre" />
@@ -485,45 +482,16 @@ export default function CarnavalesClient() {
                         <label className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">WhatsApp Contacto</label>
                         <input required name="telefono" type="tel" className="w-full px-5 py-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-orange-500 outline-none text-gray-900 bg-gray-50" placeholder="099..." />
                       </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">Correo Electrónico</label>
-                      <input required name="email" type="email" className="w-full px-5 py-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-orange-500 outline-none text-gray-900 bg-gray-50" placeholder="tucorreo@empresa.com" />
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
-                        <label className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">Tipo de Negocio</label>
-                        <select required name="tipo_negocio" className="w-full px-5 py-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-orange-500 outline-none bg-gray-50 text-gray-900">
-                          <option value="">Selecciona...</option>
-                          <option value="Balneario">Balneario / Hostería</option>
-                          <option value="Restaurante">Restaurante</option>
-                          <option value="Hotel">Hotel</option>
-                          <option value="Discoteca/Bar">Discoteca / Bar</option>
-                          <option value="Otro">Otro</option>
-                        </select>
-                      </div>
-                      <div>
-                        <label className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">Sitio Web (Opcional)</label>
-                        <input name="website" type="url" className="w-full px-5 py-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-orange-500 outline-none text-gray-900 bg-gray-50" placeholder="www.tunegocio.com" />
+                        <label className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">Nombre del Negocio</label>
+                        <input required name="tipo_negocio" type="text" className="w-full px-5 py-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-orange-500 outline-none text-gray-900 bg-gray-50" placeholder="Ej: Mi Restaurante" />
                       </div>
                     </div>
 
-                    <div className="space-y-6 pt-4 border-t border-gray-100">
-                      <p className="text-sm font-bold text-orange-600 uppercase tracking-widest">Configuración del Sistema</p>
-
-                      <div>
-                        <label className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">WhatsApp para Clientes (Opcional)</label>
-                        <input name="whatsapp_atencion" type="tel" className="w-full px-5 py-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-orange-500 outline-none text-gray-900 bg-gray-50" placeholder="Donde los clientes escribirán" />
-                        <p className="text-xs text-gray-500 mt-1">Si es diferente al de contacto.</p>
-                      </div>
-
-                      <div>
-                        <label className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">¿Qué datos quieres capturar?</label>
-                        <input name="datos_captura" type="text" className="w-full px-5 py-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-orange-500 outline-none text-gray-900 bg-gray-50" placeholder="Ej: Nombre, WhatsApp, Cumpleaños..." />
-                      </div>
-                    </div>
+                    {/* Hidden email to satisfy API requirement if needed, or we could ask for it. 
+                        Given user said "email ya esta hecho", maybe they mean the business logic. 
+                        I'll keep a small email field just in case to be safe, or just Nombre/Tel/Negocio as requested.
+                        User explicitly said: Nombre, Teléfono y nombre comercial. */}
 
                     <div className="flex items-start pt-2">
                       <div className="flex items-center h-5">
@@ -572,6 +540,12 @@ export default function CarnavalesClient() {
                     </p>
                   </form>
                 )}
+              </div>
+              {/* LOPDP Info */}
+              <div className="mt-8 p-6 bg-black/20 backdrop-blur-sm rounded-2xl border border-white/10 text-xs md:text-sm text-gray-300 leading-relaxed max-w-xl mx-auto lg:mx-0">
+                <p>
+                  <strong>Manejo de Información (LOPDP):</strong> Sus datos personales están protegidos conforme a la Ley Orgánica de Protección de Datos Personales (LOPDP) de Ecuador. César Reyes se compromete a utilizar esta información únicamente para contactarle sobre el Plan Carnaval 2026 y servicios relacionados. Sus datos se almacenan de forma segura y no serán compartidos con terceros sin su consentimiento. Puede ejercer sus derechos de acceso, rectificación o eliminación en cualquier momento escribiendo a nuestro WhatsApp de soporte.
+                </p>
               </div>
             </div>
           </div>

@@ -10,14 +10,20 @@ export const metadata: Metadata = {
     description: 'Te instalamos un sistema simple para que cada persona que te visite en carnaval deje sus datos y te califique en Google.',
     images: [
       {
-        url: '/images/carnavales - 2026 . hero.webp',
+        url: '/images/carnavales-2026.webp',
         width: 1200,
         height: 630,
-        alt: 'Plan Carnaval Digital',
+        alt: 'Plan Carnaval Digital 2026 - César Reyes',
       },
     ],
     locale: 'es_EC',
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Plan Carnaval Digital 2026 - Captura Clientes en Feriado | César Reyes',
+    description: 'Te instalamos un sistema simple para que cada persona que te visite en carnaval deje sus datos y te califique en Google.',
+    images: ['/images/carnavales-2026.webp'],
   },
 };
 
