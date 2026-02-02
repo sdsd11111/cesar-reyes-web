@@ -415,151 +415,146 @@ export default function CarnavalesClient() {
 
       <section id="reserva" className="py-24 bg-gradient-to-r from-orange-500 to-orange-600 text-white">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col lg:flex-row gap-16 max-w-7xl mx-auto">
+          <div className="max-w-7xl mx-auto">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-16 text-white font-poiret-one">
+              Plan Carnaval Digital
+            </h2>
 
-            {/* Left: Plan Details */}
-            <div className="lg:w-1/2">
-              <h2 className="text-4xl md:text-5xl font-bold mb-10 text-white font-poiret-one">Plan Carnaval Digital</h2>
-              <div className="bg-white/20 backdrop-blur-sm p-10 rounded-3xl shadow-xl border border-white/20">
-                <ul className="space-y-5 mb-10">
-                  {[
-                    "Página simple del balneario / negocio",
-                    "Sistema para capturar clientes",
-                    "Formularios de datos",
-                    "Código QR listo para imprimir",
-                    "Enlace a Google",
-                    "Conexión a WhatsApp",
-                    "Base inicial de clientes",
-                    "Soporte antes de carnaval"
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-center gap-4">
-                      {/* Icon updated to green-100 or simply white/bright to stand out on orange */}
-                      <div className="p-1 bg-white/20 rounded-full">
-                        <Check className="w-5 h-5 text-white shrink-0" />
-                      </div>
-                      <span className="text-lg text-white font-medium">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-                <div className="border-t border-white/20 pt-8">
-                  <h3 className="text-4xl font-bold text-white mb-3 font-poiret-one">💵 Inversión: $250</h3>
-                  <div className="flex items-center gap-3 text-white/80">
-                    <div className="w-2 h-2 rounded-full bg-white"></div>
-                    <p className="text-lg">Paga con tarjeta o transferencia</p>
-                  </div>
-                  <div className="flex items-center gap-3 mt-4 bg-white px-4 py-2 rounded-xl shadow-lg w-fit transform -rotate-1">
-                    <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
-                    <p className="text-lg font-bold text-orange-600">Entrega en 2 o 3 días</p>
+            <div className="flex flex-col lg:flex-row gap-16 items-center">
+              {/* Left: Plan Details */}
+              <div className="lg:w-1/2">
+                <div className="bg-white/20 backdrop-blur-sm p-10 rounded-3xl shadow-xl border border-white/20">
+                  <ul className="space-y-5 mb-10">
+                    {[
+                      "Página simple del balneario / negocio",
+                      "Sistema para capturar clientes",
+                      "Formularios de datos",
+                      "Código QR listo para imprimir",
+                      "Enlace a Google",
+                      "Conexión a WhatsApp",
+                      "Base inicial de clientes",
+                      "Soporte antes de carnaval"
+                    ].map((item, i) => (
+                      <li key={i} className="flex items-center gap-4">
+                        <div className="p-1 bg-white/20 rounded-full">
+                          <Check className="w-5 h-5 text-white shrink-0" />
+                        </div>
+                        <span className="text-lg text-white font-medium">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="border-t border-white/20 pt-8">
+                    <h3 className="text-4xl font-bold text-white mb-3 font-poiret-one">💵 Inversión: $250</h3>
+                    <div className="flex items-center gap-3 text-white/80">
+                      <div className="w-2 h-2 rounded-full bg-white"></div>
+                      <p className="text-lg">Paga con tarjeta o transferencia</p>
+                    </div>
+                    <div className="flex items-center gap-3 mt-4 bg-white px-4 py-2 rounded-xl shadow-lg w-fit transform -rotate-1">
+                      <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
+                      <p className="text-lg font-bold text-orange-600">Entrega en 2 o 3 días</p>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-16 text-center lg:text-left">
-                <h3 className="text-3xl font-bold mb-6 text-white font-poiret-one">Esto es solo el comienzo</h3>
-                <p className="text-xl text-orange-50 mb-8 leading-relaxed">
-                  Una vez que empiezas a <strong className="text-white">capturar clientes</strong>, luego puedes automatizar mensajes, promociones, reservas y temporada baja.
-                </p>
-                <p className="font-bold text-xl text-white">
-                  Primero clientes. Luego todo lo demás.
-                </p>
+              {/* Right: Form */}
+              <div className="lg:w-1/2">
+                <div className="bg-white p-10 rounded-3xl shadow-2xl relative overflow-hidden text-gray-800">
+                  <div className="absolute top-0 right-0 p-4 opacity-5 text-orange-500">
+                    <QrCode className="w-40 h-40" />
+                  </div>
+                  <h3 className="text-3xl font-bold mb-8 text-center text-orange-800 font-poiret-one">👉 Activar mi carnaval</h3>
+
+                  {submitSuccess ? (
+                    <div className="p-8 bg-green-50 border border-green-200 rounded-2xl text-center">
+                      <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <Check className="w-10 h-10 text-green-600" />
+                      </div>
+                      <h4 className="text-2xl font-bold text-green-800 mb-3">¡Solicitud Enviada!</h4>
+                      <p className="text-gray-600 text-lg">
+                        Nos pondremos en contacto contigo lo antes posible para activar tu sistema antes del carnaval.
+                      </p>
+                    </div>
+                  ) : (
+                    <form id="formulario-carnaval" onSubmit={handleSubmit} className="space-y-6 relative z-10">
+                      <div className="grid grid-cols-1 gap-6">
+                        <div>
+                          <label className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">Nombre Completo</label>
+                          <input required name="nombre" type="text" className="w-full px-5 py-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-orange-500 outline-none text-gray-900 bg-gray-50" placeholder="Tu nombre" />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">WhatsApp Contacto</label>
+                          <input required name="telefono" type="tel" className="w-full px-5 py-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-orange-500 outline-none text-gray-900 bg-gray-50" placeholder="099..." />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">Nombre del Negocio</label>
+                          <input required name="tipo_negocio" type="text" className="w-full px-5 py-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-orange-500 outline-none text-gray-900 bg-gray-50" placeholder="Ej: Mi Restaurante" />
+                        </div>
+                      </div>
+
+                      <div className="flex items-start pt-2">
+                        <div className="flex items-center h-5">
+                          <input
+                            id="terminos"
+                            name="terminos"
+                            type="checkbox"
+                            required
+                            className="h-4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300 rounded"
+                          />
+                        </div>
+                        <div className="ml-3 text-sm">
+                          <label htmlFor="terminos" className="font-medium text-gray-700">
+                            Autorizo el tratamiento de mis datos personales conforme a la{' '}
+                            <Link href="/politicas" className="text-orange-600 hover:text-orange-500 underline" target="_blank">
+                              Política de Privacidad
+                            </Link>
+                            .
+                          </label>
+                        </div>
+                      </div>
+
+                      {submitError && (
+                        <div className="text-red-600 text-sm p-3 bg-red-50 rounded-lg border border-red-200">
+                          {submitError}
+                        </div>
+                      )}
+
+                      <Button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold py-4 md:py-5 text-base md:text-xl rounded-xl mt-6 shadow-xl transform transition hover:-translate-y-1 whitespace-normal leading-tight"
+                      >
+                        {isSubmitting ? 'Enviando...' : (
+                          <>
+                            QUIERO APROVECHAR <br className="block md:hidden" /> ESTE CARNAVAL
+                          </>
+                        )}
+                      </Button>
+
+                      <p className="text-xs text-gray-500 text-center mt-6">
+                        * Plazas limitadas para garantizar soporte.
+                      </p>
+                    </form>
+                  )}
+                </div>
               </div>
             </div>
 
-            {/* Right: Form */}
-            <div className="lg:w-1/2">
-              <div className="bg-white p-10 rounded-3xl shadow-2xl relative overflow-hidden text-gray-800">
-                <div className="absolute top-0 right-0 p-4 opacity-5 text-orange-500">
-                  <QrCode className="w-40 h-40" />
-                </div>
-                <h3 className="text-3xl font-bold mb-8 text-center text-orange-800 font-poiret-one">👉 Activar mi carnaval</h3>
-
-                {submitSuccess ? (
-                  <div className="p-8 bg-green-50 border border-green-200 rounded-2xl text-center">
-                    <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                      <Check className="w-10 h-10 text-green-600" />
-                    </div>
-                    <h4 className="text-2xl font-bold text-green-800 mb-3">¡Solicitud Enviada!</h4>
-                    <p className="text-gray-600 text-lg">
-                      Nos pondremos en contacto contigo lo antes posible para activar tu sistema antes del carnaval.
-                    </p>
-                  </div>
-                ) : (
-                  <form id="formulario-carnaval" onSubmit={handleSubmit} className="space-y-6 relative z-10">
-                    <div className="grid grid-cols-1 gap-6">
-                      <div>
-                        <label className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">Nombre Completo</label>
-                        <input required name="nombre" type="text" className="w-full px-5 py-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-orange-500 outline-none text-gray-900 bg-gray-50" placeholder="Tu nombre" />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">WhatsApp Contacto</label>
-                        <input required name="telefono" type="tel" className="w-full px-5 py-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-orange-500 outline-none text-gray-900 bg-gray-50" placeholder="099..." />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">Nombre del Negocio</label>
-                        <input required name="tipo_negocio" type="text" className="w-full px-5 py-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-orange-500 outline-none text-gray-900 bg-gray-50" placeholder="Ej: Mi Restaurante" />
-                      </div>
-                    </div>
-
-                    {/* Hidden email to satisfy API requirement if needed, or we could ask for it. 
-                        Given user said "email ya esta hecho", maybe they mean the business logic. 
-                        I'll keep a small email field just in case to be safe, or just Nombre/Tel/Negocio as requested.
-                        User explicitly said: Nombre, Teléfono y nombre comercial. */}
-
-                    <div className="flex items-start pt-2">
-                      <div className="flex items-center h-5">
-                        <input
-                          id="terminos"
-                          name="terminos"
-                          type="checkbox"
-                          required
-                          className="h-4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300 rounded"
-                        />
-                      </div>
-                      <div className="ml-3 text-sm">
-                        <label htmlFor="terminos" className="font-medium text-gray-700">
-                          Autorizo el tratamiento de mis datos personales conforme a la{' '}
-                          <Link href="/politicas" className="text-orange-600 hover:text-orange-500 underline" target="_blank">
-                            Política de Privacidad
-                          </Link>
-                          .
-                        </label>
-                      </div>
-                    </div>
-
-                    {submitError && (
-                      <div className="text-red-600 text-sm p-3 bg-red-50 rounded-lg border border-red-200">
-                        {submitError}
-                      </div>
-                    )}
-
-                    <Button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold py-4 md:py-5 text-base md:text-xl rounded-xl mt-6 shadow-xl transform transition hover:-translate-y-1 whitespace-normal leading-tight"
-                    >
-                      {isSubmitting ? 'Enviando...' : (
-                        <>
-                          QUIERO APROVECHAR <br className="block md:hidden" /> ESTE CARNAVAL
-                        </>
-                      )}
-                    </Button>
-
-
-
-
-                    <p className="text-xs text-gray-500 text-center mt-6">
-                      * Plazas limitadas para garantizar soporte.
-                    </p>
-                  </form>
-                )}
-              </div>
+            <div className="mt-20 text-center max-w-4xl mx-auto">
+              <h3 className="text-3xl md:text-4xl font-bold mb-6 text-white font-poiret-one">Esto es solo el comienzo</h3>
+              <p className="text-xl text-orange-50 mb-8 leading-relaxed">
+                Una vez que empiezas a <strong className="text-white">capturar clientes</strong>, luego puedes automatizar mensajes, promociones, reservas y temporada baja.
+              </p>
+              <p className="font-bold text-xl md:text-2xl text-white">
+                Primero clientes. Luego todo lo demás.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
       {/* FAQ Section */}
-      <section className="py-24 bg-black border-t border-gray-900">
+      < section className="py-24 bg-black border-t border-gray-900" >
         <div className="container mx-auto px-4 max-w-4xl">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 font-poiret-one text-white">
             Preguntas Frecuentes
@@ -687,12 +682,12 @@ export default function CarnavalesClient() {
             ))}
           </div>
         </div>
-      </section>
+      </section >
 
 
       {/* Footer CTA */}
 
-      <section className="py-20 bg-[#121212] text-center border-t border-gray-900">
+      < section className="py-20 bg-[#121212] text-center border-t border-gray-900" >
         <h2 className="text-3xl md:text-4xl font-bold mb-10 text-white font-poiret-one">¿Quieres hacerlo tu mismo?</h2>
         <div className="flex flex-col md:flex-row gap-6 justify-center items-center max-w-4xl mx-auto px-4">
           <a
@@ -712,7 +707,7 @@ export default function CarnavalesClient() {
             Quiero que tú lo hagas <br className="block md:hidden" /> por mí
           </Button>
         </div>
-      </section>
-    </div>
+      </section >
+    </div >
   );
 }

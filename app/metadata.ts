@@ -93,7 +93,6 @@ export const metadata: Metadata = {
     google: 'google-site-verification-code', // Reemplaza con tu código de verificación de Google Search Console
   },
   alternates: {
-    canonical: SITE_URL,
     languages: {
       'es-EC': '/es-EC',
     },

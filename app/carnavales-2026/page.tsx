@@ -25,6 +25,9 @@ export const metadata: Metadata = {
     description: 'Te instalamos un sistema simple para que cada persona que te visite en carnaval deje sus datos y te califique en Google.',
     images: ['/images/carnavales-2026.webp'],
   },
+  alternates: {
+    canonical: 'https://www.cesarreyesjaramillo.com/carnavales-2026'
+  }
 };
 
 const jsonLd = {
