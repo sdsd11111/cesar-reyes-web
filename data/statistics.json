@@ -1,57 +1,57 @@
 {
-  "totalVisitas": 1649,
-  "visitasHoy": 1649,
+  "totalVisitas": 1665,
+  "visitasHoy": 1665,
   "articulosPublicados": 0,
   "suscriptoresNewsletter": 0,
   "ultimasVisitas": [
     {
-      "fecha": "2026-02-02",
-      "pagina": "/motor-reservas-hotel",
+      "fecha": "2026-02-03",
+      "pagina": "/carnavales-2026",
       "visitas": 1
     },
     {
-      "fecha": "2026-02-02",
-      "pagina": "/motor-reservas-hotel",
+      "fecha": "2026-02-03",
+      "pagina": "/pago",
       "visitas": 1
     },
     {
-      "fecha": "2026-02-02",
+      "fecha": "2026-02-03",
+      "pagina": "/carnavales-2026",
+      "visitas": 1
+    },
+    {
+      "fecha": "2026-02-03",
+      "pagina": "/pago",
+      "visitas": 1
+    },
+    {
+      "fecha": "2026-02-03",
+      "pagina": "/carnavales-2026",
+      "visitas": 1
+    },
+    {
+      "fecha": "2026-02-03",
       "pagina": "/",
       "visitas": 1
     },
     {
-      "fecha": "2026-02-01",
+      "fecha": "2026-02-03",
+      "pagina": "/pago",
+      "visitas": 1
+    },
+    {
+      "fecha": "2026-02-03",
       "pagina": "/carnavales-2026",
       "visitas": 1
     },
     {
-      "fecha": "2026-02-01",
+      "fecha": "2026-02-03",
       "pagina": "/",
       "visitas": 1
     },
     {
-      "fecha": "2026-01-26",
-      "pagina": "/carnavales-2026",
-      "visitas": 1
-    },
-    {
-      "fecha": "2026-01-26",
-      "pagina": "/carnavales-2026",
-      "visitas": 1
-    },
-    {
-      "fecha": "2026-01-26",
-      "pagina": "/carnavales-2026",
-      "visitas": 1
-    },
-    {
-      "fecha": "2026-01-26",
-      "pagina": "/",
-      "visitas": 1
-    },
-    {
-      "fecha": "2026-01-26",
-      "pagina": "/carnavales-2026",
+      "fecha": "2026-02-03",
+      "pagina": "/pago",
       "visitas": 1
     }
   ],
@@ -88,6 +88,7 @@
     "2026-01-24": 12,
     "2026-01-26": 12,
     "2026-02-01": 2,
-    "2026-02-02": 3
+    "2026-02-02": 3,
+    "2026-02-03": 16
   }
 }

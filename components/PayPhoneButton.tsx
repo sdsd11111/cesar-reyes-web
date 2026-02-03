@@ -7,9 +7,10 @@ interface PayPhoneButtonProps {
     amount: number;
     description?: string;
     className?: string; // Allow custom styling
+    label?: string; // Custom button text
 }
 
-export default function PayPhoneButton({ amount, description, className }: PayPhoneButtonProps) {
+export default function PayPhoneButton({ amount, description, className, label }: PayPhoneButtonProps) {
     const [loading, setLoading] = useState(false);
 
     const handlePayment = async () => {
@@ -26,7 +27,7 @@ export default function PayPhoneButton({ amount, description, className }: PayPh
             }
         } catch (error) {
             console.error(error);
-            alert("Hubo un error al conectar con la pasarela de pagos.");
+            alert("Hubo un error al conectar con la pasarela de pagos. Por favor intenta más tarde.");
         } finally {
             setLoading(false);
         }
@@ -38,7 +39,7 @@ export default function PayPhoneButton({ amount, description, className }: PayPh
             disabled={loading}
             className={`bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed ${className}`}
         >
-            {loading ? "Procesando..." : `Pagar $${amount.toFixed(2)}`}
+            {loading ? "Procesando..." : (label || `Pagar $${amount.toFixed(2)}`)}
         </button>
     );
 }

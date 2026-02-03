@@ -17,7 +17,7 @@ function PagoContent() {
                 {/* Header */}
                 <div className="bg-gradient-to-r from-gray-900 to-gray-800 p-8 text-white relative">
                     <Link
-                        href="/"
+                        href="/carnavales-2026"
                         className="absolute top-4 left-4 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
                     >
                         <ChevronLeft className="w-5 h-5" />

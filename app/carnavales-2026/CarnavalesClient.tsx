@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, Check, Smartphone, Database, Star, MessageCircle, QrCode, FileDown } from 'lucide-react';
 import Link from 'next/link';
 import CountdownTimer from '@/components/CountdownTimer';
+import PayPhoneButton from '@/components/PayPhoneButton';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay } from 'swiper/modules';
 
@@ -170,15 +171,22 @@ export default function CarnavalesClient() {
             Incluye: Dominio tunegocio.com + Landing page profesional + Sistema de captura con código QR + Conexión directa a tu WhatsApp. Instalado en 48 horas.
           </p>
 
-          <div className="flex justify-center items-center">
+          <div className="flex flex-col md:flex-row gap-6 justify-center items-center">
             <Button
               onClick={scrollToForm}
               variant="outline"
               size="lg"
-              className="bg-white/10 hover:bg-white/20 text-white text-lg md:text-xl px-6 md:px-10 py-5 md:py-8 rounded-full font-bold backdrop-blur-sm border-2 border-white/20 transition-all hover:scale-105 w-full md:w-auto px-12"
+              className="bg-white/10 hover:bg-white/20 text-white text-lg md:text-xl px-6 md:px-10 py-5 md:py-8 rounded-full font-bold backdrop-blur-sm border-2 border-white/20 transition-all hover:scale-105 w-full md:w-auto min-w-[280px]"
             >
               Empezar Ahora
             </Button>
+
+            <Link
+              href={`/pago?amount=250&description=${encodeURIComponent("Plan Carnaval Digital 2026")}`}
+              className="bg-[#FF6B00] hover:bg-[#E66000] text-white text-lg md:text-xl px-6 md:px-10 py-5 md:py-8 rounded-full font-bold transition-all hover:scale-105 w-full md:w-auto min-w-[280px] shadow-[0_0_20px_rgba(255,107,0,0.6)] border-2 border-orange-400 text-center flex items-center justify-center"
+            >
+              Pague aquí (a crédito o al contado)
+            </Link>
           </div>
 
 

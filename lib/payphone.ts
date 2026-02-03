@@ -36,9 +36,14 @@ export async function createPaymentLink(
     // We will put everything in 'amountWithoutTax' (0% VAT) for now, or split if needed.
     // Let's assume 0% VAT for services to start, or configurable.
 
+    // Generate a unique 12-char string, leaving room for 'tx' prefix (total 14-15 chars)
+    // Date.now() is 13 chars. We can use last 8 chars of timestamp + 4 random chars
+    const timestamp = Date.now().toString().slice(-8);
+    const random = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
+    const transactionId = `tx${timestamp}${random}`; // tx + 8 + 4 = 14 chars (safe)
+
+    // Restore missing calculation
     const amountInCents = Math.floor(amount * 100);
-    // CRITICAL: PayPhone documentation says max 15 characters for clientTransactionId
-    const transactionId = `tx${Date.now().toString().slice(-13)}`; // 2 + 13 = 15 characters
 
     const payload = {
         amount: amountInCents,
@@ -49,8 +54,8 @@ export async function createPaymentLink(
         tip: 0,
         currency: "USD",
         clientTransactionId: transactionId,
-        responseUrl: responseUrl || undefined,
-        cancellationUrl: responseUrl || undefined,
+        responseUrl: responseUrl || "http://localhost:3000", // Fallback if env missing
+        cancellationUrl: responseUrl || "http://localhost:3000",
         reference: description.substring(0, 100), // Max 100 chars
         additionalData: description.substring(0, 250), // Max 250 chars
         storeId: storeId,
